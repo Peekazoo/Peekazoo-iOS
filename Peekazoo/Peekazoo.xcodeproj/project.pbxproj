@@ -103,6 +103,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 789F10201EC481B100FAF5F1 /* Build configuration list for PBXNativeTarget "Peekazoo" */;
 			buildPhases = (
+				789F10261EC4835E00FAF5F1 /* Swiftlint */,
 				789F0FFF1EC481B100FAF5F1 /* Sources */,
 				789F10001EC481B100FAF5F1 /* Frameworks */,
 				789F10011EC481B100FAF5F1 /* Resources */,
@@ -193,6 +194,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		789F10261EC4835E00FAF5F1 /* Swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Swiftlint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint autocorrect\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		789F0FFF1EC481B100FAF5F1 /* Sources */ = {
