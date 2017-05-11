@@ -1,0 +1,10 @@
+language: objective-c
+osx_image: xcode8.3
+xcode_project: Peekazoo/Peekazoo.xcodeproj
+xcode_scheme: Peekazoo
+
+install:
+  - gem install xcpretty
+
+script:
+  - xcodebuild -project Peekazoo/Peekazoo.xcodeproj -scheme Peekazoo -destination "platform=iOS Simulator,name=iPhone 7" clean test | xcpretty
