@@ -17,7 +17,8 @@ struct RootRouter {
     }
     
     func navigateToRoot() {
-        window.rootViewController = UINavigationController()
+        let homepage = HomepageViewController()
+        window.rootViewController = UINavigationController(rootViewController: homepage)
     }
     
 }

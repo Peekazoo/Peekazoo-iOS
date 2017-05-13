@@ -10,6 +10,8 @@
 		6E0D85831EC6E84D000E7283 /* AppDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D85821EC6E84D000E7283 /* AppDelegateTests.swift */; };
 		6E0D85871EC6EF83000E7283 /* RootRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D85861EC6EF83000E7283 /* RootRouterTests.swift */; };
 		6E0D858A1EC6F022000E7283 /* RootRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D85891EC6F022000E7283 /* RootRouter.swift */; };
+		6E0D858F1EC6F159000E7283 /* HomepageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D858D1EC6F159000E7283 /* HomepageViewController.swift */; };
+		6E0D85901EC6F159000E7283 /* HomepageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E0D858E1EC6F159000E7283 /* HomepageViewController.xib */; };
 		789F10071EC481B100FAF5F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789F10061EC481B100FAF5F1 /* AppDelegate.swift */; };
 		789F100E1EC481B100FAF5F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 789F100D1EC481B100FAF5F1 /* Assets.xcassets */; };
 		789F10111EC481B100FAF5F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 789F100F1EC481B100FAF5F1 /* LaunchScreen.storyboard */; };
@@ -29,6 +31,8 @@
 		6E0D85821EC6E84D000E7283 /* AppDelegateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegateTests.swift; sourceTree = "<group>"; };
 		6E0D85861EC6EF83000E7283 /* RootRouterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootRouterTests.swift; sourceTree = "<group>"; };
 		6E0D85891EC6F022000E7283 /* RootRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootRouter.swift; sourceTree = "<group>"; };
+		6E0D858D1EC6F159000E7283 /* HomepageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomepageViewController.swift; path = "View Controllers/Homepage/HomepageViewController.swift"; sourceTree = "<group>"; };
+		6E0D858E1EC6F159000E7283 /* HomepageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HomepageViewController.xib; path = "View Controllers/Homepage/HomepageViewController.xib"; sourceTree = "<group>"; };
 		789F10031EC481B100FAF5F1 /* Peekazoo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Peekazoo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		789F10061EC481B100FAF5F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		789F100D1EC481B100FAF5F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -80,6 +84,23 @@
 			name = Routing;
 			sourceTree = "<group>";
 		};
+		6E0D858B1EC6F13B000E7283 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				6E0D858C1EC6F144000E7283 /* Homepage */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		6E0D858C1EC6F144000E7283 /* Homepage */ = {
+			isa = PBXGroup;
+			children = (
+				6E0D858D1EC6F159000E7283 /* HomepageViewController.swift */,
+				6E0D858E1EC6F159000E7283 /* HomepageViewController.xib */,
+			);
+			name = Homepage;
+			sourceTree = "<group>";
+		};
 		789F0FFA1EC481B100FAF5F1 = {
 			isa = PBXGroup;
 			children = (
@@ -102,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				6E0D85881EC6F014000E7283 /* Routing */,
+				6E0D858B1EC6F13B000E7283 /* View Controllers */,
 				789F10061EC481B100FAF5F1 /* AppDelegate.swift */,
 				789F100D1EC481B100FAF5F1 /* Assets.xcassets */,
 				789F100F1EC481B100FAF5F1 /* LaunchScreen.storyboard */,
@@ -205,6 +227,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				789F10111EC481B100FAF5F1 /* LaunchScreen.storyboard in Resources */,
+				6E0D85901EC6F159000E7283 /* HomepageViewController.xib in Resources */,
 				789F100E1EC481B100FAF5F1 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -242,6 +265,7 @@
 			files = (
 				6E0D858A1EC6F022000E7283 /* RootRouter.swift in Sources */,
 				789F10071EC481B100FAF5F1 /* AppDelegate.swift in Sources */,
+				6E0D858F1EC6F159000E7283 /* HomepageViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

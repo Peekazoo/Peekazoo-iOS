@@ -27,4 +27,12 @@ class RootRouterTests: XCTestCase {
         XCTAssertTrue(window.rootViewController is UINavigationController)
     }
     
+    func testSetTheHomepageViewControllerAsTheTopViewControllerOnTheRoot() {
+        let window = UIWindow()
+        let router = RootRouter(window: window)
+        router.navigateToRoot()
+        
+        XCTAssertTrue((window.rootViewController as? UINavigationController)?.topViewController is HomepageViewController)
+    }
+    
 }
