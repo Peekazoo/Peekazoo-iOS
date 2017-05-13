@@ -11,14 +11,6 @@ import XCTest
 
 class RootRouterTests: XCTestCase {
     
-    func testTheRouterShouldSetTheRootViewControllerOntoTheWindow() {
-        let window = UIWindow()
-        let router = RootRouter(window: window)
-        router.navigateToRoot()
-        
-        XCTAssertNotNil(window.rootViewController)
-    }
-    
     func testSetNavigationControllerAsTheRootViewController() {
         let window = UIWindow()
         let router = RootRouter(window: window)
