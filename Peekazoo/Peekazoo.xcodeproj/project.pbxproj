@@ -52,6 +52,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6E0D85841EC6EA01000E7283 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				789F101D1EC481B100FAF5F1 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6E0D85851EC6EA07000E7283 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				789F10121EC481B100FAF5F1 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		789F0FFA1EC481B100FAF5F1 = {
 			isa = PBXGroup;
 			children = (
@@ -76,7 +92,7 @@
 				789F10061EC481B100FAF5F1 /* AppDelegate.swift */,
 				789F100D1EC481B100FAF5F1 /* Assets.xcassets */,
 				789F100F1EC481B100FAF5F1 /* LaunchScreen.storyboard */,
-				789F10121EC481B100FAF5F1 /* Info.plist */,
+				6E0D85851EC6EA07000E7283 /* Supporting Files */,
 			);
 			path = Peekazoo;
 			sourceTree = "<group>";
@@ -85,7 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				6E0D85821EC6E84D000E7283 /* AppDelegateTests.swift */,
-				789F101D1EC481B100FAF5F1 /* Info.plist */,
+				6E0D85841EC6EA01000E7283 /* Supporting Files */,
 			);
 			path = PeekazooTests;
 			sourceTree = "<group>";
