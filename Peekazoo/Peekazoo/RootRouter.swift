@@ -17,7 +17,7 @@ struct RootRouter {
     }
     
     func navigateToRoot() {
-        window.rootViewController = UIViewController()
+        window.rootViewController = UINavigationController()
     }
     
 }
