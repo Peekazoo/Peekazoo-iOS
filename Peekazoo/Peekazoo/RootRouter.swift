@@ -20,6 +20,7 @@ struct RootRouter {
         let homepage = HomepageViewController()
         window.rootViewController = UINavigationController(rootViewController: homepage)
         window.isHidden = false
+        window.makeKey()
 
         return (viewController: homepage, router: HomepageRouter())
     }

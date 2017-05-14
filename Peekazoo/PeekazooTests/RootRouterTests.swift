@@ -46,4 +46,9 @@ class RootRouterTests: XCTestCase {
         XCTAssertFalse(window.isHidden)
     }
 
+    func testMakeTheWindowKey() {
+        _ = router.navigateToRoot()
+        XCTAssertTrue(window.isKeyWindow)
+    }
+
 }
