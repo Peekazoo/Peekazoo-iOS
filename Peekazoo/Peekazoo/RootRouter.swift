@@ -19,6 +19,7 @@ struct RootRouter {
     func navigateToRoot() -> (viewController: UIViewController, router: Any) {
         let homepage = HomepageViewController()
         window.rootViewController = UINavigationController(rootViewController: homepage)
+        window.isHidden = false
 
         return (viewController: homepage, router: HomepageRouter())
     }

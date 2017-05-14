@@ -41,4 +41,9 @@ class RootRouterTests: XCTestCase {
         XCTAssertTrue(homepageRouter is HomepageRouter)
     }
 
+    func testMakeTheWindowVisible() {
+        _ = router.navigateToRoot()
+        XCTAssertFalse(window.isHidden)
+    }
+
 }
