@@ -12,11 +12,11 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow? = UIWindow()
-    var appFactory: AppFactory? = PhoneAppFactory()
+    var appFactory: AppFactory = PhoneAppFactory()
     var app: App?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        app = appFactory?.makeApplication(window: window!)
+        app = appFactory.makeApplication(window: window!)
         app?.launch()
         return true
     }
