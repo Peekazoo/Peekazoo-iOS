@@ -6,10 +6,8 @@
 //  Copyright © 2017 Peekazoo. All rights reserved.
 //
 
-import UIKit
-
 protocol RootRouter {
 
-    func navigateToRoot() -> (viewController: UIViewController, router: Any)
+    func navigateToRoot() -> (interface: Any, router: Any)
 
 }

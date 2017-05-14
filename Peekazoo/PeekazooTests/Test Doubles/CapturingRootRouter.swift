@@ -7,14 +7,13 @@
 //
 
 @testable import Peekazoo
-import UIKit
 
 class CapturingRootRouter: RootRouter {
 
     private(set) var didNavigateToRoot = false
-    func navigateToRoot() -> (viewController: UIViewController, router: Any) {
+    func navigateToRoot() -> (interface: Any, router: Any) {
         didNavigateToRoot = true
-        return (viewController: UIViewController(), router: "")
+        return (interface: "", router: "")
     }
 
 }

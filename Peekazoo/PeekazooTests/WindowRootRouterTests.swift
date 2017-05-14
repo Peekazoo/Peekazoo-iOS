@@ -32,8 +32,8 @@ class WindowRootRouterTests: XCTestCase {
     }
 
     func testReturnTheHomepageViewController() {
-        let presented = router.navigateToRoot().viewController
-        XCTAssertEqual(presented, (window.rootViewController as? UINavigationController)?.topViewController)
+        let presented = router.navigateToRoot().interface
+        XCTAssertEqual((presented as? UIViewController), (window.rootViewController as? UINavigationController)?.topViewController)
     }
 
     func testReturnTheHomepageRouter() {

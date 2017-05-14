@@ -16,12 +16,12 @@ struct WindowRootRouter: RootRouter {
         self.window = window
     }
 
-    func navigateToRoot() -> (viewController: UIViewController, router: Any) {
+    func navigateToRoot() -> (interface: Any, router: Any) {
         let homepage = HomepageViewController()
         window.rootViewController = UINavigationController(rootViewController: homepage)
         window.makeKeyAndVisible()
 
-        return (viewController: homepage, router: HomepageRouter())
+        return (interface: homepage, router: HomepageRouter())
     }
 
 }
