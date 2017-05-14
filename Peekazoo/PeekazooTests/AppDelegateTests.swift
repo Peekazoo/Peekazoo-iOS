@@ -54,4 +54,9 @@ class AppDelegateTests: XCTestCase {
         XCTAssertTrue((appDelegate.app as? CapturingApp) === capturingApp)
     }
     
+    func testTheDefaultAppFactoryShouldBeUsed() {
+        let appDelegate = AppDelegate()
+        XCTAssertTrue(appDelegate.appFactory is PhoneAppFactory)
+    }
+    
 }

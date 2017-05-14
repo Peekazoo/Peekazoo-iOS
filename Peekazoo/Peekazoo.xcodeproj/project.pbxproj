@@ -19,6 +19,7 @@
 		6E0D859E1EC83B8A000E7283 /* CapturingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D859D1EC83B8A000E7283 /* CapturingApp.swift */; };
 		6E0D85A01EC83C02000E7283 /* DummyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D859F1EC83C02000E7283 /* DummyApp.swift */; };
 		6E0D85A21EC83C2F000E7283 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D85A11EC83C2F000E7283 /* App.swift */; };
+		6E0D85A41EC83DF0000E7283 /* PhoneAppFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D85A31EC83DF0000E7283 /* PhoneAppFactory.swift */; };
 		789F10071EC481B100FAF5F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789F10061EC481B100FAF5F1 /* AppDelegate.swift */; };
 		789F100E1EC481B100FAF5F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 789F100D1EC481B100FAF5F1 /* Assets.xcassets */; };
 		789F10111EC481B100FAF5F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 789F100F1EC481B100FAF5F1 /* LaunchScreen.storyboard */; };
@@ -47,6 +48,7 @@
 		6E0D859D1EC83B8A000E7283 /* CapturingApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CapturingApp.swift; path = "Test Doubles/CapturingApp.swift"; sourceTree = "<group>"; };
 		6E0D859F1EC83C02000E7283 /* DummyApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DummyApp.swift; path = "Test Doubles/DummyApp.swift"; sourceTree = "<group>"; };
 		6E0D85A11EC83C2F000E7283 /* App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = App.swift; path = Core/App.swift; sourceTree = "<group>"; };
+		6E0D85A31EC83DF0000E7283 /* PhoneAppFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhoneAppFactory.swift; path = Core/PhoneAppFactory.swift; sourceTree = "<group>"; };
 		789F10031EC481B100FAF5F1 /* Peekazoo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Peekazoo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		789F10061EC481B100FAF5F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		789F100D1EC481B100FAF5F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 			children = (
 				6E0D85971EC839FA000E7283 /* AppFactory.swift */,
 				6E0D85A11EC83C2F000E7283 /* App.swift */,
+				6E0D85A31EC83DF0000E7283 /* PhoneAppFactory.swift */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -301,6 +304,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E0D858A1EC6F022000E7283 /* RootRouter.swift in Sources */,
+				6E0D85A41EC83DF0000E7283 /* PhoneAppFactory.swift in Sources */,
 				789F10071EC481B100FAF5F1 /* AppDelegate.swift in Sources */,
 				6E0D85921EC6F2CA000E7283 /* HomepageRouter.swift in Sources */,
 				6E0D85A21EC83C2F000E7283 /* App.swift in Sources */,
