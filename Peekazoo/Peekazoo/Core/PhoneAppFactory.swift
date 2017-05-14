@@ -11,11 +11,7 @@ import UIKit
 struct PhoneAppFactory: AppFactory {
 
     func makeApplication(window: UIWindow) -> App {
-        class DummyApp: App {
-            func launch() { }
-        }
-
-        return DummyApp()
+        return PhoneApp(rootRouter: WindowRootRouter(window: window))
     }
 
 }
