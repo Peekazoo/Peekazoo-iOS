@@ -7,12 +7,15 @@
 //
 
 @testable import Peekazoo
+import UIKit
 
 class CapturingAppFactory: AppFactory {
     
     private(set) var didMakeApplication = false
-    func makeApplication() {
+    private(set) var capturedWindow: UIWindow?
+    func makeApplication(window: UIWindow) {
         didMakeApplication = true
+        capturedWindow = window
     }
     
 }

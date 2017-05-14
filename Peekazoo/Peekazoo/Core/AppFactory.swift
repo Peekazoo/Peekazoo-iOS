@@ -6,10 +6,10 @@
 //  Copyright © 2017 Peekazoo. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol AppFactory {
     
-    func makeApplication()
+    func makeApplication(window: UIWindow)
     
 }

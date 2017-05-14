@@ -25,4 +25,13 @@ class AppDelegateTests: XCTestCase {
         XCTAssertTrue(capturingAppFactory.didMakeApplication)
     }
     
+    func testWhenApplicationDidFinishLaunchingTheAppFactoryShouldUseTheWindowWhenMakingCore() {
+        let appDelegate = AppDelegate()
+        let capturingAppFactory = CapturingAppFactory()
+        appDelegate.appFactory = capturingAppFactory
+        _ = appDelegate.application(UIApplication.shared, didFinishLaunchingWithOptions: [:])
+        
+        XCTAssertEqual(appDelegate.window, capturingAppFactory.capturedWindow)
+    }
+    
 }
