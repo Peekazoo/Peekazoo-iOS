@@ -1,5 +1,5 @@
 //
-//  RootRouterTests.swift
+//  WindowRootRouterTests.swift
 //  Peekazoo
 //
 //  Created by Thomas Sherwood on 13/05/2017.
@@ -9,16 +9,16 @@
 @testable import Peekazoo
 import XCTest
 
-class RootRouterTests: XCTestCase {
+class WindowRootRouterTests: XCTestCase {
 
     var window: UIWindow!
-    var router: RootRouter!
+    var router: WindowRootRouter!
 
     override func setUp() {
         super.setUp()
 
         window = UIWindow()
-        router = RootRouter(window: window)
+        router = WindowRootRouter(window: window)
     }
 
     func testSetNavigationControllerAsTheRootViewController() {

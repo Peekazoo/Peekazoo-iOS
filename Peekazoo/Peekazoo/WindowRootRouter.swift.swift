@@ -1,5 +1,5 @@
 //
-//  RootRouter.swift
+//  WindowRootRouter.swift
 //  Peekazoo
 //
 //  Created by Thomas Sherwood on 13/05/2017.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct RootRouter {
+struct WindowRootRouter {
 
     var window: UIWindow
 
