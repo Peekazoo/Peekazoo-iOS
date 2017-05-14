@@ -16,4 +16,13 @@ class AppDelegateTests: XCTestCase {
         XCTAssertNotNil(appDelegate.window)
     }
     
+    func testWhenApplicationDidFinishLaunchingTheAppFactoryShouldBeAskedToCreateTheApp() {
+        let appDelegate = AppDelegate()
+        let capturingAppFactory = CapturingAppFactory()
+        appDelegate.appFactory = capturingAppFactory
+        _ = appDelegate.application(UIApplication.shared, didFinishLaunchingWithOptions: [:])
+        
+        XCTAssertTrue(capturingAppFactory.didMakeApplication)
+    }
+    
 }
