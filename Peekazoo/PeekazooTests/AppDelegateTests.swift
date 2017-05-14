@@ -44,4 +44,14 @@ class AppDelegateTests: XCTestCase {
         XCTAssertTrue(capturingApp.didLaunch)
     }
     
+    func testWhenApplicationDidFinishLaunchingTheAppFromTheFactoryShouldBeRetained() {
+        let appDelegate = AppDelegate()
+        let capturingApp = CapturingApp()
+        let stubbedAppFactory = StubAppFactory(app: capturingApp)
+        appDelegate.appFactory = stubbedAppFactory
+        _ = appDelegate.application(UIApplication.shared, didFinishLaunchingWithOptions: [:])
+        
+        XCTAssertTrue((appDelegate.app as? CapturingApp) === capturingApp)
+    }
+    
 }

@@ -13,9 +13,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow? = UIWindow()
     var appFactory: AppFactory?
+    var app: App?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        appFactory?.makeApplication(window: window!).launch()
+        app = appFactory?.makeApplication(window: window!)
+        app?.launch()
         return true
     }
 
