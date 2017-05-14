@@ -1,15 +1,15 @@
 //
-//  AppFactory.swift
+//  DummyApp.swift
 //  Peekazoo
 //
 //  Created by Thomas Sherwood on 14/05/2017.
 //  Copyright © 2017 Peekazoo. All rights reserved.
 //
 
-import UIKit
+@testable import Peekazoo
 
-protocol AppFactory {
+class DummyApp: App {
     
-    func makeApplication(window: UIWindow) -> App
+    func launch() { }
     
 }

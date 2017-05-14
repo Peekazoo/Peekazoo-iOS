@@ -1,15 +1,15 @@
 //
-//  AppFactory.swift
+//  App.swift
 //  Peekazoo
 //
 //  Created by Thomas Sherwood on 14/05/2017.
 //  Copyright © 2017 Peekazoo. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-protocol AppFactory {
+protocol App {
     
-    func makeApplication(window: UIWindow) -> App
+    func launch()
     
 }

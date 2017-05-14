@@ -15,6 +15,10 @@
 		6E0D85921EC6F2CA000E7283 /* HomepageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D85911EC6F2CA000E7283 /* HomepageRouter.swift */; };
 		6E0D85951EC839DB000E7283 /* CapturingAppFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D85941EC839DB000E7283 /* CapturingAppFactory.swift */; };
 		6E0D85981EC839FA000E7283 /* AppFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D85971EC839FA000E7283 /* AppFactory.swift */; };
+		6E0D859A1EC83B36000E7283 /* StubAppFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D85991EC83B36000E7283 /* StubAppFactory.swift */; };
+		6E0D859E1EC83B8A000E7283 /* CapturingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D859D1EC83B8A000E7283 /* CapturingApp.swift */; };
+		6E0D85A01EC83C02000E7283 /* DummyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D859F1EC83C02000E7283 /* DummyApp.swift */; };
+		6E0D85A21EC83C2F000E7283 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D85A11EC83C2F000E7283 /* App.swift */; };
 		789F10071EC481B100FAF5F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789F10061EC481B100FAF5F1 /* AppDelegate.swift */; };
 		789F100E1EC481B100FAF5F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 789F100D1EC481B100FAF5F1 /* Assets.xcassets */; };
 		789F10111EC481B100FAF5F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 789F100F1EC481B100FAF5F1 /* LaunchScreen.storyboard */; };
@@ -39,6 +43,10 @@
 		6E0D85911EC6F2CA000E7283 /* HomepageRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomepageRouter.swift; sourceTree = "<group>"; };
 		6E0D85941EC839DB000E7283 /* CapturingAppFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CapturingAppFactory.swift; path = "Test Doubles/CapturingAppFactory.swift"; sourceTree = "<group>"; };
 		6E0D85971EC839FA000E7283 /* AppFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppFactory.swift; path = Core/AppFactory.swift; sourceTree = "<group>"; };
+		6E0D85991EC83B36000E7283 /* StubAppFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StubAppFactory.swift; path = "Test Doubles/StubAppFactory.swift"; sourceTree = "<group>"; };
+		6E0D859D1EC83B8A000E7283 /* CapturingApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CapturingApp.swift; path = "Test Doubles/CapturingApp.swift"; sourceTree = "<group>"; };
+		6E0D859F1EC83C02000E7283 /* DummyApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DummyApp.swift; path = "Test Doubles/DummyApp.swift"; sourceTree = "<group>"; };
+		6E0D85A11EC83C2F000E7283 /* App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = App.swift; path = Core/App.swift; sourceTree = "<group>"; };
 		789F10031EC481B100FAF5F1 /* Peekazoo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Peekazoo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		789F10061EC481B100FAF5F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		789F100D1EC481B100FAF5F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -111,7 +119,10 @@
 		6E0D85931EC839CB000E7283 /* Test Doubles */ = {
 			isa = PBXGroup;
 			children = (
+				6E0D85991EC83B36000E7283 /* StubAppFactory.swift */,
 				6E0D85941EC839DB000E7283 /* CapturingAppFactory.swift */,
+				6E0D859D1EC83B8A000E7283 /* CapturingApp.swift */,
+				6E0D859F1EC83C02000E7283 /* DummyApp.swift */,
 			);
 			name = "Test Doubles";
 			sourceTree = "<group>";
@@ -120,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				6E0D85971EC839FA000E7283 /* AppFactory.swift */,
+				6E0D85A11EC83C2F000E7283 /* App.swift */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -291,6 +303,7 @@
 				6E0D858A1EC6F022000E7283 /* RootRouter.swift in Sources */,
 				789F10071EC481B100FAF5F1 /* AppDelegate.swift in Sources */,
 				6E0D85921EC6F2CA000E7283 /* HomepageRouter.swift in Sources */,
+				6E0D85A21EC83C2F000E7283 /* App.swift in Sources */,
 				6E0D858F1EC6F159000E7283 /* HomepageViewController.swift in Sources */,
 				6E0D85981EC839FA000E7283 /* AppFactory.swift in Sources */,
 			);
@@ -300,8 +313,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E0D85A01EC83C02000E7283 /* DummyApp.swift in Sources */,
 				6E0D85871EC6EF83000E7283 /* RootRouterTests.swift in Sources */,
 				6E0D85831EC6E84D000E7283 /* AppDelegateTests.swift in Sources */,
+				6E0D859E1EC83B8A000E7283 /* CapturingApp.swift in Sources */,
+				6E0D859A1EC83B36000E7283 /* StubAppFactory.swift in Sources */,
 				6E0D85951EC839DB000E7283 /* CapturingAppFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

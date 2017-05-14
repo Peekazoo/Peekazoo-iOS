@@ -9,13 +9,15 @@
 @testable import Peekazoo
 import UIKit
 
-class CapturingAppFactory: AppFactory {
+class CapturingAppFactory: StubAppFactory {
     
     private(set) var didMakeApplication = false
     private(set) var capturedWindow: UIWindow?
-    func makeApplication(window: UIWindow) {
+    override func makeApplication(window: UIWindow) -> App {
         didMakeApplication = true
         capturedWindow = window
+        
+        return super.makeApplication(window: window)
     }
     
 }
