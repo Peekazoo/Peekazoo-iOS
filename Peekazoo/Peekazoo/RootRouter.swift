@@ -9,18 +9,18 @@
 import UIKit
 
 struct RootRouter {
-    
+
     var window: UIWindow
-    
+
     init(window: UIWindow) {
         self.window = window
     }
-    
+
     func navigateToRoot() -> (viewController: UIViewController, router: Any) {
         let homepage = HomepageViewController()
         window.rootViewController = UINavigationController(rootViewController: homepage)
-        
+
         return (viewController: homepage, router: HomepageRouter())
     }
-    
+
 }

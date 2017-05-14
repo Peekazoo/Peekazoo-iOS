@@ -9,7 +9,7 @@
 import UIKit
 
 protocol AppFactory {
-    
+
     func makeApplication(window: UIWindow) -> App
-    
+
 }

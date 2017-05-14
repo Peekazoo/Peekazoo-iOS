@@ -9,7 +9,7 @@
 @testable import Peekazoo
 
 class DummyApp: App {
-    
+
     func launch() { }
-    
+
 }

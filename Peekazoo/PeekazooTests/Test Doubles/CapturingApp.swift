@@ -9,10 +9,10 @@
 @testable import Peekazoo
 
 class CapturingApp: App {
-    
+
     private(set) var didLaunch = false
     func launch() {
         didLaunch = true
     }
-    
+
 }

@@ -9,7 +9,7 @@
 import Foundation
 
 protocol App {
-    
+
     func launch()
-    
+
 }
