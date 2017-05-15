@@ -16,7 +16,7 @@ class HomepageViewController: UIViewController, HomepageInterface {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "CellIdentifier")
+        collectionView.register(HomepageItemCollectionViewCell.self, forCellWithReuseIdentifier: "CellIdentifier")
         collectionView.dataSource = dataSource
         title = "Home"
     }
@@ -25,6 +25,7 @@ class HomepageViewController: UIViewController, HomepageInterface {
 
     func updateInterface(viewModel: HomepageInterfaceViewModel, applyingDifferences diffs: [Difference]) {
         dataSource.viewModel = viewModel
+        collectionView.reloadData()
     }
 
     func showLoadingErrorPlaceholder() {

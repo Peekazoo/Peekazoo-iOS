@@ -50,4 +50,14 @@ class HomepageViewControllerTests: XCTestCase {
         XCTAssertEqual(count, homepageViewController.collectionView?.numberOfItems(inSection: 0))
     }
 
+    func testDequeueingCellAfterSupplyingContentShouldProvideHomepageItemCell() {
+        let item = StubHomepageInterfaceItemViewModel()
+        let viewModel = StubHomepageInterfaceViewModel(items: [item])
+        homepageViewController.updateInterface(viewModel: viewModel, applyingDifferences: [])
+        homepageViewController.collectionView.layoutIfNeeded()
+        let cell = homepageViewController.collectionView.cellForItem(at: IndexPath(item: 0, section: 0))
+
+        XCTAssertTrue(cell is HomepageItemCollectionViewCell)
+    }
+
 }
