@@ -16,7 +16,7 @@ class PhoneAppTests: XCTestCase {
         let app = PhoneApp(rootRouter: capturingRootRouter)
         app.launch()
 
-        XCTAssertTrue(capturingRootRouter.didNavigateToRoot)
+        XCTAssertTrue(capturingRootRouter.didNavigateToHomepage)
     }
 
 }

@@ -22,32 +22,32 @@ class WindowRootRouterTests: XCTestCase {
     }
 
     func testSetNavigationControllerAsTheRootViewController() {
-        _ = router.navigateToRoot()
+        _ = router.navigateToHomepage()
         XCTAssertTrue(window.rootViewController is UINavigationController)
     }
 
     func testSetTheHomepageViewControllerAsTheTopViewControllerOnTheRoot() {
-        _ = router.navigateToRoot()
+        _ = router.navigateToHomepage()
         XCTAssertTrue((window.rootViewController as? UINavigationController)?.topViewController is HomepageViewController)
     }
 
     func testReturnTheHomepageViewController() {
-        let presented = router.navigateToRoot().interface
+        let presented = router.navigateToHomepage().interface
         XCTAssertEqual((presented as? UIViewController), (window.rootViewController as? UINavigationController)?.topViewController)
     }
 
     func testReturnTheHomepageRouter() {
-        let homepageRouter = router.navigateToRoot().router
+        let homepageRouter = router.navigateToHomepage().router
         XCTAssertTrue(homepageRouter is HomepageRouter)
     }
 
     func testMakeTheWindowVisible() {
-        _ = router.navigateToRoot()
+        _ = router.navigateToHomepage()
         XCTAssertFalse(window.isHidden)
     }
 
     func testMakeTheWindowKey() {
-        _ = router.navigateToRoot()
+        _ = router.navigateToHomepage()
         XCTAssertTrue(window.isKeyWindow)
     }
 

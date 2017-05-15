@@ -16,7 +16,7 @@ struct WindowRootRouter: RootRouter {
         self.window = window
     }
 
-    func navigateToRoot() -> (interface: Any, router: Any) {
+    func navigateToHomepage() -> (interface: Any, router: Any) {
         let homepage = HomepageViewController()
         window.rootViewController = UINavigationController(rootViewController: homepage)
         window.makeKeyAndVisible()

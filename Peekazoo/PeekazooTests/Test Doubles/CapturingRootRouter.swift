@@ -10,9 +10,9 @@
 
 class CapturingRootRouter: RootRouter {
 
-    private(set) var didNavigateToRoot = false
-    func navigateToRoot() -> (interface: Any, router: Any) {
-        didNavigateToRoot = true
+    private(set) var didNavigateToHomepage = false
+    func navigateToHomepage() -> (interface: Any, router: Any) {
+        didNavigateToHomepage = true
         return (interface: "", router: "")
     }
 
