@@ -6,13 +6,11 @@
 //  Copyright © 2017 Peekazoo. All rights reserved.
 //
 
-import Foundation
-
-class PhoneApp: App, HomepageServiceLoadingDelegate, HomepageInterfaceDelegate {
+class PhoneApp: App {
 
     var rootRouter: RootRouter
     var homepageService: HomepageService
-    var homepageInterface: HomepageInterface?
+    var homepagePresenter: HomepagePresenter?
 
     init(rootRouter: RootRouter, homepageService: HomepageService) {
         self.rootRouter = rootRouter
@@ -20,21 +18,8 @@ class PhoneApp: App, HomepageServiceLoadingDelegate, HomepageInterfaceDelegate {
     }
 
     func launch() {
-        homepageInterface = rootRouter.navigateToHomepage().interface
-        homepageInterface?.delegate = self
-        homepageService.loadHomepage(delegate: self)
-    }
-
-    func homepageDidLoadSuccessfully() {
-        homepageInterface?.prepareForUpdates()
-    }
-
-    func homepageDidFailToLoad() {
-        homepageInterface?.showLoadingErrorPlaceholder()
-    }
-
-    func homepageDidInvokePullToRefresh() {
-        homepageService.loadHomepage(delegate: self)
+        let homepageInterface = rootRouter.navigateToHomepage().interface
+        homepagePresenter = HomepagePresenter(homepageInterface: homepageInterface, homepageService: homepageService)
     }
 
 }
