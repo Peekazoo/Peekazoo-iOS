@@ -8,10 +8,11 @@
 
 import Foundation
 
-struct PhoneApp: App {
+class PhoneApp: App, HomepageServiceLoadingDelegate {
 
     var rootRouter: RootRouter
     var homepageService: HomepageService
+    var homepageInterface: HomepageInterface?
 
     init(rootRouter: RootRouter, homepageService: HomepageService) {
         self.rootRouter = rootRouter
@@ -19,8 +20,16 @@ struct PhoneApp: App {
     }
 
     func launch() {
-        let routing = rootRouter.navigateToHomepage()
-        homepageService.loadHomepage(completionHandler: routing.interface.prepareForUpdates)
+        homepageInterface = rootRouter.navigateToHomepage().interface
+        homepageService.loadHomepage(delegate: self)
+    }
+
+    func homepageDidLoadSuccessfully() {
+        homepageInterface?.prepareForUpdates()
+    }
+
+    func homepageDidFailToLoad() {
+
     }
 
 }

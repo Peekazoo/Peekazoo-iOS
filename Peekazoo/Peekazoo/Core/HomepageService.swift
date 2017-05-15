@@ -6,8 +6,15 @@
 //  Copyright © 2017 Peekazoo. All rights reserved.
 //
 
+protocol HomepageServiceLoadingDelegate {
+
+    func homepageDidLoadSuccessfully()
+    func homepageDidFailToLoad()
+
+}
+
 protocol HomepageService {
 
-    func loadHomepage(completionHandler: @escaping () -> Void)
+    func loadHomepage(delegate: HomepageServiceLoadingDelegate)
 
 }

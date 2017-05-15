@@ -7,17 +7,18 @@
 //
 
 @testable import Peekazoo
+import Foundation
 
 class DummyHomepageService: HomepageService {
 
-    func loadHomepage(completionHandler: @escaping () -> Void) { }
+    func loadHomepage(delegate: HomepageServiceLoadingDelegate) { }
 
 }
 
 class CapturingHomepageService: HomepageService {
 
     private(set) var didLoad = false
-    func loadHomepage(completionHandler: @escaping () -> Void) {
+    func loadHomepage(delegate: HomepageServiceLoadingDelegate) {
         didLoad = true
     }
 
@@ -25,8 +26,16 @@ class CapturingHomepageService: HomepageService {
 
 class SuccessfulHomepageService: HomepageService {
 
-    func loadHomepage(completionHandler: @escaping () -> Void) {
-        completionHandler()
+    func loadHomepage(delegate: HomepageServiceLoadingDelegate) {
+        delegate.homepageDidLoadSuccessfully()
+    }
+
+}
+
+class FailingHomepageService: HomepageService {
+
+    func loadHomepage(delegate: HomepageServiceLoadingDelegate) {
+        delegate.homepageDidFailToLoad()
     }
 
 }

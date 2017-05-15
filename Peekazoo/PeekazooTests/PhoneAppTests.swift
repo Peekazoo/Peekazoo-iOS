@@ -50,4 +50,15 @@ class PhoneAppTests: XCTestCase {
         XCTAssertFalse(capturingHomepageInterface.didPrepareForUpdates)
     }
 
+    func testTheHomepageInterfaceIsNotToldToPrepareForUpdatesWhenServiceLoadFails() {
+        let capturingRootRouter = CapturingRootRouter()
+        let capturingHomepageInterface = CapturingHomepageInterface()
+        capturingRootRouter.stubHomepageInterface = capturingHomepageInterface
+        let failingHomepageService = FailingHomepageService()
+        let app = PhoneApp(rootRouter: capturingRootRouter, homepageService: failingHomepageService)
+        app.launch()
+
+        XCTAssertFalse(capturingHomepageInterface.didPrepareForUpdates)
+    }
+
 }

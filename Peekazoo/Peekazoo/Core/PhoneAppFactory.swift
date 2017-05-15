@@ -12,7 +12,7 @@ struct PhoneAppFactory: AppFactory {
 
     func makeApplication(window: UIWindow) -> App {
         class DummyHomepageService: HomepageService {
-            func loadHomepage(completionHandler: @escaping () -> Void) {}
+            func loadHomepage(delegate: HomepageServiceLoadingDelegate) {}
         }
 
         return PhoneApp(rootRouter: WindowRootRouter(window: window),
