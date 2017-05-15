@@ -16,7 +16,13 @@ struct HomepageViewModel: HomepageInterfaceViewModel {
     }
 
     mutating func union(items: [HomepageItem]) {
-        content = items.map(HomepageItemViewModel.init) + content
+        let existingIdentifiers = content.map({ $0.item.contentIdentifier })
+        let newItems = items.filter(isNotRepresentedByExistingIdentifiers(existingIdentifiers))
+        content = newItems.map(HomepageItemViewModel.init) + content
+    }
+
+    private func isNotRepresentedByExistingIdentifiers(_ identifiers: [String]) -> (HomepageItem) -> Bool {
+        return { !identifiers.contains($0.contentIdentifier) }
     }
 
     func item(at index: Int) -> HomepageInterfaceItemViewModel {

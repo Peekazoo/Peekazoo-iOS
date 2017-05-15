@@ -213,4 +213,15 @@ class PhoneAppTests: XCTestCase {
         XCTAssertEqual(firstItem.title, context.interface.committedViewModel?.item(at: 1).title)
     }
 
+    func testLoadingDataMultipleTimesProducingTheSameItemShouldNotReplicateIt() {
+        let capturingHomepageService = CapturingHomepageService()
+        let context = PhoneAppTestBuilder.buildWithHomepageService(capturingHomepageService).thenLaunch()
+        let item = StubHomepageItem(title: "Some content", contentIdentifier: "Unique ID")
+        capturingHomepageService.simulateSuccessfulLoad(content: [item])
+        context.interface.invokePullToRefresh()
+        capturingHomepageService.simulateSuccessfulLoad(content: [item])
+
+        XCTAssertEqual(1, context.interface.committedViewModel?.numberOfItems)
+    }
+
 }

@@ -15,6 +15,7 @@ protocol HomepageServiceLoadingDelegate {
 
 protocol HomepageItem {
 
+    var contentIdentifier: String { get }
     var title: String { get }
 
 }
