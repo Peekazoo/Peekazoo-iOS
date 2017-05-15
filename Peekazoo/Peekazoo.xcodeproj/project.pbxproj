@@ -20,7 +20,7 @@
 		6E0D85A41EC83DF0000E7283 /* PhoneAppFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D85A31EC83DF0000E7283 /* PhoneAppFactory.swift */; };
 		6E0D85A61EC8F864000E7283 /* PhoneAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D85A51EC8F864000E7283 /* PhoneAppTests.swift */; };
 		6E0D85A81EC8F9CE000E7283 /* RootRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D85A71EC8F9CE000E7283 /* RootRouter.swift */; };
-		6E0D85AA1EC8FA63000E7283 /* CapturingRootRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D85A91EC8FA63000E7283 /* CapturingRootRouter.swift */; };
+		6E0D85AA1EC8FA63000E7283 /* RootRouterTestDoubles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D85A91EC8FA63000E7283 /* RootRouterTestDoubles.swift */; };
 		6E0D85AC1EC8FA79000E7283 /* PhoneApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D85AB1EC8FA79000E7283 /* PhoneApp.swift */; };
 		6E0D85AE1EC8FD66000E7283 /* HomepageViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D85AD1EC8FD66000E7283 /* HomepageViewControllerTests.swift */; };
 		6E0D85B21EC9715D000E7283 /* HomepageServiceTestDoubles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D85B11EC9715D000E7283 /* HomepageServiceTestDoubles.swift */; };
@@ -58,7 +58,7 @@
 		6E0D85A31EC83DF0000E7283 /* PhoneAppFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhoneAppFactory.swift; path = Core/PhoneAppFactory.swift; sourceTree = "<group>"; };
 		6E0D85A51EC8F864000E7283 /* PhoneAppTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneAppTests.swift; sourceTree = "<group>"; };
 		6E0D85A71EC8F9CE000E7283 /* RootRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RootRouter.swift; path = Core/RootRouter.swift; sourceTree = "<group>"; };
-		6E0D85A91EC8FA63000E7283 /* CapturingRootRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CapturingRootRouter.swift; path = "Test Doubles/CapturingRootRouter.swift"; sourceTree = "<group>"; };
+		6E0D85A91EC8FA63000E7283 /* RootRouterTestDoubles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RootRouterTestDoubles.swift; path = "Test Doubles/RootRouterTestDoubles.swift"; sourceTree = "<group>"; };
 		6E0D85AB1EC8FA79000E7283 /* PhoneApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhoneApp.swift; path = Core/PhoneApp.swift; sourceTree = "<group>"; };
 		6E0D85AD1EC8FD66000E7283 /* HomepageViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomepageViewControllerTests.swift; sourceTree = "<group>"; };
 		6E0D85B11EC9715D000E7283 /* HomepageServiceTestDoubles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomepageServiceTestDoubles.swift; path = "Test Doubles/HomepageServiceTestDoubles.swift"; sourceTree = "<group>"; };
@@ -141,7 +141,7 @@
 			children = (
 				6E0D859F1EC83C02000E7283 /* AppTestDoubles.swift */,
 				6E0D85991EC83B36000E7283 /* AppFactoryTestDoubles.swift */,
-				6E0D85A91EC8FA63000E7283 /* CapturingRootRouter.swift */,
+				6E0D85A91EC8FA63000E7283 /* RootRouterTestDoubles.swift */,
 				6E0D85B11EC9715D000E7283 /* HomepageServiceTestDoubles.swift */,
 				6E0D85B91EC973DB000E7283 /* HomepageInterfaceTestDoubles.swift */,
 			);
@@ -366,7 +366,7 @@
 				6E0D85BA1EC973DB000E7283 /* HomepageInterfaceTestDoubles.swift in Sources */,
 				6E0D85831EC6E84D000E7283 /* AppDelegateTests.swift in Sources */,
 				6E0D859A1EC83B36000E7283 /* AppFactoryTestDoubles.swift in Sources */,
-				6E0D85AA1EC8FA63000E7283 /* CapturingRootRouter.swift in Sources */,
+				6E0D85AA1EC8FA63000E7283 /* RootRouterTestDoubles.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

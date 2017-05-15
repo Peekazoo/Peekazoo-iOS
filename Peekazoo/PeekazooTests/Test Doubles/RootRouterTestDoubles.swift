@@ -1,5 +1,5 @@
 //
-//  CapturingRootRouter.swift
+//  RootRouterTestDoubles.swift
 //  Peekazoo
 //
 //  Created by Thomas Sherwood on 14/05/2017.
