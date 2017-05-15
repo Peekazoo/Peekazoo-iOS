@@ -10,9 +10,6 @@ import UIKit
 
 class HomepageItemCollectionViewCell: UICollectionViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
+    @IBOutlet weak var itemTitleLabel: UILabel!
 
 }

@@ -60,4 +60,14 @@ class HomepageViewControllerTests: XCTestCase {
         XCTAssertTrue(cell is HomepageItemCollectionViewCell)
     }
 
+    func testDequeuedHomepageItemCellsShouldHaveLabels() {
+        let item = StubHomepageInterfaceItemViewModel()
+        let viewModel = StubHomepageInterfaceViewModel(items: [item])
+        homepageViewController.updateInterface(viewModel: viewModel, applyingDifferences: [])
+        homepageViewController.collectionView.layoutIfNeeded()
+        let cell = homepageViewController.collectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as? HomepageItemCollectionViewCell
+
+        XCTAssertNotNil(cell?.itemTitleLabel)
+    }
+
 }

@@ -16,7 +16,8 @@ class HomepageViewController: UIViewController, HomepageInterface {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        collectionView.register(HomepageItemCollectionViewCell.self, forCellWithReuseIdentifier: "CellIdentifier")
+        let cellNib = UINib(nibName: "HomepageItemCollectionViewCell", bundle: Bundle.main)
+        collectionView.register(cellNib, forCellWithReuseIdentifier: "CellIdentifier")
         collectionView.dataSource = dataSource
         title = "Home"
     }
