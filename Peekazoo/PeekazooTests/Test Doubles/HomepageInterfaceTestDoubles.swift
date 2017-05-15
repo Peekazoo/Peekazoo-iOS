@@ -12,9 +12,7 @@ class DummyHomepageInterface: HomepageInterface {
 
     var delegate: HomepageInterfaceDelegate?
 
-    func prepareForUpdates() { }
-    func insertItem(at index: Int) { }
-    func commitUpdates(using viewModel: HomepageInterfaceViewModel) { }
+    func updateInterface(viewModel: HomepageInterfaceViewModel, applyingDifferences diffs: [Difference]) { }
     func showLoadingErrorPlaceholder() { }
     func hideLoadingErrorPlaceholder() { }
     func showNoContentPlaceholder() { }
@@ -26,21 +24,14 @@ class CapturingHomepageInterface: HomepageInterface {
 
     var delegate: HomepageInterfaceDelegate?
 
-    private(set) var didPrepareForUpdates = false
-    func prepareForUpdates() {
-        didPrepareForUpdates = true
-    }
-
-    private(set) var insertedItemIndex: Int?
-    func insertItem(at index: Int) {
-        insertedItemIndex = index
-    }
-
-    private(set) var didCommitUpdates = false
     private(set) var committedViewModel: HomepageInterfaceViewModel?
-    func commitUpdates(using viewModel: HomepageInterfaceViewModel) {
-        didCommitUpdates = true
+    private(set) var insertedItemIndex: Int?
+    func updateInterface(viewModel: HomepageInterfaceViewModel, applyingDifferences diffs: [Difference]) {
         committedViewModel = viewModel
+
+        if let diff = diffs.first {
+            insertedItemIndex = extractIndex(from: diff)
+        }
     }
 
     private(set) var didShowLoadingErrorPlaceholder = false
@@ -67,14 +58,12 @@ class CapturingHomepageInterface: HomepageInterface {
         delegate?.homepageInterfaceDidInvokePullToRefresh()
     }
 
-}
-
-class DetectIndexInsertionBeforePreparingMock: CapturingHomepageInterface {
-
-    private(set) var wasToldToPrepareAfterAlreadyInsertingIndex = false
-    override func prepareForUpdates() {
-        super.prepareForUpdates()
-        wasToldToPrepareAfterAlreadyInsertingIndex = insertedItemIndex != nil
+    fileprivate func extractIndex(from diff: Difference) -> Int? {
+        if case .insertion(let idx) = diff {
+            return idx
+        } else {
+            return nil
+        }
     }
 
 }
@@ -82,9 +71,9 @@ class DetectIndexInsertionBeforePreparingMock: CapturingHomepageInterface {
 class JournallingIndexHomepageInterface: CapturingHomepageInterface {
 
     private(set) var indicies = [Int]()
-    override func insertItem(at index: Int) {
-        super.insertItem(at: index)
-        indicies.append(index)
+    override func updateInterface(viewModel: HomepageInterfaceViewModel, applyingDifferences diffs: [Difference]) {
+        super.updateInterface(viewModel: viewModel, applyingDifferences: diffs)
+        indicies = diffs.flatMap(extractIndex)
     }
 
 }

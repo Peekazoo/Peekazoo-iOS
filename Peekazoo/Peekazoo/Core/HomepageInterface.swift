@@ -26,13 +26,15 @@ protocol HomepageInterfaceItemViewModel {
 
 }
 
+enum Difference {
+    case insertion(index: Int)
+}
+
 protocol HomepageInterface {
 
     var delegate: HomepageInterfaceDelegate? { get set }
 
-    func prepareForUpdates()
-    func insertItem(at index: Int)
-    func commitUpdates(using viewModel: HomepageInterfaceViewModel)
+    func updateInterface(viewModel: HomepageInterfaceViewModel, applyingDifferences diffs: [Difference])
     func showLoadingErrorPlaceholder()
     func hideLoadingErrorPlaceholder()
     func showNoContentPlaceholder()

@@ -22,15 +22,7 @@ class HomepageViewController: UIViewController, HomepageInterface {
 
     var delegate: HomepageInterfaceDelegate?
 
-    func prepareForUpdates() {
-
-    }
-
-    func insertItem(at index: Int) {
-
-    }
-
-    func commitUpdates(using viewModel: HomepageInterfaceViewModel) {
+    func updateInterface(viewModel: HomepageInterfaceViewModel, applyingDifferences diffs: [Difference]) {
 
     }
 

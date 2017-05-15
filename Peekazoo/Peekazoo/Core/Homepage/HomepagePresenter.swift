@@ -28,9 +28,9 @@ class HomepagePresenter: HomepageInterfaceDelegate, HomepageServiceLoadingDelega
             interface.showNoContentPlaceholder()
         } else {
             interface.hideNoContentPlaceholder()
-            interface.prepareForUpdates()
-            content.indices.forEach(interface.insertItem(at:))
-            interface.commitUpdates(using: viewModel)
+
+            let insertions = content.indices.map({ Difference.insertion(index: $0) })
+            interface.updateInterface(viewModel: viewModel, applyingDifferences: insertions)
         }
     }
 

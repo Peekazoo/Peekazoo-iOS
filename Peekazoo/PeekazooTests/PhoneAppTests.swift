@@ -63,23 +63,6 @@ class PhoneAppTests: XCTestCase {
         XCTAssertTrue(capturingHomepageService.didLoad)
     }
 
-    func testWhenHomepageLoadedSuccessfullyWithSingleItemTheHomepageInterfaceIsToldToPrepareForUpdates() {
-        let context = PhoneAppTestBuilder.buildForSuccessfulHomepageService(content: [StubHomepageItem()]).thenLaunch()
-        XCTAssertTrue(context.interface.didPrepareForUpdates)
-    }
-
-    func testTheHomepageInterfaceIsNotToldToPrepareForUpdatesUntilServiceLoadCompletes() {
-        let capturingHomepageService = CapturingHomepageService()
-        let context = PhoneAppTestBuilder.buildWithHomepageService(capturingHomepageService).thenLaunch()
-
-        XCTAssertFalse(context.interface.didPrepareForUpdates)
-    }
-
-    func testTheHomepageInterfaceIsNotToldToPrepareForUpdatesWhenServiceLoadFails() {
-        let context = PhoneAppTestBuilder.buildForFailingHomepageService().thenLaunch()
-        XCTAssertFalse(context.interface.didPrepareForUpdates)
-    }
-
     func testHomepageServiceFailsToLoadWithNoExistingContentShownTellsInterfaceToShowErrorPlaceholder() {
         let context = PhoneAppTestBuilder.buildForFailingHomepageService().thenLaunch()
         XCTAssertTrue(context.interface.didShowLoadingErrorPlaceholder)
@@ -144,13 +127,6 @@ class PhoneAppTests: XCTestCase {
         XCTAssertEqual(0, context.interface.insertedItemIndex)
     }
 
-    func testHomepageServicesCompletesLoadWithSingleItemDoesNotPerformAnyInsertionsUntilInterfacePreparesForUpdates() {
-        let preemptiveIndexDetectionMock = DetectIndexInsertionBeforePreparingMock()
-        PhoneAppTestBuilder.buildForSuccessfulHomepageService(interface: preemptiveIndexDetectionMock).thenLaunch()
-
-        XCTAssertFalse(preemptiveIndexDetectionMock.wasToldToPrepareAfterAlreadyInsertingIndex)
-    }
-
     func testHomepageServicesCompletesLoadWithSeveralItemsTellsInterfaceToInsertEntriesWithinExpectedRange() {
         let count = Int(arc4random_uniform(100))
         let expected = 0..<count
@@ -169,21 +145,6 @@ class PhoneAppTests: XCTestCase {
         capturingHomepageService.simulateFailedLoad()
 
         XCTAssertTrue(context.interface.didShowLoadingErrorPlaceholder)
-    }
-
-    func testTheHomepageInterfaceIsNotToldToPrepareForUpdatesIfThereIsNoContentToShow() {
-        let context = PhoneAppTestBuilder.buildForSuccessfulHomepageService().thenLaunch()
-        XCTAssertFalse(context.interface.didPrepareForUpdates)
-    }
-
-    func testTheHomepageInterfaceIsToldToCommitUpdatesWhenContentIsAvailable() {
-        let context = PhoneAppTestBuilder.buildForSuccessfulHomepageService(content: [StubHomepageItem()]).thenLaunch()
-        XCTAssertTrue(context.interface.didCommitUpdates)
-    }
-
-    func testTheHomepageInterfaceIsNotToldToCommitUpdatesUnlessItWasPreparingTo() {
-        let context = PhoneAppTestBuilder.buildForSuccessfulHomepageService().thenLaunch()
-        XCTAssertFalse(context.interface.didCommitUpdates)
     }
 
     func testTheHomepageInterfaceIsToldToCommitUpdatesUsingViewModelWithSameCountOfItemsReturnByService() {
