@@ -29,9 +29,8 @@ class PhoneAppTests: XCTestCase {
     }
 
     func testWhenHomepageLoadedSuccessfullyTheHomepageInterfaceIsToldToPrepareForUpdates() {
-        let stubbedRootRouter = StubRootRouter()
         let capturingHomepageInterface = CapturingHomepageInterface()
-        stubbedRootRouter.stubHomepageInterface = capturingHomepageInterface
+        let stubbedRootRouter = StubRootRouter(homepageInterface: capturingHomepageInterface)
         let successfulHomepageService = SuccessfulHomepageService()
         let app = PhoneApp(rootRouter: stubbedRootRouter, homepageService: successfulHomepageService)
         app.launch()
@@ -40,9 +39,8 @@ class PhoneAppTests: XCTestCase {
     }
 
     func testTheHomepageInterfaceIsNotToldToPrepareForUpdatesUntilServiceLoadCompletes() {
-        let stubbedRootRouter = StubRootRouter()
         let capturingHomepageInterface = CapturingHomepageInterface()
-        stubbedRootRouter.stubHomepageInterface = capturingHomepageInterface
+        let stubbedRootRouter = StubRootRouter(homepageInterface: capturingHomepageInterface)
         let capturingHomepageService = CapturingHomepageService()
         let app = PhoneApp(rootRouter: stubbedRootRouter, homepageService: capturingHomepageService)
         app.launch()
@@ -51,9 +49,8 @@ class PhoneAppTests: XCTestCase {
     }
 
     func testTheHomepageInterfaceIsNotToldToPrepareForUpdatesWhenServiceLoadFails() {
-        let stubbedRootRouter = StubRootRouter()
         let capturingHomepageInterface = CapturingHomepageInterface()
-        stubbedRootRouter.stubHomepageInterface = capturingHomepageInterface
+        let stubbedRootRouter = StubRootRouter(homepageInterface: capturingHomepageInterface)
         let failingHomepageService = FailingHomepageService()
         let app = PhoneApp(rootRouter: stubbedRootRouter, homepageService: failingHomepageService)
         app.launch()

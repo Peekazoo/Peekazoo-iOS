@@ -10,9 +10,18 @@
 
 class StubRootRouter: RootRouter {
 
-    var stubHomepageInterface: HomepageInterface = DummyHomepageInterface()
+    var stubbedHomepageInterface: HomepageInterface
+
+    convenience init() {
+        self.init(homepageInterface: DummyHomepageInterface())
+    }
+
+    init(homepageInterface: HomepageInterface) {
+        stubbedHomepageInterface = homepageInterface
+    }
+
     func navigateToHomepage() -> (interface: HomepageInterface, router: Any) {
-        return (interface: stubHomepageInterface, router: "")
+        return (interface: stubbedHomepageInterface, router: "")
     }
 
 }
