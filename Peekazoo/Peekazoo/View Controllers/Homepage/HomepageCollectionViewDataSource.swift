@@ -23,7 +23,12 @@ class HomepageCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return collectionView.dequeueReusableCell(withReuseIdentifier: "CellIdentifier", for: indexPath)
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CellIdentifier", for: indexPath) as? HomepageItemCollectionViewCell else {
+            fatalError()
+        }
+
+        cell.itemTitleLabel.text = "Some title"
+        return cell
     }
 
 }

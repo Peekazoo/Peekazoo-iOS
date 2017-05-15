@@ -70,4 +70,14 @@ class HomepageViewControllerTests: XCTestCase {
         XCTAssertNotNil(cell?.itemTitleLabel)
     }
 
+    func testDequeuedItemCellShouldBeConfiguredWithTheTitleFromTheViewModel() {
+        let item = StubHomepageInterfaceItemViewModel(title: "Some title")
+        let viewModel = StubHomepageInterfaceViewModel(items: [item])
+        homepageViewController.updateInterface(viewModel: viewModel, applyingDifferences: [])
+        homepageViewController.collectionView.layoutIfNeeded()
+        let cell = homepageViewController.collectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as? HomepageItemCollectionViewCell
+
+        XCTAssertEqual(item.title, cell?.itemTitleLabel.text)
+    }
+
 }
