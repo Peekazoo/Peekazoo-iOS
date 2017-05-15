@@ -9,23 +9,6 @@
 @testable import Peekazoo
 import XCTest
 
-class SuccessfulHomepageService: HomepageService {
-
-    func loadHomepage() {
-
-    }
-
-}
-
-class CapturingHomepageInterface: HomepageInterface {
-
-    private(set) var didPrepareForUpdates = false
-    func prepareForUpdates() {
-        didPrepareForUpdates = true
-    }
-
-}
-
 class PhoneAppTests: XCTestCase {
 
     func testWhenLaunchedTheRootInterfaceIsNavigatedTo() {
