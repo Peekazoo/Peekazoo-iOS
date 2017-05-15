@@ -13,11 +13,9 @@
 		6E0D858F1EC6F159000E7283 /* HomepageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D858D1EC6F159000E7283 /* HomepageViewController.swift */; };
 		6E0D85901EC6F159000E7283 /* HomepageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E0D858E1EC6F159000E7283 /* HomepageViewController.xib */; };
 		6E0D85921EC6F2CA000E7283 /* HomepageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D85911EC6F2CA000E7283 /* HomepageRouter.swift */; };
-		6E0D85951EC839DB000E7283 /* CapturingAppFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D85941EC839DB000E7283 /* CapturingAppFactory.swift */; };
 		6E0D85981EC839FA000E7283 /* AppFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D85971EC839FA000E7283 /* AppFactory.swift */; };
-		6E0D859A1EC83B36000E7283 /* StubAppFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D85991EC83B36000E7283 /* StubAppFactory.swift */; };
-		6E0D859E1EC83B8A000E7283 /* CapturingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D859D1EC83B8A000E7283 /* CapturingApp.swift */; };
-		6E0D85A01EC83C02000E7283 /* DummyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D859F1EC83C02000E7283 /* DummyApp.swift */; };
+		6E0D859A1EC83B36000E7283 /* AppFactoryTestDoubles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D85991EC83B36000E7283 /* AppFactoryTestDoubles.swift */; };
+		6E0D85A01EC83C02000E7283 /* AppTestDoubles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D859F1EC83C02000E7283 /* AppTestDoubles.swift */; };
 		6E0D85A21EC83C2F000E7283 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D85A11EC83C2F000E7283 /* App.swift */; };
 		6E0D85A41EC83DF0000E7283 /* PhoneAppFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D85A31EC83DF0000E7283 /* PhoneAppFactory.swift */; };
 		6E0D85A61EC8F864000E7283 /* PhoneAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D85A51EC8F864000E7283 /* PhoneAppTests.swift */; };
@@ -25,13 +23,10 @@
 		6E0D85AA1EC8FA63000E7283 /* CapturingRootRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D85A91EC8FA63000E7283 /* CapturingRootRouter.swift */; };
 		6E0D85AC1EC8FA79000E7283 /* PhoneApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D85AB1EC8FA79000E7283 /* PhoneApp.swift */; };
 		6E0D85AE1EC8FD66000E7283 /* HomepageViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D85AD1EC8FD66000E7283 /* HomepageViewControllerTests.swift */; };
-		6E0D85B21EC9715D000E7283 /* DummyHomepageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D85B11EC9715D000E7283 /* DummyHomepageService.swift */; };
-		6E0D85B41EC97172000E7283 /* CapturingHomepageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D85B31EC97172000E7283 /* CapturingHomepageService.swift */; };
+		6E0D85B21EC9715D000E7283 /* HomepageServiceTestDoubles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D85B11EC9715D000E7283 /* HomepageServiceTestDoubles.swift */; };
 		6E0D85B61EC9719C000E7283 /* HomepageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D85B51EC9719C000E7283 /* HomepageService.swift */; };
 		6E0D85B81EC9738B000E7283 /* HomepageInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D85B71EC9738B000E7283 /* HomepageInterface.swift */; };
-		6E0D85BA1EC973DB000E7283 /* DummyHomepageInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D85B91EC973DB000E7283 /* DummyHomepageInterface.swift */; };
-		6E0D85BC1EC9939E000E7283 /* SuccessfulHomepageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D85BB1EC9939E000E7283 /* SuccessfulHomepageService.swift */; };
-		6E0D85BE1EC993B1000E7283 /* CapturingHomepageInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D85BD1EC993B1000E7283 /* CapturingHomepageInterface.swift */; };
+		6E0D85BA1EC973DB000E7283 /* HomepageInterfaceTestDoubles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D85B91EC973DB000E7283 /* HomepageInterfaceTestDoubles.swift */; };
 		789F10071EC481B100FAF5F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789F10061EC481B100FAF5F1 /* AppDelegate.swift */; };
 		789F100E1EC481B100FAF5F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 789F100D1EC481B100FAF5F1 /* Assets.xcassets */; };
 		789F10111EC481B100FAF5F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 789F100F1EC481B100FAF5F1 /* LaunchScreen.storyboard */; };
@@ -54,11 +49,9 @@
 		6E0D858D1EC6F159000E7283 /* HomepageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomepageViewController.swift; path = "View Controllers/Homepage/HomepageViewController.swift"; sourceTree = "<group>"; };
 		6E0D858E1EC6F159000E7283 /* HomepageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HomepageViewController.xib; path = "View Controllers/Homepage/HomepageViewController.xib"; sourceTree = "<group>"; };
 		6E0D85911EC6F2CA000E7283 /* HomepageRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomepageRouter.swift; sourceTree = "<group>"; };
-		6E0D85941EC839DB000E7283 /* CapturingAppFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CapturingAppFactory.swift; path = "Test Doubles/CapturingAppFactory.swift"; sourceTree = "<group>"; };
 		6E0D85971EC839FA000E7283 /* AppFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppFactory.swift; path = Core/AppFactory.swift; sourceTree = "<group>"; };
-		6E0D85991EC83B36000E7283 /* StubAppFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StubAppFactory.swift; path = "Test Doubles/StubAppFactory.swift"; sourceTree = "<group>"; };
-		6E0D859D1EC83B8A000E7283 /* CapturingApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CapturingApp.swift; path = "Test Doubles/CapturingApp.swift"; sourceTree = "<group>"; };
-		6E0D859F1EC83C02000E7283 /* DummyApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DummyApp.swift; path = "Test Doubles/DummyApp.swift"; sourceTree = "<group>"; };
+		6E0D85991EC83B36000E7283 /* AppFactoryTestDoubles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppFactoryTestDoubles.swift; path = "Test Doubles/AppFactoryTestDoubles.swift"; sourceTree = "<group>"; };
+		6E0D859F1EC83C02000E7283 /* AppTestDoubles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppTestDoubles.swift; path = "Test Doubles/AppTestDoubles.swift"; sourceTree = "<group>"; };
 		6E0D85A11EC83C2F000E7283 /* App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = App.swift; path = Core/App.swift; sourceTree = "<group>"; };
 		6E0D85A31EC83DF0000E7283 /* PhoneAppFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhoneAppFactory.swift; path = Core/PhoneAppFactory.swift; sourceTree = "<group>"; };
 		6E0D85A51EC8F864000E7283 /* PhoneAppTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneAppTests.swift; sourceTree = "<group>"; };
@@ -66,13 +59,10 @@
 		6E0D85A91EC8FA63000E7283 /* CapturingRootRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CapturingRootRouter.swift; path = "Test Doubles/CapturingRootRouter.swift"; sourceTree = "<group>"; };
 		6E0D85AB1EC8FA79000E7283 /* PhoneApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhoneApp.swift; path = Core/PhoneApp.swift; sourceTree = "<group>"; };
 		6E0D85AD1EC8FD66000E7283 /* HomepageViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomepageViewControllerTests.swift; sourceTree = "<group>"; };
-		6E0D85B11EC9715D000E7283 /* DummyHomepageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DummyHomepageService.swift; path = "Test Doubles/DummyHomepageService.swift"; sourceTree = "<group>"; };
-		6E0D85B31EC97172000E7283 /* CapturingHomepageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CapturingHomepageService.swift; path = "Test Doubles/CapturingHomepageService.swift"; sourceTree = "<group>"; };
+		6E0D85B11EC9715D000E7283 /* HomepageServiceTestDoubles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomepageServiceTestDoubles.swift; path = "Test Doubles/HomepageServiceTestDoubles.swift"; sourceTree = "<group>"; };
 		6E0D85B51EC9719C000E7283 /* HomepageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomepageService.swift; path = Core/HomepageService.swift; sourceTree = "<group>"; };
 		6E0D85B71EC9738B000E7283 /* HomepageInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomepageInterface.swift; path = Core/HomepageInterface.swift; sourceTree = "<group>"; };
-		6E0D85B91EC973DB000E7283 /* DummyHomepageInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DummyHomepageInterface.swift; path = "Test Doubles/DummyHomepageInterface.swift"; sourceTree = "<group>"; };
-		6E0D85BB1EC9939E000E7283 /* SuccessfulHomepageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SuccessfulHomepageService.swift; path = "Test Doubles/SuccessfulHomepageService.swift"; sourceTree = "<group>"; };
-		6E0D85BD1EC993B1000E7283 /* CapturingHomepageInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CapturingHomepageInterface.swift; path = "Test Doubles/CapturingHomepageInterface.swift"; sourceTree = "<group>"; };
+		6E0D85B91EC973DB000E7283 /* HomepageInterfaceTestDoubles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomepageInterfaceTestDoubles.swift; path = "Test Doubles/HomepageInterfaceTestDoubles.swift"; sourceTree = "<group>"; };
 		789F10031EC481B100FAF5F1 /* Peekazoo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Peekazoo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		789F10061EC481B100FAF5F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		789F100D1EC481B100FAF5F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -145,16 +135,11 @@
 		6E0D85931EC839CB000E7283 /* Test Doubles */ = {
 			isa = PBXGroup;
 			children = (
-				6E0D85991EC83B36000E7283 /* StubAppFactory.swift */,
-				6E0D85941EC839DB000E7283 /* CapturingAppFactory.swift */,
-				6E0D859D1EC83B8A000E7283 /* CapturingApp.swift */,
-				6E0D859F1EC83C02000E7283 /* DummyApp.swift */,
+				6E0D859F1EC83C02000E7283 /* AppTestDoubles.swift */,
+				6E0D85991EC83B36000E7283 /* AppFactoryTestDoubles.swift */,
 				6E0D85A91EC8FA63000E7283 /* CapturingRootRouter.swift */,
-				6E0D85B11EC9715D000E7283 /* DummyHomepageService.swift */,
-				6E0D85B31EC97172000E7283 /* CapturingHomepageService.swift */,
-				6E0D85B91EC973DB000E7283 /* DummyHomepageInterface.swift */,
-				6E0D85BB1EC9939E000E7283 /* SuccessfulHomepageService.swift */,
-				6E0D85BD1EC993B1000E7283 /* CapturingHomepageInterface.swift */,
+				6E0D85B11EC9715D000E7283 /* HomepageServiceTestDoubles.swift */,
+				6E0D85B91EC973DB000E7283 /* HomepageInterfaceTestDoubles.swift */,
 			);
 			name = "Test Doubles";
 			sourceTree = "<group>";
@@ -358,19 +343,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E0D85A61EC8F864000E7283 /* PhoneAppTests.swift in Sources */,
-				6E0D85A01EC83C02000E7283 /* DummyApp.swift in Sources */,
-				6E0D85BE1EC993B1000E7283 /* CapturingHomepageInterface.swift in Sources */,
-				6E0D85B41EC97172000E7283 /* CapturingHomepageService.swift in Sources */,
+				6E0D85A01EC83C02000E7283 /* AppTestDoubles.swift in Sources */,
 				6E0D85AE1EC8FD66000E7283 /* HomepageViewControllerTests.swift in Sources */,
 				6E0D85871EC6EF83000E7283 /* WindowRootRouterTests.swift in Sources */,
-				6E0D85B21EC9715D000E7283 /* DummyHomepageService.swift in Sources */,
-				6E0D85BA1EC973DB000E7283 /* DummyHomepageInterface.swift in Sources */,
-				6E0D85BC1EC9939E000E7283 /* SuccessfulHomepageService.swift in Sources */,
+				6E0D85B21EC9715D000E7283 /* HomepageServiceTestDoubles.swift in Sources */,
+				6E0D85BA1EC973DB000E7283 /* HomepageInterfaceTestDoubles.swift in Sources */,
 				6E0D85831EC6E84D000E7283 /* AppDelegateTests.swift in Sources */,
-				6E0D859E1EC83B8A000E7283 /* CapturingApp.swift in Sources */,
-				6E0D859A1EC83B36000E7283 /* StubAppFactory.swift in Sources */,
+				6E0D859A1EC83B36000E7283 /* AppFactoryTestDoubles.swift in Sources */,
 				6E0D85AA1EC8FA63000E7283 /* CapturingRootRouter.swift in Sources */,
-				6E0D85951EC839DB000E7283 /* CapturingAppFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,3 +13,12 @@ class DummyHomepageInterface: HomepageInterface {
     func prepareForUpdates() { }
 
 }
+
+class CapturingHomepageInterface: HomepageInterface {
+
+    private(set) var didPrepareForUpdates = false
+    func prepareForUpdates() {
+        didPrepareForUpdates = true
+    }
+
+}

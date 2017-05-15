@@ -1,5 +1,5 @@
 //
-//  CapturingApp.swift
+//  AppTestDoubles.swift
 //  Peekazoo
 //
 //  Created by Thomas Sherwood on 14/05/2017.
@@ -7,6 +7,12 @@
 //
 
 @testable import Peekazoo
+
+class DummyApp: App {
+
+    func launch() { }
+
+}
 
 class CapturingApp: App {
 
