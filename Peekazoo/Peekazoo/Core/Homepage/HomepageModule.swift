@@ -12,7 +12,7 @@ class HomepageModule {
 
     class func initialize(router: RootRouter, service: HomepageService) {
         let homepageInterface = router.navigateToHomepage().interface
-        _ = HomepagePresenter(homepageInterface: homepageInterface, homepageService: service)
+        _ = HomepagePresenter(interface: homepageInterface, service: service)
     }
 
 }

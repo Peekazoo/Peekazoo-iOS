@@ -8,22 +8,22 @@
 
 class HomepagePresenter: HomepageInterfaceDelegate, HomepageServiceLoadingDelegate {
 
-    var homepageService: HomepageService
-    var homepageInterface: HomepageInterface
+    var service: HomepageService
+    var interface: HomepageInterface
 
-    init(homepageInterface: HomepageInterface, homepageService: HomepageService) {
-        self.homepageInterface = homepageInterface
-        self.homepageService = homepageService
-        self.homepageInterface.delegate = self
+    init(interface: HomepageInterface, service: HomepageService) {
+        self.interface = interface
+        self.service = service
+        self.interface.delegate = self
         reloadHomepage()
     }
 
     func homepageServiceDidLoadSuccessfully() {
-        homepageInterface.prepareForUpdates()
+        interface.prepareForUpdates()
     }
 
     func homepageServiceDidFailToLoad() {
-        homepageInterface.showLoadingErrorPlaceholder()
+        interface.showLoadingErrorPlaceholder()
     }
 
     func homepageInterfaceDidInvokePullToRefresh() {
@@ -31,7 +31,7 @@ class HomepagePresenter: HomepageInterfaceDelegate, HomepageServiceLoadingDelega
     }
 
     private func reloadHomepage() {
-        homepageService.loadHomepage(delegate: self)
+        service.loadHomepage(delegate: self)
     }
 
 }
