@@ -10,14 +10,14 @@
 
 class DummyHomepageService: HomepageService {
 
-    func loadHomepage() { }
+    func loadHomepage(completionHandler: @escaping () -> Void) { }
 
 }
 
 class CapturingHomepageService: HomepageService {
 
     private(set) var didLoad = false
-    func loadHomepage() {
+    func loadHomepage(completionHandler: @escaping () -> Void) {
         didLoad = true
     }
 
@@ -25,8 +25,8 @@ class CapturingHomepageService: HomepageService {
 
 class SuccessfulHomepageService: HomepageService {
 
-    func loadHomepage() {
-
+    func loadHomepage(completionHandler: @escaping () -> Void) {
+        completionHandler()
     }
 
 }

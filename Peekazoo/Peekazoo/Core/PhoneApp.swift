@@ -20,8 +20,7 @@ struct PhoneApp: App {
 
     func launch() {
         let routing = rootRouter.navigateToHomepage()
-        homepageService.loadHomepage()
-        routing.interface.prepareForUpdates()
+        homepageService.loadHomepage(completionHandler: routing.interface.prepareForUpdates)
     }
 
 }

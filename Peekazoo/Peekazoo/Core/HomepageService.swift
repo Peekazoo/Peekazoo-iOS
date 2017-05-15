@@ -8,6 +8,6 @@
 
 protocol HomepageService {
 
-    func loadHomepage()
+    func loadHomepage(completionHandler: @escaping () -> Void)
 
 }
