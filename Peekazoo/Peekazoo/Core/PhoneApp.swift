@@ -6,11 +6,10 @@
 //  Copyright © 2017 Peekazoo. All rights reserved.
 //
 
-class PhoneApp: App {
+struct PhoneApp: App {
 
     var rootRouter: RootRouter
     var homepageService: HomepageService
-    var homepagePresenter: HomepagePresenter?
 
     init(rootRouter: RootRouter, homepageService: HomepageService) {
         self.rootRouter = rootRouter
@@ -18,8 +17,7 @@ class PhoneApp: App {
     }
 
     func launch() {
-        let homepageInterface = rootRouter.navigateToHomepage().interface
-        homepagePresenter = HomepagePresenter(homepageInterface: homepageInterface, homepageService: homepageService)
+        HomepageModule.initialize(router: rootRouter, service: homepageService)
     }
 
 }
