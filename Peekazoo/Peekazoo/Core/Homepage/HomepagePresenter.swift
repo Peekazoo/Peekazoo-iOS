@@ -10,32 +10,33 @@ class HomepagePresenter: HomepageInterfaceDelegate, HomepageServiceLoadingDelega
 
     var service: HomepageService
     var interface: HomepageInterface
-    var didLoadSuccessfully = false
+    var viewModel: HomepageViewModel
 
     init(interface: HomepageInterface, service: HomepageService) {
         self.interface = interface
         self.service = service
+        self.viewModel = HomepageViewModel(content: [])
         self.interface.delegate = self
         reloadHomepage()
     }
 
     func homepageServiceDidLoadSuccessfully(content: [Any]) {
-        didLoadSuccessfully = content.count > 0
+        viewModel = HomepageViewModel(content: content)
         interface.hideLoadingErrorPlaceholder()
         interface.prepareForUpdates()
         content.indices.forEach(interface.insertItem(at:))
 
-        if content.count > 0 {
-            interface.hideNoContentPlaceholder()
-        } else {
+        if viewModel.isEmpty {
             interface.showNoContentPlaceholder()
+        } else {
+            interface.hideNoContentPlaceholder()
         }
     }
 
     func homepageServiceDidFailToLoad() {
         interface.hideNoContentPlaceholder()
 
-        if didLoadSuccessfully == false {
+        if viewModel.isEmpty {
             interface.showLoadingErrorPlaceholder()
         }
     }
