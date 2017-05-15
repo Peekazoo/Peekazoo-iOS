@@ -21,7 +21,10 @@ struct HomepagePresenter: HomepageInterfaceDelegate, HomepageServiceLoadingDeleg
     func homepageServiceDidLoadSuccessfully(content: [Any]) {
         interface.prepareForUpdates()
         interface.showNoContentPlaceholder()
-        interface.hideNoContentPlaceholder()
+
+        if content.count > 0 {
+            interface.hideNoContentPlaceholder()
+        }
     }
 
     func homepageServiceDidFailToLoad() {
