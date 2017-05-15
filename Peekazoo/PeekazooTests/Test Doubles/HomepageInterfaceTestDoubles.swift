@@ -30,7 +30,7 @@ class CapturingHomepageInterface: HomepageInterface {
         committedViewModel = viewModel
 
         if let diff = diffs.first {
-            insertedItemIndex = extractIndex(from: diff)
+            insertedItemIndex = diff.insertedIndex
         }
     }
 
@@ -73,7 +73,7 @@ class JournallingIndexHomepageInterface: CapturingHomepageInterface {
     private(set) var indicies = [Int]()
     override func updateInterface(viewModel: HomepageInterfaceViewModel, applyingDifferences diffs: [Difference]) {
         super.updateInterface(viewModel: viewModel, applyingDifferences: diffs)
-        indicies = diffs.flatMap(extractIndex)
+        indicies = diffs.flatMap({ $0.insertedIndex })
     }
 
 }

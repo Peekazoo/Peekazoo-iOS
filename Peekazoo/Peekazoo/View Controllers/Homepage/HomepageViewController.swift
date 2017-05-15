@@ -10,13 +10,14 @@ import UIKit
 
 class HomepageViewController: UIViewController, HomepageInterface {
 
-    @IBOutlet weak var collectionView: UICollectionView?
+    @IBOutlet weak var collectionView: UICollectionView!
     private let dataSource = HomepageCollectionViewDataSource()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        collectionView?.dataSource = dataSource
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "CellIdentifier")
+        collectionView.dataSource = dataSource
         title = "Home"
     }
 
@@ -24,9 +25,6 @@ class HomepageViewController: UIViewController, HomepageInterface {
 
     func updateInterface(viewModel: HomepageInterfaceViewModel, applyingDifferences diffs: [Difference]) {
         dataSource.viewModel = viewModel
-        collectionView?.performBatchUpdates({
-
-        })
     }
 
     func showLoadingErrorPlaceholder() {

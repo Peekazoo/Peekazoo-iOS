@@ -18,11 +18,12 @@ class HomepageCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 0
+        guard let viewModel = viewModel else { return 0 }
+        return viewModel.numberOfItems
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return UICollectionViewCell()
+        return collectionView.dequeueReusableCell(withReuseIdentifier: "CellIdentifier", for: indexPath)
     }
 
 }

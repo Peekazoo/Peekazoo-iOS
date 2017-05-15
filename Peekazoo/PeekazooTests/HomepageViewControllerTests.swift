@@ -63,4 +63,16 @@ class HomepageViewControllerTests: XCTestCase {
         XCTAssertEqual(1, homepageViewController.collectionView?.numberOfSections)
     }
 
+    func testUpdatingInterfaceUpdatesNumberOfItemsToCountFromViewModel() {
+        let homepageViewController = HomepageViewController()
+        homepageViewController.loadViewIfNeeded()
+        let count = Int(arc4random_uniform(100))
+        let items = Array(repeating: StubHomepageInterfaceItemViewModel(), count: count)
+        let insertions = (0..<count).map({ Difference.insertion(index: $0) })
+        let viewModel = StubHomepageInterfaceViewModel(items: items)
+        homepageViewController.updateInterface(viewModel: viewModel, applyingDifferences: insertions)
+
+        XCTAssertEqual(count, homepageViewController.collectionView?.numberOfItems(inSection: 0))
+    }
+
 }

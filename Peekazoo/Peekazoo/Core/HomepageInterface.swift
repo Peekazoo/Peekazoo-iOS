@@ -27,7 +27,17 @@ protocol HomepageInterfaceItemViewModel {
 }
 
 enum Difference {
+
     case insertion(index: Int)
+
+    var insertedIndex: Int? {
+        if case .insertion(let idx) = self {
+            return idx
+        } else {
+            return nil
+        }
+    }
+
 }
 
 protocol HomepageInterface {
