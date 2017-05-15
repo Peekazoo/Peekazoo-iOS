@@ -8,16 +8,18 @@
 
 import UIKit
 
+private let homepageItemCellReuseIdentifier = "HomepageItemCell"
+
 class HomepageViewController: UIViewController, HomepageInterface {
 
     @IBOutlet weak var collectionView: UICollectionView!
-    private let dataSource = HomepageCollectionViewDataSource()
+    private let dataSource = HomepageCollectionViewDataSource(cellReuseIdentifier: homepageItemCellReuseIdentifier)
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         let cellNib = UINib(nibName: "HomepageItemCollectionViewCell", bundle: Bundle.main)
-        collectionView.register(cellNib, forCellWithReuseIdentifier: "CellIdentifier")
+        collectionView.register(cellNib, forCellWithReuseIdentifier: homepageItemCellReuseIdentifier)
         collectionView.dataSource = dataSource
         title = "Home"
     }

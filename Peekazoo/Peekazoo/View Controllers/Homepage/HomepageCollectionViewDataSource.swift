@@ -11,6 +11,11 @@ import UIKit
 class HomepageCollectionViewDataSource: NSObject, UICollectionViewDataSource {
 
     var viewModel: HomepageInterfaceViewModel?
+    private let cellReuseIdentifier: String
+
+    init(cellReuseIdentifier: String) {
+        self.cellReuseIdentifier = cellReuseIdentifier
+    }
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         guard viewModel != nil else { return 0 }
@@ -23,7 +28,7 @@ class HomepageCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CellIdentifier", for: indexPath) as? HomepageItemCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as? HomepageItemCollectionViewCell else {
             fatalError()
         }
 
