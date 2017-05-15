@@ -17,6 +17,7 @@ class DummyHomepageInterface: HomepageInterface {
     func hideLoadingErrorPlaceholder() { }
     func showNoContentPlaceholder() { }
     func hideNoContentPlaceholder() { }
+    func insertItem(at index: Int) { }
 
 }
 
@@ -47,6 +48,11 @@ class CapturingHomepageInterface: HomepageInterface {
     private(set) var didHideNoContentPlaceholder = false
     func hideNoContentPlaceholder() {
         didHideNoContentPlaceholder = true
+    }
+
+    private(set) var insertedItemIndex: Int?
+    func insertItem(at index: Int) {
+        insertedItemIndex = index
     }
 
     func invokePullToRefresh() {

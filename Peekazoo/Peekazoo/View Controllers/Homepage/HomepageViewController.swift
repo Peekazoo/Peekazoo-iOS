@@ -37,4 +37,8 @@ class HomepageViewController: UIViewController, HomepageInterface {
 
     }
 
+    func insertItem(at index: Int) {
+
+    }
+
 }

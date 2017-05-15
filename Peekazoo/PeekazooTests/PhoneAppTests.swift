@@ -130,4 +130,11 @@ class PhoneAppTests: XCTestCase {
         XCTAssertFalse(context.interface.didShowLoadingErrorPlaceholder)
     }
 
+    func testHomepageServicesCompletesLoadWithSingleItemTellsInterfaceToInsertEntryAtFirstIndex() {
+        let content = [StubHomepageItem()]
+        let context = PhoneAppTestBuilder.buildForSuccessfulHomepageService(content: content).thenLaunch()
+
+        XCTAssertEqual(0, context.interface.insertedItemIndex)
+    }
+
 }

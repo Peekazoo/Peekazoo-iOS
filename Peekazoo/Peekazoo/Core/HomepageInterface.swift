@@ -21,5 +21,6 @@ protocol HomepageInterface {
     func hideLoadingErrorPlaceholder()
     func showNoContentPlaceholder()
     func hideNoContentPlaceholder()
+    func insertItem(at index: Int)
 
 }
