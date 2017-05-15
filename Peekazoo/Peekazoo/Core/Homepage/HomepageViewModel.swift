@@ -6,9 +6,13 @@
 //  Copyright © 2017 Peekazoo. All rights reserved.
 //
 
-struct HomepageViewModel {
+struct HomepageViewModel: HomepageInterfaceViewModel {
 
     var content: [Any]
     var isEmpty: Bool { return content.isEmpty }
+
+    var numberOfItems: Int {
+        return content.count
+    }
 
 }

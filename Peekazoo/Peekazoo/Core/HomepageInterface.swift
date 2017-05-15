@@ -12,12 +12,18 @@ protocol HomepageInterfaceDelegate {
 
 }
 
+protocol HomepageInterfaceViewModel {
+
+    var numberOfItems: Int { get }
+
+}
+
 protocol HomepageInterface {
 
     var delegate: HomepageInterfaceDelegate? { get set }
 
     func prepareForUpdates()
-    func commitUpdates()
+    func commitUpdates(using viewModel: HomepageInterfaceViewModel)
     func showLoadingErrorPlaceholder()
     func hideLoadingErrorPlaceholder()
     func showNoContentPlaceholder()

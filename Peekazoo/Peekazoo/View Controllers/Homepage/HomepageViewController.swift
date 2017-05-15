@@ -21,7 +21,7 @@ class HomepageViewController: UIViewController, HomepageInterface {
 
     }
 
-    func commitUpdates() {
+    func commitUpdates(using viewModel: HomepageInterfaceViewModel) {
 
     }
 

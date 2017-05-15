@@ -13,7 +13,7 @@ class DummyHomepageInterface: HomepageInterface {
     var delegate: HomepageInterfaceDelegate?
 
     func prepareForUpdates() { }
-    func commitUpdates() { }
+    func commitUpdates(using viewModel: HomepageInterfaceViewModel) { }
     func showLoadingErrorPlaceholder() { }
     func hideLoadingErrorPlaceholder() { }
     func showNoContentPlaceholder() { }
@@ -32,8 +32,10 @@ class CapturingHomepageInterface: HomepageInterface {
     }
 
     private(set) var didCommitUpdates = false
-    func commitUpdates() {
+    private(set) var committedViewModel: HomepageInterfaceViewModel?
+    func commitUpdates(using viewModel: HomepageInterfaceViewModel) {
         didCommitUpdates = true
+        committedViewModel = viewModel
     }
 
     private(set) var didShowLoadingErrorPlaceholder = false

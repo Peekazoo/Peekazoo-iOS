@@ -186,4 +186,12 @@ class PhoneAppTests: XCTestCase {
         XCTAssertFalse(context.interface.didCommitUpdates)
     }
 
+    func testTheHomepageInterfaceIsToldToCommitUpdatesUsingViewModelWithSameCountOfItemsReturnByService() {
+        let count = Int(arc4random_uniform(100))
+        let content = Array(repeating: StubHomepageItem(), count: count)
+        let context = PhoneAppTestBuilder.buildForSuccessfulHomepageService(content: content).thenLaunch()
+
+        XCTAssertEqual(count, context.interface.committedViewModel?.numberOfItems)
+    }
+
 }
