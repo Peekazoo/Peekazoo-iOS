@@ -20,6 +20,11 @@ class HomepageViewControllerTests: XCTestCase {
         homepageViewController.loadViewIfNeeded()
     }
 
+    private func updateInterface(viewModel: HomepageInterfaceViewModel, applyingDifferences diffs: [Difference]) {
+        homepageViewController.updateInterface(viewModel: viewModel, applyingDifferences: [])
+        homepageViewController.collectionView.layoutIfNeeded()
+    }
+
     func testHasHomeAsTheTitle() {
         XCTAssertEqual("Home", homepageViewController.title)
     }
@@ -35,7 +40,7 @@ class HomepageViewControllerTests: XCTestCase {
     func testUpdatingInterfaceUpdatesNumberOfSectionsToOne() {
         let item = StubHomepageInterfaceItemViewModel()
         let viewModel = StubHomepageInterfaceViewModel(items: [item])
-        homepageViewController.updateInterface(viewModel: viewModel, applyingDifferences: [])
+        updateInterface(viewModel: viewModel, applyingDifferences: [])
 
         XCTAssertEqual(1, homepageViewController.collectionView?.numberOfSections)
     }
@@ -45,7 +50,7 @@ class HomepageViewControllerTests: XCTestCase {
         let items = Array(repeating: StubHomepageInterfaceItemViewModel(), count: count)
         let insertions = (0..<count).map({ Difference.insertion(index: $0) })
         let viewModel = StubHomepageInterfaceViewModel(items: items)
-        homepageViewController.updateInterface(viewModel: viewModel, applyingDifferences: insertions)
+        updateInterface(viewModel: viewModel, applyingDifferences: insertions)
 
         XCTAssertEqual(count, homepageViewController.collectionView?.numberOfItems(inSection: 0))
     }
@@ -53,8 +58,7 @@ class HomepageViewControllerTests: XCTestCase {
     func testDequeueingCellAfterSupplyingContentShouldProvideHomepageItemCell() {
         let item = StubHomepageInterfaceItemViewModel()
         let viewModel = StubHomepageInterfaceViewModel(items: [item])
-        homepageViewController.updateInterface(viewModel: viewModel, applyingDifferences: [])
-        homepageViewController.collectionView.layoutIfNeeded()
+        updateInterface(viewModel: viewModel, applyingDifferences: [])
         let cell = homepageViewController.collectionView.cellForItem(at: IndexPath(item: 0, section: 0))
 
         XCTAssertTrue(cell is HomepageItemCollectionViewCell)
@@ -63,8 +67,7 @@ class HomepageViewControllerTests: XCTestCase {
     func testDequeuedHomepageItemCellsShouldHaveLabels() {
         let item = StubHomepageInterfaceItemViewModel()
         let viewModel = StubHomepageInterfaceViewModel(items: [item])
-        homepageViewController.updateInterface(viewModel: viewModel, applyingDifferences: [])
-        homepageViewController.collectionView.layoutIfNeeded()
+        updateInterface(viewModel: viewModel, applyingDifferences: [])
         let cell = homepageViewController.collectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as? HomepageItemCollectionViewCell
 
         XCTAssertNotNil(cell?.itemTitleLabel)
@@ -73,8 +76,7 @@ class HomepageViewControllerTests: XCTestCase {
     func testDequeuedItemCellShouldBeConfiguredWithTheTitleFromTheViewModel() {
         let item = StubHomepageInterfaceItemViewModel(title: "Some title")
         let viewModel = StubHomepageInterfaceViewModel(items: [item])
-        homepageViewController.updateInterface(viewModel: viewModel, applyingDifferences: [])
-        homepageViewController.collectionView.layoutIfNeeded()
+        updateInterface(viewModel: viewModel, applyingDifferences: [])
         let cell = homepageViewController.collectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as? HomepageItemCollectionViewCell
 
         XCTAssertEqual(item.title, cell?.itemTitleLabel.text)
@@ -84,8 +86,7 @@ class HomepageViewControllerTests: XCTestCase {
         let firstItem = StubHomepageInterfaceItemViewModel(title: "Some title")
         let secondItem = StubHomepageInterfaceItemViewModel(title: "Some other title")
         let viewModel = StubHomepageInterfaceViewModel(items: [firstItem, secondItem])
-        homepageViewController.updateInterface(viewModel: viewModel, applyingDifferences: [])
-        homepageViewController.collectionView.layoutIfNeeded()
+        updateInterface(viewModel: viewModel, applyingDifferences: [])
         let cell = homepageViewController.collectionView.cellForItem(at: IndexPath(item: 1, section: 0)) as? HomepageItemCollectionViewCell
 
         XCTAssertEqual(secondItem.title, cell?.itemTitleLabel.text)
