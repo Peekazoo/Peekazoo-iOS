@@ -137,4 +137,19 @@ class PhoneAppTests: XCTestCase {
         XCTAssertEqual(0, context.interface.insertedItemIndex)
     }
 
+    func testHomepageServicesCompletesLoadWithSingleItemDoesNotPerformAnyInsertionsUntilInterfacePreparesForUpdates() {
+        let timedInvocationHomepageInterface = TimedInvocationHomepageInterface()
+        var insertedIntoHomepageBeforePreparedForUpdates = false
+        timedInvocationHomepageInterface.prepareForUpdatesHandler = {
+            insertedIntoHomepageBeforePreparedForUpdates = timedInvocationHomepageInterface.insertedItemIndex != nil
+        }
+
+        let stubbedRootRouter = StubRootRouter(homepageInterface: timedInvocationHomepageInterface)
+        let content = [StubHomepageItem()]
+        let app = PhoneApp(rootRouter: stubbedRootRouter, homepageService: SuccessfulHomepageService(content: content))
+        app.launch()
+
+        XCTAssertFalse(insertedIntoHomepageBeforePreparedForUpdates)
+    }
+
 }

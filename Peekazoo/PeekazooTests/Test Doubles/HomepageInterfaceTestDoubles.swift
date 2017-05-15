@@ -60,3 +60,13 @@ class CapturingHomepageInterface: HomepageInterface {
     }
 
 }
+
+class TimedInvocationHomepageInterface: CapturingHomepageInterface {
+
+    var prepareForUpdatesHandler: (() -> Void)?
+    override func prepareForUpdates() {
+        super.prepareForUpdates()
+        prepareForUpdatesHandler?()
+    }
+
+}
