@@ -25,6 +25,12 @@ class HomepageViewControllerTests: XCTestCase {
         homepageViewController.collectionView.layoutIfNeeded()
     }
 
+    private func cellForItem(at index: Int) -> HomepageItemCollectionViewCell? {
+        let indexPath = IndexPath(item: index, section: 0)
+        let cell = homepageViewController.collectionView.cellForItem(at: indexPath)
+        return cell as? HomepageItemCollectionViewCell
+    }
+
     func testHasHomeAsTheTitle() {
         XCTAssertEqual("Home", homepageViewController.title)
     }
@@ -59,27 +65,24 @@ class HomepageViewControllerTests: XCTestCase {
         let item = StubHomepageInterfaceItemViewModel()
         let viewModel = StubHomepageInterfaceViewModel(items: [item])
         updateInterface(viewModel: viewModel, applyingDifferences: [])
-        let cell = homepageViewController.collectionView.cellForItem(at: IndexPath(item: 0, section: 0))
 
-        XCTAssertTrue(cell is HomepageItemCollectionViewCell)
+        XCTAssertTrue((cellForItem(at: 0) as Any) is HomepageItemCollectionViewCell)
     }
 
     func testDequeuedHomepageItemCellsShouldHaveLabels() {
         let item = StubHomepageInterfaceItemViewModel()
         let viewModel = StubHomepageInterfaceViewModel(items: [item])
         updateInterface(viewModel: viewModel, applyingDifferences: [])
-        let cell = homepageViewController.collectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as? HomepageItemCollectionViewCell
 
-        XCTAssertNotNil(cell?.itemTitleLabel)
+        XCTAssertNotNil(cellForItem(at: 0)?.itemTitleLabel)
     }
 
     func testDequeuedItemCellShouldBeConfiguredWithTheTitleFromTheViewModel() {
         let item = StubHomepageInterfaceItemViewModel(title: "Some title")
         let viewModel = StubHomepageInterfaceViewModel(items: [item])
         updateInterface(viewModel: viewModel, applyingDifferences: [])
-        let cell = homepageViewController.collectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as? HomepageItemCollectionViewCell
 
-        XCTAssertEqual(item.title, cell?.itemTitleLabel.text)
+        XCTAssertEqual(item.title, cellForItem(at: 0)?.itemTitleLabel.text)
     }
 
     func testDequeuedItemsShouldBeProvidedWithCorrectTitlesFromViewModel() {
@@ -87,9 +90,8 @@ class HomepageViewControllerTests: XCTestCase {
         let secondItem = StubHomepageInterfaceItemViewModel(title: "Some other title")
         let viewModel = StubHomepageInterfaceViewModel(items: [firstItem, secondItem])
         updateInterface(viewModel: viewModel, applyingDifferences: [])
-        let cell = homepageViewController.collectionView.cellForItem(at: IndexPath(item: 1, section: 0)) as? HomepageItemCollectionViewCell
 
-        XCTAssertEqual(secondItem.title, cell?.itemTitleLabel.text)
+        XCTAssertEqual(secondItem.title, cellForItem(at: 1)?.itemTitleLabel.text)
     }
 
 }
