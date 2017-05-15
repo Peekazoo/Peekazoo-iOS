@@ -18,5 +18,6 @@ protocol HomepageInterface {
 
     func prepareForUpdates()
     func showLoadingErrorPlaceholder()
+    func showNoContentPlaceholder()
 
 }
