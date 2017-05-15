@@ -161,4 +161,14 @@ class PhoneAppTests: XCTestCase {
         XCTAssertTrue(expected.elementsEqual(context.interface.indicies))
     }
 
+    func testLoadingSuccessfullyWithoutContentThenFailingToLoadOnRefreshShowsTheErrorPlaceholder() {
+        let capturingHomepageService = CapturingHomepageService()
+        let context = PhoneAppTestBuilder.buildWithHomepageService(capturingHomepageService).thenLaunch()
+        capturingHomepageService.simulateSuccessfulLoad(content: [])
+        context.interface.invokePullToRefresh()
+        capturingHomepageService.simulateFailedLoad()
+
+        XCTAssertTrue(context.interface.didShowLoadingErrorPlaceholder)
+    }
+
 }

@@ -20,7 +20,7 @@ class HomepagePresenter: HomepageInterfaceDelegate, HomepageServiceLoadingDelega
     }
 
     func homepageServiceDidLoadSuccessfully(content: [Any]) {
-        didLoadSuccessfully = true
+        didLoadSuccessfully = content.count > 0
         interface.hideLoadingErrorPlaceholder()
         interface.prepareForUpdates()
         content.indices.forEach(interface.insertItem(at:))
