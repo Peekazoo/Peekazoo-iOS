@@ -9,6 +9,27 @@
 @testable import Peekazoo
 import XCTest
 
+struct StubHomepageInterfaceViewModel: HomepageInterfaceViewModel {
+
+    init(items: [StubHomepageInterfaceItemViewModel]) {
+        self.items = items
+    }
+
+    var items: [StubHomepageInterfaceItemViewModel]
+    var numberOfItems: Int { return items.count }
+
+    func item(at index: Int) -> HomepageInterfaceItemViewModel {
+        return items[index]
+    }
+
+}
+
+struct StubHomepageInterfaceItemViewModel: HomepageInterfaceItemViewModel {
+
+    var title: String = ""
+
+}
+
 class HomepageViewControllerTests: XCTestCase {
 
     func testHasHomeAsTheTitle() {
@@ -30,6 +51,16 @@ class HomepageViewControllerTests: XCTestCase {
         homepageViewController.loadViewIfNeeded()
 
         XCTAssertEqual(0, homepageViewController.collectionView?.numberOfSections)
+    }
+
+    func testUpdatingInterfaceUpdatesNumberOfSectionsToOne() {
+        let homepageViewController = HomepageViewController()
+        homepageViewController.loadViewIfNeeded()
+        let item = StubHomepageInterfaceItemViewModel()
+        let viewModel = StubHomepageInterfaceViewModel(items: [item])
+        homepageViewController.updateInterface(viewModel: viewModel, applyingDifferences: [])
+
+        XCTAssertEqual(1, homepageViewController.collectionView?.numberOfSections)
     }
 
 }

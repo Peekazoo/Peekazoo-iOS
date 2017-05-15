@@ -23,7 +23,10 @@ class HomepageViewController: UIViewController, HomepageInterface {
     var delegate: HomepageInterfaceDelegate?
 
     func updateInterface(viewModel: HomepageInterfaceViewModel, applyingDifferences diffs: [Difference]) {
+        dataSource.viewModel = viewModel
+        collectionView?.performBatchUpdates({
 
+        })
     }
 
     func showLoadingErrorPlaceholder() {

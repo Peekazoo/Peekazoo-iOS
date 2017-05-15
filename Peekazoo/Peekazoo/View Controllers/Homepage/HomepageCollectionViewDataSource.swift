@@ -10,8 +10,11 @@ import UIKit
 
 class HomepageCollectionViewDataSource: NSObject, UICollectionViewDataSource {
 
+    var viewModel: HomepageInterfaceViewModel?
+
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 0
+        guard viewModel != nil else { return 0 }
+        return 1
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
