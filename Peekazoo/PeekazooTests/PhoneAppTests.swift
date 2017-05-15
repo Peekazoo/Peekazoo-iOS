@@ -13,10 +13,19 @@ class PhoneAppTests: XCTestCase {
 
     func testWhenLaunchedTheRootInterfaceIsNavigatedTo() {
         let capturingRootRouter = CapturingRootRouter()
-        let app = PhoneApp(rootRouter: capturingRootRouter)
+        let app = PhoneApp(rootRouter: capturingRootRouter, homepageService: DummyHomepageService())
         app.launch()
 
         XCTAssertTrue(capturingRootRouter.didNavigateToHomepage)
+    }
+
+    func testWhenNavigatingToTheHomepageTheHompageServiceIsToldToLoad() {
+        let capturingRootRouter = CapturingRootRouter()
+        let capturingHomepageService = CapturingHomepageService()
+        let app = PhoneApp(rootRouter: capturingRootRouter, homepageService: capturingHomepageService)
+        app.launch()
+
+        XCTAssertTrue(capturingHomepageService.didLoad)
     }
 
 }
