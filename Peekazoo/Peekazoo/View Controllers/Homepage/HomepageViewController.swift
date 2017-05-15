@@ -10,6 +10,8 @@ import UIKit
 
 class HomepageViewController: UIViewController, HomepageInterface {
 
+    @IBOutlet weak var collectionView: UICollectionView?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Home"

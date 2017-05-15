@@ -18,4 +18,11 @@ class HomepageViewControllerTests: XCTestCase {
         XCTAssertEqual("Home", homepageViewController.title)
     }
 
+    func testHasCollectionView() {
+        let homepageViewController = HomepageViewController()
+        homepageViewController.loadViewIfNeeded()
+
+        XCTAssertNotNil(homepageViewController.collectionView)
+    }
+
 }
