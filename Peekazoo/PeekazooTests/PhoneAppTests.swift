@@ -128,7 +128,7 @@ class PhoneAppTests: XCTestCase {
     }
 
     func testHomepageServicesCompletesLoadWithSeveralItemsTellsInterfaceToInsertEntriesWithinExpectedRange() {
-        let count = Int(arc4random_uniform(100))
+        let count = Int.random(upperLimit: 100)
         let expected = 0..<count
         let content = Array(repeating: StubHomepageItem(), count: count)
         let journallingIndiciesInterface = JournallingIndexHomepageInterface()
@@ -148,7 +148,7 @@ class PhoneAppTests: XCTestCase {
     }
 
     func testTheHomepageInterfaceIsToldToCommitUpdatesUsingViewModelWithSameCountOfItemsReturnByService() {
-        let count = Int(arc4random_uniform(100))
+        let count = Int.random(upperLimit: 100)
         let content = Array(repeating: StubHomepageItem(), count: count)
         let context = PhoneAppTestBuilder.buildForSuccessfulHomepageService(content: content).thenLaunch()
 

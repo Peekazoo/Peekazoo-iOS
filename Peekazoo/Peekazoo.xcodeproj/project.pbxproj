@@ -33,6 +33,7 @@
 		6E6E61731EC9ED8400964076 /* HomepageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6E61721EC9ED8400964076 /* HomepageViewModel.swift */; };
 		6E6E61751EC9FC4C00964076 /* HomepageCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6E61741EC9FC4C00964076 /* HomepageCollectionViewDataSource.swift */; };
 		6E6E61771ECA420A00964076 /* StubHomepageInterfaceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6E61761ECA420A00964076 /* StubHomepageInterfaceViewModel.swift */; };
+		6E6E617A1ECA426100964076 /* Randomness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6E61791ECA426100964076 /* Randomness.swift */; };
 		789F10071EC481B100FAF5F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789F10061EC481B100FAF5F1 /* AppDelegate.swift */; };
 		789F100E1EC481B100FAF5F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 789F100D1EC481B100FAF5F1 /* Assets.xcassets */; };
 		789F10111EC481B100FAF5F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 789F100F1EC481B100FAF5F1 /* LaunchScreen.storyboard */; };
@@ -75,6 +76,7 @@
 		6E6E61721EC9ED8400964076 /* HomepageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomepageViewModel.swift; path = Core/Homepage/HomepageViewModel.swift; sourceTree = "<group>"; };
 		6E6E61741EC9FC4C00964076 /* HomepageCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomepageCollectionViewDataSource.swift; path = "View Controllers/Homepage/HomepageCollectionViewDataSource.swift"; sourceTree = "<group>"; };
 		6E6E61761ECA420A00964076 /* StubHomepageInterfaceViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StubHomepageInterfaceViewModel.swift; path = "Test Doubles/StubHomepageInterfaceViewModel.swift"; sourceTree = "<group>"; };
+		6E6E61791ECA426100964076 /* Randomness.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Randomness.swift; path = Utilities/Randomness.swift; sourceTree = "<group>"; };
 		789F10031EC481B100FAF5F1 /* Peekazoo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Peekazoo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		789F10061EC481B100FAF5F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		789F100D1EC481B100FAF5F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -184,6 +186,14 @@
 			name = Homepage;
 			sourceTree = "<group>";
 		};
+		6E6E61781ECA424A00964076 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				6E6E61791ECA426100964076 /* Randomness.swift */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
 		789F0FFA1EC481B100FAF5F1 = {
 			isa = PBXGroup;
 			children = (
@@ -224,6 +234,7 @@
 				6E0D85861EC6EF83000E7283 /* WindowRootRouterTests.swift */,
 				6E0D85AD1EC8FD66000E7283 /* HomepageViewControllerTests.swift */,
 				6E0D85931EC839CB000E7283 /* Test Doubles */,
+				6E6E61781ECA424A00964076 /* Utilities */,
 				6E0D85841EC6EA01000E7283 /* Supporting Files */,
 			);
 			path = PeekazooTests;
@@ -373,6 +384,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E0D85A61EC8F864000E7283 /* PhoneAppTests.swift in Sources */,
+				6E6E617A1ECA426100964076 /* Randomness.swift in Sources */,
 				6E0D85A01EC83C02000E7283 /* AppTestDoubles.swift in Sources */,
 				6E0D85AE1EC8FD66000E7283 /* HomepageViewControllerTests.swift in Sources */,
 				6E0D85871EC6EF83000E7283 /* WindowRootRouterTests.swift in Sources */,

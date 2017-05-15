@@ -41,7 +41,7 @@ class HomepageViewControllerTests: XCTestCase {
     }
 
     func testUpdatingInterfaceUpdatesNumberOfItemsToCountFromViewModel() {
-        let count = Int(arc4random_uniform(100))
+        let count = Int.random(upperLimit: 100)
         let items = Array(repeating: StubHomepageInterfaceItemViewModel(), count: count)
         let insertions = (0..<count).map({ Difference.insertion(index: $0) })
         let viewModel = StubHomepageInterfaceViewModel(items: items)
