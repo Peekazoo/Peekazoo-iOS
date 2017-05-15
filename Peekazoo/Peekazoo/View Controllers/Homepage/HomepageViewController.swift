@@ -8,11 +8,15 @@
 
 import UIKit
 
-class HomepageViewController: UIViewController {
+class HomepageViewController: UIViewController, HomepageInterface {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Home"
+    }
+
+    func prepareForUpdates() {
+
     }
 
 }

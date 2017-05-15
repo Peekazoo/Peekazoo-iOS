@@ -8,6 +8,6 @@
 
 protocol RootRouter {
 
-    func navigateToHomepage() -> (interface: Any, router: Any)
+    func navigateToHomepage() -> (interface: HomepageInterface, router: Any)
 
 }

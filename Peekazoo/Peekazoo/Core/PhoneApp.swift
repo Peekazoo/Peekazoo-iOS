@@ -19,8 +19,9 @@ struct PhoneApp: App {
     }
 
     func launch() {
-        _ = rootRouter.navigateToHomepage()
+        let routing = rootRouter.navigateToHomepage()
         homepageService.loadHomepage()
+        routing.interface.prepareForUpdates()
     }
 
 }

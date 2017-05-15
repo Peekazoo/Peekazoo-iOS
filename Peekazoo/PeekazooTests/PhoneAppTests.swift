@@ -9,6 +9,23 @@
 @testable import Peekazoo
 import XCTest
 
+class SuccessfulHomepageService: HomepageService {
+
+    func loadHomepage() {
+
+    }
+
+}
+
+class CapturingHomepageInterface: HomepageInterface {
+
+    private(set) var didPrepareForUpdates = false
+    func prepareForUpdates() {
+        didPrepareForUpdates = true
+    }
+
+}
+
 class PhoneAppTests: XCTestCase {
 
     func testWhenLaunchedTheRootInterfaceIsNavigatedTo() {
@@ -26,6 +43,17 @@ class PhoneAppTests: XCTestCase {
         app.launch()
 
         XCTAssertTrue(capturingHomepageService.didLoad)
+    }
+
+    func testWhenHomepageLoadedSuccessfullyTheHomepageInterfaceIsToldToPrepareForUpdates() {
+        let capturingRootRouter = CapturingRootRouter()
+        let capturingHomepageInterface = CapturingHomepageInterface()
+        capturingRootRouter.stubHomepageInterface = capturingHomepageInterface
+        let successfulHomepageService = SuccessfulHomepageService()
+        let app = PhoneApp(rootRouter: capturingRootRouter, homepageService: successfulHomepageService)
+        app.launch()
+
+        XCTAssertTrue(capturingHomepageInterface.didPrepareForUpdates)
     }
 
 }
