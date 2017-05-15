@@ -25,6 +25,10 @@ class HomepageViewController: UIViewController, HomepageInterface {
 
     }
 
+    func hideLoadingErrorPlaceholder() {
+
+    }
+
     func showNoContentPlaceholder() {
 
     }

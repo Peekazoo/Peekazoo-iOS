@@ -14,6 +14,7 @@ class DummyHomepageInterface: HomepageInterface {
 
     func prepareForUpdates() { }
     func showLoadingErrorPlaceholder() { }
+    func hideLoadingErrorPlaceholder() { }
     func showNoContentPlaceholder() { }
     func hideNoContentPlaceholder() { }
 
@@ -31,6 +32,11 @@ class CapturingHomepageInterface: HomepageInterface {
     private(set) var didShowLoadingErrorPlaceholder = false
     func showLoadingErrorPlaceholder() {
         didShowLoadingErrorPlaceholder = true
+    }
+
+    private(set) var didHideLoadingErrorPlaceholder = false
+    func hideLoadingErrorPlaceholder() {
+        didHideLoadingErrorPlaceholder = true
     }
 
     private(set) var didShowNoContentPlaceholder = false
