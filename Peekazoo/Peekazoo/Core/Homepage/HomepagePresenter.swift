@@ -20,7 +20,10 @@ struct HomepagePresenter: HomepageInterfaceDelegate, HomepageServiceLoadingDeleg
 
     func homepageServiceDidLoadSuccessfully(content: [Any]) {
         interface.prepareForUpdates()
-        interface.showNoContentPlaceholder()
+
+        if content.count == 0 {
+            interface.showNoContentPlaceholder()
+        }
 
         if content.count > 0 {
             interface.hideNoContentPlaceholder()

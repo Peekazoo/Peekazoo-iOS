@@ -109,4 +109,14 @@ class PhoneAppTests: XCTestCase {
         XCTAssertFalse(capturingHomepageInterface.didHideNoContentPlaceholder)
     }
 
+    func testHomepageServiceCompletesLoadWithSingleItemDoesNotTellInterfaceToShowNoContentPlaceholder() {
+        let capturingHomepageInterface = CapturingHomepageInterface()
+        let stubbedRootRouter = StubRootRouter(homepageInterface: capturingHomepageInterface)
+        let successfulHomepageService = SuccessfulHomepageService(content: [StubHomepageItem()])
+        let app = PhoneApp(rootRouter: stubbedRootRouter, homepageService: successfulHomepageService)
+        app.launch()
+
+        XCTAssertFalse(capturingHomepageInterface.didShowNoContentPlaceholder)
+    }
+
 }
