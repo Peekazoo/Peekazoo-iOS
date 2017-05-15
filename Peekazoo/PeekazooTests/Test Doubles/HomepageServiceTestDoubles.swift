@@ -35,8 +35,18 @@ class JournallingHomepageService: HomepageService {
 
 struct SuccessfulHomepageService: HomepageService {
 
+    var content: [Any]
+
+    init() {
+        content = []
+    }
+
+    init(content: [Any]) {
+        self.content = content
+    }
+
     func loadHomepage(delegate: HomepageServiceLoadingDelegate) {
-        delegate.homepageServiceDidLoadSuccessfully()
+        delegate.homepageServiceDidLoadSuccessfully(content: content)
     }
 
 }

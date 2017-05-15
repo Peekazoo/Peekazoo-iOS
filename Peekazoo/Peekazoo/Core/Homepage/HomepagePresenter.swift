@@ -18,9 +18,10 @@ struct HomepagePresenter: HomepageInterfaceDelegate, HomepageServiceLoadingDeleg
         reloadHomepage()
     }
 
-    func homepageServiceDidLoadSuccessfully() {
+    func homepageServiceDidLoadSuccessfully(content: [Any]) {
         interface.prepareForUpdates()
         interface.showNoContentPlaceholder()
+        interface.hideNoContentPlaceholder()
     }
 
     func homepageServiceDidFailToLoad() {

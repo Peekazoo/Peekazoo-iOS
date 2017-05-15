@@ -29,4 +29,8 @@ class HomepageViewController: UIViewController, HomepageInterface {
 
     }
 
+    func hideNoContentPlaceholder() {
+
+    }
+
 }
