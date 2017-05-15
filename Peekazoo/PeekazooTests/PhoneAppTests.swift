@@ -16,6 +16,11 @@ class PhoneAppTests: XCTestCase {
         struct Product {
             var app: PhoneApp
             var interface: CapturingHomepageInterface
+
+            @discardableResult func thenLaunch() -> Product {
+                app.launch()
+                return self
+            }
         }
 
         static func buildWithHomepageService(_ service: HomepageService) -> Product {
@@ -46,89 +51,71 @@ class PhoneAppTests: XCTestCase {
 
     func testWhenNavigatingToTheHomepageTheHompageServiceIsToldToLoad() {
         let capturingHomepageService = CapturingHomepageService()
-        let context = PhoneAppTestBuilder.buildWithHomepageService(capturingHomepageService)
-        context.app.launch()
+        PhoneAppTestBuilder.buildWithHomepageService(capturingHomepageService).thenLaunch()
 
         XCTAssertTrue(capturingHomepageService.didLoad)
     }
 
     func testWhenHomepageLoadedSuccessfullyTheHomepageInterfaceIsToldToPrepareForUpdates() {
-        let context = PhoneAppTestBuilder.buildForSuccessfulHomepageService()
-        context.app.launch()
-
+        let context = PhoneAppTestBuilder.buildForSuccessfulHomepageService().thenLaunch()
         XCTAssertTrue(context.interface.didPrepareForUpdates)
     }
 
     func testTheHomepageInterfaceIsNotToldToPrepareForUpdatesUntilServiceLoadCompletes() {
         let capturingHomepageService = CapturingHomepageService()
-        let context = PhoneAppTestBuilder.buildWithHomepageService(capturingHomepageService)
-        context.app.launch()
+        let context = PhoneAppTestBuilder.buildWithHomepageService(capturingHomepageService).thenLaunch()
 
         XCTAssertFalse(context.interface.didPrepareForUpdates)
     }
 
     func testTheHomepageInterfaceIsNotToldToPrepareForUpdatesWhenServiceLoadFails() {
-        let context = PhoneAppTestBuilder.buildForFailingHomepageService()
-        context.app.launch()
-
+        let context = PhoneAppTestBuilder.buildForFailingHomepageService().thenLaunch()
         XCTAssertFalse(context.interface.didPrepareForUpdates)
     }
 
     func testHomepageServiceFailsToLoadWithNoExistingContentShownTellsInterfaceToShowErrorPlaceholder() {
-        let context = PhoneAppTestBuilder.buildForFailingHomepageService()
-        context.app.launch()
-
+        let context = PhoneAppTestBuilder.buildForFailingHomepageService().thenLaunch()
         XCTAssertTrue(context.interface.didShowLoadingErrorPlaceholder)
     }
 
     func testInvokingRefreshFromInterfaceTellsHomepageServiceToLoad() {
         let journallingHomepageService = JournallingHomepageService()
-        let context = PhoneAppTestBuilder.buildWithHomepageService(journallingHomepageService)
-        context.app.launch()
+        let context = PhoneAppTestBuilder.buildWithHomepageService(journallingHomepageService).thenLaunch()
         context.interface.invokePullToRefresh()
 
         XCTAssertEqual(2, journallingHomepageService.numberOfLoads)
     }
 
     func testHomepageServiceCompletesLoadWithNoContentTellsInterfaceToShowNoContentPlaceholder() {
-        let context = PhoneAppTestBuilder.buildForSuccessfulHomepageService()
-        context.app.launch()
-
+        let context = PhoneAppTestBuilder.buildForSuccessfulHomepageService().thenLaunch()
         XCTAssertTrue(context.interface.didShowNoContentPlaceholder)
     }
 
     func testHomepageServiceCompletesLoadWithSingleItemTellsInterfaceToHideNoContentPlaceholder() {
-        let context = PhoneAppTestBuilder.buildForSuccessfulHomepageService(content: [StubHomepageItem()])
-        context.app.launch()
-
+        let content = [StubHomepageItem()]
+        let context = PhoneAppTestBuilder.buildForSuccessfulHomepageService(content: content).thenLaunch()
         XCTAssertTrue(context.interface.didHideNoContentPlaceholder)
     }
 
     func testHomepageServiceCompletesLoadWithNoContentDoesNotTellInterfaceToHideNoContentPlaceholder() {
-        let context = PhoneAppTestBuilder.buildForSuccessfulHomepageService()
-        context.app.launch()
-
+        let context = PhoneAppTestBuilder.buildForSuccessfulHomepageService().thenLaunch()
         XCTAssertFalse(context.interface.didHideNoContentPlaceholder)
     }
 
     func testHomepageServiceCompletesLoadWithSingleItemDoesNotTellInterfaceToShowNoContentPlaceholder() {
-        let context = PhoneAppTestBuilder.buildForSuccessfulHomepageService(content: [StubHomepageItem()])
-        context.app.launch()
+        let content = [StubHomepageItem()]
+        let context = PhoneAppTestBuilder.buildForSuccessfulHomepageService(content: content).thenLaunch()
 
         XCTAssertFalse(context.interface.didShowNoContentPlaceholder)
     }
 
     func testHomepageServiceCompletesLoadTellsInterfaceToHideErrorPlaceholder() {
-        let context = PhoneAppTestBuilder.buildForSuccessfulHomepageService()
-        context.app.launch()
-
+        let context = PhoneAppTestBuilder.buildForSuccessfulHomepageService().thenLaunch()
         XCTAssertTrue(context.interface.didHideLoadingErrorPlaceholder)
     }
 
     func testHomepageServiceFailsToLoadHidesNoContentPlaceholder() {
-        let context = PhoneAppTestBuilder.buildForFailingHomepageService()
-        context.app.launch()
-
+        let context = PhoneAppTestBuilder.buildForFailingHomepageService().thenLaunch()
         XCTAssertTrue(context.interface.didHideNoContentPlaceholder)
     }
 
