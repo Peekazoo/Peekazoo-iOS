@@ -8,7 +8,7 @@
 
 protocol HomepageInterfaceDelegate {
 
-    func homepageDidInvokePullToRefresh()
+    func homepageInterfaceDidInvokePullToRefresh()
 
 }
 

@@ -36,7 +36,7 @@ class JournallingHomepageService: HomepageService {
 class SuccessfulHomepageService: HomepageService {
 
     func loadHomepage(delegate: HomepageServiceLoadingDelegate) {
-        delegate.homepageDidLoadSuccessfully()
+        delegate.homepageServiceDidLoadSuccessfully()
     }
 
 }
@@ -44,7 +44,7 @@ class SuccessfulHomepageService: HomepageService {
 class FailingHomepageService: HomepageService {
 
     func loadHomepage(delegate: HomepageServiceLoadingDelegate) {
-        delegate.homepageDidFailToLoad()
+        delegate.homepageServiceDidFailToLoad()
     }
 
 }

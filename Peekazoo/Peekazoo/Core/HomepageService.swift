@@ -8,8 +8,8 @@
 
 protocol HomepageServiceLoadingDelegate {
 
-    func homepageDidLoadSuccessfully()
-    func homepageDidFailToLoad()
+    func homepageServiceDidLoadSuccessfully()
+    func homepageServiceDidFailToLoad()
 
 }
 

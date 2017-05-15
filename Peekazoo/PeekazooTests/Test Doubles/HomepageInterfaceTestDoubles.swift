@@ -32,7 +32,7 @@ class CapturingHomepageInterface: HomepageInterface {
     }
 
     func invokePullToRefresh() {
-        delegate?.homepageDidInvokePullToRefresh()
+        delegate?.homepageInterfaceDidInvokePullToRefresh()
     }
 
 }

@@ -18,15 +18,15 @@ class HomepagePresenter: HomepageInterfaceDelegate, HomepageServiceLoadingDelega
         reloadHomepage()
     }
 
-    func homepageDidLoadSuccessfully() {
+    func homepageServiceDidLoadSuccessfully() {
         homepageInterface.prepareForUpdates()
     }
 
-    func homepageDidFailToLoad() {
+    func homepageServiceDidFailToLoad() {
         homepageInterface.showLoadingErrorPlaceholder()
     }
 
-    func homepageDidInvokePullToRefresh() {
+    func homepageInterfaceDidInvokePullToRefresh() {
         reloadHomepage()
     }
 
