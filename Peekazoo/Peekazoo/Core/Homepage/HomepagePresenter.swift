@@ -6,10 +6,11 @@
 //  Copyright © 2017 Peekazoo. All rights reserved.
 //
 
-struct HomepagePresenter: HomepageInterfaceDelegate, HomepageServiceLoadingDelegate {
+class HomepagePresenter: HomepageInterfaceDelegate, HomepageServiceLoadingDelegate {
 
     var service: HomepageService
     var interface: HomepageInterface
+    var didLoadSuccessfully = false
 
     init(interface: HomepageInterface, service: HomepageService) {
         self.interface = interface
@@ -19,6 +20,7 @@ struct HomepagePresenter: HomepageInterfaceDelegate, HomepageServiceLoadingDeleg
     }
 
     func homepageServiceDidLoadSuccessfully(content: [Any]) {
+        didLoadSuccessfully = true
         interface.hideLoadingErrorPlaceholder()
         interface.prepareForUpdates()
 
@@ -31,7 +33,10 @@ struct HomepagePresenter: HomepageInterfaceDelegate, HomepageServiceLoadingDeleg
 
     func homepageServiceDidFailToLoad() {
         interface.hideNoContentPlaceholder()
-        interface.showLoadingErrorPlaceholder()
+
+        if didLoadSuccessfully == false {
+            interface.showLoadingErrorPlaceholder()
+        }
     }
 
     func homepageInterfaceDidInvokePullToRefresh() {

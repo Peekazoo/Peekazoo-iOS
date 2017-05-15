@@ -18,8 +18,18 @@ struct DummyHomepageService: HomepageService {
 class CapturingHomepageService: HomepageService {
 
     private(set) var didLoad = false
+    private(set) var capturedDelegate: HomepageServiceLoadingDelegate?
     func loadHomepage(delegate: HomepageServiceLoadingDelegate) {
         didLoad = true
+        capturedDelegate = delegate
+    }
+
+    func simulateSuccessfulLoad(content: [StubHomepageItem]) {
+        capturedDelegate?.homepageServiceDidLoadSuccessfully(content: content)
+    }
+
+    func simulateFailedLoad() {
+        capturedDelegate?.homepageServiceDidFailToLoad()
     }
 
 }

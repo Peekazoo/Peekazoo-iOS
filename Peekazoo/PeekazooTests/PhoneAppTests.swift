@@ -119,4 +119,15 @@ class PhoneAppTests: XCTestCase {
         XCTAssertTrue(context.interface.didHideNoContentPlaceholder)
     }
 
+    func testHomepageServicesLoadsWithContentThenFailsToLoadOnRefreshTheErrorPlaceholderIsNotShown() {
+        let capturingHomepageService = CapturingHomepageService()
+        let context = PhoneAppTestBuilder.buildWithHomepageService(capturingHomepageService).thenLaunch()
+        let content = [StubHomepageItem()]
+        capturingHomepageService.simulateSuccessfulLoad(content: content)
+        context.interface.invokePullToRefresh()
+        capturingHomepageService.simulateFailedLoad()
+
+        XCTAssertFalse(context.interface.didShowLoadingErrorPlaceholder)
+    }
+
 }
