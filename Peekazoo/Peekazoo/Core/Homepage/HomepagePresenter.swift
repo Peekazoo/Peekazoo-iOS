@@ -23,13 +23,13 @@ class HomepagePresenter: HomepageInterfaceDelegate, HomepageServiceLoadingDelega
     func homepageServiceDidLoadSuccessfully(content: [Any]) {
         viewModel = HomepageViewModel(content: content)
         interface.hideLoadingErrorPlaceholder()
-        interface.prepareForUpdates()
-        content.indices.forEach(interface.insertItem(at:))
 
         if viewModel.isEmpty {
             interface.showNoContentPlaceholder()
         } else {
             interface.hideNoContentPlaceholder()
+            interface.prepareForUpdates()
+            content.indices.forEach(interface.insertItem(at:))
         }
     }
 

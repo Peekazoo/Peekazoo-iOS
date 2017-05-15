@@ -63,8 +63,8 @@ class PhoneAppTests: XCTestCase {
         XCTAssertTrue(capturingHomepageService.didLoad)
     }
 
-    func testWhenHomepageLoadedSuccessfullyTheHomepageInterfaceIsToldToPrepareForUpdates() {
-        let context = PhoneAppTestBuilder.buildForSuccessfulHomepageService().thenLaunch()
+    func testWhenHomepageLoadedSuccessfullyWithSingleItemTheHomepageInterfaceIsToldToPrepareForUpdates() {
+        let context = PhoneAppTestBuilder.buildForSuccessfulHomepageService(content: [StubHomepageItem()]).thenLaunch()
         XCTAssertTrue(context.interface.didPrepareForUpdates)
     }
 
@@ -169,6 +169,11 @@ class PhoneAppTests: XCTestCase {
         capturingHomepageService.simulateFailedLoad()
 
         XCTAssertTrue(context.interface.didShowLoadingErrorPlaceholder)
+    }
+
+    func testTheHomepageInterfaceIsNotToldToPrepareForUpdatesIfThereIsNoContentToShow() {
+        let context = PhoneAppTestBuilder.buildForSuccessfulHomepageService().thenLaunch()
+        XCTAssertFalse(context.interface.didPrepareForUpdates)
     }
 
 }
