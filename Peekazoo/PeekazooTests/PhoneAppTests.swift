@@ -201,4 +201,16 @@ class PhoneAppTests: XCTestCase {
         XCTAssertEqual(item.title, context.interface.committedViewModel?.item(at: 0).title)
     }
 
+    func testLoadingDataThenSuccessfullyRefreshingNewContentShouldOldItemsToTheBottom() {
+        let capturingHomepageService = CapturingHomepageService()
+        let context = PhoneAppTestBuilder.buildWithHomepageService(capturingHomepageService).thenLaunch()
+        let firstItem = StubHomepageItem(title: "Some content")
+        let secondItem = StubHomepageItem(title: "New content")
+        capturingHomepageService.simulateSuccessfulLoad(content: [firstItem])
+        context.interface.invokePullToRefresh()
+        capturingHomepageService.simulateSuccessfulLoad(content: [secondItem])
+
+        XCTAssertEqual(firstItem.title, context.interface.committedViewModel?.item(at: 1).title)
+    }
+
 }
