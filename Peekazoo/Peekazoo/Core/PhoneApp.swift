@@ -29,7 +29,7 @@ class PhoneApp: App, HomepageServiceLoadingDelegate {
     }
 
     func homepageDidFailToLoad() {
-
+        homepageInterface?.showLoadingErrorPlaceholder()
     }
 
 }

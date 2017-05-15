@@ -9,5 +9,6 @@
 protocol HomepageInterface {
 
     func prepareForUpdates()
+    func showLoadingErrorPlaceholder()
 
 }

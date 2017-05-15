@@ -58,4 +58,14 @@ class PhoneAppTests: XCTestCase {
         XCTAssertFalse(capturingHomepageInterface.didPrepareForUpdates)
     }
 
+    func testHomepageServiceFailsToLoadWithNoExistingContentShownTellsInterfaceToShowErrorPlaceholder() {
+        let capturingHomepageInterface = CapturingHomepageInterface()
+        let stubbedRootRouter = StubRootRouter(homepageInterface: capturingHomepageInterface)
+        let failingHomepageService = FailingHomepageService()
+        let app = PhoneApp(rootRouter: stubbedRootRouter, homepageService: failingHomepageService)
+        app.launch()
+
+        XCTAssertTrue(capturingHomepageInterface.didShowLoadingErrorPlaceholder)
+    }
+
 }

@@ -19,4 +19,8 @@ class HomepageViewController: UIViewController, HomepageInterface {
 
     }
 
+    func showLoadingErrorPlaceholder() {
+
+    }
+
 }
