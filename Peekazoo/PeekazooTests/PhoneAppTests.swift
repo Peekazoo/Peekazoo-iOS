@@ -13,9 +13,9 @@ class PhoneAppTests: XCTestCase {
 
     struct PhoneAppTestBuilder {
 
-        struct Product {
+        struct Product<Interface> where Interface: HomepageInterface {
             var app: PhoneApp
-            var interface: CapturingHomepageInterface
+            var interface: Interface
 
             @discardableResult func thenLaunch() -> Product {
                 app.launch()
@@ -23,19 +23,26 @@ class PhoneAppTests: XCTestCase {
             }
         }
 
-        static func buildWithHomepageService(_ service: HomepageService) -> Product {
-            let capturingHomepageInterface = CapturingHomepageInterface()
-            let stubbedRootRouter = StubRootRouter(homepageInterface: capturingHomepageInterface)
+        static func buildWithHomepageService<T: HomepageInterface>(_ service: HomepageService, interface: T) -> Product<T> {
+            let stubbedRootRouter = StubRootRouter(homepageInterface: interface)
             let app = PhoneApp(rootRouter: stubbedRootRouter, homepageService: service)
 
-            return Product(app: app, interface: capturingHomepageInterface)
+            return Product(app: app, interface: interface)
         }
 
-        static func buildForSuccessfulHomepageService(content: [StubHomepageItem] = []) -> Product {
+        static func buildWithHomepageService(_ service: HomepageService) -> Product<CapturingHomepageInterface> {
+            return buildWithHomepageService(service, interface: CapturingHomepageInterface())
+        }
+
+        static func buildForSuccessfulHomepageService<T: HomepageInterface>(content: [StubHomepageItem] = [], interface: T) -> Product<T> {
+            return buildWithHomepageService(SuccessfulHomepageService(content: content), interface: interface)
+        }
+
+        static func buildForSuccessfulHomepageService(content: [StubHomepageItem] = []) -> Product<CapturingHomepageInterface> {
             return buildWithHomepageService(SuccessfulHomepageService(content: content))
         }
 
-        static func buildForFailingHomepageService() -> Product {
+        static func buildForFailingHomepageService() -> Product<CapturingHomepageInterface> {
             return buildWithHomepageService(FailingHomepageService())
         }
 
@@ -144,10 +151,7 @@ class PhoneAppTests: XCTestCase {
             insertedIntoHomepageBeforePreparedForUpdates = timedInvocationHomepageInterface.insertedItemIndex != nil
         }
 
-        let stubbedRootRouter = StubRootRouter(homepageInterface: timedInvocationHomepageInterface)
-        let content = [StubHomepageItem()]
-        let app = PhoneApp(rootRouter: stubbedRootRouter, homepageService: SuccessfulHomepageService(content: content))
-        app.launch()
+        PhoneAppTestBuilder.buildForSuccessfulHomepageService(interface: timedInvocationHomepageInterface).thenLaunch()
 
         XCTAssertFalse(insertedIntoHomepageBeforePreparedForUpdates)
     }
