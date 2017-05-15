@@ -15,13 +15,13 @@ class HomepagePresenter: HomepageInterfaceDelegate, HomepageServiceLoadingDelega
     init(interface: HomepageInterface, service: HomepageService) {
         self.interface = interface
         self.service = service
-        self.viewModel = HomepageViewModel(content: [])
+        self.viewModel = HomepageViewModel(items: [])
         self.interface.delegate = self
         reloadHomepage()
     }
 
-    func homepageServiceDidLoadSuccessfully(content: [Any]) {
-        viewModel = HomepageViewModel(content: content)
+    func homepageServiceDidLoadSuccessfully(content: [HomepageItem]) {
+        viewModel = HomepageViewModel(items: content)
         interface.hideLoadingErrorPlaceholder()
 
         if viewModel.isEmpty {

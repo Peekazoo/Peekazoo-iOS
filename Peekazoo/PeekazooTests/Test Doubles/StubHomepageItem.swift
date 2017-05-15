@@ -8,6 +8,12 @@
 
 @testable import Peekazoo
 
-struct StubHomepageItem {
+struct StubHomepageItem: HomepageItem {
+
+    var title: String
+
+    init(title: String = "") {
+        self.title = title
+    }
 
 }

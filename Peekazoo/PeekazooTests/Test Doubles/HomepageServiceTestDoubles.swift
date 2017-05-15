@@ -45,13 +45,13 @@ class JournallingHomepageService: HomepageService {
 
 struct SuccessfulHomepageService: HomepageService {
 
-    var content: [Any]
+    var content: [HomepageItem]
 
     init() {
         content = []
     }
 
-    init(content: [Any]) {
+    init(content: [HomepageItem]) {
         self.content = content
     }
 

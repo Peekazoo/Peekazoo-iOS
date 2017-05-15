@@ -8,8 +8,14 @@
 
 protocol HomepageServiceLoadingDelegate {
 
-    func homepageServiceDidLoadSuccessfully(content: [Any])
+    func homepageServiceDidLoadSuccessfully(content: [HomepageItem])
     func homepageServiceDidFailToLoad()
+
+}
+
+protocol HomepageItem {
+
+    var title: String { get }
 
 }
 

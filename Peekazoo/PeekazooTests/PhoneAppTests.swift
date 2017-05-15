@@ -194,4 +194,11 @@ class PhoneAppTests: XCTestCase {
         XCTAssertEqual(count, context.interface.committedViewModel?.numberOfItems)
     }
 
+    func testLoadingHomepageDataShouldApplyViewModelWithTheCorrectHomepageItem() {
+        let item = StubHomepageItem(title: "Some content")
+        let context = PhoneAppTestBuilder.buildForSuccessfulHomepageService(content: [item]).thenLaunch()
+
+        XCTAssertEqual(item.title, context.interface.committedViewModel?.item(at: 0).title)
+    }
+
 }
