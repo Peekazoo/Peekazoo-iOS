@@ -21,6 +21,10 @@ class HomepageViewController: UIViewController, HomepageInterface {
 
     }
 
+    func insertItem(at index: Int) {
+
+    }
+
     func commitUpdates(using viewModel: HomepageInterfaceViewModel) {
 
     }
@@ -38,10 +42,6 @@ class HomepageViewController: UIViewController, HomepageInterface {
     }
 
     func hideNoContentPlaceholder() {
-
-    }
-
-    func insertItem(at index: Int) {
 
     }
 

@@ -31,11 +31,11 @@ protocol HomepageInterface {
     var delegate: HomepageInterfaceDelegate? { get set }
 
     func prepareForUpdates()
+    func insertItem(at index: Int)
     func commitUpdates(using viewModel: HomepageInterfaceViewModel)
     func showLoadingErrorPlaceholder()
     func hideLoadingErrorPlaceholder()
     func showNoContentPlaceholder()
     func hideNoContentPlaceholder()
-    func insertItem(at index: Int)
 
 }

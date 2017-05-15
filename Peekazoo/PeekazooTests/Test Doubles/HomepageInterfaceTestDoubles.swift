@@ -13,12 +13,12 @@ class DummyHomepageInterface: HomepageInterface {
     var delegate: HomepageInterfaceDelegate?
 
     func prepareForUpdates() { }
+    func insertItem(at index: Int) { }
     func commitUpdates(using viewModel: HomepageInterfaceViewModel) { }
     func showLoadingErrorPlaceholder() { }
     func hideLoadingErrorPlaceholder() { }
     func showNoContentPlaceholder() { }
     func hideNoContentPlaceholder() { }
-    func insertItem(at index: Int) { }
 
 }
 
@@ -29,6 +29,11 @@ class CapturingHomepageInterface: HomepageInterface {
     private(set) var didPrepareForUpdates = false
     func prepareForUpdates() {
         didPrepareForUpdates = true
+    }
+
+    private(set) var insertedItemIndex: Int?
+    func insertItem(at index: Int) {
+        insertedItemIndex = index
     }
 
     private(set) var didCommitUpdates = false
@@ -56,11 +61,6 @@ class CapturingHomepageInterface: HomepageInterface {
     private(set) var didHideNoContentPlaceholder = false
     func hideNoContentPlaceholder() {
         didHideNoContentPlaceholder = true
-    }
-
-    private(set) var insertedItemIndex: Int?
-    func insertItem(at index: Int) {
-        insertedItemIndex = index
     }
 
     func invokePullToRefresh() {
