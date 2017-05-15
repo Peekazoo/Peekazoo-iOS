@@ -176,4 +176,9 @@ class PhoneAppTests: XCTestCase {
         XCTAssertFalse(context.interface.didPrepareForUpdates)
     }
 
+    func testTheHomepageInterfaceIsToldToCommitUpdatesWhenContentIsAvailable() {
+        let context = PhoneAppTestBuilder.buildForSuccessfulHomepageService(content: [StubHomepageItem()]).thenLaunch()
+        XCTAssertTrue(context.interface.didCommitUpdates)
+    }
+
 }

@@ -13,6 +13,7 @@ class DummyHomepageInterface: HomepageInterface {
     var delegate: HomepageInterfaceDelegate?
 
     func prepareForUpdates() { }
+    func commitUpdates() { }
     func showLoadingErrorPlaceholder() { }
     func hideLoadingErrorPlaceholder() { }
     func showNoContentPlaceholder() { }
@@ -28,6 +29,11 @@ class CapturingHomepageInterface: HomepageInterface {
     private(set) var didPrepareForUpdates = false
     func prepareForUpdates() {
         didPrepareForUpdates = true
+    }
+
+    private(set) var didCommitUpdates = false
+    func commitUpdates() {
+        didCommitUpdates = true
     }
 
     private(set) var didShowLoadingErrorPlaceholder = false

@@ -31,6 +31,8 @@ class HomepagePresenter: HomepageInterfaceDelegate, HomepageServiceLoadingDelega
             interface.prepareForUpdates()
             content.indices.forEach(interface.insertItem(at:))
         }
+
+        interface.commitUpdates()
     }
 
     func homepageServiceDidFailToLoad() {

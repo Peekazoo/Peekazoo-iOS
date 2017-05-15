@@ -21,6 +21,10 @@ class HomepageViewController: UIViewController, HomepageInterface {
 
     }
 
+    func commitUpdates() {
+
+    }
+
     func showLoadingErrorPlaceholder() {
 
     }

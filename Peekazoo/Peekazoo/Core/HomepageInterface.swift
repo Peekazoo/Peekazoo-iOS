@@ -17,6 +17,7 @@ protocol HomepageInterface {
     var delegate: HomepageInterfaceDelegate? { get set }
 
     func prepareForUpdates()
+    func commitUpdates()
     func showLoadingErrorPlaceholder()
     func hideLoadingErrorPlaceholder()
     func showNoContentPlaceholder()
