@@ -21,33 +21,41 @@ class WindowRootRouterTests: XCTestCase {
         router = WindowRootRouter(window: window)
     }
 
+    @discardableResult private func navigateToHomepage() -> (interface: HomepageInterface, router: Any) {
+        return router.navigateToHomepage()
+    }
+
+    private var expectedRootNavigationController: UINavigationController? {
+        return window.rootViewController as? UINavigationController
+    }
+
     func testSetNavigationControllerAsTheRootViewController() {
-        _ = router.navigateToHomepage()
+        navigateToHomepage()
         XCTAssertTrue(window.rootViewController is UINavigationController)
     }
 
     func testSetTheHomepageViewControllerAsTheTopViewControllerOnTheRoot() {
-        _ = router.navigateToHomepage()
-        XCTAssertTrue((window.rootViewController as? UINavigationController)?.topViewController is HomepageViewController)
+        navigateToHomepage()
+        XCTAssertTrue(expectedRootNavigationController?.topViewController is HomepageViewController)
     }
 
     func testReturnTheHomepageViewController() {
-        let presented = router.navigateToHomepage().interface
-        XCTAssertEqual((presented as? UIViewController), (window.rootViewController as? UINavigationController)?.topViewController)
+        let presented = navigateToHomepage().interface
+        XCTAssertEqual(presented as? UIViewController, expectedRootNavigationController?.topViewController)
     }
 
     func testReturnTheHomepageRouter() {
-        let homepageRouter = router.navigateToHomepage().router
+        let homepageRouter = navigateToHomepage().router
         XCTAssertTrue(homepageRouter is HomepageRouter)
     }
 
     func testMakeTheWindowVisible() {
-        _ = router.navigateToHomepage()
+        navigateToHomepage()
         XCTAssertFalse(window.isHidden)
     }
 
     func testMakeTheWindowKey() {
-        _ = router.navigateToHomepage()
+        navigateToHomepage()
         XCTAssertTrue(window.isKeyWindow)
     }
 

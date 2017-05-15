@@ -17,7 +17,7 @@ class AppDelegateTests: XCTestCase {
         super.setUp()
         appDelegate = AppDelegate()
     }
-    
+
     private func simulateAppDidFinishLaunching() {
         _ = appDelegate.application(UIApplication.shared, didFinishLaunchingWithOptions: [:])
     }
