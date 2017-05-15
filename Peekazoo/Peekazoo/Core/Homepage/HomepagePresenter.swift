@@ -6,7 +6,7 @@
 //  Copyright © 2017 Peekazoo. All rights reserved.
 //
 
-class HomepagePresenter: HomepageInterfaceDelegate, HomepageServiceLoadingDelegate {
+struct HomepagePresenter: HomepageInterfaceDelegate, HomepageServiceLoadingDelegate {
 
     var service: HomepageService
     var interface: HomepageInterface

@@ -8,7 +8,7 @@
 
 @testable import Peekazoo
 
-class DummyApp: App {
+struct DummyApp: App {
 
     func launch() { }
 

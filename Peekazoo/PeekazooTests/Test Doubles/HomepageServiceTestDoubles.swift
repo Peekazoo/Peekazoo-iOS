@@ -9,7 +9,7 @@
 @testable import Peekazoo
 import Foundation
 
-class DummyHomepageService: HomepageService {
+struct DummyHomepageService: HomepageService {
 
     func loadHomepage(delegate: HomepageServiceLoadingDelegate) { }
 
@@ -33,7 +33,7 @@ class JournallingHomepageService: HomepageService {
 
 }
 
-class SuccessfulHomepageService: HomepageService {
+struct SuccessfulHomepageService: HomepageService {
 
     func loadHomepage(delegate: HomepageServiceLoadingDelegate) {
         delegate.homepageServiceDidLoadSuccessfully()
@@ -41,7 +41,7 @@ class SuccessfulHomepageService: HomepageService {
 
 }
 
-class FailingHomepageService: HomepageService {
+struct FailingHomepageService: HomepageService {
 
     func loadHomepage(delegate: HomepageServiceLoadingDelegate) {
         delegate.homepageServiceDidFailToLoad()

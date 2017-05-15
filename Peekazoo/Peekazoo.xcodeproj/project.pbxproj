@@ -141,9 +141,9 @@
 			children = (
 				6E0D859F1EC83C02000E7283 /* AppTestDoubles.swift */,
 				6E0D85991EC83B36000E7283 /* AppFactoryTestDoubles.swift */,
-				6E0D85A91EC8FA63000E7283 /* RootRouterTestDoubles.swift */,
 				6E0D85B11EC9715D000E7283 /* HomepageServiceTestDoubles.swift */,
 				6E0D85B91EC973DB000E7283 /* HomepageInterfaceTestDoubles.swift */,
+				6E0D85A91EC8FA63000E7283 /* RootRouterTestDoubles.swift */,
 			);
 			name = "Test Doubles";
 			sourceTree = "<group>";

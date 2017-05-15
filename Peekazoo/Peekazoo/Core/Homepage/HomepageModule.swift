@@ -8,9 +8,9 @@
 
 import Foundation
 
-class HomepageModule {
+struct HomepageModule {
 
-    class func initialize(router: RootRouter, service: HomepageService) {
+    static func initialize(router: RootRouter, service: HomepageService) {
         let homepageInterface = router.navigateToHomepage().interface
         _ = HomepagePresenter(interface: homepageInterface, service: service)
     }
