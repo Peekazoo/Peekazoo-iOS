@@ -68,4 +68,15 @@ class PhoneAppTests: XCTestCase {
         XCTAssertTrue(capturingHomepageInterface.didShowLoadingErrorPlaceholder)
     }
 
+    func testInvokingRefreshFromInterfaceTellsHomepageServiceToLoad() {
+        let capturingHomepageInterface = CapturingHomepageInterface()
+        let stubbedRootRouter = StubRootRouter(homepageInterface: capturingHomepageInterface)
+        let journallingHomepageService = JournallingHomepageService()
+        let app = PhoneApp(rootRouter: stubbedRootRouter, homepageService: journallingHomepageService)
+        app.launch()
+        capturingHomepageInterface.invokePullToRefresh()
+
+        XCTAssertEqual(2, journallingHomepageService.numberOfLoads)
+    }
+
 }

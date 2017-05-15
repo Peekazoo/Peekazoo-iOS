@@ -8,7 +8,7 @@
 
 import Foundation
 
-class PhoneApp: App, HomepageServiceLoadingDelegate {
+class PhoneApp: App, HomepageServiceLoadingDelegate, HomepageInterfaceDelegate {
 
     var rootRouter: RootRouter
     var homepageService: HomepageService
@@ -21,6 +21,7 @@ class PhoneApp: App, HomepageServiceLoadingDelegate {
 
     func launch() {
         homepageInterface = rootRouter.navigateToHomepage().interface
+        homepageInterface?.delegate = self
         homepageService.loadHomepage(delegate: self)
     }
 
@@ -30,6 +31,10 @@ class PhoneApp: App, HomepageServiceLoadingDelegate {
 
     func homepageDidFailToLoad() {
         homepageInterface?.showLoadingErrorPlaceholder()
+    }
+
+    func homepageDidInvokePullToRefresh() {
+        homepageService.loadHomepage(delegate: self)
     }
 
 }

@@ -24,6 +24,15 @@ class CapturingHomepageService: HomepageService {
 
 }
 
+class JournallingHomepageService: HomepageService {
+
+    private(set) var numberOfLoads = 0
+    func loadHomepage(delegate: HomepageServiceLoadingDelegate) {
+        numberOfLoads += 1
+    }
+
+}
+
 class SuccessfulHomepageService: HomepageService {
 
     func loadHomepage(delegate: HomepageServiceLoadingDelegate) {

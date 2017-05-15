@@ -15,6 +15,8 @@ class HomepageViewController: UIViewController, HomepageInterface {
         title = "Home"
     }
 
+    var delegate: HomepageInterfaceDelegate?
+
     func prepareForUpdates() {
 
     }

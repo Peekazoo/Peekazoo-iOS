@@ -10,12 +10,16 @@
 
 class DummyHomepageInterface: HomepageInterface {
 
+    var delegate: HomepageInterfaceDelegate?
+
     func prepareForUpdates() { }
     func showLoadingErrorPlaceholder() { }
 
 }
 
 class CapturingHomepageInterface: HomepageInterface {
+
+    var delegate: HomepageInterfaceDelegate?
 
     private(set) var didPrepareForUpdates = false
     func prepareForUpdates() {
@@ -25,6 +29,10 @@ class CapturingHomepageInterface: HomepageInterface {
     private(set) var didShowLoadingErrorPlaceholder = false
     func showLoadingErrorPlaceholder() {
         didShowLoadingErrorPlaceholder = true
+    }
+
+    func invokePullToRefresh() {
+        delegate?.homepageDidInvokePullToRefresh()
     }
 
 }

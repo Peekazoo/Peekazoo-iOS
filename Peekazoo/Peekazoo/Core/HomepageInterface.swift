@@ -6,7 +6,15 @@
 //  Copyright © 2017 Peekazoo. All rights reserved.
 //
 
+protocol HomepageInterfaceDelegate {
+
+    func homepageDidInvokePullToRefresh()
+
+}
+
 protocol HomepageInterface {
+
+    var delegate: HomepageInterfaceDelegate? { get set }
 
     func prepareForUpdates()
     func showLoadingErrorPlaceholder()
