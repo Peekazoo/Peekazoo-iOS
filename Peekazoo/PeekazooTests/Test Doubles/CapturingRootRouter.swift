@@ -8,13 +8,21 @@
 
 @testable import Peekazoo
 
-class CapturingRootRouter: RootRouter {
+class StubRootRouter: RootRouter {
 
-    private(set) var didNavigateToHomepage = false
     var stubHomepageInterface: HomepageInterface = DummyHomepageInterface()
     func navigateToHomepage() -> (interface: HomepageInterface, router: Any) {
-        didNavigateToHomepage = true
         return (interface: stubHomepageInterface, router: "")
+    }
+
+}
+
+class CapturingRootRouter: StubRootRouter {
+
+    private(set) var didNavigateToHomepage = false
+    override func navigateToHomepage() -> (interface: HomepageInterface, router: Any) {
+        didNavigateToHomepage = true
+        return super.navigateToHomepage()
     }
 
 }
