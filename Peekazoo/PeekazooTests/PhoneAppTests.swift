@@ -11,6 +11,31 @@ import XCTest
 
 class PhoneAppTests: XCTestCase {
 
+    struct PhoneAppTestBuilder {
+
+        struct Product {
+            var app: PhoneApp
+            var interface: CapturingHomepageInterface
+        }
+
+        static func buildWithHomepageService(_ service: HomepageService) -> Product {
+            let capturingHomepageInterface = CapturingHomepageInterface()
+            let stubbedRootRouter = StubRootRouter(homepageInterface: capturingHomepageInterface)
+            let app = PhoneApp(rootRouter: stubbedRootRouter, homepageService: service)
+
+            return Product(app: app, interface: capturingHomepageInterface)
+        }
+
+        static func buildForSuccessfulHomepageService(content: [StubHomepageItem] = []) -> Product {
+            return buildWithHomepageService(SuccessfulHomepageService(content: content))
+        }
+
+        static func buildForFailingHomepageService() -> Product {
+            return buildWithHomepageService(FailingHomepageService())
+        }
+
+    }
+
     func testWhenLaunchedTheRootInterfaceIsNavigatedTo() {
         let capturingRootRouter = CapturingRootRouter()
         let app = PhoneApp(rootRouter: capturingRootRouter, homepageService: DummyHomepageService())
@@ -20,123 +45,91 @@ class PhoneAppTests: XCTestCase {
     }
 
     func testWhenNavigatingToTheHomepageTheHompageServiceIsToldToLoad() {
-        let stubbedRootRouter = StubRootRouter()
         let capturingHomepageService = CapturingHomepageService()
-        let app = PhoneApp(rootRouter: stubbedRootRouter, homepageService: capturingHomepageService)
-        app.launch()
+        let context = PhoneAppTestBuilder.buildWithHomepageService(capturingHomepageService)
+        context.app.launch()
 
         XCTAssertTrue(capturingHomepageService.didLoad)
     }
 
     func testWhenHomepageLoadedSuccessfullyTheHomepageInterfaceIsToldToPrepareForUpdates() {
-        let capturingHomepageInterface = CapturingHomepageInterface()
-        let stubbedRootRouter = StubRootRouter(homepageInterface: capturingHomepageInterface)
-        let successfulHomepageService = SuccessfulHomepageService()
-        let app = PhoneApp(rootRouter: stubbedRootRouter, homepageService: successfulHomepageService)
-        app.launch()
+        let context = PhoneAppTestBuilder.buildForSuccessfulHomepageService()
+        context.app.launch()
 
-        XCTAssertTrue(capturingHomepageInterface.didPrepareForUpdates)
+        XCTAssertTrue(context.interface.didPrepareForUpdates)
     }
 
     func testTheHomepageInterfaceIsNotToldToPrepareForUpdatesUntilServiceLoadCompletes() {
-        let capturingHomepageInterface = CapturingHomepageInterface()
-        let stubbedRootRouter = StubRootRouter(homepageInterface: capturingHomepageInterface)
         let capturingHomepageService = CapturingHomepageService()
-        let app = PhoneApp(rootRouter: stubbedRootRouter, homepageService: capturingHomepageService)
-        app.launch()
+        let context = PhoneAppTestBuilder.buildWithHomepageService(capturingHomepageService)
+        context.app.launch()
 
-        XCTAssertFalse(capturingHomepageInterface.didPrepareForUpdates)
+        XCTAssertFalse(context.interface.didPrepareForUpdates)
     }
 
     func testTheHomepageInterfaceIsNotToldToPrepareForUpdatesWhenServiceLoadFails() {
-        let capturingHomepageInterface = CapturingHomepageInterface()
-        let stubbedRootRouter = StubRootRouter(homepageInterface: capturingHomepageInterface)
-        let failingHomepageService = FailingHomepageService()
-        let app = PhoneApp(rootRouter: stubbedRootRouter, homepageService: failingHomepageService)
-        app.launch()
+        let context = PhoneAppTestBuilder.buildForFailingHomepageService()
+        context.app.launch()
 
-        XCTAssertFalse(capturingHomepageInterface.didPrepareForUpdates)
+        XCTAssertFalse(context.interface.didPrepareForUpdates)
     }
 
     func testHomepageServiceFailsToLoadWithNoExistingContentShownTellsInterfaceToShowErrorPlaceholder() {
-        let capturingHomepageInterface = CapturingHomepageInterface()
-        let stubbedRootRouter = StubRootRouter(homepageInterface: capturingHomepageInterface)
-        let failingHomepageService = FailingHomepageService()
-        let app = PhoneApp(rootRouter: stubbedRootRouter, homepageService: failingHomepageService)
-        app.launch()
+        let context = PhoneAppTestBuilder.buildForFailingHomepageService()
+        context.app.launch()
 
-        XCTAssertTrue(capturingHomepageInterface.didShowLoadingErrorPlaceholder)
+        XCTAssertTrue(context.interface.didShowLoadingErrorPlaceholder)
     }
 
     func testInvokingRefreshFromInterfaceTellsHomepageServiceToLoad() {
-        let capturingHomepageInterface = CapturingHomepageInterface()
-        let stubbedRootRouter = StubRootRouter(homepageInterface: capturingHomepageInterface)
         let journallingHomepageService = JournallingHomepageService()
-        let app = PhoneApp(rootRouter: stubbedRootRouter, homepageService: journallingHomepageService)
-        app.launch()
-        capturingHomepageInterface.invokePullToRefresh()
+        let context = PhoneAppTestBuilder.buildWithHomepageService(journallingHomepageService)
+        context.app.launch()
+        context.interface.invokePullToRefresh()
 
         XCTAssertEqual(2, journallingHomepageService.numberOfLoads)
     }
 
     func testHomepageServiceCompletesLoadWithNoContentTellsInterfaceToShowNoContentPlaceholder() {
-        let capturingHomepageInterface = CapturingHomepageInterface()
-        let stubbedRootRouter = StubRootRouter(homepageInterface: capturingHomepageInterface)
-        let successfulHomepageService = SuccessfulHomepageService()
-        let app = PhoneApp(rootRouter: stubbedRootRouter, homepageService: successfulHomepageService)
-        app.launch()
+        let context = PhoneAppTestBuilder.buildForSuccessfulHomepageService()
+        context.app.launch()
 
-        XCTAssertTrue(capturingHomepageInterface.didShowNoContentPlaceholder)
+        XCTAssertTrue(context.interface.didShowNoContentPlaceholder)
     }
 
     func testHomepageServiceCompletesLoadWithSingleItemTellsInterfaceToHideNoContentPlaceholder() {
-        let capturingHomepageInterface = CapturingHomepageInterface()
-        let stubbedRootRouter = StubRootRouter(homepageInterface: capturingHomepageInterface)
-        let successfulHomepageService = SuccessfulHomepageService(content: [StubHomepageItem()])
-        let app = PhoneApp(rootRouter: stubbedRootRouter, homepageService: successfulHomepageService)
-        app.launch()
+        let context = PhoneAppTestBuilder.buildForSuccessfulHomepageService(content: [StubHomepageItem()])
+        context.app.launch()
 
-        XCTAssertTrue(capturingHomepageInterface.didHideNoContentPlaceholder)
+        XCTAssertTrue(context.interface.didHideNoContentPlaceholder)
     }
 
     func testHomepageServiceCompletesLoadWithNoContentDoesNotTellInterfaceToHideNoContentPlaceholder() {
-        let capturingHomepageInterface = CapturingHomepageInterface()
-        let stubbedRootRouter = StubRootRouter(homepageInterface: capturingHomepageInterface)
-        let successfulHomepageService = SuccessfulHomepageService()
-        let app = PhoneApp(rootRouter: stubbedRootRouter, homepageService: successfulHomepageService)
-        app.launch()
+        let context = PhoneAppTestBuilder.buildForSuccessfulHomepageService()
+        context.app.launch()
 
-        XCTAssertFalse(capturingHomepageInterface.didHideNoContentPlaceholder)
+        XCTAssertFalse(context.interface.didHideNoContentPlaceholder)
     }
 
     func testHomepageServiceCompletesLoadWithSingleItemDoesNotTellInterfaceToShowNoContentPlaceholder() {
-        let capturingHomepageInterface = CapturingHomepageInterface()
-        let stubbedRootRouter = StubRootRouter(homepageInterface: capturingHomepageInterface)
-        let successfulHomepageService = SuccessfulHomepageService(content: [StubHomepageItem()])
-        let app = PhoneApp(rootRouter: stubbedRootRouter, homepageService: successfulHomepageService)
-        app.launch()
+        let context = PhoneAppTestBuilder.buildForSuccessfulHomepageService(content: [StubHomepageItem()])
+        context.app.launch()
 
-        XCTAssertFalse(capturingHomepageInterface.didShowNoContentPlaceholder)
+        XCTAssertFalse(context.interface.didShowNoContentPlaceholder)
     }
 
     func testHomepageServiceCompletesLoadTellsInterfaceToHideErrorPlaceholder() {
-        let capturingHomepageInterface = CapturingHomepageInterface()
-        let stubbedRootRouter = StubRootRouter(homepageInterface: capturingHomepageInterface)
-        let successfulHomepageService = SuccessfulHomepageService()
-        let app = PhoneApp(rootRouter: stubbedRootRouter, homepageService: successfulHomepageService)
-        app.launch()
+        let context = PhoneAppTestBuilder.buildForSuccessfulHomepageService()
+        context.app.launch()
 
-        XCTAssertTrue(capturingHomepageInterface.didHideLoadingErrorPlaceholder)
+        XCTAssertTrue(context.interface.didHideLoadingErrorPlaceholder)
     }
 
     func testHomepageServiceFailsToLoadHidesNoContentPlaceholder() {
-        let capturingHomepageInterface = CapturingHomepageInterface()
-        let stubbedRootRouter = StubRootRouter(homepageInterface: capturingHomepageInterface)
-        let failingHomepageService = FailingHomepageService()
-        let app = PhoneApp(rootRouter: stubbedRootRouter, homepageService: failingHomepageService)
-        app.launch()
+        let context = PhoneAppTestBuilder.buildForFailingHomepageService()
+        context.app.launch()
 
-        XCTAssertTrue(capturingHomepageInterface.didHideNoContentPlaceholder)
+        XCTAssertTrue(context.interface.didHideNoContentPlaceholder)
     }
 
 }
