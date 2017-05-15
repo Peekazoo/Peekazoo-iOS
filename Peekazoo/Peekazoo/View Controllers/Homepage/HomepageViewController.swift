@@ -11,9 +11,12 @@ import UIKit
 class HomepageViewController: UIViewController, HomepageInterface {
 
     @IBOutlet weak var collectionView: UICollectionView?
+    private let dataSource = HomepageCollectionViewDataSource()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        collectionView?.dataSource = dataSource
         title = "Home"
     }
 

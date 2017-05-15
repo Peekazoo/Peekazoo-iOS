@@ -25,4 +25,11 @@ class HomepageViewControllerTests: XCTestCase {
         XCTAssertNotNil(homepageViewController.collectionView)
     }
 
+    func testHaveZeroSectionsInTheCollectionViewBeforeLoading() {
+        let homepageViewController = HomepageViewController()
+        homepageViewController.loadViewIfNeeded()
+
+        XCTAssertEqual(0, homepageViewController.collectionView?.numberOfSections)
+    }
+
 }
