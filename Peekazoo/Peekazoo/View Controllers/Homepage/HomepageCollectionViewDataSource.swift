@@ -27,7 +27,8 @@ class HomepageCollectionViewDataSource: NSObject, UICollectionViewDataSource {
             fatalError()
         }
 
-        cell.itemTitleLabel.text = "Some title"
+        let itemViewModel = viewModel?.item(at: indexPath.item)
+        cell.itemTitleLabel.text = itemViewModel?.title
         return cell
     }
 

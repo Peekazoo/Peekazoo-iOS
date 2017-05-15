@@ -80,4 +80,15 @@ class HomepageViewControllerTests: XCTestCase {
         XCTAssertEqual(item.title, cell?.itemTitleLabel.text)
     }
 
+    func testDequeuedItemsShouldBeProvidedWithCorrectTitlesFromViewModel() {
+        let firstItem = StubHomepageInterfaceItemViewModel(title: "Some title")
+        let secondItem = StubHomepageInterfaceItemViewModel(title: "Some other title")
+        let viewModel = StubHomepageInterfaceViewModel(items: [firstItem, secondItem])
+        homepageViewController.updateInterface(viewModel: viewModel, applyingDifferences: [])
+        homepageViewController.collectionView.layoutIfNeeded()
+        let cell = homepageViewController.collectionView.cellForItem(at: IndexPath(item: 1, section: 0)) as? HomepageItemCollectionViewCell
+
+        XCTAssertEqual(secondItem.title, cell?.itemTitleLabel.text)
+    }
+
 }
