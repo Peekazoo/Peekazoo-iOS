@@ -30,6 +30,7 @@ struct HomepagePresenter: HomepageInterfaceDelegate, HomepageServiceLoadingDeleg
     }
 
     func homepageServiceDidFailToLoad() {
+        interface.hideNoContentPlaceholder()
         interface.showLoadingErrorPlaceholder()
     }
 
