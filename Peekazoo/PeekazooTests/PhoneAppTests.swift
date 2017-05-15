@@ -145,15 +145,20 @@ class PhoneAppTests: XCTestCase {
     }
 
     func testHomepageServicesCompletesLoadWithSingleItemDoesNotPerformAnyInsertionsUntilInterfacePreparesForUpdates() {
-        let timedInvocationHomepageInterface = TimedInvocationHomepageInterface()
-        var insertedIntoHomepageBeforePreparedForUpdates = false
-        timedInvocationHomepageInterface.prepareForUpdatesHandler = {
-            insertedIntoHomepageBeforePreparedForUpdates = timedInvocationHomepageInterface.insertedItemIndex != nil
-        }
+        let preemptiveIndexDetectionMock = DetectIndexInsertionBeforePreparingMock()
+        PhoneAppTestBuilder.buildForSuccessfulHomepageService(interface: preemptiveIndexDetectionMock).thenLaunch()
 
-        PhoneAppTestBuilder.buildForSuccessfulHomepageService(interface: timedInvocationHomepageInterface).thenLaunch()
+        XCTAssertFalse(preemptiveIndexDetectionMock.wasToldToPrepareAfterAlreadyInsertingIndex)
+    }
 
-        XCTAssertFalse(insertedIntoHomepageBeforePreparedForUpdates)
+    func testHomepageServicesCompletesLoadWithSeveralItemsTellsInterfaceToInsertEntriesWithinExpectedRange() {
+        let count = Int(arc4random_uniform(100))
+        let expected = 0..<count
+        let content = Array(repeating: StubHomepageItem(), count: count)
+        let journallingIndiciesInterface = JournallingIndexHomepageInterface()
+        let context = PhoneAppTestBuilder.buildForSuccessfulHomepageService(content: content, interface: journallingIndiciesInterface).thenLaunch()
+
+        XCTAssertTrue(expected.elementsEqual(context.interface.indicies))
     }
 
 }

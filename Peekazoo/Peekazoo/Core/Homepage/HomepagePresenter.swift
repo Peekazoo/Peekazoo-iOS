@@ -23,7 +23,7 @@ class HomepagePresenter: HomepageInterfaceDelegate, HomepageServiceLoadingDelega
         didLoadSuccessfully = true
         interface.hideLoadingErrorPlaceholder()
         interface.prepareForUpdates()
-        interface.insertItem(at: 0)
+        content.indices.forEach(interface.insertItem(at:))
 
         if content.count > 0 {
             interface.hideNoContentPlaceholder()

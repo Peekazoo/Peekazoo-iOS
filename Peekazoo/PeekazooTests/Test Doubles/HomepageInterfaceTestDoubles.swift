@@ -61,12 +61,22 @@ class CapturingHomepageInterface: HomepageInterface {
 
 }
 
-class TimedInvocationHomepageInterface: CapturingHomepageInterface {
+class DetectIndexInsertionBeforePreparingMock: CapturingHomepageInterface {
 
-    var prepareForUpdatesHandler: (() -> Void)?
+    private(set) var wasToldToPrepareAfterAlreadyInsertingIndex = false
     override func prepareForUpdates() {
         super.prepareForUpdates()
-        prepareForUpdatesHandler?()
+        wasToldToPrepareAfterAlreadyInsertingIndex = insertedItemIndex != nil
+    }
+
+}
+
+class JournallingIndexHomepageInterface: CapturingHomepageInterface {
+
+    private(set) var indicies = [Int]()
+    override func insertItem(at index: Int) {
+        super.insertItem(at: index)
+        indicies.append(index)
     }
 
 }
