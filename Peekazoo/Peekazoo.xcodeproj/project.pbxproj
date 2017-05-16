@@ -36,6 +36,10 @@
 		6E6E617A1ECA426100964076 /* Randomness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6E61791ECA426100964076 /* Randomness.swift */; };
 		6E6E617F1ECA43FF00964076 /* HomepageItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6E617D1ECA43FF00964076 /* HomepageItemCollectionViewCell.swift */; };
 		6E6E61801ECA43FF00964076 /* HomepageItemCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E6E617E1ECA43FF00964076 /* HomepageItemCollectionViewCell.xib */; };
+		7840DF7E1ECB19A800A623A7 /* CapturingHomepageServiceLoadingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7840DF7D1ECB19A800A623A7 /* CapturingHomepageServiceLoadingDelegate.swift */; };
+		7840DF801ECB19BA00A623A7 /* CapturingHomepageFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7840DF7F1ECB19BA00A623A7 /* CapturingHomepageFeed.swift */; };
+		7840DF831ECB19D800A623A7 /* NetworkAggregateHomepageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7840DF821ECB19D800A623A7 /* NetworkAggregateHomepageService.swift */; };
+		788B0D0A1ECB17E30035C26A /* NetworkAggregateHomepageServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788B0D091ECB17E30035C26A /* NetworkAggregateHomepageServiceTests.swift */; };
 		789F10071EC481B100FAF5F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789F10061EC481B100FAF5F1 /* AppDelegate.swift */; };
 		789F100E1EC481B100FAF5F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 789F100D1EC481B100FAF5F1 /* Assets.xcassets */; };
 		789F10111EC481B100FAF5F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 789F100F1EC481B100FAF5F1 /* LaunchScreen.storyboard */; };
@@ -81,6 +85,10 @@
 		6E6E61791ECA426100964076 /* Randomness.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Randomness.swift; path = Utilities/Randomness.swift; sourceTree = "<group>"; };
 		6E6E617D1ECA43FF00964076 /* HomepageItemCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomepageItemCollectionViewCell.swift; path = "View Controllers/Homepage/HomepageItemCollectionViewCell.swift"; sourceTree = "<group>"; };
 		6E6E617E1ECA43FF00964076 /* HomepageItemCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HomepageItemCollectionViewCell.xib; path = "View Controllers/Homepage/HomepageItemCollectionViewCell.xib"; sourceTree = "<group>"; };
+		7840DF7D1ECB19A800A623A7 /* CapturingHomepageServiceLoadingDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CapturingHomepageServiceLoadingDelegate.swift; path = "Test Doubles/CapturingHomepageServiceLoadingDelegate.swift"; sourceTree = "<group>"; };
+		7840DF7F1ECB19BA00A623A7 /* CapturingHomepageFeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CapturingHomepageFeed.swift; path = "Test Doubles/CapturingHomepageFeed.swift"; sourceTree = "<group>"; };
+		7840DF821ECB19D800A623A7 /* NetworkAggregateHomepageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkAggregateHomepageService.swift; path = Core/Homepage/Service/NetworkAggregateHomepageService.swift; sourceTree = "<group>"; };
+		788B0D091ECB17E30035C26A /* NetworkAggregateHomepageServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkAggregateHomepageServiceTests.swift; sourceTree = "<group>"; };
 		789F10031EC481B100FAF5F1 /* Peekazoo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Peekazoo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		789F10061EC481B100FAF5F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		789F100D1EC481B100FAF5F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -163,6 +171,8 @@
 				6E0D85A91EC8FA63000E7283 /* RootRouterTestDoubles.swift */,
 				6E0D85C61EC9AFBF000E7283 /* StubHomepageItem.swift */,
 				6E6E61761ECA420A00964076 /* StubHomepageInterfaceViewModel.swift */,
+				7840DF7D1ECB19A800A623A7 /* CapturingHomepageServiceLoadingDelegate.swift */,
+				7840DF7F1ECB19BA00A623A7 /* CapturingHomepageFeed.swift */,
 			);
 			name = "Test Doubles";
 			sourceTree = "<group>";
@@ -185,6 +195,7 @@
 		6E0D85C11EC9A4CE000E7283 /* Homepage */ = {
 			isa = PBXGroup;
 			children = (
+				7840DF811ECB19CC00A623A7 /* Service */,
 				6E0D85C41EC9AC88000E7283 /* HomepageModule.swift */,
 				6E0D85C21EC9A4DF000E7283 /* HomepagePresenter.swift */,
 				6E6E61721EC9ED8400964076 /* HomepageViewModel.swift */,
@@ -198,6 +209,14 @@
 				6E6E61791ECA426100964076 /* Randomness.swift */,
 			);
 			name = Utilities;
+			sourceTree = "<group>";
+		};
+		7840DF811ECB19CC00A623A7 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				7840DF821ECB19D800A623A7 /* NetworkAggregateHomepageService.swift */,
+			);
+			name = Service;
 			sourceTree = "<group>";
 		};
 		789F0FFA1EC481B100FAF5F1 = {
@@ -239,6 +258,7 @@
 				6E0D85821EC6E84D000E7283 /* AppDelegateTests.swift */,
 				6E0D85861EC6EF83000E7283 /* WindowRootRouterTests.swift */,
 				6E0D85AD1EC8FD66000E7283 /* HomepageViewControllerTests.swift */,
+				788B0D091ECB17E30035C26A /* NetworkAggregateHomepageServiceTests.swift */,
 				6E0D85931EC839CB000E7283 /* Test Doubles */,
 				6E6E61781ECA424A00964076 /* Utilities */,
 				6E0D85841EC6EA01000E7283 /* Supporting Files */,
@@ -379,6 +399,7 @@
 				6E0D858F1EC6F159000E7283 /* HomepageViewController.swift in Sources */,
 				6E0D85981EC839FA000E7283 /* AppFactory.swift in Sources */,
 				6E6E61731EC9ED8400964076 /* HomepageViewModel.swift in Sources */,
+				7840DF831ECB19D800A623A7 /* NetworkAggregateHomepageService.swift in Sources */,
 				6E6E617F1ECA43FF00964076 /* HomepageItemCollectionViewCell.swift in Sources */,
 				6E0D85C51EC9AC88000E7283 /* HomepageModule.swift in Sources */,
 				6E6E61751EC9FC4C00964076 /* HomepageCollectionViewDataSource.swift in Sources */,
@@ -391,12 +412,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7840DF801ECB19BA00A623A7 /* CapturingHomepageFeed.swift in Sources */,
 				6E0D85A61EC8F864000E7283 /* PhoneAppTests.swift in Sources */,
 				6E6E617A1ECA426100964076 /* Randomness.swift in Sources */,
 				6E0D85A01EC83C02000E7283 /* AppTestDoubles.swift in Sources */,
+				788B0D0A1ECB17E30035C26A /* NetworkAggregateHomepageServiceTests.swift in Sources */,
 				6E0D85AE1EC8FD66000E7283 /* HomepageViewControllerTests.swift in Sources */,
 				6E0D85871EC6EF83000E7283 /* WindowRootRouterTests.swift in Sources */,
 				6E0D85B21EC9715D000E7283 /* HomepageServiceTestDoubles.swift in Sources */,
+				7840DF7E1ECB19A800A623A7 /* CapturingHomepageServiceLoadingDelegate.swift in Sources */,
 				6E0D85BA1EC973DB000E7283 /* HomepageInterfaceTestDoubles.swift in Sources */,
 				6E0D85831EC6E84D000E7283 /* AppDelegateTests.swift in Sources */,
 				6E0D85C71EC9AFBF000E7283 /* StubHomepageItem.swift in Sources */,
