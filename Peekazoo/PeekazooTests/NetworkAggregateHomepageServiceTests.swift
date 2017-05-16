@@ -11,11 +11,25 @@ import XCTest
 
 class NetworkAggregateHomepageServiceTests: XCTestCase {
 
+    var service: NetworkAggregateHomepageService!
+    var capturingLoadingDelegate: CapturingHomepageServiceLoadingDelegate!
+    var networkAdapter: DummyNetworkAdapter!
+
+    override func setUp() {
+        super.setUp()
+
+        capturingLoadingDelegate = CapturingHomepageServiceLoadingDelegate()
+        networkAdapter = DummyNetworkAdapter()
+    }
+
+    private func loadHomepage() {
+        service.loadHomepage(delegate: capturingLoadingDelegate)
+    }
+
     func testWhenLoadingTheFeedIsToldToLoad() {
         let feed = CapturingHomepageFeed()
-        let capturingLoadingDelegate = CapturingHomepageServiceLoadingDelegate()
-        let service = NetworkAggregateHomepageService(feeds: [feed], networkAdapter: DummyNetworkAdapter())
-        service.loadHomepage(delegate: capturingLoadingDelegate)
+        service = NetworkAggregateHomepageService(feeds: [feed], networkAdapter: networkAdapter)
+        loadHomepage()
 
         XCTAssertTrue(feed.didLoad)
     }
@@ -23,21 +37,18 @@ class NetworkAggregateHomepageServiceTests: XCTestCase {
     func testWhenLoadingAllFeedsAreToldToLoad() {
         let count = Int.random(upperLimit: 100, lowerLimit: 2)
         let feeds = (0..<count).map({ _ in CapturingHomepageFeed() })
-        let capturingLoadingDelegate = CapturingHomepageServiceLoadingDelegate()
-        let service = NetworkAggregateHomepageService(feeds: feeds, networkAdapter: DummyNetworkAdapter())
-        service.loadHomepage(delegate: capturingLoadingDelegate)
+        service = NetworkAggregateHomepageService(feeds: feeds, networkAdapter: networkAdapter)
+        loadHomepage()
 
         XCTAssertTrue(feeds.all({ $0.didLoad }))
     }
 
     func testWhenLoadingTheFeedIsGivenTheNetworkAdapter() {
-        let dummyNetworkAdapter = DummyNetworkAdapter()
         let feed = CapturingHomepageFeed()
-        let capturingLoadingDelegate = CapturingHomepageServiceLoadingDelegate()
-        let service = NetworkAggregateHomepageService(feeds: [feed], networkAdapter: dummyNetworkAdapter)
-        service.loadHomepage(delegate: capturingLoadingDelegate)
+        service = NetworkAggregateHomepageService(feeds: [feed], networkAdapter: networkAdapter)
+        loadHomepage()
 
-        XCTAssertTrue((feed.capturedNetworkAdapter as? DummyNetworkAdapter) === dummyNetworkAdapter)
+        XCTAssertTrue((feed.capturedNetworkAdapter as? DummyNetworkAdapter) === networkAdapter)
     }
 
 }
