@@ -11,17 +11,23 @@ import XCTest
 
 class WeasylHomepageFeedTests: XCTestCase {
 
+    var feed: WeasylHomepageFeed!
+
+    override func setUp() {
+        super.setUp()
+
+        feed = WeasylHomepageFeed()
+    }
+
     func testWhenToldToLoadTheHomepageURLIsRequested() {
         let expectedURL = URL(string: "https://www.weasyl.com/api/submissions/frontpage")!
         let capturingNetworkAdapter = CapturingNetworkAdapter()
-        let feed = WeasylHomepageFeed()
         feed.loadFeed(networkAdapter: capturingNetworkAdapter, delegate: DummyHomepageFeedDelegate())
 
         XCTAssertEqual(expectedURL, capturingNetworkAdapter.requestedURL)
     }
 
     func testTheDelegateIsToldTheFeedFailedToLoadWhenNetworkEncounteredError() {
-        let feed = WeasylHomepageFeed()
         let failingNetworkAdapter = FailingNetworkAdapter()
         let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
         feed.loadFeed(networkAdapter: failingNetworkAdapter, delegate: capturingHomepageFeedDelegate)
@@ -30,7 +36,6 @@ class WeasylHomepageFeedTests: XCTestCase {
     }
 
     func testTheDelegateIsNotToldAboutFeedFailuresUntilNetworkHandlerIsInvokedWithError() {
-        let feed = WeasylHomepageFeed()
         let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
         feed.loadFeed(networkAdapter: DummyNetworkAdapter(), delegate: capturingHomepageFeedDelegate)
 
