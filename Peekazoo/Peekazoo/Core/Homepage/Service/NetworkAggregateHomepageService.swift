@@ -6,6 +6,8 @@
 //  Copyright © 2017 Peekazoo. All rights reserved.
 //
 
+import Foundation
+
 protocol HomepageFeed {
 
     func loadFeed(networkAdapter: NetworkAdapter, delegate: HomepageFeedDelegate)
@@ -20,6 +22,8 @@ protocol HomepageFeedDelegate {
 }
 
 protocol NetworkAdapter {
+
+    func get(_ url: URL)
 
 }
 

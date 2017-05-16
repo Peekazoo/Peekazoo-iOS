@@ -7,7 +7,10 @@
 //
 
 @testable import Peekazoo
+import Foundation
 
 class DummyNetworkAdapter: NetworkAdapter {
+
+    func get(_ url: URL) { }
 
 }
