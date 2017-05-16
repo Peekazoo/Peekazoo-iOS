@@ -14,12 +14,17 @@ class NetworkAggregateHomepageServiceTests: XCTestCase {
     var service: NetworkAggregateHomepageService!
     var capturingLoadingDelegate: CapturingHomepageServiceLoadingDelegate!
     var networkAdapter: DummyNetworkAdapter!
+    var firstFeed: CapturingHomepageFeed!
+    var secondFeed: CapturingHomepageFeed!
 
     override func setUp() {
         super.setUp()
 
         capturingLoadingDelegate = CapturingHomepageServiceLoadingDelegate()
         networkAdapter = DummyNetworkAdapter()
+        firstFeed = CapturingHomepageFeed()
+        secondFeed = CapturingHomepageFeed()
+        service = NetworkAggregateHomepageService(feeds: [firstFeed, secondFeed], networkAdapter: networkAdapter)
     }
 
     private func loadHomepage() {
@@ -27,20 +32,13 @@ class NetworkAggregateHomepageServiceTests: XCTestCase {
     }
 
     func testWhenLoadingAllFeedsAreToldToLoad() {
-        let count = Int.random(upperLimit: 100, lowerLimit: 2)
-        let feeds = (0..<count).map({ _ in CapturingHomepageFeed() })
-        service = NetworkAggregateHomepageService(feeds: feeds, networkAdapter: networkAdapter)
         loadHomepage()
-
-        XCTAssertTrue(feeds.all({ $0.didLoad }))
+        XCTAssertTrue([firstFeed, secondFeed].all({ $0.didLoad }))
     }
 
     func testWhenLoadingTheFeedIsGivenTheNetworkAdapter() {
-        let feed = CapturingHomepageFeed()
-        service = NetworkAggregateHomepageService(feeds: [feed], networkAdapter: networkAdapter)
         loadHomepage()
-
-        XCTAssertTrue((feed.capturedNetworkAdapter as? DummyNetworkAdapter) === networkAdapter)
+        XCTAssertTrue((firstFeed.capturedNetworkAdapter as? DummyNetworkAdapter) === networkAdapter)
     }
 
 }
