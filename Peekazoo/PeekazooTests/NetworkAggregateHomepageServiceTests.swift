@@ -17,6 +17,14 @@ struct FailingHomepageFeed: HomepageFeed {
 
 }
 
+struct SuccessfulHomepageFeed: HomepageFeed {
+
+    func loadFeed(networkAdapter: NetworkAdapter, delegate: HomepageFeedDelegate) {
+        delegate.feedDidFinishLoading()
+    }
+
+}
+
 class NetworkAggregateHomepageServiceTests: XCTestCase {
 
     var service: NetworkAggregateHomepageService!
@@ -55,6 +63,15 @@ class NetworkAggregateHomepageServiceTests: XCTestCase {
         loadHomepage()
 
         XCTAssertTrue(capturingLoadingDelegate.didFailToLoadInvoked)
+    }
+
+    func testWhenSingleFeedLoadsSuccessfullyTheDelegateIsToldAboutIt() {
+        let successfulFeed = SuccessfulHomepageFeed()
+        service = NetworkAggregateHomepageService(feeds: [successfulFeed], networkAdapter: networkAdapter)
+        loadHomepage()
+
+        XCTAssertTrue(capturingLoadingDelegate.didFinishLoadingInvoked)
+
     }
 
 }

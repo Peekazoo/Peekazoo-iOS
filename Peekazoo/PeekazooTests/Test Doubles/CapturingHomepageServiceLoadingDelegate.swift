@@ -10,8 +10,9 @@
 
 class CapturingHomepageServiceLoadingDelegate: HomepageServiceLoadingDelegate {
 
+    private(set) var didFinishLoadingInvoked = false
     func homepageServiceDidLoadSuccessfully(content: [HomepageItem]) {
-
+        didFinishLoadingInvoked = true
     }
 
     private(set) var didFailToLoadInvoked = false
