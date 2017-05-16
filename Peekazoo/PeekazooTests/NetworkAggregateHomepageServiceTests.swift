@@ -9,22 +9,6 @@
 @testable import Peekazoo
 import XCTest
 
-struct FailingHomepageFeed: HomepageFeed {
-
-    func loadFeed(networkAdapter: NetworkAdapter, delegate: HomepageFeedDelegate) {
-        delegate.feedDidFailToLoad()
-    }
-
-}
-
-struct SuccessfulHomepageFeed: HomepageFeed {
-
-    func loadFeed(networkAdapter: NetworkAdapter, delegate: HomepageFeedDelegate) {
-        delegate.feedDidFinishLoading()
-    }
-
-}
-
 class NetworkAggregateHomepageServiceTests: XCTestCase {
 
     var service: NetworkAggregateHomepageService!

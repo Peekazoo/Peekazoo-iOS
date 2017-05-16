@@ -1,5 +1,5 @@
 //
-//  CapturingHomepageFeed.swift
+//  HomepageFeedTestDoubles.swift
 //  Peekazoo
 //
 //  Created by Thomas Sherwood on 16/05/2017.
@@ -15,6 +15,22 @@ class CapturingHomepageFeed: HomepageFeed {
     func loadFeed(networkAdapter: NetworkAdapter, delegate: HomepageFeedDelegate) {
         didLoad = true
         capturedNetworkAdapter = networkAdapter
+    }
+
+}
+
+struct FailingHomepageFeed: HomepageFeed {
+
+    func loadFeed(networkAdapter: NetworkAdapter, delegate: HomepageFeedDelegate) {
+        delegate.feedDidFailToLoad()
+    }
+
+}
+
+struct SuccessfulHomepageFeed: HomepageFeed {
+
+    func loadFeed(networkAdapter: NetworkAdapter, delegate: HomepageFeedDelegate) {
+        delegate.feedDidFinishLoading()
     }
 
 }
