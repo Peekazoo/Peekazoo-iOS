@@ -9,15 +9,6 @@
 @testable import Peekazoo
 import XCTest
 
-class CapturingNetworkAdapter: NetworkAdapter {
-
-    private(set) var requestedURL: URL?
-    func get(_ url: URL) {
-        requestedURL = url
-    }
-
-}
-
 class WeasylHomepageFeedTests: XCTestCase {
 
     func testWhenToldToLoadTheHomepageURLIsRequested() {
