@@ -8,20 +8,30 @@
 
 protocol HomepageFeed {
 
-    func loadFeed()
+    func loadFeed(networkAdapter: NetworkAdapter)
+
+}
+
+protocol NetworkAdapter {
 
 }
 
 struct NetworkAggregateHomepageService: HomepageService {
 
     var feeds: [HomepageFeed]
+    var networkAdapter: NetworkAdapter
 
-    init(feeds: [HomepageFeed]) {
+    init(feeds: [HomepageFeed], networkAdapter: NetworkAdapter) {
         self.feeds = feeds
+        self.networkAdapter = networkAdapter
     }
 
     func loadHomepage(delegate: HomepageServiceLoadingDelegate) {
-        feeds.forEach({ $0.loadFeed() })
+        feeds.forEach(beginLoad)
+    }
+
+    private func beginLoad(for feed: HomepageFeed) {
+        feed.loadFeed(networkAdapter: networkAdapter)
     }
 
 }

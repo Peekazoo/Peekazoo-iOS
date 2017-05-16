@@ -11,8 +11,10 @@
 class CapturingHomepageFeed: HomepageFeed {
 
     private(set) var didLoad = false
-    func loadFeed() {
+    private(set) var capturedNetworkAdapter: NetworkAdapter?
+    func loadFeed(networkAdapter: NetworkAdapter) {
         didLoad = true
+        capturedNetworkAdapter = networkAdapter
     }
 
 }
