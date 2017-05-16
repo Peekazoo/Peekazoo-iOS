@@ -10,8 +10,8 @@ import Foundation
 
 extension Int {
 
-    static func random(upperLimit: UInt32) -> Int {
-        return Int(arc4random_uniform(upperLimit))
+    static func random(upperLimit: UInt32, lowerLimit: Int = 0) -> Int {
+        return Swift.max(Int(arc4random_uniform(upperLimit)), lowerLimit)
     }
 
 }
