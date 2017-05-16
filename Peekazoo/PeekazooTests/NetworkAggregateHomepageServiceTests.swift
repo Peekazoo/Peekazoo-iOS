@@ -9,10 +9,6 @@
 @testable import Peekazoo
 import XCTest
 
-class DummyNetworkAdapter: NetworkAdapter {
-
-}
-
 class NetworkAggregateHomepageServiceTests: XCTestCase {
 
     func testWhenLoadingTheFeedIsToldToLoad() {
