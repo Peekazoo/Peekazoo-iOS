@@ -37,7 +37,6 @@ class NetworkAggregateHomepageService: HomepageService, HomepageFeedDelegate {
     func loadHomepage(delegate: HomepageServiceLoadingDelegate) {
         self.delegate = delegate
         feeds.forEach(beginLoad)
-        delegate.homepageServiceDidFailToLoad()
     }
 
     func feedDidFinishLoading() {
@@ -45,7 +44,7 @@ class NetworkAggregateHomepageService: HomepageService, HomepageFeedDelegate {
     }
 
     func feedDidFailToLoad() {
-
+        delegate?.homepageServiceDidFailToLoad()
     }
 
     private func beginLoad(for feed: HomepageFeed) {
