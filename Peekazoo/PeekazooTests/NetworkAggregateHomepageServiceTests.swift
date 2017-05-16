@@ -71,7 +71,14 @@ class NetworkAggregateHomepageServiceTests: XCTestCase {
         loadHomepage()
 
         XCTAssertTrue(capturingLoadingDelegate.didFinishLoadingInvoked)
+    }
 
+    func testFeedFailingToLoadShouldNotNotifyDelegateAboutSuccess() {
+        let failingFeed = FailingHomepageFeed()
+        service = NetworkAggregateHomepageService(feeds: [failingFeed], networkAdapter: networkAdapter)
+        loadHomepage()
+
+        XCTAssertFalse(capturingLoadingDelegate.didFinishLoadingInvoked)
     }
 
 }
