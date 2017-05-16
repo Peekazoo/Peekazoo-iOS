@@ -21,7 +21,7 @@ struct NetworkAggregateHomepageService: HomepageService {
     }
 
     func loadHomepage(delegate: HomepageServiceLoadingDelegate) {
-        feeds.first!.loadFeed()
+        feeds.forEach({ $0.loadFeed() })
     }
 
 }
