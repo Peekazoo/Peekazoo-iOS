@@ -23,7 +23,7 @@ protocol HomepageFeedDelegate {
 
 protocol NetworkAdapter {
 
-    func get(_ url: URL)
+    func get(_ url: URL, completionHandler: (Error) -> Void)
 
 }
 

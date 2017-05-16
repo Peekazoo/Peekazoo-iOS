@@ -43,7 +43,7 @@
 		7840DF891ECB78FA00A623A7 /* HomepageFeedTestDoubles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7840DF881ECB78FA00A623A7 /* HomepageFeedTestDoubles.swift */; };
 		7840DF8B1ECB949900A623A7 /* WeasylHomepageFeedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7840DF8A1ECB949900A623A7 /* WeasylHomepageFeedTests.swift */; };
 		7840DF8D1ECB974000A623A7 /* WeasylHomepageFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7840DF8C1ECB974000A623A7 /* WeasylHomepageFeed.swift */; };
-		7840DF8F1ECB976A00A623A7 /* DummyHomepageFeedDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7840DF8E1ECB976A00A623A7 /* DummyHomepageFeedDelegate.swift */; };
+		7840DF8F1ECB976A00A623A7 /* HomepageFeedDelegateTestDoubles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7840DF8E1ECB976A00A623A7 /* HomepageFeedDelegateTestDoubles.swift */; };
 		788B0D0A1ECB17E30035C26A /* NetworkAggregateHomepageServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788B0D091ECB17E30035C26A /* NetworkAggregateHomepageServiceTests.swift */; };
 		789F10071EC481B100FAF5F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789F10061EC481B100FAF5F1 /* AppDelegate.swift */; };
 		789F100E1EC481B100FAF5F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 789F100D1EC481B100FAF5F1 /* Assets.xcassets */; };
@@ -97,7 +97,7 @@
 		7840DF881ECB78FA00A623A7 /* HomepageFeedTestDoubles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomepageFeedTestDoubles.swift; path = "Test Doubles/HomepageFeedTestDoubles.swift"; sourceTree = "<group>"; };
 		7840DF8A1ECB949900A623A7 /* WeasylHomepageFeedTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeasylHomepageFeedTests.swift; sourceTree = "<group>"; };
 		7840DF8C1ECB974000A623A7 /* WeasylHomepageFeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeasylHomepageFeed.swift; path = Core/Homepage/Service/WeasylHomepageFeed.swift; sourceTree = "<group>"; };
-		7840DF8E1ECB976A00A623A7 /* DummyHomepageFeedDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DummyHomepageFeedDelegate.swift; path = "Test Doubles/DummyHomepageFeedDelegate.swift"; sourceTree = "<group>"; };
+		7840DF8E1ECB976A00A623A7 /* HomepageFeedDelegateTestDoubles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomepageFeedDelegateTestDoubles.swift; path = "Test Doubles/HomepageFeedDelegateTestDoubles.swift"; sourceTree = "<group>"; };
 		788B0D091ECB17E30035C26A /* NetworkAggregateHomepageServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkAggregateHomepageServiceTests.swift; sourceTree = "<group>"; };
 		789F10031EC481B100FAF5F1 /* Peekazoo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Peekazoo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		789F10061EC481B100FAF5F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -184,7 +184,7 @@
 				6E6E61761ECA420A00964076 /* StubHomepageInterfaceViewModel.swift */,
 				7840DF7D1ECB19A800A623A7 /* CapturingHomepageServiceLoadingDelegate.swift */,
 				7840DF861ECB1F7F00A623A7 /* NetworkAdapterTestDoubles.swift */,
-				7840DF8E1ECB976A00A623A7 /* DummyHomepageFeedDelegate.swift */,
+				7840DF8E1ECB976A00A623A7 /* HomepageFeedDelegateTestDoubles.swift */,
 			);
 			name = "Test Doubles";
 			sourceTree = "<group>";
@@ -428,7 +428,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7840DF8F1ECB976A00A623A7 /* DummyHomepageFeedDelegate.swift in Sources */,
+				7840DF8F1ECB976A00A623A7 /* HomepageFeedDelegateTestDoubles.swift in Sources */,
 				6E0D85A61EC8F864000E7283 /* PhoneAppTests.swift in Sources */,
 				6E6E617A1ECA426100964076 /* Randomness.swift in Sources */,
 				6E0D85A01EC83C02000E7283 /* AppTestDoubles.swift in Sources */,

@@ -20,4 +20,13 @@ class WeasylHomepageFeedTests: XCTestCase {
         XCTAssertEqual(expectedURL, capturingNetworkAdapter.requestedURL)
     }
 
+    func testTheDelegateIsToldTheFeedFailedToLoadWhenNetworkEncounteredError() {
+        let feed = WeasylHomepageFeed()
+        let failingNetworkAdapter = FailingNetworkAdapter()
+        let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
+        feed.loadFeed(networkAdapter: failingNetworkAdapter, delegate: capturingHomepageFeedDelegate)
+
+        XCTAssertTrue(capturingHomepageFeedDelegate.wasNotifiedFeedDidFailToLoad)
+    }
+
 }
