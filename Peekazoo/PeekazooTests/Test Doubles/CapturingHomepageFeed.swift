@@ -12,7 +12,7 @@ class CapturingHomepageFeed: HomepageFeed {
 
     private(set) var didLoad = false
     private(set) var capturedNetworkAdapter: NetworkAdapter?
-    func loadFeed(networkAdapter: NetworkAdapter) {
+    func loadFeed(networkAdapter: NetworkAdapter, delegate: HomepageFeedDelegate) {
         didLoad = true
         capturedNetworkAdapter = networkAdapter
     }

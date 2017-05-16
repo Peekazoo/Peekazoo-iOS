@@ -8,7 +8,13 @@
 
 protocol HomepageFeed {
 
-    func loadFeed(networkAdapter: NetworkAdapter)
+    func loadFeed(networkAdapter: NetworkAdapter, delegate: HomepageFeedDelegate)
+
+}
+
+protocol HomepageFeedDelegate {
+
+    func feedDidFailToLoad()
 
 }
 
@@ -16,10 +22,11 @@ protocol NetworkAdapter {
 
 }
 
-struct NetworkAggregateHomepageService: HomepageService {
+class NetworkAggregateHomepageService: HomepageService, HomepageFeedDelegate {
 
     var feeds: [HomepageFeed]
     var networkAdapter: NetworkAdapter
+    var delegate: HomepageServiceLoadingDelegate?
 
     init(feeds: [HomepageFeed], networkAdapter: NetworkAdapter) {
         self.feeds = feeds
@@ -27,11 +34,17 @@ struct NetworkAggregateHomepageService: HomepageService {
     }
 
     func loadHomepage(delegate: HomepageServiceLoadingDelegate) {
+        self.delegate = delegate
         feeds.forEach(beginLoad)
+        delegate.homepageServiceDidFailToLoad()
+    }
+
+    func feedDidFailToLoad() {
+
     }
 
     private func beginLoad(for feed: HomepageFeed) {
-        feed.loadFeed(networkAdapter: networkAdapter)
+        feed.loadFeed(networkAdapter: networkAdapter, delegate: self)
     }
 
 }

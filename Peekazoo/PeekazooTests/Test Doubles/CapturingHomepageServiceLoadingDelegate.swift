@@ -14,8 +14,9 @@ class CapturingHomepageServiceLoadingDelegate: HomepageServiceLoadingDelegate {
 
     }
 
+    private(set) var didFailToLoadInvoked = false
     func homepageServiceDidFailToLoad() {
-
+        didFailToLoadInvoked = true
     }
 
 }

@@ -9,6 +9,14 @@
 @testable import Peekazoo
 import XCTest
 
+struct FailingHomepageFeed: HomepageFeed {
+
+    func loadFeed(networkAdapter: NetworkAdapter, delegate: HomepageFeedDelegate) {
+        delegate.feedDidFailToLoad()
+    }
+
+}
+
 class NetworkAggregateHomepageServiceTests: XCTestCase {
 
     var service: NetworkAggregateHomepageService!
@@ -39,6 +47,14 @@ class NetworkAggregateHomepageServiceTests: XCTestCase {
     func testWhenLoadingTheFeedIsGivenTheNetworkAdapter() {
         loadHomepage()
         XCTAssertTrue((firstFeed.capturedNetworkAdapter as? DummyNetworkAdapter) === networkAdapter)
+    }
+
+    func testWhenFeedFailsToLoadThenTheFailureCallbackIsInvoked() {
+        let failingFeed = FailingHomepageFeed()
+        service = NetworkAggregateHomepageService(feeds: [failingFeed], networkAdapter: networkAdapter)
+        loadHomepage()
+
+        XCTAssertTrue(capturingLoadingDelegate.didFailToLoadInvoked)
     }
 
 }
