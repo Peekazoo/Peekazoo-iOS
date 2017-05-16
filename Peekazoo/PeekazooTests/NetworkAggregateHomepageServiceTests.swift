@@ -26,14 +26,6 @@ class NetworkAggregateHomepageServiceTests: XCTestCase {
         service.loadHomepage(delegate: capturingLoadingDelegate)
     }
 
-    func testWhenLoadingTheFeedIsToldToLoad() {
-        let feed = CapturingHomepageFeed()
-        service = NetworkAggregateHomepageService(feeds: [feed], networkAdapter: networkAdapter)
-        loadHomepage()
-
-        XCTAssertTrue(feed.didLoad)
-    }
-
     func testWhenLoadingAllFeedsAreToldToLoad() {
         let count = Int.random(upperLimit: 100, lowerLimit: 2)
         let feeds = (0..<count).map({ _ in CapturingHomepageFeed() })
