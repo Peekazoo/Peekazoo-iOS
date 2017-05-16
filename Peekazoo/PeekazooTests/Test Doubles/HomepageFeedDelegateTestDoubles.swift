@@ -17,8 +17,9 @@ struct DummyHomepageFeedDelegate: HomepageFeedDelegate {
 
 class CapturingHomepageFeedDelegate: HomepageFeedDelegate {
 
+    private(set) var wasNotifiedDidFinishLoading = false
     func feedDidFinishLoading() {
-
+        wasNotifiedDidFinishLoading = true
     }
 
     private(set) var wasNotifiedFeedDidFailToLoad = false

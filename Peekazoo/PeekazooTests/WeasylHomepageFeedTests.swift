@@ -42,4 +42,16 @@ class WeasylHomepageFeedTests: XCTestCase {
         XCTAssertFalse(capturingHomepageFeedDelegate.wasNotifiedFeedDidFailToLoad)
     }
 
+    func testWhenLoadingValidFeedDataTheDelegateIsToldTheFeedLoaded() {
+        let filename = "ValidWeasylHomepageResponse"
+        let url = Bundle(for: type(of: self)).url(forResource: filename, withExtension: "json")!
+        let data = try? Data(contentsOf: url)
+        let successfulNetworkAdapter = SuccessfulNetworkAdapter(data: data)
+        let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
+        feed.loadFeed(networkAdapter: successfulNetworkAdapter, delegate: capturingHomepageFeedDelegate)
+
+        XCTAssertTrue(capturingHomepageFeedDelegate.wasNotifiedDidFinishLoading)
+
+    }
+
 }

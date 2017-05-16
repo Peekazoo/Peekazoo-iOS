@@ -44,6 +44,7 @@
 		7840DF8B1ECB949900A623A7 /* WeasylHomepageFeedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7840DF8A1ECB949900A623A7 /* WeasylHomepageFeedTests.swift */; };
 		7840DF8D1ECB974000A623A7 /* WeasylHomepageFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7840DF8C1ECB974000A623A7 /* WeasylHomepageFeed.swift */; };
 		7840DF8F1ECB976A00A623A7 /* HomepageFeedDelegateTestDoubles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7840DF8E1ECB976A00A623A7 /* HomepageFeedDelegateTestDoubles.swift */; };
+		7840DF951ECB9F2400A623A7 /* ValidWeasylHomepageResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 7840DF941ECB9F2400A623A7 /* ValidWeasylHomepageResponse.json */; };
 		788B0D0A1ECB17E30035C26A /* NetworkAggregateHomepageServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788B0D091ECB17E30035C26A /* NetworkAggregateHomepageServiceTests.swift */; };
 		789F10071EC481B100FAF5F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789F10061EC481B100FAF5F1 /* AppDelegate.swift */; };
 		789F100E1EC481B100FAF5F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 789F100D1EC481B100FAF5F1 /* Assets.xcassets */; };
@@ -98,6 +99,7 @@
 		7840DF8A1ECB949900A623A7 /* WeasylHomepageFeedTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeasylHomepageFeedTests.swift; sourceTree = "<group>"; };
 		7840DF8C1ECB974000A623A7 /* WeasylHomepageFeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeasylHomepageFeed.swift; path = Core/Homepage/Service/WeasylHomepageFeed.swift; sourceTree = "<group>"; };
 		7840DF8E1ECB976A00A623A7 /* HomepageFeedDelegateTestDoubles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomepageFeedDelegateTestDoubles.swift; path = "Test Doubles/HomepageFeedDelegateTestDoubles.swift"; sourceTree = "<group>"; };
+		7840DF941ECB9F2400A623A7 /* ValidWeasylHomepageResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = ValidWeasylHomepageResponse.json; path = "Test Data/ValidWeasylHomepageResponse.json"; sourceTree = "<group>"; };
 		788B0D091ECB17E30035C26A /* NetworkAggregateHomepageServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkAggregateHomepageServiceTests.swift; sourceTree = "<group>"; };
 		789F10031EC481B100FAF5F1 /* Peekazoo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Peekazoo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		789F10061EC481B100FAF5F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -233,6 +235,14 @@
 			name = Service;
 			sourceTree = "<group>";
 		};
+		7840DF931ECB9EFC00A623A7 /* Test Data */ = {
+			isa = PBXGroup;
+			children = (
+				7840DF941ECB9F2400A623A7 /* ValidWeasylHomepageResponse.json */,
+			);
+			name = "Test Data";
+			sourceTree = "<group>";
+		};
 		789F0FFA1EC481B100FAF5F1 = {
 			isa = PBXGroup;
 			children = (
@@ -274,6 +284,7 @@
 				6E0D85AD1EC8FD66000E7283 /* HomepageViewControllerTests.swift */,
 				788B0D091ECB17E30035C26A /* NetworkAggregateHomepageServiceTests.swift */,
 				7840DF8A1ECB949900A623A7 /* WeasylHomepageFeedTests.swift */,
+				7840DF931ECB9EFC00A623A7 /* Test Data */,
 				6E0D85931EC839CB000E7283 /* Test Doubles */,
 				6E6E61781ECA424A00964076 /* Utilities */,
 				6E0D85841EC6EA01000E7283 /* Supporting Files */,
@@ -376,6 +387,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7840DF951ECB9F2400A623A7 /* ValidWeasylHomepageResponse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,14 +11,14 @@ import Foundation
 
 class DummyNetworkAdapter: NetworkAdapter {
 
-    func get(_ url: URL, completionHandler: (Error) -> Void) { }
+    func get(_ url: URL, completionHandler: (Data?, Error?) -> Void) { }
 
 }
 
 class CapturingNetworkAdapter: NetworkAdapter {
 
     private(set) var requestedURL: URL?
-    func get(_ url: URL, completionHandler: (Error) -> Void) {
+    func get(_ url: URL, completionHandler: (Data?, Error?) -> Void) {
         requestedURL = url
     }
 
@@ -26,9 +26,19 @@ class CapturingNetworkAdapter: NetworkAdapter {
 
 struct FailingNetworkAdapter: NetworkAdapter {
 
-    func get(_ url: URL, completionHandler: (Error) -> Void) {
+    func get(_ url: URL, completionHandler: (Data?, Error?) -> Void) {
         let error = NSError(domain: "Test", code: 0, userInfo: nil)
-        completionHandler(error)
+        completionHandler(nil, error)
+    }
+
+}
+
+struct SuccessfulNetworkAdapter: NetworkAdapter {
+
+    var data: Data?
+
+    func get(_ url: URL, completionHandler: (Data?, Error?) -> Void) {
+        completionHandler(data, nil)
     }
 
 }

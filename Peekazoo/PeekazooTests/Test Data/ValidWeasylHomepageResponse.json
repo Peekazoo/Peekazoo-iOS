@@ -1,0 +1,69 @@
+[
+  {
+  "rating": "general",
+  "title": ":CO: ChaiFennec",
+  "owner_login": "saltypaw",
+  "tags": [
+           487135,
+           221,
+           290390,
+           18,
+           486961,
+           10
+           ],
+  "subtype": "visual",
+  "link": "https://www.weasyl.com/submission/1489775/co-chaifennec",
+  "media": {
+  "thumbnail-custom": [
+                       {
+                       "url": "https://cdn.weasyl.com/static/media/ef/ed/b3/efedb3da7748832508d9c3035ba965562f82cf36f8ca7dca82ecab0db792e4b4.png",
+                       "mediaid": 5832200
+                       }
+                       ],
+  "thumbnail-generated": [
+                          {
+                          "url": "https://cdn.weasyl.com/static/media/43/df/b6/43dfb6b43052a4912720a077cc86c56182460067c61155441d537b15a486fe70.png",
+                          "mediaid": 5832199
+                          }
+                          ],
+  "cover": [
+            {
+            "url": "https://cdn.weasyl.com/static/media/76/c6/79/76c67987a4ad6df30ba6d4e4f4248b2ff06d7e0cc73d3ab0e51639f8aa64ed5d.png",
+            "mediaid": 5832198,
+            "links": {
+            "cover": [
+                      {
+                      "url": "https://cdn.weasyl.com/static/media/76/c6/79/76c67987a4ad6df30ba6d4e4f4248b2ff06d7e0cc73d3ab0e51639f8aa64ed5d.png",
+                      "mediaid": 5832198
+                      }
+                      ]
+            }
+            }
+            ],
+  "thumbnail": [
+                {
+                "url": "https://cdn.weasyl.com/static/media/ef/ed/b3/efedb3da7748832508d9c3035ba965562f82cf36f8ca7dca82ecab0db792e4b4.png",
+                "mediaid": 5832200
+                }
+                ],
+  "submission": [
+                 {
+                 "url": "https://cdn.weasyl.com/~saltypaw/submissions/1489775/76c67987a4ad6df30ba6d4e4f4248b2ff06d7e0cc73d3ab0e51639f8aa64ed5d/saltypaw-co-chaifennec.png",
+                 "mediaid": 5832198,
+                 "links": {
+                 "cover": [
+                           {
+                           "url": "https://cdn.weasyl.com/static/media/76/c6/79/76c67987a4ad6df30ba6d4e4f4248b2ff06d7e0cc73d3ab0e51639f8aa64ed5d.png",
+                           "mediaid": 5832198
+                           }
+                           ]
+                 }
+                 }
+                 ]
+  },
+  "owner": "saltypaw",
+  "type": "submission",
+  "posted_at": "2017-05-08T19:12:45Z",
+  "submitid": 1489775
+  }
+]
