@@ -73,4 +73,13 @@ class NetworkAggregateHomepageServiceTests: XCTestCase {
         XCTAssertFalse(capturingLoadingDelegate.didFailToLoadInvoked)
     }
 
+    func testForSingleFeedItsItemsAreProvidedToTheDelegate() {
+        let items = [StubHomepageItem()]
+        let successfulFeed = SuccessfulHomepageFeed(items: items)
+        service = NetworkAggregateHomepageService(feeds: [successfulFeed], networkAdapter: networkAdapter)
+        loadHomepage()
+
+        XCTAssertEqual(true, (capturingLoadingDelegate.capturedHomepageItems as? [StubHomepageItem])?.elementsEqual(items))
+    }
+
 }

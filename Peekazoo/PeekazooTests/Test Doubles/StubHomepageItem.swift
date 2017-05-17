@@ -9,7 +9,7 @@
 @testable import Peekazoo
 import Foundation
 
-struct StubHomepageItem: HomepageItem {
+struct StubHomepageItem: HomepageItem, Equatable {
 
     var title: String
     var contentIdentifier: String
@@ -17,6 +17,11 @@ struct StubHomepageItem: HomepageItem {
     init(title: String = "", contentIdentifier: String = UUID().uuidString) {
         self.title = title
         self.contentIdentifier = contentIdentifier
+    }
+
+    static func ==(lhs: StubHomepageItem, rhs: StubHomepageItem) -> Bool {
+        return lhs.title == rhs.title &&
+               lhs.contentIdentifier == rhs.contentIdentifier
     }
 
 }

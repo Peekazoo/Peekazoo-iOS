@@ -44,7 +44,7 @@ class NetworkAggregateHomepageService: HomepageService, HomepageFeedDelegate {
     }
 
     func feedDidFinishLoading(items: [HomepageItem]) {
-        delegate?.homepageServiceDidLoadSuccessfully(content: [])
+        delegate?.homepageServiceDidLoadSuccessfully(content: items)
     }
 
     func feedDidFailToLoad() {

@@ -29,8 +29,18 @@ struct FailingHomepageFeed: HomepageFeed {
 
 struct SuccessfulHomepageFeed: HomepageFeed {
 
+    var items: [HomepageItem]
+
+    init() {
+        items = []
+    }
+
+    init(items: [HomepageItem]) {
+        self.items = items
+    }
+
     func loadFeed(networkAdapter: NetworkAdapter, delegate: HomepageFeedDelegate) {
-        delegate.feedDidFinishLoading(items: [])
+        delegate.feedDidFinishLoading(items: items)
     }
 
 }
