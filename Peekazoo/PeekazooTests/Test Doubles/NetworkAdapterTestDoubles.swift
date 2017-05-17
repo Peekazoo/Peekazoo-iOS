@@ -33,9 +33,19 @@ struct FailingNetworkAdapter: NetworkAdapter {
 
 }
 
-struct SuccessfulNetworkAdapter: NetworkAdapter {
+class SuccessfulNetworkAdapter: NetworkAdapter {
 
     var data: Data?
+
+    init(data: Data?) {
+        self.data = data
+    }
+
+    init(contentsOfJSONFile fileName: String) {
+        let bundle = Bundle(for: SuccessfulNetworkAdapter.self)
+        let jsonURL = bundle.url(forResource: fileName, withExtension: "json")!
+        data = try? Data(contentsOf: jsonURL)
+    }
 
     func get(_ url: URL, completionHandler: @escaping (Data?, Error?) -> Void) {
         completionHandler(data, nil)
