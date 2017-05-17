@@ -1,4 +1,4 @@
-[
+ [
   {
   "rating": "general",
   "title": ":CO: ChaiFennec",
@@ -65,5 +65,133 @@
   "type": "submission",
   "posted_at": "2017-05-08T19:12:45Z",
   "submitid": 1489775
+  },{
+  "rating": "general",
+  "title": "[C] Azri Simple Icon",
+  "owner_login": "derangedleech",
+  "tags": [
+           55266,
+           1251,
+           262,
+           14280,
+           668,
+           203,
+           404,
+           221,
+           8732,
+           1816,
+           21
+           ],
+  "subtype": "visual",
+  "link": "https://www.weasyl.com/submission/1489774/c-azri-simple-icon",
+  "media": {
+  "thumbnail-generated": [
+                          {
+                          "url": "https://cdn.weasyl.com/static/media/a3/6a/d0/a36ad001441277b176e79686d259c2e9e02ddead693a3e2774ea9a48cf256df7.png",
+                          "mediaid": 5832197
+                          }
+                          ],
+  "cover": [
+            {
+            "url": "https://cdn.weasyl.com/static/media/8b/f8/88/8bf88887c1a1fd5ee463a8f0ac869d460b597da96152d2da0c1aad282cad14d1.png",
+            "mediaid": 5832196,
+            "links": {
+            "cover": [
+                      {
+                      "url": "https://cdn.weasyl.com/static/media/8b/f8/88/8bf88887c1a1fd5ee463a8f0ac869d460b597da96152d2da0c1aad282cad14d1.png",
+                      "mediaid": 5832196
+                      }
+                      ]
+            }
+            }
+            ],
+  "thumbnail": [
+                {
+                "url": "https://cdn.weasyl.com/static/media/a3/6a/d0/a36ad001441277b176e79686d259c2e9e02ddead693a3e2774ea9a48cf256df7.png",
+                "mediaid": 5832197
+                }
+                ],
+  "submission": [
+                 {
+                 "url": "https://cdn.weasyl.com/~derangedleech/submissions/1489774/8bf88887c1a1fd5ee463a8f0ac869d460b597da96152d2da0c1aad282cad14d1/derangedleech-c-azri-simple-icon.png",
+                 "mediaid": 5832196,
+                 "links": {
+                 "cover": [
+                           {
+                           "url": "https://cdn.weasyl.com/static/media/8b/f8/88/8bf88887c1a1fd5ee463a8f0ac869d460b597da96152d2da0c1aad282cad14d1.png",
+                           "mediaid": 5832196
+                           }
+                           ]
+                 }
+                 }
+                 ]
+  },
+  "owner": "DerangedLeech",
+  "type": "submission",
+  "posted_at": "2017-05-08T19:11:25Z",
+  "submitid": 1489774
+  },
+  {
+  "rating": "general",
+  "title": "[P] Fetal",
+  "owner_login": "derangedleech",
+  "tags": [
+           2138,
+           4858,
+           25,
+           246,
+           40912,
+           15241,
+           709,
+           2435
+           ],
+  "subtype": "visual",
+  "link": "https://www.weasyl.com/submission/1489773/p-fetal",
+  "media": {
+  "thumbnail-generated": [
+                          {
+                          "url": "https://cdn.weasyl.com/static/media/a8/37/7f/a8377f91a30a4b91996f8c178e7fc926911721be152b027781515338e62a1355.png",
+                          "mediaid": 5832195
+                          }
+                          ],
+  "cover": [
+            {
+            "url": "https://cdn.weasyl.com/static/media/91/e6/0d/91e60d18f16d33463683381211c97709b3bfdb247091a8667ca9395a594f00c6.png",
+            "mediaid": 5832194,
+            "links": {
+            "cover": [
+                      {
+                      "url": "https://cdn.weasyl.com/static/media/91/e6/0d/91e60d18f16d33463683381211c97709b3bfdb247091a8667ca9395a594f00c6.png",
+                      "mediaid": 5832194
+                      }
+                      ]
+            }
+            }
+            ],
+  "thumbnail": [
+                {
+                "url": "https://cdn.weasyl.com/static/media/a8/37/7f/a8377f91a30a4b91996f8c178e7fc926911721be152b027781515338e62a1355.png",
+                "mediaid": 5832195
+                }
+                ],
+  "submission": [
+                 {
+                 "url": "https://cdn.weasyl.com/~derangedleech/submissions/1489773/91e60d18f16d33463683381211c97709b3bfdb247091a8667ca9395a594f00c6/derangedleech-p-fetal.png",
+                 "mediaid": 5832194,
+                 "links": {
+                 "cover": [
+                           {
+                           "url": "https://cdn.weasyl.com/static/media/91/e6/0d/91e60d18f16d33463683381211c97709b3bfdb247091a8667ca9395a594f00c6.png",
+                           "mediaid": 5832194
+                           }
+                           ]
+                 }
+                 }
+                 ]
+  },
+  "owner": "DerangedLeech",
+  "type": "submission",
+  "posted_at": "2017-05-08T19:09:02Z",
+  "submitid": 1489773
   }
 ]
