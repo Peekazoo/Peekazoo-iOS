@@ -37,7 +37,16 @@ struct WeasylHomepageFeed: HomepageFeed {
     }
 
     private func parse(_ jsonObject: [[String : Any]]) -> [HomepageItem] {
-        return jsonObject.flatMap({ $0["title"] as? String }).map({ WeasylHomepageItem(contentIdentifier: "1489775", title: $0) })
+        var homepageItems = [HomepageItem]()
+        for object in jsonObject {
+            guard let title = object["title"] as? String,
+                  let contentIdentifier = object["submitid"] as? Int else { continue }
+
+            let item = WeasylHomepageItem(contentIdentifier: String(contentIdentifier), title: title)
+            homepageItems.append(item)
+        }
+
+        return homepageItems
     }
 
 }
