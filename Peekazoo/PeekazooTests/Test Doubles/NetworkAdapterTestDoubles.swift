@@ -11,14 +11,14 @@ import Foundation
 
 class DummyNetworkAdapter: NetworkAdapter {
 
-    func get(_ url: URL, completionHandler: (Data?, Error?) -> Void) { }
+    func get(_ url: URL, completionHandler: @escaping (Data?, Error?) -> Void) { }
 
 }
 
 class CapturingNetworkAdapter: NetworkAdapter {
 
     private(set) var requestedURL: URL?
-    func get(_ url: URL, completionHandler: (Data?, Error?) -> Void) {
+    func get(_ url: URL, completionHandler: @escaping (Data?, Error?) -> Void) {
         requestedURL = url
     }
 
@@ -26,7 +26,7 @@ class CapturingNetworkAdapter: NetworkAdapter {
 
 struct FailingNetworkAdapter: NetworkAdapter {
 
-    func get(_ url: URL, completionHandler: (Data?, Error?) -> Void) {
+    func get(_ url: URL, completionHandler: @escaping (Data?, Error?) -> Void) {
         let error = NSError(domain: "Test", code: 0, userInfo: nil)
         completionHandler(nil, error)
     }
@@ -37,8 +37,33 @@ struct SuccessfulNetworkAdapter: NetworkAdapter {
 
     var data: Data?
 
-    func get(_ url: URL, completionHandler: (Data?, Error?) -> Void) {
+    func get(_ url: URL, completionHandler: @escaping (Data?, Error?) -> Void) {
         completionHandler(data, nil)
+    }
+
+}
+
+class BlockingNetworkAdapter: NetworkAdapter {
+
+    struct Invocation {
+        var url: URL
+        var completionHandler: (Data?, Error?) -> Void
+    }
+
+    var adapter: NetworkAdapter
+    var invocation: Invocation?
+
+    init(adapter: NetworkAdapter) {
+        self.adapter = adapter
+    }
+
+    func get(_ url: URL, completionHandler: @escaping (Data?, Error?) -> Void) {
+        invocation = Invocation(url: url, completionHandler: completionHandler)
+    }
+
+    func run() {
+        guard let invocation = invocation else { return }
+        adapter.get(invocation.url, completionHandler: invocation.completionHandler)
     }
 
 }

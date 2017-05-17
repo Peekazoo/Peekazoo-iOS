@@ -15,9 +15,8 @@ struct WeasylHomepageFeed: HomepageFeed {
     func loadFeed(networkAdapter: NetworkAdapter, delegate: HomepageFeedDelegate) {
         networkAdapter.get(homepageURL) { _, _ in
             delegate.feedDidFailToLoad()
+            delegate.feedDidFinishLoading()
         }
-
-        delegate.feedDidFinishLoading()
     }
 
 }
