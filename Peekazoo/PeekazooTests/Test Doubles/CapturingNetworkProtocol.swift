@@ -22,10 +22,24 @@ struct MockNetworkDataMatcher {
 
 }
 
+struct MockNetworkErrorMatcher {
+
+    var expectedError: NSError
+    var expectation: XCTestExpectation
+
+    func verify(_ data: Data?, _ error: Error?) {
+        if let error = error, error._code == expectedError.code, error._domain == expectedError.domain {
+            expectation.fulfill()
+        }
+    }
+
+}
+
 class CapturingNetworkProtocol: URLProtocol {
 
     private static var loadExpectations = [URL: XCTestExpectation]()
     private static var responseData = [URL: Data]()
+    private static var responseErrors = [URL: Error]()
 
     class func registerLoadExpectation(_ expectation: XCTestExpectation, for url: URL) {
         loadExpectations[url] = expectation
@@ -33,6 +47,10 @@ class CapturingNetworkProtocol: URLProtocol {
 
     class func registerResponseData(_ data: Data, for url: URL) {
         responseData[url] = data
+    }
+
+    class func registerResponseError(_ error: Error, for url: URL) {
+        responseErrors[url] = error
     }
 
     private class func fulfillLoadExpectation(for request: URLRequest) {
@@ -48,6 +66,7 @@ class CapturingNetworkProtocol: URLProtocol {
         URLProtocol.unregisterClass(CapturingNetworkProtocol.self)
         loadExpectations.removeAll()
         responseData.removeAll()
+        responseErrors.removeAll()
     }
 
     open override class func canInit(with request: URLRequest) -> Bool {
@@ -66,6 +85,10 @@ class CapturingNetworkProtocol: URLProtocol {
         if let data = CapturingNetworkProtocol.responseData[request.url!] {
             client?.urlProtocol(self, didLoad: data)
             client?.urlProtocolDidFinishLoading(self)
+        }
+
+        if let error = CapturingNetworkProtocol.responseErrors[request.url!] {
+            client?.urlProtocol(self, didFailWithError: error)
         }
     }
 

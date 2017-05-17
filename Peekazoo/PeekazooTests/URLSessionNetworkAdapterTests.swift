@@ -45,4 +45,15 @@ class URLSessionNetworkAdapterTests: XCTestCase {
         waitForExpectations(timeout: 0.1)
     }
 
+    func testUnsuccessfulNetworkLoadsProvideErrorToCompletionHandler() {
+        let url = URL(string: "https://it.doesnt.matter")!
+        let error = NSError(domain: "Some domain", code: 0, userInfo: [:])
+        CapturingNetworkProtocol.registerResponseError(error, for: url)
+        let matchingExpectation = expectation(description: "Error should be provided to completion handler")
+        let matcher = MockNetworkErrorMatcher(expectedError: error, expectation: matchingExpectation)
+        adapter.get(url, completionHandler: matcher.verify)
+
+        waitForExpectations(timeout: 0.1)
+    }
+
 }
