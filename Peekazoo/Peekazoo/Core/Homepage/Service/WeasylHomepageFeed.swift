@@ -1,8 +1,3 @@
-//
-//  WeasylHomepageFeed.swift
-//  Peekazoo
-//
-//  Created by Thomas Sherwood on 16/05/2017.
 //  Copyright © 2017 Peekazoo. All rights reserved.
 //
 
@@ -22,15 +17,27 @@ struct WeasylHomepageFeed: HomepageFeed {
     func loadFeed(networkAdapter: NetworkAdapter, delegate: HomepageFeedDelegate) {
         networkAdapter.get(homepageURL) { data, _ in
             if let data = data {
-                if (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)) is [[String : Any]] {
-                    delegate.feedDidFinishLoading(items: [WeasylHomepageItem(contentIdentifier: "", title: ":CO: ChaiFennec")])
-                } else {
-                    delegate.feedDidFailToLoad()
-                }
+                self.parseHomepageItems(from: data, delegate: delegate)
             } else {
                 delegate.feedDidFailToLoad()
             }
         }
+    }
+
+    private func parseHomepageItems(from data: Data, delegate: HomepageFeedDelegate) {
+        if let jsonObject = self.jsonObject(from: data) {
+            delegate.feedDidFinishLoading(items: parse(jsonObject))
+        } else {
+            delegate.feedDidFailToLoad()
+        }
+    }
+
+    private func jsonObject(from data: Data) -> [[String : Any]]? {
+        return (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)) as? [[String : Any]]
+    }
+
+    private func parse(_ jsonObject: [[String : Any]]) -> [HomepageItem] {
+        return [WeasylHomepageItem(contentIdentifier: "", title: ":CO: ChaiFennec")]
     }
 
 }
