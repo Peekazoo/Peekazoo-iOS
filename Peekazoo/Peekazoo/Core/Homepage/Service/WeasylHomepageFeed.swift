@@ -14,7 +14,11 @@ struct WeasylHomepageFeed: HomepageFeed {
 
     func loadFeed(networkAdapter: NetworkAdapter, delegate: HomepageFeedDelegate) {
         networkAdapter.get(homepageURL) { data, _ in
-            if data != nil {
+            if let data = data {
+                if (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)) == nil {
+                    delegate.feedDidFailToLoad()
+                }
+
                 delegate.feedDidFinishLoading()
             } else {
                 delegate.feedDidFailToLoad()
