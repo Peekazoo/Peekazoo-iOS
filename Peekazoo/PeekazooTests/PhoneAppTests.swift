@@ -148,7 +148,7 @@ class PhoneAppTests: XCTestCase {
     }
 
     func testTheHomepageInterfaceIsToldToCommitUpdatesUsingViewModelWithSameCountOfItemsReturnByService() {
-        let count = Int.random(upperLimit: 100)
+        let count = Int.random(upperLimit: 100, lowerLimit: 1)
         let content = Array(repeating: StubHomepageItem(), count: count)
         let context = PhoneAppTestBuilder.buildForSuccessfulHomepageService(content: content).thenLaunch()
 
