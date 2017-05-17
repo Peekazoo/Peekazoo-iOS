@@ -11,7 +11,7 @@ import Foundation
 struct URLSessionNetworkAdapter: NetworkAdapter {
 
     func get(_ url: URL, completionHandler: @escaping (Data?, Error?) -> Void) {
-        URLSession.shared.dataTask(with: url, completionHandler: { _, _, _ in }).resume()
+        URLSession.shared.dataTask(with: url, completionHandler: { data, _, _ in completionHandler(data, nil) }).resume()
     }
 
 }

@@ -9,12 +9,30 @@
 import Foundation
 import XCTest
 
+struct MockNetworkDataMatcher {
+
+    var expectedData: Data
+    var expectation: XCTestExpectation
+
+    func verify(_ data: Data?, _ error: Error?) {
+        if let data = data, data == expectedData {
+            expectation.fulfill()
+        }
+    }
+
+}
+
 class CapturingNetworkProtocol: URLProtocol {
 
     private static var loadExpectations = [URL: XCTestExpectation]()
+    private static var responseData = [URL: Data]()
 
     class func registerLoadExpectation(_ expectation: XCTestExpectation, for url: URL) {
         loadExpectations[url] = expectation
+    }
+
+    class func registerResponseData(_ data: Data, for url: URL) {
+        responseData[url] = data
     }
 
     private class func fulfillLoadExpectation(for request: URLRequest) {
@@ -28,6 +46,8 @@ class CapturingNetworkProtocol: URLProtocol {
 
     class func tearDown() {
         URLProtocol.unregisterClass(CapturingNetworkProtocol.self)
+        loadExpectations.removeAll()
+        responseData.removeAll()
     }
 
     open override class func canInit(with request: URLRequest) -> Bool {
@@ -43,7 +63,10 @@ class CapturingNetworkProtocol: URLProtocol {
     }
 
     override func startLoading() {
-
+        if let data = CapturingNetworkProtocol.responseData[request.url!] {
+            client?.urlProtocol(self, didLoad: data)
+            client?.urlProtocolDidFinishLoading(self)
+        }
     }
 
     override func stopLoading() {
