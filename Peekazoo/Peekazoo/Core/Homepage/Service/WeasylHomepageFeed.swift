@@ -16,9 +16,9 @@ struct WeasylHomepageFeed: HomepageFeed {
         networkAdapter.get(homepageURL) { data, _ in
             if data != nil {
                 delegate.feedDidFinishLoading()
+            } else {
+                delegate.feedDidFailToLoad()
             }
-
-            delegate.feedDidFailToLoad()
         }
     }
 
