@@ -110,4 +110,18 @@ class WeasylHomepageFeedTests: XCTestCase {
         XCTAssertEqual(titleForFirstItemInJSON, capturingHomepageFeedDelegate.capturedResults?.first?.title)
     }
 
+    func testParsingValidJSONProvidesSecondItemWithExpectedTitle() {
+        let titleForSecondItemInJSON = "[C] Azri Simple Icon"
+        let validHomepageAdapter = SuccessfulNetworkAdapter(contentsOfJSONFile: "ValidWeasylHomepageResponse")
+        let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
+        feed.loadFeed(networkAdapter: validHomepageAdapter, delegate: capturingHomepageFeedDelegate)
+
+        guard let results = capturingHomepageFeedDelegate.capturedResults, results.count > 1 else {
+            XCTFail()
+            return
+        }
+
+        XCTAssertEqual(titleForSecondItemInJSON, results[1].title)
+    }
+
 }
