@@ -17,9 +17,9 @@ struct WeasylHomepageFeed: HomepageFeed {
             if let data = data {
                 if (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)) == nil {
                     delegate.feedDidFailToLoad()
+                } else {
+                    delegate.feedDidFinishLoading()
                 }
-
-                delegate.feedDidFinishLoading()
             } else {
                 delegate.feedDidFailToLoad()
             }
