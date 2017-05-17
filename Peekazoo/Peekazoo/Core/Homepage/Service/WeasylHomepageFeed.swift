@@ -10,6 +10,14 @@ struct WeasylHomepageFeed: HomepageFeed {
         var contentIdentifier: String
         var title: String
 
+        fileprivate init?(jsonObject: [String : Any]) {
+            guard let title = jsonObject["title"] as? String,
+                  let contentIdentifier = jsonObject["submitid"] as? Int else { return nil }
+
+            self.title = title
+            self.contentIdentifier = String(contentIdentifier)
+        }
+
     }
 
     let homepageURL = URL(string: "https://www.weasyl.com/api/submissions/frontpage")!
@@ -37,16 +45,7 @@ struct WeasylHomepageFeed: HomepageFeed {
     }
 
     private func parse(_ jsonObject: [[String : Any]]) -> [HomepageItem] {
-        var homepageItems = [HomepageItem]()
-        for object in jsonObject {
-            guard let title = object["title"] as? String,
-                  let contentIdentifier = object["submitid"] as? Int else { continue }
-
-            let item = WeasylHomepageItem(contentIdentifier: String(contentIdentifier), title: title)
-            homepageItems.append(item)
-        }
-
-        return homepageItems
+        return jsonObject.flatMap(WeasylHomepageItem.init)
     }
 
 }
