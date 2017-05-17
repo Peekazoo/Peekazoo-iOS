@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E02FB1D1ECCE4EB001C2D66 /* URLSessionNetworkAdapterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E02FB1C1ECCE4EB001C2D66 /* URLSessionNetworkAdapterTests.swift */; };
+		6E02FB1F1ECCEA53001C2D66 /* URLSessionNetworkAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E02FB1E1ECCEA53001C2D66 /* URLSessionNetworkAdapter.swift */; };
+		6E02FB211ECCEA65001C2D66 /* CapturingNetworkProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E02FB201ECCEA65001C2D66 /* CapturingNetworkProtocol.swift */; };
 		6E0D85831EC6E84D000E7283 /* AppDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D85821EC6E84D000E7283 /* AppDelegateTests.swift */; };
 		6E0D85871EC6EF83000E7283 /* WindowRootRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D85861EC6EF83000E7283 /* WindowRootRouterTests.swift */; };
 		6E0D858A1EC6F022000E7283 /* WindowRootRouter.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D85891EC6F022000E7283 /* WindowRootRouter.swift.swift */; };
@@ -63,6 +66,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6E02FB1C1ECCE4EB001C2D66 /* URLSessionNetworkAdapterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSessionNetworkAdapterTests.swift; sourceTree = "<group>"; };
+		6E02FB1E1ECCEA53001C2D66 /* URLSessionNetworkAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = URLSessionNetworkAdapter.swift; path = Core/Homepage/URLSessionNetworkAdapter.swift; sourceTree = "<group>"; };
+		6E02FB201ECCEA65001C2D66 /* CapturingNetworkProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CapturingNetworkProtocol.swift; path = "Test Doubles/CapturingNetworkProtocol.swift"; sourceTree = "<group>"; };
 		6E0D85821EC6E84D000E7283 /* AppDelegateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegateTests.swift; sourceTree = "<group>"; };
 		6E0D85861EC6EF83000E7283 /* WindowRootRouterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowRootRouterTests.swift; sourceTree = "<group>"; };
 		6E0D85891EC6F022000E7283 /* WindowRootRouter.swift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowRootRouter.swift.swift; sourceTree = "<group>"; };
@@ -189,6 +195,7 @@
 				7840DF7D1ECB19A800A623A7 /* CapturingHomepageServiceLoadingDelegate.swift */,
 				7840DF861ECB1F7F00A623A7 /* NetworkAdapterTestDoubles.swift */,
 				7840DF8E1ECB976A00A623A7 /* HomepageFeedDelegateTestDoubles.swift */,
+				6E02FB201ECCEA65001C2D66 /* CapturingNetworkProtocol.swift */,
 			);
 			name = "Test Doubles";
 			sourceTree = "<group>";
@@ -215,6 +222,7 @@
 				6E0D85C41EC9AC88000E7283 /* HomepageModule.swift */,
 				6E0D85C21EC9A4DF000E7283 /* HomepagePresenter.swift */,
 				6E6E61721EC9ED8400964076 /* HomepageViewModel.swift */,
+				6E02FB1E1ECCEA53001C2D66 /* URLSessionNetworkAdapter.swift */,
 			);
 			name = Homepage;
 			sourceTree = "<group>";
@@ -287,6 +295,7 @@
 				6E0D85AD1EC8FD66000E7283 /* HomepageViewControllerTests.swift */,
 				788B0D091ECB17E30035C26A /* NetworkAggregateHomepageServiceTests.swift */,
 				7840DF8A1ECB949900A623A7 /* WeasylHomepageFeedTests.swift */,
+				6E02FB1C1ECCE4EB001C2D66 /* URLSessionNetworkAdapterTests.swift */,
 				7840DF931ECB9EFC00A623A7 /* Test Data */,
 				6E0D85931EC839CB000E7283 /* Test Doubles */,
 				6E6E61781ECA424A00964076 /* Utilities */,
@@ -435,6 +444,7 @@
 				6E6E617F1ECA43FF00964076 /* HomepageItemCollectionViewCell.swift in Sources */,
 				6E0D85C51EC9AC88000E7283 /* HomepageModule.swift in Sources */,
 				6E6E61751EC9FC4C00964076 /* HomepageCollectionViewDataSource.swift in Sources */,
+				6E02FB1F1ECCEA53001C2D66 /* URLSessionNetworkAdapter.swift in Sources */,
 				6E0D85AC1EC8FA79000E7283 /* PhoneApp.swift in Sources */,
 				6E0D85B61EC9719C000E7283 /* HomepageService.swift in Sources */,
 			);
@@ -444,6 +454,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E02FB211ECCEA65001C2D66 /* CapturingNetworkProtocol.swift in Sources */,
 				7840DF8F1ECB976A00A623A7 /* HomepageFeedDelegateTestDoubles.swift in Sources */,
 				6E0D85A61EC8F864000E7283 /* PhoneAppTests.swift in Sources */,
 				6E6E617A1ECA426100964076 /* Randomness.swift in Sources */,
@@ -455,6 +466,7 @@
 				6E0D85871EC6EF83000E7283 /* WindowRootRouterTests.swift in Sources */,
 				6E0D85B21EC9715D000E7283 /* HomepageServiceTestDoubles.swift in Sources */,
 				7840DF891ECB78FA00A623A7 /* HomepageFeedTestDoubles.swift in Sources */,
+				6E02FB1D1ECCE4EB001C2D66 /* URLSessionNetworkAdapterTests.swift in Sources */,
 				7840DF7E1ECB19A800A623A7 /* CapturingHomepageServiceLoadingDelegate.swift in Sources */,
 				6E0D85BA1EC973DB000E7283 /* HomepageInterfaceTestDoubles.swift in Sources */,
 				7840DF8B1ECB949900A623A7 /* WeasylHomepageFeedTests.swift in Sources */,
