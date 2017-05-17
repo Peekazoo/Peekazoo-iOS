@@ -124,4 +124,13 @@ class WeasylHomepageFeedTests: XCTestCase {
         XCTAssertEqual(titleForSecondItemInJSON, results[1].title)
     }
 
+    func testParsingValidJSONProvidesFirstItemWithExpectedContentIdentifier() {
+        let contentIdentifierForFirstItemInJSON = "1489775"
+        let validHomepageAdapter = SuccessfulNetworkAdapter(contentsOfJSONFile: "ValidWeasylHomepageResponse")
+        let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
+        feed.loadFeed(networkAdapter: validHomepageAdapter, delegate: capturingHomepageFeedDelegate)
+
+        XCTAssertEqual(contentIdentifierForFirstItemInJSON, capturingHomepageFeedDelegate.capturedResults?.first?.contentIdentifier)
+    }
+
 }

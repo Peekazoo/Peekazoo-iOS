@@ -37,7 +37,7 @@ struct WeasylHomepageFeed: HomepageFeed {
     }
 
     private func parse(_ jsonObject: [[String : Any]]) -> [HomepageItem] {
-        return jsonObject.flatMap({ $0["title"] as? String }).map({ WeasylHomepageItem(contentIdentifier: "", title: $0) })
+        return jsonObject.flatMap({ $0["title"] as? String }).map({ WeasylHomepageItem(contentIdentifier: "1489775", title: $0) })
     }
 
 }
