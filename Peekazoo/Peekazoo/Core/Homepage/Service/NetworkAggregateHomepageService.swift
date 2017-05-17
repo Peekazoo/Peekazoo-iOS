@@ -16,7 +16,7 @@ protocol HomepageFeed {
 
 protocol HomepageFeedDelegate {
 
-    func feedDidFinishLoading()
+    func feedDidFinishLoading(items: [HomepageItem])
     func feedDidFailToLoad()
 
 }
@@ -43,7 +43,7 @@ class NetworkAggregateHomepageService: HomepageService, HomepageFeedDelegate {
         feeds.forEach(beginLoad)
     }
 
-    func feedDidFinishLoading() {
+    func feedDidFinishLoading(items: [HomepageItem]) {
         delegate?.homepageServiceDidLoadSuccessfully(content: [])
     }
 

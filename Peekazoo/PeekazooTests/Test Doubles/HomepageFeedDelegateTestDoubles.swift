@@ -10,7 +10,7 @@
 
 struct DummyHomepageFeedDelegate: HomepageFeedDelegate {
 
-    func feedDidFinishLoading() { }
+    func feedDidFinishLoading(items: [HomepageItem]) { }
     func feedDidFailToLoad() { }
 
 }
@@ -18,8 +18,10 @@ struct DummyHomepageFeedDelegate: HomepageFeedDelegate {
 class CapturingHomepageFeedDelegate: HomepageFeedDelegate {
 
     private(set) var wasNotifiedDidFinishLoading = false
-    func feedDidFinishLoading() {
+    private(set) var capturedResults: [HomepageItem]?
+    func feedDidFinishLoading(items: [HomepageItem]) {
         wasNotifiedDidFinishLoading = true
+        capturedResults = items
     }
 
     private(set) var wasNotifiedFeedDidFailToLoad = false

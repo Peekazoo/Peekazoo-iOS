@@ -30,7 +30,7 @@ struct FailingHomepageFeed: HomepageFeed {
 struct SuccessfulHomepageFeed: HomepageFeed {
 
     func loadFeed(networkAdapter: NetworkAdapter, delegate: HomepageFeedDelegate) {
-        delegate.feedDidFinishLoading()
+        delegate.feedDidFinishLoading(items: [])
     }
 
 }

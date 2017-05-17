@@ -101,4 +101,13 @@ class WeasylHomepageFeedTests: XCTestCase {
         XCTAssertTrue(capturingHomepageFeedDelegate.wasNotifiedFeedDidFailToLoad)
     }
 
+    func testParsingValidJSONProvidesFirstItemWithExpectedTitle() {
+        let titleForFirstItemInJSON = ":CO: ChaiFennec"
+        let validHomepageAdapter = SuccessfulNetworkAdapter(contentsOfJSONFile: "ValidWeasylHomepageResponse")
+        let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
+        feed.loadFeed(networkAdapter: validHomepageAdapter, delegate: capturingHomepageFeedDelegate)
+
+        XCTAssertEqual(titleForFirstItemInJSON, capturingHomepageFeedDelegate.capturedResults?.first?.title)
+    }
+
 }
