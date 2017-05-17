@@ -65,4 +65,12 @@ class WeasylHomepageFeedTests: XCTestCase {
         XCTAssertFalse(capturingHomepageFeedDelegate.wasNotifiedDidFinishLoading)
     }
 
+    func testTheDelegateIsNotToldAboutFeedLoadsWhenNetworkErrors() {
+        let successfulNetworkAdapter = FailingNetworkAdapter()
+        let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
+        feed.loadFeed(networkAdapter: successfulNetworkAdapter, delegate: capturingHomepageFeedDelegate)
+
+        XCTAssertFalse(capturingHomepageFeedDelegate.wasNotifiedDidFinishLoading)
+    }
+
 }

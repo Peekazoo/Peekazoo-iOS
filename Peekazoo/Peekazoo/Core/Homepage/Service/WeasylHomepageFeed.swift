@@ -13,9 +13,12 @@ struct WeasylHomepageFeed: HomepageFeed {
     let homepageURL = URL(string: "https://www.weasyl.com/api/submissions/frontpage")!
 
     func loadFeed(networkAdapter: NetworkAdapter, delegate: HomepageFeedDelegate) {
-        networkAdapter.get(homepageURL) { _, _ in
+        networkAdapter.get(homepageURL) { data, _ in
+            if data != nil {
+                delegate.feedDidFinishLoading()
+            }
+
             delegate.feedDidFailToLoad()
-            delegate.feedDidFinishLoading()
         }
     }
 
