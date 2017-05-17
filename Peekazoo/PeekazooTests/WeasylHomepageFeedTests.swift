@@ -91,4 +91,14 @@ class WeasylHomepageFeedTests: XCTestCase {
         XCTAssertFalse(capturingHomepageFeedDelegate.wasNotifiedDidFinishLoading)
     }
 
+    func testNetworkRespondsWithJSONThatDoesNotContainExpectedTopLevelStructureTellsDelegateLoadFailed() {
+        let unexpectedStructure = ["key": "value"]
+        let json = try! JSONSerialization.data(withJSONObject: unexpectedStructure, options: .prettyPrinted)
+        let unexpectedJSONAdapter = SuccessfulNetworkAdapter(data: json)
+        let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
+        feed.loadFeed(networkAdapter: unexpectedJSONAdapter, delegate: capturingHomepageFeedDelegate)
+
+        XCTAssertTrue(capturingHomepageFeedDelegate.wasNotifiedFeedDidFailToLoad)
+    }
+
 }
