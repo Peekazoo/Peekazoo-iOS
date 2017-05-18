@@ -32,7 +32,7 @@ struct WeasylServiceAdapter: HomepageFeed {
         self.service = service
     }
 
-    func loadFeed(networkAdapter: NetworkAdapter, delegate: HomepageFeedDelegate) {
+    func loadFeed(delegate: HomepageFeedDelegate) {
         service.loadHomepage()
     }
 
@@ -43,7 +43,7 @@ class WeasylServiceAdapterTests: XCTestCase {
     func testFetchingHomepageShouldTellTheServiceToPerformFetch() {
         let capturingWeasylService = CapturingWeasylService()
         let adapter = WeasylServiceAdapter(service: capturingWeasylService)
-        adapter.loadFeed(networkAdapter: DummyNetworkAdapter(), delegate: DummyHomepageFeedDelegate())
+        adapter.loadFeed(delegate: DummyHomepageFeedDelegate())
 
         XCTAssertTrue(capturingWeasylService.didLoadHomepage)
     }

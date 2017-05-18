@@ -20,9 +20,10 @@ struct WeasylHomepageFeed: HomepageFeed {
 
     }
 
-    let homepageURL = URL(string: "https://www.weasyl.com/api/submissions/frontpage")!
+    var networkAdapter: NetworkAdapter
+    private let homepageURL = URL(string: "https://www.weasyl.com/api/submissions/frontpage")!
 
-    func loadFeed(networkAdapter: NetworkAdapter, delegate: HomepageFeedDelegate) {
+    func loadFeed(delegate: HomepageFeedDelegate) {
         networkAdapter.get(homepageURL) { data, _ in
             if let data = data {
                 self.parseHomepageItems(from: data, delegate: delegate)

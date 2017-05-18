@@ -15,29 +15,16 @@ class PeekazooClientTests: XCTestCase {
         let firstFeed = CapturingHomepageFeed()
         let secondFeed = CapturingHomepageFeed()
         let capturingLoadingDelegate = CapturingHomepageServiceLoadingDelegate()
-        let networkAdapter = DummyNetworkAdapter()
-        let service = PeekazooClient(feeds: [firstFeed, secondFeed], networkAdapter: networkAdapter)
+        let service = PeekazooClient(feeds: [firstFeed, secondFeed])
         service.loadHomepage(delegate: capturingLoadingDelegate)
 
         XCTAssertTrue([firstFeed, secondFeed].all({ $0.didLoad }))
     }
 
-    func testWhenLoadingTheFeedIsGivenTheNetworkAdapter() {
-        let firstFeed = CapturingHomepageFeed()
-        let secondFeed = CapturingHomepageFeed()
-        let capturingLoadingDelegate = CapturingHomepageServiceLoadingDelegate()
-        let networkAdapter = DummyNetworkAdapter()
-        let service = PeekazooClient(feeds: [firstFeed, secondFeed], networkAdapter: networkAdapter)
-        service.loadHomepage(delegate: capturingLoadingDelegate)
-
-        XCTAssertTrue((firstFeed.capturedNetworkAdapter as? DummyNetworkAdapter) === networkAdapter)
-    }
-
     func testWhenFeedFailsToLoadThenTheFailureCallbackIsInvoked() {
         let failingFeed = FailingHomepageFeed()
         let capturingLoadingDelegate = CapturingHomepageServiceLoadingDelegate()
-        let networkAdapter = DummyNetworkAdapter()
-        let service = PeekazooClient(feeds: [failingFeed], networkAdapter: networkAdapter)
+        let service = PeekazooClient(feeds: [failingFeed])
         service.loadHomepage(delegate: capturingLoadingDelegate)
 
         XCTAssertTrue(capturingLoadingDelegate.didFailToLoadInvoked)
@@ -46,8 +33,7 @@ class PeekazooClientTests: XCTestCase {
     func testWhenSingleFeedLoadsSuccessfullyTheDelegateIsToldAboutIt() {
         let successfulFeed = SuccessfulHomepageFeed()
         let capturingLoadingDelegate = CapturingHomepageServiceLoadingDelegate()
-        let networkAdapter = DummyNetworkAdapter()
-        let service = PeekazooClient(feeds: [successfulFeed], networkAdapter: networkAdapter)
+        let service = PeekazooClient(feeds: [successfulFeed])
         service.loadHomepage(delegate: capturingLoadingDelegate)
 
         XCTAssertTrue(capturingLoadingDelegate.didFinishLoadingInvoked)
@@ -56,8 +42,7 @@ class PeekazooClientTests: XCTestCase {
     func testFeedFailingToLoadShouldNotNotifyDelegateAboutSuccess() {
         let failingFeed = FailingHomepageFeed()
         let capturingLoadingDelegate = CapturingHomepageServiceLoadingDelegate()
-        let networkAdapter = DummyNetworkAdapter()
-        let service = PeekazooClient(feeds: [failingFeed], networkAdapter: networkAdapter)
+        let service = PeekazooClient(feeds: [failingFeed])
         service.loadHomepage(delegate: capturingLoadingDelegate)
 
         XCTAssertFalse(capturingLoadingDelegate.didFinishLoadingInvoked)
@@ -66,8 +51,7 @@ class PeekazooClientTests: XCTestCase {
     func testFeedLoadingSuccessfullyShouldNotNotifyDelegateAboutFailures() {
         let successfulFeed = SuccessfulHomepageFeed()
         let capturingLoadingDelegate = CapturingHomepageServiceLoadingDelegate()
-        let networkAdapter = DummyNetworkAdapter()
-        let service = PeekazooClient(feeds: [successfulFeed], networkAdapter: networkAdapter)
+        let service = PeekazooClient(feeds: [successfulFeed])
         service.loadHomepage(delegate: capturingLoadingDelegate)
 
         XCTAssertFalse(capturingLoadingDelegate.didFailToLoadInvoked)
@@ -77,8 +61,7 @@ class PeekazooClientTests: XCTestCase {
         let items = [StubHomepageItem()]
         let successfulFeed = SuccessfulHomepageFeed(items: items)
         let capturingLoadingDelegate = CapturingHomepageServiceLoadingDelegate()
-        let networkAdapter = DummyNetworkAdapter()
-        let service = PeekazooClient(feeds: [successfulFeed], networkAdapter: networkAdapter)
+        let service = PeekazooClient(feeds: [successfulFeed])
         service.loadHomepage(delegate: capturingLoadingDelegate)
 
         XCTAssertEqual(true, (capturingLoadingDelegate.capturedHomepageItems as? [StubHomepageItem])?.elementsEqual(items))

@@ -8,15 +8,14 @@
 
 struct WeasylService {
 
-    var networkAdapter: NetworkAdapter
-    private let homepageFeed = WeasylHomepageFeed()
+    private var homepageFeed: WeasylHomepageFeed
 
     init(networkAdapter: NetworkAdapter) {
-        self.networkAdapter = networkAdapter
+        homepageFeed = WeasylHomepageFeed(networkAdapter: networkAdapter)
     }
 
     func loadHomepage(delegate: HomepageFeedDelegate) {
-        homepageFeed.loadFeed(networkAdapter: networkAdapter, delegate: delegate)
+        homepageFeed.loadFeed(delegate: delegate)
     }
 
 }

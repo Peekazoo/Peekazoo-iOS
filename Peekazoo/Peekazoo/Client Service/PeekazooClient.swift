@@ -10,7 +10,7 @@ import Foundation
 
 protocol HomepageFeed {
 
-    func loadFeed(networkAdapter: NetworkAdapter, delegate: HomepageFeedDelegate)
+    func loadFeed(delegate: HomepageFeedDelegate)
 
 }
 
@@ -24,12 +24,10 @@ protocol HomepageFeedDelegate {
 class PeekazooClient: HomepageService, HomepageFeedDelegate {
 
     var feeds: [HomepageFeed]
-    var networkAdapter: NetworkAdapter
     var delegate: HomepageServiceLoadingDelegate?
 
-    init(feeds: [HomepageFeed], networkAdapter: NetworkAdapter) {
+    init(feeds: [HomepageFeed]) {
         self.feeds = feeds
-        self.networkAdapter = networkAdapter
     }
 
     func loadHomepage(delegate: HomepageServiceLoadingDelegate) {
@@ -46,7 +44,7 @@ class PeekazooClient: HomepageService, HomepageFeedDelegate {
     }
 
     private func beginLoad(for feed: HomepageFeed) {
-        feed.loadFeed(networkAdapter: networkAdapter, delegate: self)
+        feed.loadFeed(delegate: self)
     }
 
 }

@@ -11,17 +11,15 @@
 class CapturingHomepageFeed: HomepageFeed {
 
     private(set) var didLoad = false
-    private(set) var capturedNetworkAdapter: NetworkAdapter?
-    func loadFeed(networkAdapter: NetworkAdapter, delegate: HomepageFeedDelegate) {
+    func loadFeed(delegate: HomepageFeedDelegate) {
         didLoad = true
-        capturedNetworkAdapter = networkAdapter
     }
 
 }
 
 struct FailingHomepageFeed: HomepageFeed {
 
-    func loadFeed(networkAdapter: NetworkAdapter, delegate: HomepageFeedDelegate) {
+    func loadFeed(delegate: HomepageFeedDelegate) {
         delegate.feedDidFailToLoad()
     }
 
@@ -39,7 +37,7 @@ struct SuccessfulHomepageFeed: HomepageFeed {
         self.items = items
     }
 
-    func loadFeed(networkAdapter: NetworkAdapter, delegate: HomepageFeedDelegate) {
+    func loadFeed(delegate: HomepageFeedDelegate) {
         delegate.feedDidFinishLoading(items: items)
     }
 
