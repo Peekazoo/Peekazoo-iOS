@@ -11,64 +11,64 @@ import XCTest
 
 class PeekazooClientTests: XCTestCase {
 
-    var service: PeekazooClient!
-    var capturingLoadingDelegate: CapturingHomepageServiceLoadingDelegate!
-    var networkAdapter: DummyNetworkAdapter!
-    var firstFeed: CapturingHomepageFeed!
-    var secondFeed: CapturingHomepageFeed!
-
-    override func setUp() {
-        super.setUp()
-
-        capturingLoadingDelegate = CapturingHomepageServiceLoadingDelegate()
-        networkAdapter = DummyNetworkAdapter()
-        firstFeed = CapturingHomepageFeed()
-        secondFeed = CapturingHomepageFeed()
-        service = PeekazooClient(feeds: [firstFeed, secondFeed], networkAdapter: networkAdapter)
-    }
-
-    private func loadHomepage() {
-        service.loadHomepage(delegate: capturingLoadingDelegate)
-    }
-
     func testWhenLoadingAllFeedsAreToldToLoad() {
-        loadHomepage()
+        let firstFeed = CapturingHomepageFeed()
+        let secondFeed = CapturingHomepageFeed()
+        let capturingLoadingDelegate = CapturingHomepageServiceLoadingDelegate()
+        let networkAdapter = DummyNetworkAdapter()
+        let service = PeekazooClient(feeds: [firstFeed, secondFeed], networkAdapter: networkAdapter)
+        service.loadHomepage(delegate: capturingLoadingDelegate)
+
         XCTAssertTrue([firstFeed, secondFeed].all({ $0.didLoad }))
     }
 
     func testWhenLoadingTheFeedIsGivenTheNetworkAdapter() {
-        loadHomepage()
+        let firstFeed = CapturingHomepageFeed()
+        let secondFeed = CapturingHomepageFeed()
+        let capturingLoadingDelegate = CapturingHomepageServiceLoadingDelegate()
+        let networkAdapter = DummyNetworkAdapter()
+        let service = PeekazooClient(feeds: [firstFeed, secondFeed], networkAdapter: networkAdapter)
+        service.loadHomepage(delegate: capturingLoadingDelegate)
+
         XCTAssertTrue((firstFeed.capturedNetworkAdapter as? DummyNetworkAdapter) === networkAdapter)
     }
 
     func testWhenFeedFailsToLoadThenTheFailureCallbackIsInvoked() {
         let failingFeed = FailingHomepageFeed()
-        service = PeekazooClient(feeds: [failingFeed], networkAdapter: networkAdapter)
-        loadHomepage()
+        let capturingLoadingDelegate = CapturingHomepageServiceLoadingDelegate()
+        let networkAdapter = DummyNetworkAdapter()
+        let service = PeekazooClient(feeds: [failingFeed], networkAdapter: networkAdapter)
+        service.loadHomepage(delegate: capturingLoadingDelegate)
 
         XCTAssertTrue(capturingLoadingDelegate.didFailToLoadInvoked)
     }
 
     func testWhenSingleFeedLoadsSuccessfullyTheDelegateIsToldAboutIt() {
         let successfulFeed = SuccessfulHomepageFeed()
-        service = PeekazooClient(feeds: [successfulFeed], networkAdapter: networkAdapter)
-        loadHomepage()
+        let capturingLoadingDelegate = CapturingHomepageServiceLoadingDelegate()
+        let networkAdapter = DummyNetworkAdapter()
+        let service = PeekazooClient(feeds: [successfulFeed], networkAdapter: networkAdapter)
+        service.loadHomepage(delegate: capturingLoadingDelegate)
 
         XCTAssertTrue(capturingLoadingDelegate.didFinishLoadingInvoked)
     }
 
     func testFeedFailingToLoadShouldNotNotifyDelegateAboutSuccess() {
         let failingFeed = FailingHomepageFeed()
-        service = PeekazooClient(feeds: [failingFeed], networkAdapter: networkAdapter)
-        loadHomepage()
+        let capturingLoadingDelegate = CapturingHomepageServiceLoadingDelegate()
+        let networkAdapter = DummyNetworkAdapter()
+        let service = PeekazooClient(feeds: [failingFeed], networkAdapter: networkAdapter)
+        service.loadHomepage(delegate: capturingLoadingDelegate)
 
         XCTAssertFalse(capturingLoadingDelegate.didFinishLoadingInvoked)
     }
 
     func testFeedLoadingSuccessfullyShouldNotNotifyDelegateAboutFailures() {
         let successfulFeed = SuccessfulHomepageFeed()
-        service = PeekazooClient(feeds: [successfulFeed], networkAdapter: networkAdapter)
-        loadHomepage()
+        let capturingLoadingDelegate = CapturingHomepageServiceLoadingDelegate()
+        let networkAdapter = DummyNetworkAdapter()
+        let service = PeekazooClient(feeds: [successfulFeed], networkAdapter: networkAdapter)
+        service.loadHomepage(delegate: capturingLoadingDelegate)
 
         XCTAssertFalse(capturingLoadingDelegate.didFailToLoadInvoked)
     }
@@ -76,8 +76,10 @@ class PeekazooClientTests: XCTestCase {
     func testForSingleFeedItsItemsAreProvidedToTheDelegate() {
         let items = [StubHomepageItem()]
         let successfulFeed = SuccessfulHomepageFeed(items: items)
-        service = PeekazooClient(feeds: [successfulFeed], networkAdapter: networkAdapter)
-        loadHomepage()
+        let capturingLoadingDelegate = CapturingHomepageServiceLoadingDelegate()
+        let networkAdapter = DummyNetworkAdapter()
+        let service = PeekazooClient(feeds: [successfulFeed], networkAdapter: networkAdapter)
+        service.loadHomepage(delegate: capturingLoadingDelegate)
 
         XCTAssertEqual(true, (capturingLoadingDelegate.capturedHomepageItems as? [StubHomepageItem])?.elementsEqual(items))
     }
