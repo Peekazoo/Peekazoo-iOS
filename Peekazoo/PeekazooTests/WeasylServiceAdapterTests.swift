@@ -83,7 +83,7 @@ class WeasylServiceAdapterTests: XCTestCase {
         XCTAssertEqual(item.contentIdentifier, fetchedItem?.contentIdentifier)
     }
 
-    func testSuccessfullyFetchingWasylItemAdaptsItemIntoPeekazooDomainObjectWithTitle() {
+    func testSuccessfullyFetchingWeasylItemAdaptsItemIntoPeekazooDomainObjectWithTitle() {
         let item = WeasylHomepageItem(submitID: "ID", title: "Title")
         let successfulWeasylService = SuccessfulWeasylService(items: [item])
         let adapter = WeasylServiceAdapter(service: successfulWeasylService)
