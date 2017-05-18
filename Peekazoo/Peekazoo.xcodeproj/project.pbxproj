@@ -105,7 +105,7 @@
 		7840DF861ECB1F7F00A623A7 /* NetworkAdapterTestDoubles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkAdapterTestDoubles.swift; path = "Test Doubles/NetworkAdapterTestDoubles.swift"; sourceTree = "<group>"; };
 		7840DF881ECB78FA00A623A7 /* HomepageFeedTestDoubles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomepageFeedTestDoubles.swift; path = "Test Doubles/HomepageFeedTestDoubles.swift"; sourceTree = "<group>"; };
 		7840DF8A1ECB949900A623A7 /* WeasylHomepageFeedTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeasylHomepageFeedTests.swift; sourceTree = "<group>"; };
-		7840DF8C1ECB974000A623A7 /* WeasylHomepageFeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeasylHomepageFeed.swift; path = Core/Homepage/Service/WeasylHomepageFeed.swift; sourceTree = "<group>"; };
+		7840DF8C1ECB974000A623A7 /* WeasylHomepageFeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeasylHomepageFeed.swift; path = "Remote Services/Weasyl/WeasylHomepageFeed.swift"; sourceTree = "<group>"; };
 		7840DF8E1ECB976A00A623A7 /* HomepageFeedDelegateTestDoubles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomepageFeedDelegateTestDoubles.swift; path = "Test Doubles/HomepageFeedDelegateTestDoubles.swift"; sourceTree = "<group>"; };
 		7840DF941ECB9F2400A623A7 /* ValidWeasylHomepageResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = ValidWeasylHomepageResponse.json; path = "Test Data/ValidWeasylHomepageResponse.json"; sourceTree = "<group>"; };
 		7840DF981ECC6B7100A623A7 /* MalformedWeasylHomepageResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = MalformedWeasylHomepageResponse.json; path = "Test Data/MalformedWeasylHomepageResponse.json"; sourceTree = "<group>"; };
@@ -242,7 +242,6 @@
 			isa = PBXGroup;
 			children = (
 				7840DF821ECB19D800A623A7 /* NetworkAggregateHomepageService.swift */,
-				7840DF8C1ECB974000A623A7 /* WeasylHomepageFeed.swift */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -319,6 +318,7 @@
 			isa = PBXGroup;
 			children = (
 				78F27FA21ECDC0CC00C38738 /* WeasylService.swift */,
+				7840DF8C1ECB974000A623A7 /* WeasylHomepageFeed.swift */,
 			);
 			name = Weasyl;
 			sourceTree = "<group>";
