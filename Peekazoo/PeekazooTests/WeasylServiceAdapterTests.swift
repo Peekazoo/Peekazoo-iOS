@@ -41,7 +41,7 @@ struct WeasylServiceAdapter: HomepageFeed {
         var weasylItem: WeasylHomepageItem
 
         var contentIdentifier: String { return weasylItem.contentIdentifier }
-        var title: String { return "" }
+        var title: String { return weasylItem.title }
 
     }
 
@@ -81,6 +81,17 @@ class WeasylServiceAdapterTests: XCTestCase {
         let fetchedItem = capturingHomepageFeedDelegate.capturedResults?.first
 
         XCTAssertEqual(item.contentIdentifier, fetchedItem?.contentIdentifier)
+    }
+
+    func testSuccessfullyFetchingWasylItemAdaptsItemIntoPeekazooDomainObjectWithTitle() {
+        let item = WeasylHomepageItem(submitID: "ID", title: "Title")
+        let successfulWeasylService = SuccessfulWeasylService(items: [item])
+        let adapter = WeasylServiceAdapter(service: successfulWeasylService)
+        let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
+        adapter.loadFeed(delegate: capturingHomepageFeedDelegate)
+        let fetchedItem = capturingHomepageFeedDelegate.capturedResults?.first
+
+        XCTAssertEqual(item.title, fetchedItem?.title)
     }
 
 }
