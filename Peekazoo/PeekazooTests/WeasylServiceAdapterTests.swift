@@ -73,7 +73,7 @@ class WeasylServiceAdapterTests: XCTestCase {
     }
 
     func testSuccessfullyFetchingWeasylItemAdaptsItemIntoPeekazooDomainObjectWithContentIdentifier() {
-        let item = WeasylHomepageItem(contentIdentifier: "ID", title: "Title")
+        let item = WeasylHomepageItem(submitID: "ID", title: "Title")
         let successfulWeasylService = SuccessfulWeasylService(items: [item])
         let adapter = WeasylServiceAdapter(service: successfulWeasylService)
         let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()

@@ -10,20 +10,22 @@ import Foundation
 
 struct WeasylHomepageItem: HomepageItem {
 
-    var contentIdentifier: String
     var title: String
+    var submitID: String
 
-    init(contentIdentifier: String, title: String) {
-        self.contentIdentifier = contentIdentifier
+    var contentIdentifier: String { return submitID }
+
+    init(submitID: String, title: String) {
+        self.submitID = submitID
         self.title = title
     }
 
     init?(jsonObject: [String : Any]) {
         guard let title = jsonObject["title"] as? String,
-            let contentIdentifier = jsonObject["submitid"] as? Int else { return nil }
+              let submitID = jsonObject["submitid"] as? Int else { return nil }
 
         self.title = title
-        self.contentIdentifier = String(contentIdentifier)
+        self.submitID = String(submitID)
     }
 
 }
