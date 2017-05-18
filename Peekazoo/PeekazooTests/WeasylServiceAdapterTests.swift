@@ -11,14 +11,14 @@ import XCTest
 
 protocol WeasylServiceProtocol {
 
-    func loadHomepage(completionHandler: ([WeasylHomepageFeed.WeasylHomepageItem]) -> Void)
+    func loadHomepage(completionHandler: ([WeasylHomepageItem]) -> Void)
 
 }
 
 class CapturingWeasylService: WeasylServiceProtocol {
 
     private(set) var didLoadHomepage = false
-    func loadHomepage(completionHandler: ([WeasylHomepageFeed.WeasylHomepageItem]) -> Void) {
+    func loadHomepage(completionHandler: ([WeasylHomepageItem]) -> Void) {
         didLoadHomepage = true
     }
 
@@ -26,9 +26,9 @@ class CapturingWeasylService: WeasylServiceProtocol {
 
 struct SuccessfulWeasylService: WeasylServiceProtocol {
 
-    var items: [WeasylHomepageFeed.WeasylHomepageItem]
+    var items: [WeasylHomepageItem]
 
-    func loadHomepage(completionHandler: ([WeasylHomepageFeed.WeasylHomepageItem]) -> Void) {
+    func loadHomepage(completionHandler: ([WeasylHomepageItem]) -> Void) {
         completionHandler(items)
     }
 
@@ -38,7 +38,7 @@ struct WeasylServiceAdapter: HomepageFeed {
 
     private struct AdaptedItem: HomepageItem {
 
-        var weasylItem: WeasylHomepageFeed.WeasylHomepageItem
+        var weasylItem: WeasylHomepageItem
 
         var contentIdentifier: String { return weasylItem.contentIdentifier }
         var title: String { return "" }
@@ -73,7 +73,7 @@ class WeasylServiceAdapterTests: XCTestCase {
     }
 
     func testSuccessfullyFetchingWeasylItemAdaptsItemIntoPeekazooDomainObjectWithContentIdentifier() {
-        let item = WeasylHomepageFeed.WeasylHomepageItem(contentIdentifier: "ID", title: "Title")
+        let item = WeasylHomepageItem(contentIdentifier: "ID", title: "Title")
         let successfulWeasylService = SuccessfulWeasylService(items: [item])
         let adapter = WeasylServiceAdapter(service: successfulWeasylService)
         let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()

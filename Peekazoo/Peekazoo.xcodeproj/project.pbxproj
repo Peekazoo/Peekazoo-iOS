@@ -51,6 +51,7 @@
 		7840DF991ECC6B7100A623A7 /* MalformedWeasylHomepageResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 7840DF981ECC6B7100A623A7 /* MalformedWeasylHomepageResponse.json */; };
 		786725A61ECDC4C000D78A72 /* WeasylServiceAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786725A51ECDC4C000D78A72 /* WeasylServiceAdapter.swift */; };
 		786725A81ECDC4CD00D78A72 /* WeasylServiceAdapterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786725A71ECDC4CD00D78A72 /* WeasylServiceAdapterTests.swift */; };
+		786725AA1ECE1DB500D78A72 /* WeasylHomepageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786725A91ECE1DB500D78A72 /* WeasylHomepageItem.swift */; };
 		788B0D0A1ECB17E30035C26A /* PeekazooClientTests.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788B0D091ECB17E30035C26A /* PeekazooClientTests.swift.swift */; };
 		789F10071EC481B100FAF5F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789F10061EC481B100FAF5F1 /* AppDelegate.swift */; };
 		789F100E1EC481B100FAF5F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 789F100D1EC481B100FAF5F1 /* Assets.xcassets */; };
@@ -114,6 +115,7 @@
 		7840DF981ECC6B7100A623A7 /* MalformedWeasylHomepageResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = MalformedWeasylHomepageResponse.json; path = "Test Data/MalformedWeasylHomepageResponse.json"; sourceTree = "<group>"; };
 		786725A51ECDC4C000D78A72 /* WeasylServiceAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeasylServiceAdapter.swift; path = "Client Service/Remote Service Adapters/WeasylServiceAdapter.swift"; sourceTree = "<group>"; };
 		786725A71ECDC4CD00D78A72 /* WeasylServiceAdapterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeasylServiceAdapterTests.swift; sourceTree = "<group>"; };
+		786725A91ECE1DB500D78A72 /* WeasylHomepageItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeasylHomepageItem.swift; path = "Remote Services/Weasyl/WeasylHomepageItem.swift"; sourceTree = "<group>"; };
 		788B0D091ECB17E30035C26A /* PeekazooClientTests.swift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeekazooClientTests.swift.swift; sourceTree = "<group>"; };
 		789F10031EC481B100FAF5F1 /* Peekazoo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Peekazoo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		789F10061EC481B100FAF5F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -326,6 +328,7 @@
 			children = (
 				78F27FA21ECDC0CC00C38738 /* WeasylService.swift */,
 				7840DF8C1ECB974000A623A7 /* WeasylHomepageFeed.swift */,
+				786725A91ECE1DB500D78A72 /* WeasylHomepageItem.swift */,
 			);
 			name = Weasyl;
 			sourceTree = "<group>";
@@ -473,6 +476,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				78F27FA31ECDC0CC00C38738 /* WeasylService.swift in Sources */,
+				786725AA1ECE1DB500D78A72 /* WeasylHomepageItem.swift in Sources */,
 				6E0D85A81EC8F9CE000E7283 /* RootRouter.swift in Sources */,
 				6E0D858A1EC6F022000E7283 /* WindowRootRouter.swift.swift in Sources */,
 				6E0D85A41EC83DF0000E7283 /* PhoneAppFactory.swift in Sources */,

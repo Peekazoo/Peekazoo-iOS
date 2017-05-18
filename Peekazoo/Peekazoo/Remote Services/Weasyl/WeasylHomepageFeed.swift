@@ -5,26 +5,6 @@ import Foundation
 
 struct WeasylHomepageFeed: HomepageFeed {
 
-    struct WeasylHomepageItem: HomepageItem {
-
-        var contentIdentifier: String
-        var title: String
-
-        init(contentIdentifier: String, title: String) {
-            self.contentIdentifier = contentIdentifier
-            self.title = title
-        }
-
-        fileprivate init?(jsonObject: [String : Any]) {
-            guard let title = jsonObject["title"] as? String,
-                  let contentIdentifier = jsonObject["submitid"] as? Int else { return nil }
-
-            self.title = title
-            self.contentIdentifier = String(contentIdentifier)
-        }
-
-    }
-
     var networkAdapter: NetworkAdapter
     private let homepageURL = URL(string: "https://www.weasyl.com/api/submissions/frontpage")!
 
