@@ -11,7 +11,7 @@ import UIKit
 struct PhoneAppFactory: AppFactory {
 
     func makeApplication(window: UIWindow) -> App {
-        let service = NetworkAggregateHomepageService(feeds: [WeasylHomepageFeed()],
+        let service = PeekazooClient(feeds: [WeasylHomepageFeed()],
                                                       networkAdapter: URLSessionNetworkAdapter())
         return PhoneApp(rootRouter: WindowRootRouter(window: window),
                         homepageService: service)

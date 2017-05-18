@@ -1,5 +1,5 @@
 //
-//  NetworkAggregateHomepageServiceTests.swift
+//  PeekazooClientTests.swift
 //  Peekazoo
 //
 //  Created by Thomas Sherwood on 16/05/2017.
@@ -9,9 +9,9 @@
 @testable import Peekazoo
 import XCTest
 
-class NetworkAggregateHomepageServiceTests: XCTestCase {
+class PeekazooClientTests: XCTestCase {
 
-    var service: NetworkAggregateHomepageService!
+    var service: PeekazooClient!
     var capturingLoadingDelegate: CapturingHomepageServiceLoadingDelegate!
     var networkAdapter: DummyNetworkAdapter!
     var firstFeed: CapturingHomepageFeed!
@@ -24,7 +24,7 @@ class NetworkAggregateHomepageServiceTests: XCTestCase {
         networkAdapter = DummyNetworkAdapter()
         firstFeed = CapturingHomepageFeed()
         secondFeed = CapturingHomepageFeed()
-        service = NetworkAggregateHomepageService(feeds: [firstFeed, secondFeed], networkAdapter: networkAdapter)
+        service = PeekazooClient(feeds: [firstFeed, secondFeed], networkAdapter: networkAdapter)
     }
 
     private func loadHomepage() {
@@ -43,7 +43,7 @@ class NetworkAggregateHomepageServiceTests: XCTestCase {
 
     func testWhenFeedFailsToLoadThenTheFailureCallbackIsInvoked() {
         let failingFeed = FailingHomepageFeed()
-        service = NetworkAggregateHomepageService(feeds: [failingFeed], networkAdapter: networkAdapter)
+        service = PeekazooClient(feeds: [failingFeed], networkAdapter: networkAdapter)
         loadHomepage()
 
         XCTAssertTrue(capturingLoadingDelegate.didFailToLoadInvoked)
@@ -51,7 +51,7 @@ class NetworkAggregateHomepageServiceTests: XCTestCase {
 
     func testWhenSingleFeedLoadsSuccessfullyTheDelegateIsToldAboutIt() {
         let successfulFeed = SuccessfulHomepageFeed()
-        service = NetworkAggregateHomepageService(feeds: [successfulFeed], networkAdapter: networkAdapter)
+        service = PeekazooClient(feeds: [successfulFeed], networkAdapter: networkAdapter)
         loadHomepage()
 
         XCTAssertTrue(capturingLoadingDelegate.didFinishLoadingInvoked)
@@ -59,7 +59,7 @@ class NetworkAggregateHomepageServiceTests: XCTestCase {
 
     func testFeedFailingToLoadShouldNotNotifyDelegateAboutSuccess() {
         let failingFeed = FailingHomepageFeed()
-        service = NetworkAggregateHomepageService(feeds: [failingFeed], networkAdapter: networkAdapter)
+        service = PeekazooClient(feeds: [failingFeed], networkAdapter: networkAdapter)
         loadHomepage()
 
         XCTAssertFalse(capturingLoadingDelegate.didFinishLoadingInvoked)
@@ -67,7 +67,7 @@ class NetworkAggregateHomepageServiceTests: XCTestCase {
 
     func testFeedLoadingSuccessfullyShouldNotNotifyDelegateAboutFailures() {
         let successfulFeed = SuccessfulHomepageFeed()
-        service = NetworkAggregateHomepageService(feeds: [successfulFeed], networkAdapter: networkAdapter)
+        service = PeekazooClient(feeds: [successfulFeed], networkAdapter: networkAdapter)
         loadHomepage()
 
         XCTAssertFalse(capturingLoadingDelegate.didFailToLoadInvoked)
@@ -76,7 +76,7 @@ class NetworkAggregateHomepageServiceTests: XCTestCase {
     func testForSingleFeedItsItemsAreProvidedToTheDelegate() {
         let items = [StubHomepageItem()]
         let successfulFeed = SuccessfulHomepageFeed(items: items)
-        service = NetworkAggregateHomepageService(feeds: [successfulFeed], networkAdapter: networkAdapter)
+        service = PeekazooClient(feeds: [successfulFeed], networkAdapter: networkAdapter)
         loadHomepage()
 
         XCTAssertEqual(true, (capturingLoadingDelegate.capturedHomepageItems as? [StubHomepageItem])?.elementsEqual(items))

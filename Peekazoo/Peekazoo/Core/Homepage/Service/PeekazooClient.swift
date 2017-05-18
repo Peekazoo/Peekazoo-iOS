@@ -1,5 +1,5 @@
 //
-//  NetworkAggregateHomepageService.swift
+//  PeekazooClient.swift
 //  Peekazoo
 //
 //  Created by Thomas Sherwood on 16/05/2017.
@@ -27,7 +27,7 @@ protocol NetworkAdapter {
 
 }
 
-class NetworkAggregateHomepageService: HomepageService, HomepageFeedDelegate {
+class PeekazooClient: HomepageService, HomepageFeedDelegate {
 
     var feeds: [HomepageFeed]
     var networkAdapter: NetworkAdapter
