@@ -65,9 +65,11 @@ struct WeasylServiceAdapter: HomepageFeed {
     }
 
     func loadFeed(delegate: HomepageFeedDelegate) {
-        delegate.feedDidFailToLoad()
         service.loadHomepage { result in
-            guard case .success(let items) = result, let item = items.first else { return }
+            guard case .success(let items) = result, let item = items.first else {
+                delegate.feedDidFailToLoad()
+                return
+            }
 
             let adaptedItem = AdaptedItem(weasylItem: item)
             delegate.feedDidFinishLoading(items: [adaptedItem])
@@ -115,6 +117,16 @@ class WeasylServiceAdapterTests: XCTestCase {
         adapter.loadFeed(delegate: capturingHomepageFeedDelegate)
 
         XCTAssertTrue(capturingHomepageFeedDelegate.wasNotifiedFeedDidFailToLoad)
+    }
+
+    func testSuccessfullyFetchingWeasylItemDoesNotNotifyDelegateOfLoadFailure() {
+        let item = WeasylHomepageItem(submitID: "ID", title: "Title")
+        let successfulWeasylService = SuccessfulWeasylService(items: [item])
+        let adapter = WeasylServiceAdapter(service: successfulWeasylService)
+        let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
+        adapter.loadFeed(delegate: capturingHomepageFeedDelegate)
+
+        XCTAssertFalse(capturingHomepageFeedDelegate.wasNotifiedFeedDidFailToLoad)
     }
 
 }
