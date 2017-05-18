@@ -21,12 +21,6 @@ protocol HomepageFeedDelegate {
 
 }
 
-protocol NetworkAdapter {
-
-    func get(_ url: URL, completionHandler: @escaping (Data?, Error?) -> Void)
-
-}
-
 class PeekazooClient: HomepageService, HomepageFeedDelegate {
 
     var feeds: [HomepageFeed]
