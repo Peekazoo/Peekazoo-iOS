@@ -10,6 +10,11 @@ struct WeasylHomepageFeed: HomepageFeed {
         var contentIdentifier: String
         var title: String
 
+        init(contentIdentifier: String, title: String) {
+            self.contentIdentifier = contentIdentifier
+            self.title = title
+        }
+
         fileprivate init?(jsonObject: [String : Any]) {
             guard let title = jsonObject["title"] as? String,
                   let contentIdentifier = jsonObject["submitid"] as? Int else { return nil }
