@@ -6,7 +6,7 @@
 //  Copyright © 2017 Peekazoo. All rights reserved.
 //
 
-struct WeasylService {
+struct WeasylService: WeasylServiceProtocol {
 
     private var homepageFeed: WeasylHomepageFeed
 
@@ -14,8 +14,8 @@ struct WeasylService {
         homepageFeed = WeasylHomepageFeed(networkAdapter: networkAdapter)
     }
 
-    func loadHomepage(delegate: HomepageFeedDelegate) {
-        homepageFeed.loadFeed(delegate: delegate)
+    func loadHomepage(completionHandler: @escaping (HomepageLoadResult) -> Void) {
+        homepageFeed.loadFeed(completionHandler: completionHandler)
     }
 
 }

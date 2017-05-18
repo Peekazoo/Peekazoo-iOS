@@ -3,26 +3,26 @@
 
 import Foundation
 
-struct WeasylHomepageFeed: HomepageFeed {
+struct WeasylHomepageFeed {
 
     var networkAdapter: NetworkAdapter
     private let homepageURL = URL(string: "https://www.weasyl.com/api/submissions/frontpage")!
 
-    func loadFeed(delegate: HomepageFeedDelegate) {
+    func loadFeed(completionHandler: @escaping (HomepageLoadResult) -> Void) {
         networkAdapter.get(homepageURL) { data, _ in
             if let data = data {
-                self.parseHomepageItems(from: data, delegate: delegate)
+                self.parseHomepageItems(from: data, completionHandler: completionHandler)
             } else {
-                delegate.feedDidFailToLoad()
+                completionHandler(.failure)
             }
         }
     }
 
-    private func parseHomepageItems(from data: Data, delegate: HomepageFeedDelegate) {
+    private func parseHomepageItems(from data: Data, completionHandler: (HomepageLoadResult) -> Void) {
         if let jsonObject = self.jsonObject(from: data) {
-            delegate.feedDidFinishLoading(items: parse(jsonObject))
+            completionHandler(.success(parse(jsonObject)))
         } else {
-            delegate.feedDidFailToLoad()
+            completionHandler(.failure)
         }
     }
 
@@ -30,7 +30,7 @@ struct WeasylHomepageFeed: HomepageFeed {
         return (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)) as? [[String : Any]]
     }
 
-    private func parse(_ jsonObject: [[String : Any]]) -> [HomepageItem] {
+    private func parse(_ jsonObject: [[String : Any]]) -> [WeasylHomepageItem] {
         return jsonObject.flatMap(WeasylHomepageItem.init)
     }
 

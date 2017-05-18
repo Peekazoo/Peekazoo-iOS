@@ -13,6 +13,6 @@ enum HomepageLoadResult {
 
 protocol WeasylServiceProtocol {
 
-    func loadHomepage(completionHandler: (HomepageLoadResult) -> Void)
+    func loadHomepage(completionHandler: @escaping (HomepageLoadResult) -> Void)
 
 }
