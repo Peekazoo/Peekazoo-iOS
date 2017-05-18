@@ -52,6 +52,8 @@
 		786725A61ECDC4C000D78A72 /* WeasylServiceAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786725A51ECDC4C000D78A72 /* WeasylServiceAdapter.swift */; };
 		786725A81ECDC4CD00D78A72 /* WeasylServiceAdapterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786725A71ECDC4CD00D78A72 /* WeasylServiceAdapterTests.swift */; };
 		786725AA1ECE1DB500D78A72 /* WeasylHomepageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786725A91ECE1DB500D78A72 /* WeasylHomepageItem.swift */; };
+		7885CAF51ECE4120005F426B /* WeasylServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7885CAF41ECE4120005F426B /* WeasylServiceProtocol.swift */; };
+		7885CAF71ECE4140005F426B /* WeasylServiceTestDoubles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7885CAF61ECE4140005F426B /* WeasylServiceTestDoubles.swift */; };
 		788B0D0A1ECB17E30035C26A /* PeekazooClientTests.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788B0D091ECB17E30035C26A /* PeekazooClientTests.swift.swift */; };
 		789F10071EC481B100FAF5F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789F10061EC481B100FAF5F1 /* AppDelegate.swift */; };
 		789F100E1EC481B100FAF5F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 789F100D1EC481B100FAF5F1 /* Assets.xcassets */; };
@@ -116,6 +118,8 @@
 		786725A51ECDC4C000D78A72 /* WeasylServiceAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeasylServiceAdapter.swift; path = "Client Service/Remote Service Adapters/WeasylServiceAdapter.swift"; sourceTree = "<group>"; };
 		786725A71ECDC4CD00D78A72 /* WeasylServiceAdapterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeasylServiceAdapterTests.swift; sourceTree = "<group>"; };
 		786725A91ECE1DB500D78A72 /* WeasylHomepageItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeasylHomepageItem.swift; path = "Remote Services/Weasyl/WeasylHomepageItem.swift"; sourceTree = "<group>"; };
+		7885CAF41ECE4120005F426B /* WeasylServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeasylServiceProtocol.swift; path = "Remote Services/Weasyl/WeasylServiceProtocol.swift"; sourceTree = "<group>"; };
+		7885CAF61ECE4140005F426B /* WeasylServiceTestDoubles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeasylServiceTestDoubles.swift; path = "Test Doubles/WeasylServiceTestDoubles.swift"; sourceTree = "<group>"; };
 		788B0D091ECB17E30035C26A /* PeekazooClientTests.swift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeekazooClientTests.swift.swift; sourceTree = "<group>"; };
 		789F10031EC481B100FAF5F1 /* Peekazoo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Peekazoo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		789F10061EC481B100FAF5F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -206,6 +210,7 @@
 				7840DF861ECB1F7F00A623A7 /* NetworkAdapterTestDoubles.swift */,
 				7840DF8E1ECB976A00A623A7 /* HomepageFeedDelegateTestDoubles.swift */,
 				6E02FB201ECCEA65001C2D66 /* CapturingNetworkProtocol.swift */,
+				7885CAF61ECE4140005F426B /* WeasylServiceTestDoubles.swift */,
 			);
 			name = "Test Doubles";
 			sourceTree = "<group>";
@@ -326,6 +331,7 @@
 		78F27FA11ECDBCA400C38738 /* Weasyl */ = {
 			isa = PBXGroup;
 			children = (
+				7885CAF41ECE4120005F426B /* WeasylServiceProtocol.swift */,
 				78F27FA21ECDC0CC00C38738 /* WeasylService.swift */,
 				7840DF8C1ECB974000A623A7 /* WeasylHomepageFeed.swift */,
 				786725A91ECE1DB500D78A72 /* WeasylHomepageItem.swift */,
@@ -497,6 +503,7 @@
 				6E6E61751EC9FC4C00964076 /* HomepageCollectionViewDataSource.swift in Sources */,
 				6E02FB1F1ECCEA53001C2D66 /* URLSessionNetworkAdapter.swift in Sources */,
 				6E0D85AC1EC8FA79000E7283 /* PhoneApp.swift in Sources */,
+				7885CAF51ECE4120005F426B /* WeasylServiceProtocol.swift in Sources */,
 				6E0D85B61EC9719C000E7283 /* HomepageService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -509,6 +516,7 @@
 				7840DF8F1ECB976A00A623A7 /* HomepageFeedDelegateTestDoubles.swift in Sources */,
 				6E0D85A61EC8F864000E7283 /* PhoneAppTests.swift in Sources */,
 				6E6E617A1ECA426100964076 /* Randomness.swift in Sources */,
+				7885CAF71ECE4140005F426B /* WeasylServiceTestDoubles.swift in Sources */,
 				6E0D85A01EC83C02000E7283 /* AppTestDoubles.swift in Sources */,
 				788B0D0A1ECB17E30035C26A /* PeekazooClientTests.swift.swift in Sources */,
 				7840DF851ECB1BB400A623A7 /* Array.swift in Sources */,
