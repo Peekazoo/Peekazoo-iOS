@@ -8,7 +8,7 @@ struct WeasylHomepageFeed {
     var networkAdapter: NetworkAdapter
     private let homepageURL = URL(string: "https://www.weasyl.com/api/submissions/frontpage")!
 
-    func loadFeed(completionHandler: @escaping (HomepageLoadResult) -> Void) {
+    func loadFeed(completionHandler: @escaping (WeasylHomepageLoadResult) -> Void) {
         networkAdapter.get(homepageURL) { data, _ in
             if let data = data {
                 self.parseHomepageItems(from: data, completionHandler: completionHandler)
@@ -18,7 +18,7 @@ struct WeasylHomepageFeed {
         }
     }
 
-    private func parseHomepageItems(from data: Data, completionHandler: (HomepageLoadResult) -> Void) {
+    private func parseHomepageItems(from data: Data, completionHandler: (WeasylHomepageLoadResult) -> Void) {
         if let jsonObject = self.jsonObject(from: data) {
             completionHandler(.success(parse(jsonObject)))
         } else {

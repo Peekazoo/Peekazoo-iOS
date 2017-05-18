@@ -14,7 +14,7 @@ struct WeasylService: WeasylServiceProtocol {
         homepageFeed = WeasylHomepageFeed(networkAdapter: networkAdapter)
     }
 
-    func loadHomepage(completionHandler: @escaping (HomepageLoadResult) -> Void) {
+    func loadHomepage(completionHandler: @escaping (WeasylHomepageLoadResult) -> Void) {
         homepageFeed.loadFeed(completionHandler: completionHandler)
     }
 

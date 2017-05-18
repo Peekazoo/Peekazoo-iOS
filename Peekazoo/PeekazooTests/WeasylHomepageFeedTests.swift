@@ -14,7 +14,7 @@ class CapturingWeasylHomepageHandler {
     private(set) var wasNotifiedDidFinishLoading = false
     private(set) var capturedResults: [WeasylHomepageItem]?
     private(set) var wasNotifiedFeedDidFailToLoad = false
-    func verify(_ result: HomepageLoadResult) {
+    func verify(_ result: WeasylHomepageLoadResult) {
         switch result {
         case .success(let items):
             wasNotifiedDidFinishLoading = true

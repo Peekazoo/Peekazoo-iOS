@@ -12,7 +12,7 @@ import Foundation
 class CapturingWeasylService: WeasylServiceProtocol {
 
     private(set) var didLoadHomepage = false
-    func loadHomepage(completionHandler: @escaping (HomepageLoadResult) -> Void) {
+    func loadHomepage(completionHandler: @escaping (WeasylHomepageLoadResult) -> Void) {
         didLoadHomepage = true
     }
 
@@ -22,7 +22,7 @@ struct SuccessfulWeasylService: WeasylServiceProtocol {
 
     var items: [WeasylHomepageItem]
 
-    func loadHomepage(completionHandler: @escaping (HomepageLoadResult) -> Void) {
+    func loadHomepage(completionHandler: @escaping (WeasylHomepageLoadResult) -> Void) {
         completionHandler(.success(items))
     }
 
@@ -30,7 +30,7 @@ struct SuccessfulWeasylService: WeasylServiceProtocol {
 
 struct FailingWeasylService: WeasylServiceProtocol {
 
-    func loadHomepage(completionHandler: @escaping (HomepageLoadResult) -> Void) {
+    func loadHomepage(completionHandler: @escaping (WeasylHomepageLoadResult) -> Void) {
         completionHandler(.failure)
     }
 
