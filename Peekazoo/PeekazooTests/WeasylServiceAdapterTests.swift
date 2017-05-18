@@ -40,7 +40,7 @@ struct WeasylServiceAdapter: HomepageFeed {
 
         var weasylItem: WeasylHomepageItem
 
-        var contentIdentifier: String { return weasylItem.contentIdentifier }
+        var contentIdentifier: String { return weasylItem.submitID }
         var title: String { return weasylItem.title }
 
     }
