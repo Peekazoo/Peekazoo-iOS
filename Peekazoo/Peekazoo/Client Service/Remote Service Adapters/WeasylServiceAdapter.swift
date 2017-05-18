@@ -18,13 +18,12 @@ struct WeasylServiceAdapter: HomepageFeed {
 
     func loadFeed(delegate: HomepageFeedDelegate) {
         service.loadHomepage { result in
-            guard case .success(let items) = result, let item = items.first else {
+            guard case .success(let items) = result else {
                 delegate.feedDidFailToLoad()
                 return
             }
 
-            let adaptedItem = AdaptedItem(weasylItem: item)
-            delegate.feedDidFinishLoading(items: [adaptedItem])
+            delegate.feedDidFinishLoading(items: items.map(AdaptedItem.init))
         }
     }
 

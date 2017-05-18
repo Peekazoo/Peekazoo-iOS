@@ -60,4 +60,22 @@ class WeasylServiceAdapterTests: XCTestCase {
         XCTAssertFalse(capturingHomepageFeedDelegate.wasNotifiedFeedDidFailToLoad)
     }
 
+    func testSuccessfullyFetchingMultipleWeasylItemsAdaptsSecondItemTitle() {
+        let firstItem = WeasylHomepageItem(submitID: "ID", title: "Title")
+        let secondItem = WeasylHomepageItem(submitID: "ID 2", title: "Another Title")
+        let successfulWeasylService = SuccessfulWeasylService(items: [firstItem, secondItem])
+        let adapter = WeasylServiceAdapter(service: successfulWeasylService)
+        let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
+        adapter.loadFeed(delegate: capturingHomepageFeedDelegate)
+
+        guard let results = capturingHomepageFeedDelegate.capturedResults, results.count > 1 else {
+            XCTFail()
+            return
+        }
+
+        let fetchedItem = results[1]
+
+        XCTAssertEqual(secondItem.title, fetchedItem.title)
+    }
+
 }
