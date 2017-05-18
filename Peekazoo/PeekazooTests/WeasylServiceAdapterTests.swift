@@ -9,16 +9,21 @@
 @testable import Peekazoo
 import XCTest
 
+enum HomepageLoadResult {
+    case success([WeasylHomepageItem])
+    case failure
+}
+
 protocol WeasylServiceProtocol {
 
-    func loadHomepage(completionHandler: ([WeasylHomepageItem]) -> Void)
+    func loadHomepage(completionHandler: (HomepageLoadResult) -> Void)
 
 }
 
 class CapturingWeasylService: WeasylServiceProtocol {
 
     private(set) var didLoadHomepage = false
-    func loadHomepage(completionHandler: ([WeasylHomepageItem]) -> Void) {
+    func loadHomepage(completionHandler: (HomepageLoadResult) -> Void) {
         didLoadHomepage = true
     }
 
@@ -28,8 +33,16 @@ struct SuccessfulWeasylService: WeasylServiceProtocol {
 
     var items: [WeasylHomepageItem]
 
-    func loadHomepage(completionHandler: ([WeasylHomepageItem]) -> Void) {
-        completionHandler(items)
+    func loadHomepage(completionHandler: (HomepageLoadResult) -> Void) {
+        completionHandler(.success(items))
+    }
+
+}
+
+struct FailingWeasylService: WeasylServiceProtocol {
+
+    func loadHomepage(completionHandler: (HomepageLoadResult) -> Void) {
+        completionHandler(.failure)
     }
 
 }
@@ -52,8 +65,9 @@ struct WeasylServiceAdapter: HomepageFeed {
     }
 
     func loadFeed(delegate: HomepageFeedDelegate) {
-        service.loadHomepage { items in
-            guard let item = items.first else { return }
+        delegate.feedDidFailToLoad()
+        service.loadHomepage { result in
+            guard case .success(let items) = result, let item = items.first else { return }
 
             let adaptedItem = AdaptedItem(weasylItem: item)
             delegate.feedDidFinishLoading(items: [adaptedItem])
@@ -92,6 +106,15 @@ class WeasylServiceAdapterTests: XCTestCase {
         let fetchedItem = capturingHomepageFeedDelegate.capturedResults?.first
 
         XCTAssertEqual(item.title, fetchedItem?.title)
+    }
+
+    func testFailingToFetchWeasylItemTellsDelegateLoadFailed() {
+        let failingWeasylService = FailingWeasylService()
+        let adapter = WeasylServiceAdapter(service: failingWeasylService)
+        let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
+        adapter.loadFeed(delegate: capturingHomepageFeedDelegate)
+
+        XCTAssertTrue(capturingHomepageFeedDelegate.wasNotifiedFeedDidFailToLoad)
     }
 
 }
