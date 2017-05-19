@@ -23,8 +23,11 @@ struct InkbunnyAPI {
 
     func loadHomepage(completionHandler: @escaping (InkbunnyHomepageLoadResult) -> Void) {
         let loginURL = URL(string: "https://inkbunny.net/api_login.php")!
-        networkAdapter.get(loginURL) { _, _ in
-            completionHandler(.failure)
+        networkAdapter.get(loginURL) { data, _ in
+            if data == nil {
+                completionHandler(.failure)
+            }
+
             let searchURL = URL(string: "https://inkbunny.net/api_search.php")!
             self.networkAdapter.get(searchURL, completionHandler: { _, _ in })
         }
@@ -98,6 +101,15 @@ class InkbunnyAPITests: XCTestCase {
         inkbunnyAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
 
         XCTAssertEqual(true, journallingNetworkAdapter.getURLs.last?.absoluteString.contains(expectedSearchEndpoint.absoluteString))
+    }
+
+    func testLoginRequestReturnsValidResponseDoesNotNotifyHandlerAboutFailure() {
+        let successfulNetworkAdapter = SuccessfulNetworkAdapter(contentsOfJSONFile: "ValidInkbunnyGuestLoginResponse")
+        let inkbunnyAPI = InkbunnyAPI(networkAdapter: successfulNetworkAdapter)
+        let capturingHomepageHandler = CapturingInkbunnyHomepageHandler()
+        inkbunnyAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
+
+        XCTAssertFalse(capturingHomepageHandler.wasNotifiedFeedDidFailToLoad)
     }
 
 }
