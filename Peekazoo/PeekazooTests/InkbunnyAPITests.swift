@@ -54,27 +54,6 @@ class CapturingInkbunnyHomepageHandler {
 
 }
 
-class JournallingNetworkAdapter: NetworkAdapter {
-
-    var networkAdapter: NetworkAdapter
-
-    init(networkAdapter: NetworkAdapter) {
-        self.networkAdapter = networkAdapter
-    }
-
-    private(set) var getURLs = [URL]()
-    func get(_ url: URL, completionHandler: @escaping (Data?, Error?) -> Void) {
-        getURLs.append(url)
-        networkAdapter.get(url, completionHandler: completionHandler)
-    }
-
-    func lastGetURLContains(_ component: String) -> Bool {
-        guard let url = getURLs.last else { return false }
-        return url.absoluteString.contains(component)
-    }
-
-}
-
 class InkbunnyAPITests: XCTestCase {
 
     func testAttemptingToFetchHomepageWhenNotLoggedInGetsLoginEndpoint() {
@@ -163,50 +142,6 @@ class InkbunnyAPITests: XCTestCase {
         inkbunnyAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
 
          XCTAssertTrue(journallingNetworkAdapter.lastGetURLContains("api_search.php?sid=\(sidFromJSON)"))
-    }
-
-    struct ControllableNetworkAdapter: NetworkAdapter {
-
-        enum StubResponse {
-            case data(Data)
-            case error(Error)
-        }
-
-        private var responses = [URL: StubResponse]()
-
-        func get(_ url: URL, completionHandler: @escaping (Data?, Error?) -> Void) {
-            guard let response = responses[url] else { return }
-
-            switch response {
-            case .data(let data):
-                completionHandler(data, nil)
-
-            case .error(let error):
-                completionHandler(nil, error)
-            }
-        }
-
-        mutating func stub(url: URL, with data: Data) {
-            responses[url] = .data(data)
-        }
-
-        mutating func stub(url: URL, withContentsOfJSONFile name: String) {
-            let bundle = Bundle(for: SuccessfulNetworkAdapter.self)
-            let jsonURL = bundle.url(forResource: name, withExtension: "json")!
-            if let data = try? Data(contentsOf: jsonURL) {
-                stub(url: url, with: data)
-            }
-        }
-
-        mutating func stub(url: URL, with error: Error) {
-            responses[url] = .error(error)
-        }
-
-        mutating func stubFailure(url: URL) {
-            let error = NSError(domain: "", code: 0, userInfo: nil)
-            stub(url: url, with: error)
-        }
-
     }
 
     func testSearchFailsAfterLoginSucceedsNotifiesHandlerOfFailure() {
