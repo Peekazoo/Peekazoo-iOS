@@ -29,16 +29,16 @@ struct InkbunnyAPI {
             } else {
                 do {
                     let json = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String : Any]
-                    if json?["sid"] == nil {
+                    guard let sid = json?["sid"] as? String else {
                         completionHandler(.failure)
                         return
                     }
+
+                    let searchURL = URL(string: "https://inkbunny.net/api_search.php?sid=\(sid)")!
+                    self.networkAdapter.get(searchURL, completionHandler: { _, _ in })
                 } catch {
                     completionHandler(.failure)
                 }
-
-                let searchURL = URL(string: "https://inkbunny.net/api_search.php")!
-                self.networkAdapter.get(searchURL, completionHandler: { _, _ in })
             }
         }
     }
@@ -155,6 +155,17 @@ class InkbunnyAPITests: XCTestCase {
         inkbunnyAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
 
         XCTAssertTrue(capturingHomepageHandler.wasNotifiedFeedDidFailToLoad)
+    }
+
+    func testLoginReturnsValidJSONWithSidFieldUsesSidFieldForSearchRequest() {
+        let sidFromJSON = "This_Is_A_Test_Token"
+        let successfulLoginNetworkAdapter = SuccessfulNetworkAdapter(contentsOfJSONFile: "ValidInkbunnyGuestLoginResponse")
+        let journallingNetworkAdapter = JournallingNetworkAdapter(networkAdapter: successfulLoginNetworkAdapter)
+        let inkbunnyAPI = InkbunnyAPI(networkAdapter: journallingNetworkAdapter)
+        let capturingHomepageHandler = CapturingInkbunnyHomepageHandler()
+        inkbunnyAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
+
+         XCTAssertTrue(journallingNetworkAdapter.lastGetURLSatisfies({ $0.absoluteString.contains("api_search.php?sid=\(sidFromJSON)") }))
     }
 
 }
