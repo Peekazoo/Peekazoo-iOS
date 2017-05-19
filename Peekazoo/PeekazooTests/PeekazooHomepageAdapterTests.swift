@@ -53,26 +53,30 @@ struct SucceedingPeekazooService: PeekazooServiceProtocol {
 
 }
 
-class PeekazooHomepageAdapter: HomepageService, HomepageLoadingDelegate {
+struct PeekazooHomepageAdapter: HomepageService {
 
     var service: PeekazooServiceProtocol
-    var delegate: HomepageServiceLoadingDelegate?
 
     init(service: PeekazooServiceProtocol) {
         self.service = service
     }
 
     func loadHomepage(delegate: HomepageServiceLoadingDelegate) {
-        self.delegate = delegate
-        service.loadHomepage(delegate: self)
+        service.loadHomepage(delegate: HomepageLoadingDelegateAdapter(delegate: delegate))
     }
 
-    func finishedLoadingHomepage(items: [HomepageItem]) {
-        delegate?.homepageServiceDidLoadSuccessfully(content: items)
-    }
+    private struct HomepageLoadingDelegateAdapter: HomepageLoadingDelegate {
 
-    func failedToLoadHomepage() {
-        delegate?.homepageServiceDidFailToLoad()
+        var delegate: HomepageServiceLoadingDelegate
+
+        func finishedLoadingHomepage(items: [HomepageItem]) {
+            delegate.homepageServiceDidLoadSuccessfully(content: items)
+        }
+
+        func failedToLoadHomepage() {
+            delegate.homepageServiceDidFailToLoad()
+        }
+
     }
 
 }
