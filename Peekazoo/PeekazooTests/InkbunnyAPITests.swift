@@ -27,6 +27,12 @@ struct InkbunnyAPI {
             if data == nil {
                 completionHandler(.failure)
             } else {
+                do {
+                    _ = try JSONSerialization.jsonObject(with: data!, options: .allowFragments)
+                } catch {
+                    completionHandler(.failure)
+                }
+
                 let searchURL = URL(string: "https://inkbunny.net/api_search.php")!
                 self.networkAdapter.get(searchURL, completionHandler: { _, _ in })
             }
@@ -125,6 +131,16 @@ class InkbunnyAPITests: XCTestCase {
         inkbunnyAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
 
         XCTAssertFalse(journallingNetworkAdapter.lastGetURLSatisfies({ $0.absoluteString.contains("api_search.php") }))
+    }
+
+    func testLoginReturnsInvalidJSONDataNotifiesHandlerOfFailure() {
+        let invalidJSONData = "{what!".data(using: .utf8)
+        let invalidJSONNetworkAdapter = SuccessfulNetworkAdapter(data: invalidJSONData)
+        let inkbunnyAPI = InkbunnyAPI(networkAdapter: invalidJSONNetworkAdapter)
+        let capturingHomepageHandler = CapturingInkbunnyHomepageHandler()
+        inkbunnyAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
+
+        XCTAssertTrue(capturingHomepageHandler.wasNotifiedFeedDidFailToLoad)
     }
 
 }
