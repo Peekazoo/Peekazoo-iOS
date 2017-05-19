@@ -32,7 +32,11 @@ struct InkbunnyAPI {
             }
 
             let searchURL = URL(string: "https://inkbunny.net/api_search.php?sid=\(sid)")!
-            self.networkAdapter.get(searchURL, completionHandler: { _, _ in })
+            self.networkAdapter.get(searchURL, completionHandler: { _, error in
+                if error != nil {
+                    completionHandler(.failure)
+                }
+            })
         }
     }
 
@@ -159,6 +163,62 @@ class InkbunnyAPITests: XCTestCase {
         inkbunnyAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
 
          XCTAssertTrue(journallingNetworkAdapter.lastGetURLContains("api_search.php?sid=\(sidFromJSON)"))
+    }
+
+    struct ControllableNetworkAdapter: NetworkAdapter {
+
+        enum StubResponse {
+            case data(Data)
+            case error(Error)
+        }
+
+        private var responses = [URL: StubResponse]()
+
+        func get(_ url: URL, completionHandler: @escaping (Data?, Error?) -> Void) {
+            guard let response = responses[url] else { return }
+
+            switch response {
+            case .data(let data):
+                completionHandler(data, nil)
+
+            case .error(let error):
+                completionHandler(nil, error)
+            }
+        }
+
+        mutating func stub(url: URL, with data: Data) {
+            responses[url] = .data(data)
+        }
+
+        mutating func stub(url: URL, withContentsOfJSONFile name: String) {
+            let bundle = Bundle(for: SuccessfulNetworkAdapter.self)
+            let jsonURL = bundle.url(forResource: name, withExtension: "json")!
+            if let data = try? Data(contentsOf: jsonURL) {
+                stub(url: url, with: data)
+            }
+        }
+
+        mutating func stub(url: URL, with error: Error) {
+            responses[url] = .error(error)
+        }
+
+        mutating func stubFailure(url: URL) {
+            let error = NSError(domain: "", code: 0, userInfo: nil)
+            stub(url: url, with: error)
+        }
+
+    }
+
+    func testSearchFailsAfterLoginSucceedsNotifiesHandlerOfFailure() {
+        var controllableNetworkAdapter = ControllableNetworkAdapter()
+        controllableNetworkAdapter.stub(url: URL(string: "https://inkbunny.net/api_login.php")!, withContentsOfJSONFile: "ValidInkbunnyGuestLoginResponse")
+        controllableNetworkAdapter.stubFailure(url: URL(string: "https://inkbunny.net/api_search.php?sid=This_Is_A_Test_Token")!)
+
+        let inkbunnyAPI = InkbunnyAPI(networkAdapter: controllableNetworkAdapter)
+        let capturingHomepageHandler = CapturingInkbunnyHomepageHandler()
+        inkbunnyAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
+
+        XCTAssertTrue(capturingHomepageHandler.wasNotifiedFeedDidFailToLoad)
     }
 
 }
