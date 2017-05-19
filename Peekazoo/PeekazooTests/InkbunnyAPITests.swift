@@ -26,10 +26,10 @@ struct InkbunnyAPI {
         networkAdapter.get(loginURL) { data, _ in
             if data == nil {
                 completionHandler(.failure)
+            } else {
+                let searchURL = URL(string: "https://inkbunny.net/api_search.php")!
+                self.networkAdapter.get(searchURL, completionHandler: { _, _ in })
             }
-
-            let searchURL = URL(string: "https://inkbunny.net/api_search.php")!
-            self.networkAdapter.get(searchURL, completionHandler: { _, _ in })
         }
     }
 
@@ -110,6 +110,16 @@ class InkbunnyAPITests: XCTestCase {
         inkbunnyAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
 
         XCTAssertFalse(capturingHomepageHandler.wasNotifiedFeedDidFailToLoad)
+    }
+
+    func testLoginReturnsInvalidResponseDoesNotAttemptToFetchFromSearchEndpoint() {
+        let capturingNetworkAdapter = FailingNetworkAdapter()
+        let journallingNetworkAdapter = JournallingNetworkAdapter(networkAdapter: capturingNetworkAdapter)
+        let inkbunnyAPI = InkbunnyAPI(networkAdapter: journallingNetworkAdapter)
+        let capturingHomepageHandler = CapturingInkbunnyHomepageHandler()
+        inkbunnyAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
+
+        XCTAssertEqual(false, journallingNetworkAdapter.getURLs.last?.absoluteString.contains("api_search.php"))
     }
 
 }
