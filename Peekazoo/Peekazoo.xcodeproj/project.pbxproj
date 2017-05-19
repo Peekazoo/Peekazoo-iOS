@@ -45,6 +45,7 @@
 		7821A1541ECF7878009CA08A /* HomepageInterfaceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7821A1531ECF7878009CA08A /* HomepageInterfaceViewModel.swift */; };
 		7821A1561ECF7935009CA08A /* Difference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7821A1551ECF7935009CA08A /* Difference.swift */; };
 		7821A1581ECF7E3D009CA08A /* InkbunnyAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7821A1571ECF7E3D009CA08A /* InkbunnyAPITests.swift */; };
+		7821A15A1ECF8DB9009CA08A /* ValidInkbunnyGuestLoginResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 7821A1591ECF8DB8009CA08A /* ValidInkbunnyGuestLoginResponse.json */; };
 		7840DF7E1ECB19A800A623A7 /* CapturingHomepageServiceLoadingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7840DF7D1ECB19A800A623A7 /* CapturingHomepageServiceLoadingDelegate.swift */; };
 		7840DF831ECB19D800A623A7 /* PeekazooClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7840DF821ECB19D800A623A7 /* PeekazooClient.swift */; };
 		7840DF851ECB1BB400A623A7 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7840DF841ECB1BB400A623A7 /* Array.swift */; };
@@ -118,6 +119,7 @@
 		7821A1531ECF7878009CA08A /* HomepageInterfaceViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomepageInterfaceViewModel.swift; path = Core/Homepage/HomepageInterfaceViewModel.swift; sourceTree = "<group>"; };
 		7821A1551ECF7935009CA08A /* Difference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Difference.swift; path = Core/Difference.swift; sourceTree = "<group>"; };
 		7821A1571ECF7E3D009CA08A /* InkbunnyAPITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InkbunnyAPITests.swift; sourceTree = "<group>"; };
+		7821A1591ECF8DB8009CA08A /* ValidInkbunnyGuestLoginResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = ValidInkbunnyGuestLoginResponse.json; path = "Test Data/ValidInkbunnyGuestLoginResponse.json"; sourceTree = "<group>"; };
 		7840DF7D1ECB19A800A623A7 /* CapturingHomepageServiceLoadingDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CapturingHomepageServiceLoadingDelegate.swift; path = "Test Doubles/CapturingHomepageServiceLoadingDelegate.swift"; sourceTree = "<group>"; };
 		7840DF821ECB19D800A623A7 /* PeekazooClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PeekazooClient.swift; path = "Client Service/PeekazooClient.swift"; sourceTree = "<group>"; };
 		7840DF841ECB1BB400A623A7 /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Array.swift; path = Utilities/Array.swift; sourceTree = "<group>"; };
@@ -272,6 +274,7 @@
 			children = (
 				7840DF941ECB9F2400A623A7 /* ValidWeasylHomepageResponse.json */,
 				7840DF981ECC6B7100A623A7 /* MalformedWeasylHomepageResponse.json */,
+				7821A1591ECF8DB8009CA08A /* ValidInkbunnyGuestLoginResponse.json */,
 			);
 			name = "Test Data";
 			sourceTree = "<group>";
@@ -482,6 +485,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7840DF951ECB9F2400A623A7 /* ValidWeasylHomepageResponse.json in Resources */,
+				7821A15A1ECF8DB9009CA08A /* ValidInkbunnyGuestLoginResponse.json in Resources */,
 				7840DF991ECC6B7100A623A7 /* MalformedWeasylHomepageResponse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
