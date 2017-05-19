@@ -11,29 +11,49 @@ import XCTest
 
 protocol PeekazooServiceProtocol {
 
-    func loadHomepage()
+    func loadHomepage(delegate: HomepageLoadingDelegate)
+
+}
+
+protocol HomepageLoadingDelegate {
+
+    func failedToLoadHomepage()
 
 }
 
 class CapturingPeekazooService: PeekazooServiceProtocol {
 
     private(set) var didRequestLoadHomepage = false
-    func loadHomepage() {
+    func loadHomepage(delegate: HomepageLoadingDelegate) {
         didRequestLoadHomepage = true
     }
 
 }
 
-struct PeekazooHomepageAdapter: HomepageService {
+struct FailingPeekazooService: PeekazooServiceProtocol {
+
+    func loadHomepage(delegate: HomepageLoadingDelegate) {
+        delegate.failedToLoadHomepage()
+    }
+
+}
+
+class PeekazooHomepageAdapter: HomepageService, HomepageLoadingDelegate {
 
     var service: PeekazooServiceProtocol
+    var delegate: HomepageServiceLoadingDelegate?
 
     init(service: PeekazooServiceProtocol) {
         self.service = service
     }
 
     func loadHomepage(delegate: HomepageServiceLoadingDelegate) {
-        service.loadHomepage()
+        self.delegate = delegate
+        service.loadHomepage(delegate: self)
+    }
+
+    func failedToLoadHomepage() {
+        delegate?.homepageServiceDidFailToLoad()
     }
 
 }
@@ -46,6 +66,15 @@ class PeekazooHomepageAdapterTests: XCTestCase {
         adapter.loadHomepage(delegate: CapturingHomepageServiceLoadingDelegate())
 
         XCTAssertTrue(capturingPeekazooService.didRequestLoadHomepage)
+    }
+
+    func testFailingToLoadHomepageTellsDelegateAboutFailure() {
+        let failingPeekazooService = FailingPeekazooService()
+        let adapter = PeekazooHomepageAdapter(service: failingPeekazooService)
+        let delegate = CapturingHomepageServiceLoadingDelegate()
+        adapter.loadHomepage(delegate: delegate)
+
+        XCTAssertTrue(delegate.didFailToLoadInvoked)
     }
 
 }
