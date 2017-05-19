@@ -24,6 +24,14 @@ class CapturingWeasylHomepageHandler {
         }
     }
 
+    func result(at index: Int) -> WeasylHomepageItem? {
+        guard let results = capturedResults, index < results.count else {
+            return nil
+        }
+
+        return results[index]
+    }
+
 }
 
 class WeasylHomepageFeedTests: XCTestCase {
@@ -137,37 +145,27 @@ class WeasylHomepageFeedTests: XCTestCase {
         let weasylAPI = WeasylAPI(networkAdapter: validHomepageAdapter)
         weasylAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
 
-        guard let results = capturingHomepageHandler.capturedResults, results.count > 1 else {
-            XCTFail()
-            return
-        }
-
-        XCTAssertEqual(titleForSecondItemInJSON, results[1].title)
+        XCTAssertEqual(titleForSecondItemInJSON, capturingHomepageHandler.result(at: 1)?.title)
     }
 
     func testParsingValidJSONProvidesFirstItemWithExpectedContentIdentifier() {
-        let submitIDForFirstItemInJSON = "1489775"
+        let submitIDForFirstItem = "1489775"
         let validHomepageAdapter = SuccessfulNetworkAdapter(contentsOfJSONFile: "ValidWeasylHomepageResponse")
         let capturingHomepageHandler = CapturingWeasylHomepageHandler()
         let weasylAPI = WeasylAPI(networkAdapter: validHomepageAdapter)
         weasylAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
 
-        XCTAssertEqual(submitIDForFirstItemInJSON, capturingHomepageHandler.capturedResults?.first?.submitID)
+        XCTAssertEqual(submitIDForFirstItem, capturingHomepageHandler.capturedResults?.first?.submitID)
     }
 
     func testParsingValidJSONProvidesSecondItemWithExpectedContentIdentifier() {
-        let submitIDForSecondItemInJSON = "1489774"
+        let submitIDForSecondItem = "1489774"
         let validHomepageAdapter = SuccessfulNetworkAdapter(contentsOfJSONFile: "ValidWeasylHomepageResponse")
         let capturingHomepageHandler = CapturingWeasylHomepageHandler()
         let weasylAPI = WeasylAPI(networkAdapter: validHomepageAdapter)
         weasylAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
 
-        guard let results = capturingHomepageHandler.capturedResults, results.count > 1 else {
-            XCTFail()
-            return
-        }
-
-        XCTAssertEqual(submitIDForSecondItemInJSON, results[1].submitID)
+        XCTAssertEqual(submitIDForSecondItem, capturingHomepageHandler.result(at: 1)?.submitID)
     }
 
 }
