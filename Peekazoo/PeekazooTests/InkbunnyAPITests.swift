@@ -28,7 +28,11 @@ struct InkbunnyAPI {
                 completionHandler(.failure)
             } else {
                 do {
-                    _ = try JSONSerialization.jsonObject(with: data!, options: .allowFragments)
+                    let json = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String : Any]
+                    if json?["sid"] == nil {
+                        completionHandler(.failure)
+                        return
+                    }
                 } catch {
                     completionHandler(.failure)
                 }
@@ -137,6 +141,16 @@ class InkbunnyAPITests: XCTestCase {
         let invalidJSONData = "{what!".data(using: .utf8)
         let invalidJSONNetworkAdapter = SuccessfulNetworkAdapter(data: invalidJSONData)
         let inkbunnyAPI = InkbunnyAPI(networkAdapter: invalidJSONNetworkAdapter)
+        let capturingHomepageHandler = CapturingInkbunnyHomepageHandler()
+        inkbunnyAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
+
+        XCTAssertTrue(capturingHomepageHandler.wasNotifiedFeedDidFailToLoad)
+    }
+
+    func testLoginReturnsValidJSONWithoutSidFieldNotifiesHandlerOfFailure() {
+        let missingSidJSON = "{\"notsid\": \"value\"}".data(using: .utf8)
+        let missingSidNetworkAdapter = SuccessfulNetworkAdapter(data: missingSidJSON)
+        let inkbunnyAPI = InkbunnyAPI(networkAdapter: missingSidNetworkAdapter)
         let capturingHomepageHandler = CapturingInkbunnyHomepageHandler()
         inkbunnyAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
 
