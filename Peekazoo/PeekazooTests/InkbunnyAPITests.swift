@@ -61,6 +61,11 @@ class JournallingNetworkAdapter: NetworkAdapter {
         networkAdapter.get(url, completionHandler: completionHandler)
     }
 
+    func lastGetURLSatisfies(_ predicate: (URL) -> Bool) -> Bool {
+        guard let url = getURLs.last else { return false }
+        return predicate(url)
+    }
+
 }
 
 class InkbunnyAPITests: XCTestCase {
@@ -100,7 +105,7 @@ class InkbunnyAPITests: XCTestCase {
         let capturingHomepageHandler = CapturingInkbunnyHomepageHandler()
         inkbunnyAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
 
-        XCTAssertEqual(true, journallingNetworkAdapter.getURLs.last?.absoluteString.contains(expectedSearchEndpoint.absoluteString))
+        XCTAssertTrue(journallingNetworkAdapter.lastGetURLSatisfies({ $0.absoluteString.contains(expectedSearchEndpoint.absoluteString) }))
     }
 
     func testLoginRequestReturnsValidResponseDoesNotNotifyHandlerAboutFailure() {
@@ -119,7 +124,7 @@ class InkbunnyAPITests: XCTestCase {
         let capturingHomepageHandler = CapturingInkbunnyHomepageHandler()
         inkbunnyAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
 
-        XCTAssertEqual(false, journallingNetworkAdapter.getURLs.last?.absoluteString.contains("api_search.php"))
+        XCTAssertFalse(journallingNetworkAdapter.lastGetURLSatisfies({ $0.absoluteString.contains("api_search.php") }))
     }
 
 }
