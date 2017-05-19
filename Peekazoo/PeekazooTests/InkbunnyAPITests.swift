@@ -24,22 +24,15 @@ struct InkbunnyAPI {
     func loadHomepage(completionHandler: @escaping (InkbunnyHomepageLoadResult) -> Void) {
         let loginURL = URL(string: "https://inkbunny.net/api_login.php")!
         networkAdapter.get(loginURL) { data, _ in
-            if data == nil {
+            guard let data = data,
+                  let json = (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)) as? [String : Any],
+                  let sid = json["sid"] as? String else {
                 completionHandler(.failure)
-            } else {
-                do {
-                    let json = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String : Any]
-                    guard let sid = json?["sid"] as? String else {
-                        completionHandler(.failure)
-                        return
-                    }
-
-                    let searchURL = URL(string: "https://inkbunny.net/api_search.php?sid=\(sid)")!
-                    self.networkAdapter.get(searchURL, completionHandler: { _, _ in })
-                } catch {
-                    completionHandler(.failure)
-                }
+                return
             }
+
+            let searchURL = URL(string: "https://inkbunny.net/api_search.php?sid=\(sid)")!
+            self.networkAdapter.get(searchURL, completionHandler: { _, _ in })
         }
     }
 
