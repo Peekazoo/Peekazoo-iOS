@@ -1,5 +1,5 @@
 //
-//  WeasylServiceAdapterTests.swift
+//  WeasylAPIAdapterTests.swift
 //  Peekazoo
 //
 //  Created by Thomas Sherwood on 18/05/2017.
@@ -9,20 +9,20 @@
 @testable import Peekazoo
 import XCTest
 
-class WeasylServiceAdapterTests: XCTestCase {
+class WeasylAPIAdapterTests: XCTestCase {
 
     func testFetchingHomepageShouldTellTheServiceToPerformFetch() {
-        let capturingWeasylService = CapturingWeasylService()
-        let adapter = WeasylServiceAdapter(service: capturingWeasylService)
+        let capturingWeasylAPI = CapturingWeasylAPI()
+        let adapter = WeasylAPIAdapter(api: capturingWeasylAPI)
         adapter.loadFeed(delegate: DummyHomepageFeedDelegate())
 
-        XCTAssertTrue(capturingWeasylService.didLoadHomepage)
+        XCTAssertTrue(capturingWeasylAPI.didLoadHomepage)
     }
 
     func testSuccessfullyFetchingWeasylItemAdaptsItemIntoPeekazooDomainObjectWithContentIdentifier() {
         let item = WeasylHomepageItem(submitID: "ID", title: "Title")
-        let successfulWeasylService = SuccessfulWeasylService(items: [item])
-        let adapter = WeasylServiceAdapter(service: successfulWeasylService)
+        let successfulWeasylAPI = SuccessfulWeasylAPI(items: [item])
+        let adapter = WeasylAPIAdapter(api: successfulWeasylAPI)
         let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
         adapter.loadFeed(delegate: capturingHomepageFeedDelegate)
         let fetchedItem = capturingHomepageFeedDelegate.capturedResults?.first
@@ -32,8 +32,8 @@ class WeasylServiceAdapterTests: XCTestCase {
 
     func testSuccessfullyFetchingWeasylItemAdaptsItemIntoPeekazooDomainObjectWithTitle() {
         let item = WeasylHomepageItem(submitID: "ID", title: "Title")
-        let successfulWeasylService = SuccessfulWeasylService(items: [item])
-        let adapter = WeasylServiceAdapter(service: successfulWeasylService)
+        let successfulWeasylAPI = SuccessfulWeasylAPI(items: [item])
+        let adapter = WeasylAPIAdapter(api: successfulWeasylAPI)
         let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
         adapter.loadFeed(delegate: capturingHomepageFeedDelegate)
         let fetchedItem = capturingHomepageFeedDelegate.capturedResults?.first
@@ -42,8 +42,8 @@ class WeasylServiceAdapterTests: XCTestCase {
     }
 
     func testFailingToFetchWeasylItemTellsDelegateLoadFailed() {
-        let failingWeasylService = FailingWeasylService()
-        let adapter = WeasylServiceAdapter(service: failingWeasylService)
+        let failingWeasylAPI = FailingWeasylAPI()
+        let adapter = WeasylAPIAdapter(api: failingWeasylAPI)
         let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
         adapter.loadFeed(delegate: capturingHomepageFeedDelegate)
 
@@ -52,8 +52,8 @@ class WeasylServiceAdapterTests: XCTestCase {
 
     func testSuccessfullyFetchingWeasylItemDoesNotNotifyDelegateOfLoadFailure() {
         let item = WeasylHomepageItem(submitID: "ID", title: "Title")
-        let successfulWeasylService = SuccessfulWeasylService(items: [item])
-        let adapter = WeasylServiceAdapter(service: successfulWeasylService)
+        let successfulWeasylAPI = SuccessfulWeasylAPI(items: [item])
+        let adapter = WeasylAPIAdapter(api: successfulWeasylAPI)
         let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
         adapter.loadFeed(delegate: capturingHomepageFeedDelegate)
 
@@ -63,8 +63,8 @@ class WeasylServiceAdapterTests: XCTestCase {
     func testSuccessfullyFetchingMultipleWeasylItemsAdaptsSecondItemTitle() {
         let firstItem = WeasylHomepageItem(submitID: "ID", title: "Title")
         let secondItem = WeasylHomepageItem(submitID: "ID 2", title: "Another Title")
-        let successfulWeasylService = SuccessfulWeasylService(items: [firstItem, secondItem])
-        let adapter = WeasylServiceAdapter(service: successfulWeasylService)
+        let successfulWeasylAPI = SuccessfulWeasylAPI(items: [firstItem, secondItem])
+        let adapter = WeasylAPIAdapter(api: successfulWeasylAPI)
         let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
         adapter.loadFeed(delegate: capturingHomepageFeedDelegate)
 

@@ -12,8 +12,8 @@ struct PhoneAppFactory: AppFactory {
 
     func makeApplication(window: UIWindow) -> App {
         let networkAdapter = URLSessionNetworkAdapter()
-        let weasylService = WeasylService(networkAdapter: networkAdapter)
-        let weasylAdapter = WeasylServiceAdapter(service: weasylService)
+        let weasylAPI = WeasylAPI(networkAdapter: networkAdapter)
+        let weasylAdapter = WeasylAPIAdapter(api: weasylAPI)
         let service = PeekazooClient(feeds: [weasylAdapter])
         let serviceAdapter = PeekazooHomepageAdapter(service: service)
 

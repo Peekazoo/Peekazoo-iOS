@@ -1,5 +1,5 @@
 //
-//  WeasylServiceTestDoubles.swift
+//  WeasylAPITestDoubles.swift
 //  Peekazoo
 //
 //  Created by Thomas Sherwood on 18/05/2017.
@@ -9,7 +9,7 @@
 import Foundation
 @testable import Peekazoo
 
-class CapturingWeasylService: WeasylServiceProtocol {
+class CapturingWeasylAPI: WeasylAPIProtocol {
 
     private(set) var didLoadHomepage = false
     func loadHomepage(completionHandler: @escaping (WeasylHomepageLoadResult) -> Void) {
@@ -18,7 +18,7 @@ class CapturingWeasylService: WeasylServiceProtocol {
 
 }
 
-struct SuccessfulWeasylService: WeasylServiceProtocol {
+struct SuccessfulWeasylAPI: WeasylAPIProtocol {
 
     var items: [WeasylHomepageItem]
 
@@ -28,7 +28,7 @@ struct SuccessfulWeasylService: WeasylServiceProtocol {
 
 }
 
-struct FailingWeasylService: WeasylServiceProtocol {
+struct FailingWeasylAPI: WeasylAPIProtocol {
 
     func loadHomepage(completionHandler: @escaping (WeasylHomepageLoadResult) -> Void) {
         completionHandler(.failure)

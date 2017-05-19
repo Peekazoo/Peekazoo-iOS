@@ -1,5 +1,5 @@
 //
-//  WeasylServiceAdapter.swift
+//  WeasylAPIAdapter.swift
 //  Peekazoo
 //
 //  Created by Thomas Sherwood on 18/05/2017.
@@ -8,16 +8,16 @@
 
 import Foundation
 
-struct WeasylServiceAdapter: HomepageFeed {
+struct WeasylAPIAdapter: HomepageFeed {
 
-    var service: WeasylServiceProtocol
+    var api: WeasylAPIProtocol
 
-    init(service: WeasylServiceProtocol) {
-        self.service = service
+    init(api: WeasylAPIProtocol) {
+        self.api = api
     }
 
     func loadFeed(delegate: HomepageFeedDelegate) {
-        service.loadHomepage { result in
+        api.loadHomepage { result in
             guard case .success(let items) = result else {
                 delegate.feedDidFailToLoad()
                 return

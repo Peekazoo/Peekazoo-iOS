@@ -31,8 +31,8 @@ class WeasylHomepageFeedTests: XCTestCase {
     func testWhenToldToLoadTheHomepageURLIsRequested() {
         let expectedURL = URL(string: "https://www.weasyl.com/api/submissions/frontpage")!
         let capturingNetworkAdapter = CapturingNetworkAdapter()
-        let service = WeasylService(networkAdapter: capturingNetworkAdapter)
-        service.loadHomepage(completionHandler: { _ in })
+        let weasylAPI = WeasylAPI(networkAdapter: capturingNetworkAdapter)
+        weasylAPI.loadHomepage(completionHandler: { _ in })
 
         XCTAssertEqual(expectedURL, capturingNetworkAdapter.requestedURL)
     }
@@ -40,8 +40,8 @@ class WeasylHomepageFeedTests: XCTestCase {
     func testTheDelegateIsToldTheFeedFailedToLoadWhenNetworkEncounteredError() {
         let failingNetworkAdapter = FailingNetworkAdapter()
         let capturingHomepageHandler = CapturingWeasylHomepageHandler()
-        let service = WeasylService(networkAdapter: failingNetworkAdapter)
-        service.loadHomepage(completionHandler: capturingHomepageHandler.verify)
+        let weasylAPI = WeasylAPI(networkAdapter: failingNetworkAdapter)
+        weasylAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
 
         XCTAssertTrue(capturingHomepageHandler.wasNotifiedFeedDidFailToLoad)
     }
@@ -49,8 +49,8 @@ class WeasylHomepageFeedTests: XCTestCase {
     func testTheDelegateIsNotToldAboutFeedFailuresUntilNetworkHandlerIsInvokedWithError() {
         let capturingHomepageHandler = CapturingWeasylHomepageHandler()
         let blockedNetworkAdapter = BlockingNetworkAdapter(adapter: FailingNetworkAdapter())
-        let service = WeasylService(networkAdapter: blockedNetworkAdapter)
-        service.loadHomepage(completionHandler: capturingHomepageHandler.verify)
+        let weasylAPI = WeasylAPI(networkAdapter: blockedNetworkAdapter)
+        weasylAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
 
         XCTAssertFalse(capturingHomepageHandler.wasNotifiedFeedDidFailToLoad)
     }
@@ -58,8 +58,8 @@ class WeasylHomepageFeedTests: XCTestCase {
     func testWhenLoadingValidFeedDataTheDelegateIsToldTheFeedLoaded() {
         let successfulNetworkAdapter = SuccessfulNetworkAdapter(contentsOfJSONFile: "ValidWeasylHomepageResponse")
         let capturingHomepageHandler = CapturingWeasylHomepageHandler()
-        let service = WeasylService(networkAdapter: successfulNetworkAdapter)
-        service.loadHomepage(completionHandler: capturingHomepageHandler.verify)
+        let weasylAPI = WeasylAPI(networkAdapter: successfulNetworkAdapter)
+        weasylAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
 
         XCTAssertTrue(capturingHomepageHandler.wasNotifiedDidFinishLoading)
     }
@@ -67,8 +67,8 @@ class WeasylHomepageFeedTests: XCTestCase {
     func testTheDelegateIsNotToldAboutFeedLoadsUntilNetworkHandlerIsInvokedWithData() {
         let blockedNetworkAdapter = BlockingNetworkAdapter(adapter: SuccessfulNetworkAdapter(contentsOfJSONFile: "ValidWeasylHomepageResponse"))
         let capturingHomepageHandler = CapturingWeasylHomepageHandler()
-        let service = WeasylService(networkAdapter: blockedNetworkAdapter)
-        service.loadHomepage(completionHandler: capturingHomepageHandler.verify)
+        let weasylAPI = WeasylAPI(networkAdapter: blockedNetworkAdapter)
+        weasylAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
 
         XCTAssertFalse(capturingHomepageHandler.wasNotifiedDidFinishLoading)
     }
@@ -76,8 +76,8 @@ class WeasylHomepageFeedTests: XCTestCase {
     func testTheDelegateIsNotToldAboutFeedLoadsWhenNetworkErrors() {
         let successfulNetworkAdapter = FailingNetworkAdapter()
         let capturingHomepageHandler = CapturingWeasylHomepageHandler()
-        let service = WeasylService(networkAdapter: successfulNetworkAdapter)
-        service.loadHomepage(completionHandler: capturingHomepageHandler.verify)
+        let weasylAPI = WeasylAPI(networkAdapter: successfulNetworkAdapter)
+        weasylAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
 
         XCTAssertFalse(capturingHomepageHandler.wasNotifiedDidFinishLoading)
     }
@@ -85,8 +85,8 @@ class WeasylHomepageFeedTests: XCTestCase {
     func testTheDelegateIsNotToldAboutFeedErrorsWhenNetworkSucceeds() {
         let blockedNetworkAdapter = SuccessfulNetworkAdapter(contentsOfJSONFile: "ValidWeasylHomepageResponse")
         let capturingHomepageHandler = CapturingWeasylHomepageHandler()
-        let service = WeasylService(networkAdapter: blockedNetworkAdapter)
-        service.loadHomepage(completionHandler: capturingHomepageHandler.verify)
+        let weasylAPI = WeasylAPI(networkAdapter: blockedNetworkAdapter)
+        weasylAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
 
         XCTAssertFalse(capturingHomepageHandler.wasNotifiedFeedDidFailToLoad)
     }
@@ -94,8 +94,8 @@ class WeasylHomepageFeedTests: XCTestCase {
     func testNetworkRespondsWithInvalidJSONNotifiesDelegateAboutError() {
         let invalidJSONAdapter = SuccessfulNetworkAdapter(contentsOfJSONFile: "MalformedWeasylHomepageResponse")
         let capturingHomepageHandler = CapturingWeasylHomepageHandler()
-        let service = WeasylService(networkAdapter: invalidJSONAdapter)
-        service.loadHomepage(completionHandler: capturingHomepageHandler.verify)
+        let weasylAPI = WeasylAPI(networkAdapter: invalidJSONAdapter)
+        weasylAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
 
         XCTAssertTrue(capturingHomepageHandler.wasNotifiedFeedDidFailToLoad)
     }
@@ -103,8 +103,8 @@ class WeasylHomepageFeedTests: XCTestCase {
     func testNetworkRespondsWithInvalidJSONDoesNotNotifyDelegateLoadWasSuccessful() {
         let invalidJSONAdapter = SuccessfulNetworkAdapter(contentsOfJSONFile: "MalformedWeasylHomepageResponse")
         let capturingHomepageHandler = CapturingWeasylHomepageHandler()
-        let service = WeasylService(networkAdapter: invalidJSONAdapter)
-        service.loadHomepage(completionHandler: capturingHomepageHandler.verify)
+        let weasylAPI = WeasylAPI(networkAdapter: invalidJSONAdapter)
+        weasylAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
 
         XCTAssertFalse(capturingHomepageHandler.wasNotifiedDidFinishLoading)
     }
@@ -114,8 +114,8 @@ class WeasylHomepageFeedTests: XCTestCase {
         let json = try! JSONSerialization.data(withJSONObject: unexpectedStructure, options: .prettyPrinted)
         let unexpectedJSONAdapter = SuccessfulNetworkAdapter(data: json)
         let capturingHomepageHandler = CapturingWeasylHomepageHandler()
-        let service = WeasylService(networkAdapter: unexpectedJSONAdapter)
-        service.loadHomepage(completionHandler: capturingHomepageHandler.verify)
+        let weasylAPI = WeasylAPI(networkAdapter: unexpectedJSONAdapter)
+        weasylAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
 
         XCTAssertTrue(capturingHomepageHandler.wasNotifiedFeedDidFailToLoad)
     }
@@ -124,8 +124,8 @@ class WeasylHomepageFeedTests: XCTestCase {
         let titleForFirstItemInJSON = ":CO: ChaiFennec"
         let validHomepageAdapter = SuccessfulNetworkAdapter(contentsOfJSONFile: "ValidWeasylHomepageResponse")
         let capturingHomepageHandler = CapturingWeasylHomepageHandler()
-        let service = WeasylService(networkAdapter: validHomepageAdapter)
-        service.loadHomepage(completionHandler: capturingHomepageHandler.verify)
+        let weasylAPI = WeasylAPI(networkAdapter: validHomepageAdapter)
+        weasylAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
 
         XCTAssertEqual(titleForFirstItemInJSON, capturingHomepageHandler.capturedResults?.first?.title)
     }
@@ -134,8 +134,8 @@ class WeasylHomepageFeedTests: XCTestCase {
         let titleForSecondItemInJSON = "[C] Azri Simple Icon"
         let validHomepageAdapter = SuccessfulNetworkAdapter(contentsOfJSONFile: "ValidWeasylHomepageResponse")
         let capturingHomepageHandler = CapturingWeasylHomepageHandler()
-        let service = WeasylService(networkAdapter: validHomepageAdapter)
-        service.loadHomepage(completionHandler: capturingHomepageHandler.verify)
+        let weasylAPI = WeasylAPI(networkAdapter: validHomepageAdapter)
+        weasylAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
 
         guard let results = capturingHomepageHandler.capturedResults, results.count > 1 else {
             XCTFail()
@@ -149,8 +149,8 @@ class WeasylHomepageFeedTests: XCTestCase {
         let submitIDForFirstItemInJSON = "1489775"
         let validHomepageAdapter = SuccessfulNetworkAdapter(contentsOfJSONFile: "ValidWeasylHomepageResponse")
         let capturingHomepageHandler = CapturingWeasylHomepageHandler()
-        let service = WeasylService(networkAdapter: validHomepageAdapter)
-        service.loadHomepage(completionHandler: capturingHomepageHandler.verify)
+        let weasylAPI = WeasylAPI(networkAdapter: validHomepageAdapter)
+        weasylAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
 
         XCTAssertEqual(submitIDForFirstItemInJSON, capturingHomepageHandler.capturedResults?.first?.submitID)
     }
@@ -159,8 +159,8 @@ class WeasylHomepageFeedTests: XCTestCase {
         let submitIDForSecondItemInJSON = "1489774"
         let validHomepageAdapter = SuccessfulNetworkAdapter(contentsOfJSONFile: "ValidWeasylHomepageResponse")
         let capturingHomepageHandler = CapturingWeasylHomepageHandler()
-        let service = WeasylService(networkAdapter: validHomepageAdapter)
-        service.loadHomepage(completionHandler: capturingHomepageHandler.verify)
+        let weasylAPI = WeasylAPI(networkAdapter: validHomepageAdapter)
+        weasylAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
 
         guard let results = capturingHomepageHandler.capturedResults, results.count > 1 else {
             XCTFail()

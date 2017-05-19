@@ -1,5 +1,5 @@
 //
-//  WeasylServiceProtocol.swift
+//  WeasylAPIProtocol.swift
 //  Peekazoo
 //
 //  Created by Thomas Sherwood on 18/05/2017.
@@ -11,7 +11,7 @@ enum WeasylHomepageLoadResult {
     case failure
 }
 
-protocol WeasylServiceProtocol {
+protocol WeasylAPIProtocol {
 
     func loadHomepage(completionHandler: @escaping (WeasylHomepageLoadResult) -> Void)
 

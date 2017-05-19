@@ -1,12 +1,12 @@
 //
-//  WeasylService.swift
+//  WeasylAPI.swift
 //  Peekazoo
 //
 //  Created by Thomas Sherwood on 18/05/2017.
 //  Copyright © 2017 Peekazoo. All rights reserved.
 //
 
-struct WeasylService: WeasylServiceProtocol {
+struct WeasylAPI: WeasylAPIProtocol {
 
     private var homepageFeed: WeasylHomepageFeed
 
