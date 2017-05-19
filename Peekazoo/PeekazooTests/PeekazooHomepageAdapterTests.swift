@@ -17,7 +17,7 @@ protocol PeekazooServiceProtocol {
 
 protocol HomepageLoadingDelegate {
 
-    func finishedLoadingHomepage()
+    func finishedLoadingHomepage(items: [HomepageItem])
     func failedToLoadHomepage()
 
 }
@@ -41,8 +41,14 @@ struct FailingPeekazooService: PeekazooServiceProtocol {
 
 struct SucceedingPeekazooService: PeekazooServiceProtocol {
 
+    var items: [HomepageItem]
+
+    init(items: [HomepageItem] = []) {
+        self.items = items
+    }
+
     func loadHomepage(delegate: HomepageLoadingDelegate) {
-        delegate.finishedLoadingHomepage()
+        delegate.finishedLoadingHomepage(items: items)
     }
 
 }
@@ -58,13 +64,13 @@ class PeekazooHomepageAdapter: HomepageService, HomepageLoadingDelegate {
 
     func loadHomepage(delegate: HomepageServiceLoadingDelegate) {
         self.delegate = delegate
-        service.loadHomepage(delegate: self)
         delegate.homepageServiceDidFailToLoad()
         delegate.homepageServiceDidLoadSuccessfully(content: [])
+        service.loadHomepage(delegate: self)
     }
 
-    func finishedLoadingHomepage() {
-
+    func finishedLoadingHomepage(items: [HomepageItem]) {
+        delegate?.homepageServiceDidLoadSuccessfully(content: items)
     }
 
     func failedToLoadHomepage() {
@@ -99,6 +105,16 @@ class PeekazooHomepageAdapterTests: XCTestCase {
         adapter.loadHomepage(delegate: delegate)
 
         XCTAssertTrue(delegate.didFinishLoadingInvoked)
+    }
+
+    func testSucceedingInLoadingHomepageProvidesItemsToDelegate() {
+        let items = [StubHomepageItem(), StubHomepageItem(), StubHomepageItem()]
+        let successfulHomepageService = SucceedingPeekazooService(items: items)
+        let adapter = PeekazooHomepageAdapter(service: successfulHomepageService)
+        let delegate = CapturingHomepageServiceLoadingDelegate()
+        adapter.loadHomepage(delegate: delegate)
+
+        XCTAssertEqual(true, (delegate.capturedHomepageItems as? [StubHomepageItem])?.elementsEqual(items))
     }
 
 }
