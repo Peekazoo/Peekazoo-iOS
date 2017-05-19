@@ -15,9 +15,10 @@ struct PhoneAppFactory: AppFactory {
         let weasylService = WeasylService(networkAdapter: networkAdapter)
         let weasylAdapter = WeasylServiceAdapter(service: weasylService)
         let service = PeekazooClient(feeds: [weasylAdapter])
+        let serviceAdapter = PeekazooHomepageAdapter(service: service)
 
         return PhoneApp(rootRouter: WindowRootRouter(window: window),
-                        homepageService: service)
+                        homepageService: serviceAdapter)
     }
 
 }
