@@ -146,17 +146,17 @@ class WeasylHomepageFeedTests: XCTestCase {
     }
 
     func testParsingValidJSONProvidesFirstItemWithExpectedContentIdentifier() {
-        let contentIdentifierForFirstItemInJSON = "1489775"
+        let submitIDForFirstItemInJSON = "1489775"
         let validHomepageAdapter = SuccessfulNetworkAdapter(contentsOfJSONFile: "ValidWeasylHomepageResponse")
         let capturingHomepageHandler = CapturingWeasylHomepageHandler()
         let service = WeasylService(networkAdapter: validHomepageAdapter)
         service.loadHomepage(completionHandler: capturingHomepageHandler.verify)
 
-        XCTAssertEqual(contentIdentifierForFirstItemInJSON, capturingHomepageHandler.capturedResults?.first?.contentIdentifier)
+        XCTAssertEqual(submitIDForFirstItemInJSON, capturingHomepageHandler.capturedResults?.first?.submitID)
     }
 
     func testParsingValidJSONProvidesSecondItemWithExpectedContentIdentifier() {
-        let contentIdentifierForSecondItemInJSON = "1489774"
+        let submitIDForSecondItemInJSON = "1489774"
         let validHomepageAdapter = SuccessfulNetworkAdapter(contentsOfJSONFile: "ValidWeasylHomepageResponse")
         let capturingHomepageHandler = CapturingWeasylHomepageHandler()
         let service = WeasylService(networkAdapter: validHomepageAdapter)
@@ -167,7 +167,7 @@ class WeasylHomepageFeedTests: XCTestCase {
             return
         }
 
-        XCTAssertEqual(contentIdentifierForSecondItemInJSON, results[1].contentIdentifier)
+        XCTAssertEqual(submitIDForSecondItemInJSON, results[1].submitID)
     }
 
 }

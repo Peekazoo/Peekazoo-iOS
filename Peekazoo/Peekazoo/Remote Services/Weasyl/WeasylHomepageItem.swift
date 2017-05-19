@@ -8,12 +8,10 @@
 
 import Foundation
 
-struct WeasylHomepageItem: HomepageItem {
+struct WeasylHomepageItem {
 
     var title: String
     var submitID: String
-
-    var contentIdentifier: String { return submitID }
 
     init(submitID: String, title: String) {
         self.submitID = submitID

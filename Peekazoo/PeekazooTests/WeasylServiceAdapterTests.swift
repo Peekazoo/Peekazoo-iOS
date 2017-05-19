@@ -27,7 +27,7 @@ class WeasylServiceAdapterTests: XCTestCase {
         adapter.loadFeed(delegate: capturingHomepageFeedDelegate)
         let fetchedItem = capturingHomepageFeedDelegate.capturedResults?.first
 
-        XCTAssertEqual(item.contentIdentifier, fetchedItem?.contentIdentifier)
+        XCTAssertEqual(item.submitID, fetchedItem?.contentIdentifier)
     }
 
     func testSuccessfullyFetchingWeasylItemAdaptsItemIntoPeekazooDomainObjectWithTitle() {
