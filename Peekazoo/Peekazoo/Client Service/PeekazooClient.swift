@@ -21,26 +21,30 @@ protocol HomepageFeedDelegate {
 
 }
 
-class PeekazooClient: HomepageService, HomepageFeedDelegate {
+class PeekazooClient: PeekazooServiceProtocol, HomepageService, HomepageFeedDelegate {
 
     var feeds: [HomepageFeed]
-    var delegate: HomepageServiceLoadingDelegate?
+    var delegate: HomepageLoadingDelegate?
 
     init(feeds: [HomepageFeed]) {
         self.feeds = feeds
     }
 
-    func loadHomepage(delegate: HomepageServiceLoadingDelegate) {
+    func loadHomepage(delegate: HomepageLoadingDelegate) {
         self.delegate = delegate
         feeds.forEach(beginLoad)
     }
 
+    func loadHomepage(delegate: HomepageServiceLoadingDelegate) {
+
+    }
+
     func feedDidFinishLoading(items: [HomepageItem]) {
-        delegate?.homepageServiceDidLoadSuccessfully(content: items)
+        delegate?.finishedLoadingHomepage(items: items)
     }
 
     func feedDidFailToLoad() {
-        delegate?.homepageServiceDidFailToLoad()
+        delegate?.failedToLoadHomepage()
     }
 
     private func beginLoad(for feed: HomepageFeed) {

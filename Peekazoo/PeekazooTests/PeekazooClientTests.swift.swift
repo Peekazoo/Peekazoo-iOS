@@ -9,12 +9,28 @@
 @testable import Peekazoo
 import XCTest
 
+class CapturingHomepageLoadingDelegate: HomepageLoadingDelegate {
+
+    private(set) var didFinishLoadingInvoked = false
+    private(set) var capturedHomepageItems: [HomepageItem]?
+    func finishedLoadingHomepage(items: [HomepageItem]) {
+        didFinishLoadingInvoked = true
+        capturedHomepageItems = items
+    }
+
+    private(set) var didFailToLoadInvoked = false
+    func failedToLoadHomepage() {
+        didFailToLoadInvoked = true
+    }
+
+}
+
 class PeekazooClientTests: XCTestCase {
 
     func testWhenLoadingAllFeedsAreToldToLoad() {
         let firstFeed = CapturingHomepageFeed()
         let secondFeed = CapturingHomepageFeed()
-        let capturingLoadingDelegate = CapturingHomepageServiceLoadingDelegate()
+        let capturingLoadingDelegate = CapturingHomepageLoadingDelegate()
         let service = PeekazooClient(feeds: [firstFeed, secondFeed])
         service.loadHomepage(delegate: capturingLoadingDelegate)
 
@@ -23,7 +39,7 @@ class PeekazooClientTests: XCTestCase {
 
     func testWhenFeedFailsToLoadThenTheFailureCallbackIsInvoked() {
         let failingFeed = FailingHomepageFeed()
-        let capturingLoadingDelegate = CapturingHomepageServiceLoadingDelegate()
+        let capturingLoadingDelegate = CapturingHomepageLoadingDelegate()
         let service = PeekazooClient(feeds: [failingFeed])
         service.loadHomepage(delegate: capturingLoadingDelegate)
 
@@ -32,7 +48,7 @@ class PeekazooClientTests: XCTestCase {
 
     func testWhenSingleFeedLoadsSuccessfullyTheDelegateIsToldAboutIt() {
         let successfulFeed = SuccessfulHomepageFeed()
-        let capturingLoadingDelegate = CapturingHomepageServiceLoadingDelegate()
+        let capturingLoadingDelegate = CapturingHomepageLoadingDelegate()
         let service = PeekazooClient(feeds: [successfulFeed])
         service.loadHomepage(delegate: capturingLoadingDelegate)
 
@@ -41,7 +57,7 @@ class PeekazooClientTests: XCTestCase {
 
     func testFeedFailingToLoadShouldNotNotifyDelegateAboutSuccess() {
         let failingFeed = FailingHomepageFeed()
-        let capturingLoadingDelegate = CapturingHomepageServiceLoadingDelegate()
+        let capturingLoadingDelegate = CapturingHomepageLoadingDelegate()
         let service = PeekazooClient(feeds: [failingFeed])
         service.loadHomepage(delegate: capturingLoadingDelegate)
 
@@ -50,7 +66,7 @@ class PeekazooClientTests: XCTestCase {
 
     func testFeedLoadingSuccessfullyShouldNotNotifyDelegateAboutFailures() {
         let successfulFeed = SuccessfulHomepageFeed()
-        let capturingLoadingDelegate = CapturingHomepageServiceLoadingDelegate()
+        let capturingLoadingDelegate = CapturingHomepageLoadingDelegate()
         let service = PeekazooClient(feeds: [successfulFeed])
         service.loadHomepage(delegate: capturingLoadingDelegate)
 
@@ -60,7 +76,7 @@ class PeekazooClientTests: XCTestCase {
     func testForSingleFeedItsItemsAreProvidedToTheDelegate() {
         let items = [StubHomepageItem()]
         let successfulFeed = SuccessfulHomepageFeed(items: items)
-        let capturingLoadingDelegate = CapturingHomepageServiceLoadingDelegate()
+        let capturingLoadingDelegate = CapturingHomepageLoadingDelegate()
         let service = PeekazooClient(feeds: [successfulFeed])
         service.loadHomepage(delegate: capturingLoadingDelegate)
 
