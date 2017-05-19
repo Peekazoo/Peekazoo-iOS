@@ -50,10 +50,11 @@ class PeekazooHomepageAdapter: HomepageService, HomepageLoadingDelegate {
     func loadHomepage(delegate: HomepageServiceLoadingDelegate) {
         self.delegate = delegate
         service.loadHomepage(delegate: self)
+        delegate.homepageServiceDidFailToLoad()
     }
 
     func failedToLoadHomepage() {
-        delegate?.homepageServiceDidFailToLoad()
+
     }
 
 }
