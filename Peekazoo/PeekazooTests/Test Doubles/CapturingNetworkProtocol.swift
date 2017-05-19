@@ -9,32 +9,6 @@
 import Foundation
 import XCTest
 
-struct MockNetworkDataMatcher {
-
-    var expectedData: Data
-    var expectation: XCTestExpectation
-
-    func verify(_ data: Data?, _ error: Error?) {
-        if let data = data, data == expectedData {
-            expectation.fulfill()
-        }
-    }
-
-}
-
-struct MockNetworkErrorMatcher {
-
-    var expectedError: NSError
-    var expectation: XCTestExpectation
-
-    func verify(_ data: Data?, _ error: Error?) {
-        if let error = error, error._code == expectedError.code, error._domain == expectedError.domain {
-            expectation.fulfill()
-        }
-    }
-
-}
-
 class CapturingNetworkProtocol: URLProtocol {
 
     private static var loadExpectations = [URL: XCTestExpectation]()

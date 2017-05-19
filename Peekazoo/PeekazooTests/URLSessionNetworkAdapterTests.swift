@@ -39,19 +39,25 @@ class URLSessionNetworkAdapterTests: XCTestCase {
         let inputData = "{ \"key\": \"Some JSON\" }".data(using: .utf8)!
         CapturingNetworkProtocol.registerResponseData(inputData, for: url)
         let matchingExpectation = expectation(description: "Data should be provided to completion handler")
-        let matcher = MockNetworkDataMatcher(expectedData: inputData, expectation: matchingExpectation)
-        adapter.get(url, completionHandler: matcher.verify)
+        adapter.get(url) { data, _ in
+            if data == inputData {
+                matchingExpectation.fulfill()
+            }
+        }
 
         waitForExpectations(timeout: 0.1)
     }
 
     func testUnsuccessfulNetworkLoadsProvideErrorToCompletionHandler() {
         let url = URL(string: "https://it.doesnt.matter")!
-        let error = NSError(domain: "Some domain", code: 0, userInfo: [:])
-        CapturingNetworkProtocol.registerResponseError(error, for: url)
+        let expectedError = NSError(domain: "Some domain", code: 0, userInfo: [:])
+        CapturingNetworkProtocol.registerResponseError(expectedError, for: url)
         let matchingExpectation = expectation(description: "Error should be provided to completion handler")
-        let matcher = MockNetworkErrorMatcher(expectedError: error, expectation: matchingExpectation)
-        adapter.get(url, completionHandler: matcher.verify)
+        adapter.get(url) { _, error in
+            if let error = error, error._code == expectedError.code, error._domain == expectedError.domain {
+                matchingExpectation.fulfill()
+            }
+        }
 
         waitForExpectations(timeout: 0.1)
     }
