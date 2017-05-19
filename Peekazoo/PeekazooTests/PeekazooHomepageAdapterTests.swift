@@ -65,7 +65,6 @@ class PeekazooHomepageAdapter: HomepageService, HomepageLoadingDelegate {
     func loadHomepage(delegate: HomepageServiceLoadingDelegate) {
         self.delegate = delegate
         delegate.homepageServiceDidFailToLoad()
-        delegate.homepageServiceDidLoadSuccessfully(content: [])
         service.loadHomepage(delegate: self)
     }
 
@@ -115,6 +114,15 @@ class PeekazooHomepageAdapterTests: XCTestCase {
         adapter.loadHomepage(delegate: delegate)
 
         XCTAssertEqual(true, (delegate.capturedHomepageItems as? [StubHomepageItem])?.elementsEqual(items))
+    }
+
+    func testFailingToLoadHomepageShouldNotTellDelegateAboutSuccess() {
+        let failingPeekazooService = FailingPeekazooService()
+        let adapter = PeekazooHomepageAdapter(service: failingPeekazooService)
+        let delegate = CapturingHomepageServiceLoadingDelegate()
+        adapter.loadHomepage(delegate: delegate)
+
+        XCTAssertFalse(delegate.didFinishLoadingInvoked)
     }
 
 }
