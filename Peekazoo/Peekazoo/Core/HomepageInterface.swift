@@ -9,7 +9,7 @@
 protocol HomepageInterfaceDelegate {
 
     func homepageInterfaceDidInvokePullToRefresh()
-    
+
 }
 
 protocol HomepageInterface {

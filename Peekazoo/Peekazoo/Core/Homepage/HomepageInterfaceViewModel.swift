@@ -11,11 +11,11 @@ protocol HomepageInterfaceViewModel {
     var numberOfItems: Int { get }
 
     func item(at index: Int) -> HomepageInterfaceItemViewModel
-    
+
 }
 
 protocol HomepageInterfaceItemViewModel {
 
     var title: String { get }
-    
+
 }

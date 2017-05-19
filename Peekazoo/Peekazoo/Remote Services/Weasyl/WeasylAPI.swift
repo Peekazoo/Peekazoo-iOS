@@ -8,10 +8,10 @@
 
 struct WeasylAPI: WeasylAPIProtocol {
 
-    private var homepageFeed: WeasylHomepageFeed
+    private var homepageFeed: WeasylHomepageAPI
 
     init(networkAdapter: NetworkAdapter) {
-        homepageFeed = WeasylHomepageFeed(networkAdapter: networkAdapter)
+        homepageFeed = WeasylHomepageAPI(networkAdapter: networkAdapter)
     }
 
     func loadHomepage(completionHandler: @escaping (WeasylHomepageLoadResult) -> Void) {

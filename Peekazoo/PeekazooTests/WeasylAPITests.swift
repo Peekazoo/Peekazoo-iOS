@@ -1,5 +1,5 @@
 //
-//  WeasylHomepageFeedTests.swift
+//  WeasylAPITests.swift
 //  Peekazoo
 //
 //  Created by Thomas Sherwood on 16/05/2017.
@@ -34,7 +34,7 @@ class CapturingWeasylHomepageHandler {
 
 }
 
-class WeasylHomepageFeedTests: XCTestCase {
+class WeasylAPITests: XCTestCase {
 
     func testWhenToldToLoadTheHomepageURLIsRequested() {
         let expectedURL = URL(string: "https://www.weasyl.com/api/submissions/frontpage")!

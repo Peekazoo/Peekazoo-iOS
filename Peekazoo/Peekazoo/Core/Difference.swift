@@ -17,5 +17,5 @@ enum Difference {
             return nil
         }
     }
-    
+
 }
