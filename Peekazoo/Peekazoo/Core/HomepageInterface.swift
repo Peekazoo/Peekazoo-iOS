@@ -9,35 +9,7 @@
 protocol HomepageInterfaceDelegate {
 
     func homepageInterfaceDidInvokePullToRefresh()
-
-}
-
-protocol HomepageInterfaceViewModel {
-
-    var numberOfItems: Int { get }
-
-    func item(at index: Int) -> HomepageInterfaceItemViewModel
-
-}
-
-protocol HomepageInterfaceItemViewModel {
-
-    var title: String { get }
-
-}
-
-enum Difference {
-
-    case insertion(index: Int)
-
-    var insertedIndex: Int? {
-        if case .insertion(let idx) = self {
-            return idx
-        } else {
-            return nil
-        }
-    }
-
+    
 }
 
 protocol HomepageInterface {

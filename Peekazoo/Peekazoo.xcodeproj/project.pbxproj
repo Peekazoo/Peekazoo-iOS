@@ -42,6 +42,8 @@
 		7821A14E1ECF178B009CA08A /* PeekazooServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7821A14D1ECF178B009CA08A /* PeekazooServiceProtocol.swift */; };
 		7821A1501ECF17AA009CA08A /* PeekazooServiceProtocolTestDoubles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7821A14F1ECF17AA009CA08A /* PeekazooServiceProtocolTestDoubles.swift */; };
 		7821A1521ECF17CB009CA08A /* PeekazooHomepageAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7821A1511ECF17CB009CA08A /* PeekazooHomepageAdapter.swift */; };
+		7821A1541ECF7878009CA08A /* HomepageInterfaceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7821A1531ECF7878009CA08A /* HomepageInterfaceViewModel.swift */; };
+		7821A1561ECF7935009CA08A /* Difference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7821A1551ECF7935009CA08A /* Difference.swift */; };
 		7840DF7E1ECB19A800A623A7 /* CapturingHomepageServiceLoadingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7840DF7D1ECB19A800A623A7 /* CapturingHomepageServiceLoadingDelegate.swift */; };
 		7840DF831ECB19D800A623A7 /* PeekazooClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7840DF821ECB19D800A623A7 /* PeekazooClient.swift */; };
 		7840DF851ECB1BB400A623A7 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7840DF841ECB1BB400A623A7 /* Array.swift */; };
@@ -112,6 +114,8 @@
 		7821A14D1ECF178B009CA08A /* PeekazooServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PeekazooServiceProtocol.swift; path = "Client Service/PeekazooServiceProtocol.swift"; sourceTree = "<group>"; };
 		7821A14F1ECF17AA009CA08A /* PeekazooServiceProtocolTestDoubles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PeekazooServiceProtocolTestDoubles.swift; path = "Test Doubles/PeekazooServiceProtocolTestDoubles.swift"; sourceTree = "<group>"; };
 		7821A1511ECF17CB009CA08A /* PeekazooHomepageAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PeekazooHomepageAdapter.swift; path = "Core/Service Adapters/PeekazooHomepageAdapter.swift"; sourceTree = "<group>"; };
+		7821A1531ECF7878009CA08A /* HomepageInterfaceViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomepageInterfaceViewModel.swift; path = Core/Homepage/HomepageInterfaceViewModel.swift; sourceTree = "<group>"; };
+		7821A1551ECF7935009CA08A /* Difference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Difference.swift; path = Core/Difference.swift; sourceTree = "<group>"; };
 		7840DF7D1ECB19A800A623A7 /* CapturingHomepageServiceLoadingDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CapturingHomepageServiceLoadingDelegate.swift; path = "Test Doubles/CapturingHomepageServiceLoadingDelegate.swift"; sourceTree = "<group>"; };
 		7840DF821ECB19D800A623A7 /* PeekazooClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PeekazooClient.swift; path = "Client Service/PeekazooClient.swift"; sourceTree = "<group>"; };
 		7840DF841ECB1BB400A623A7 /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Array.swift; path = Utilities/Array.swift; sourceTree = "<group>"; };
@@ -236,6 +240,7 @@
 				6E0D85AB1EC8FA79000E7283 /* PhoneApp.swift */,
 				6E0D85B51EC9719C000E7283 /* HomepageService.swift */,
 				6E0D85B71EC9738B000E7283 /* HomepageInterface.swift */,
+				7821A1551ECF7935009CA08A /* Difference.swift */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -246,6 +251,7 @@
 				6E0D85C41EC9AC88000E7283 /* HomepageModule.swift */,
 				6E0D85C21EC9A4DF000E7283 /* HomepagePresenter.swift */,
 				6E6E61721EC9ED8400964076 /* HomepageViewModel.swift */,
+				7821A1531ECF7878009CA08A /* HomepageInterfaceViewModel.swift */,
 			);
 			name = Homepage;
 			sourceTree = "<group>";
@@ -507,6 +513,7 @@
 				6E0D858A1EC6F022000E7283 /* WindowRootRouter.swift.swift in Sources */,
 				6E0D85A41EC83DF0000E7283 /* PhoneAppFactory.swift in Sources */,
 				7821A1521ECF17CB009CA08A /* PeekazooHomepageAdapter.swift in Sources */,
+				7821A1561ECF7935009CA08A /* Difference.swift in Sources */,
 				789F10071EC481B100FAF5F1 /* AppDelegate.swift in Sources */,
 				7821A14E1ECF178B009CA08A /* PeekazooServiceProtocol.swift in Sources */,
 				6E0D85C31EC9A4DF000E7283 /* HomepagePresenter.swift in Sources */,
@@ -515,6 +522,7 @@
 				7840DF8D1ECB974000A623A7 /* WeasylHomepageFeed.swift in Sources */,
 				6E0D85A21EC83C2F000E7283 /* App.swift in Sources */,
 				6E0D85B81EC9738B000E7283 /* HomepageInterface.swift in Sources */,
+				7821A1541ECF7878009CA08A /* HomepageInterfaceViewModel.swift in Sources */,
 				6E0D858F1EC6F159000E7283 /* HomepageViewController.swift in Sources */,
 				6E0D85981EC839FA000E7283 /* AppFactory.swift in Sources */,
 				6E6E61731EC9ED8400964076 /* HomepageViewModel.swift in Sources */,
