@@ -67,4 +67,14 @@ class PeekazooClientTests: XCTestCase {
         XCTAssertEqual(true, (capturingLoadingDelegate.capturedHomepageItems as? [StubHomepageItem])?.elementsEqual(items))
     }
 
+    func testWhenOneFeedFinishesLoadingWhileAnotherIsInProgressTheDelegateIsNotToldToLoadFinished() {
+        let firstFeed = SuccessfulHomepageFeed()
+        let secondFeed = CapturingHomepageFeed()
+        let capturingLoadingDelegate = CapturingHomepageLoadingDelegate()
+        let service = PeekazooClient(feeds: [firstFeed, secondFeed])
+        service.loadHomepage(delegate: capturingLoadingDelegate)
+
+        XCTAssertFalse(capturingLoadingDelegate.didFinishLoadingInvoked)
+    }
+
 }
