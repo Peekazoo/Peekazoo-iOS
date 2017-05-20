@@ -29,4 +29,9 @@ class CapturingHomepageFeedDelegate: HomepageFeedDelegate {
         wasNotifiedFeedDidFailToLoad = true
     }
 
+    func result(at index: Int) -> HomepageItem? {
+        guard let results = capturedResults, index < results.count else { return nil }
+        return results[index]
+    }
+
 }

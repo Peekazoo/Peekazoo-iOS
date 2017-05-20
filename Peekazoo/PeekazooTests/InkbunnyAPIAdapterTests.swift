@@ -58,17 +58,13 @@ struct InkbunnyAPIAdapter: HomepageFeed {
         api.loadHomepage { result in
             switch result {
             case .success(let items):
-                delegate.feedDidFinishLoading(items: self.adapt(items: items))
+                let homepageItems = items.map(AdaptedItem.init)
+                delegate.feedDidFinishLoading(items: homepageItems)
 
             case .failure:
                 delegate.feedDidFailToLoad()
             }
         }
-    }
-
-    private func adapt(items: [InkbunnySubmission]) -> [AdaptedItem] {
-        guard let item = items.first else { return [] }
-        return [AdaptedItem(submission: item)]
     }
 
     private struct AdaptedItem: HomepageItem {
@@ -152,6 +148,17 @@ class InkbunnyAPIAdapterTests: XCTestCase {
         adapter.loadFeed(delegate: capturingHomepageFeedDelegate)
 
         XCTAssertEqual(submissionID, capturingHomepageFeedDelegate.capturedResults?.first?.contentIdentifier)
+    }
+
+    func testSuccessfullyLoadingMultipleItemsShouldTheSecondIdentifier() {
+        let firstInkbunnySubmission = InkbunnySubmission(submissionID: "ID 1", title: "")
+        let secondInkbunnySubmission = InkbunnySubmission(submissionID: "ID 2", title: "")
+        let successfulInkbunnyAPI = SuccessfulInkbunnyAPI(items: [firstInkbunnySubmission, secondInkbunnySubmission])
+        let adapter = InkbunnyAPIAdapter(api: successfulInkbunnyAPI)
+        let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
+        adapter.loadFeed(delegate: capturingHomepageFeedDelegate)
+
+        XCTAssertEqual(secondInkbunnySubmission.submissionID, capturingHomepageFeedDelegate.result(at: 1)?.contentIdentifier)
     }
 
 }
