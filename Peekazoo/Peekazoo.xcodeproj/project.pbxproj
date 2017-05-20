@@ -47,6 +47,8 @@
 		7821A1581ECF7E3D009CA08A /* InkbunnyAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7821A1571ECF7E3D009CA08A /* InkbunnyAPITests.swift */; };
 		7821A15A1ECF8DB9009CA08A /* ValidInkbunnyGuestLoginResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 7821A1591ECF8DB8009CA08A /* ValidInkbunnyGuestLoginResponse.json */; };
 		7821A15C1ED029C0009CA08A /* ValidInkbunnySearchResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 7821A15B1ED029C0009CA08A /* ValidInkbunnySearchResponse.json */; };
+		7821A15F1ED039BB009CA08A /* InkbunnyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7821A15E1ED039BB009CA08A /* InkbunnyAPI.swift */; };
+		7821A1611ED039D3009CA08A /* InkbunnyHomepageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7821A1601ED039D3009CA08A /* InkbunnyHomepageItem.swift */; };
 		7840DF7E1ECB19A800A623A7 /* CapturingHomepageServiceLoadingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7840DF7D1ECB19A800A623A7 /* CapturingHomepageServiceLoadingDelegate.swift */; };
 		7840DF831ECB19D800A623A7 /* PeekazooClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7840DF821ECB19D800A623A7 /* PeekazooClient.swift */; };
 		7840DF851ECB1BB400A623A7 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7840DF841ECB1BB400A623A7 /* Array.swift */; };
@@ -122,6 +124,8 @@
 		7821A1571ECF7E3D009CA08A /* InkbunnyAPITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InkbunnyAPITests.swift; sourceTree = "<group>"; };
 		7821A1591ECF8DB8009CA08A /* ValidInkbunnyGuestLoginResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = ValidInkbunnyGuestLoginResponse.json; path = "Test Data/ValidInkbunnyGuestLoginResponse.json"; sourceTree = "<group>"; };
 		7821A15B1ED029C0009CA08A /* ValidInkbunnySearchResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = ValidInkbunnySearchResponse.json; path = "Test Data/ValidInkbunnySearchResponse.json"; sourceTree = "<group>"; };
+		7821A15E1ED039BB009CA08A /* InkbunnyAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InkbunnyAPI.swift; path = "Remote Services/Inkbunny/InkbunnyAPI.swift"; sourceTree = "<group>"; };
+		7821A1601ED039D3009CA08A /* InkbunnyHomepageItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InkbunnyHomepageItem.swift; path = "Remote Services/Inkbunny/InkbunnyHomepageItem.swift"; sourceTree = "<group>"; };
 		7840DF7D1ECB19A800A623A7 /* CapturingHomepageServiceLoadingDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CapturingHomepageServiceLoadingDelegate.swift; path = "Test Doubles/CapturingHomepageServiceLoadingDelegate.swift"; sourceTree = "<group>"; };
 		7840DF821ECB19D800A623A7 /* PeekazooClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PeekazooClient.swift; path = "Client Service/PeekazooClient.swift"; sourceTree = "<group>"; };
 		7840DF841ECB1BB400A623A7 /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Array.swift; path = Utilities/Array.swift; sourceTree = "<group>"; };
@@ -271,6 +275,15 @@
 			name = Utilities;
 			sourceTree = "<group>";
 		};
+		7821A15D1ED039A2009CA08A /* Inkbunny */ = {
+			isa = PBXGroup;
+			children = (
+				7821A15E1ED039BB009CA08A /* InkbunnyAPI.swift */,
+				7821A1601ED039D3009CA08A /* InkbunnyHomepageItem.swift */,
+			);
+			name = Inkbunny;
+			sourceTree = "<group>";
+		};
 		7840DF931ECB9EFC00A623A7 /* Test Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -357,6 +370,7 @@
 		78F27FA01ECDBC9700C38738 /* Remote Services */ = {
 			isa = PBXGroup;
 			children = (
+				7821A15D1ED039A2009CA08A /* Inkbunny */,
 				78F27FA11ECDBCA400C38738 /* Weasyl */,
 			);
 			name = "Remote Services";
@@ -526,6 +540,7 @@
 				7821A1521ECF17CB009CA08A /* PeekazooHomepageAdapter.swift in Sources */,
 				7821A1561ECF7935009CA08A /* Difference.swift in Sources */,
 				789F10071EC481B100FAF5F1 /* AppDelegate.swift in Sources */,
+				7821A1611ED039D3009CA08A /* InkbunnyHomepageItem.swift in Sources */,
 				7821A14E1ECF178B009CA08A /* PeekazooServiceProtocol.swift in Sources */,
 				6E0D85C31EC9A4DF000E7283 /* HomepagePresenter.swift in Sources */,
 				786725A61ECDC4C000D78A72 /* WeasylAPIAdapter.swift in Sources */,
@@ -537,6 +552,7 @@
 				6E0D858F1EC6F159000E7283 /* HomepageViewController.swift in Sources */,
 				6E0D85981EC839FA000E7283 /* AppFactory.swift in Sources */,
 				6E6E61731EC9ED8400964076 /* HomepageViewModel.swift in Sources */,
+				7821A15F1ED039BB009CA08A /* InkbunnyAPI.swift in Sources */,
 				7840DF831ECB19D800A623A7 /* PeekazooClient.swift in Sources */,
 				6E6E617F1ECA43FF00964076 /* HomepageItemCollectionViewCell.swift in Sources */,
 				78F27FA81ECDC2BD00C38738 /* NetworkAdapter.swift in Sources */,
