@@ -74,8 +74,9 @@ struct InkbunnyAPIAdapter: HomepageFeed {
     private struct AdaptedItem: HomepageItem {
 
         private var submission: InkbunnySubmission
+
         var title: String { return submission.title }
-        var contentIdentifier: String = ""
+        var contentIdentifier: String { return submission.submissionID }
 
         init(submission: InkbunnySubmission) {
             self.submission = submission
@@ -140,6 +141,17 @@ class InkbunnyAPIAdapterTests: XCTestCase {
         adapter.loadFeed(delegate: capturingHomepageFeedDelegate)
 
         XCTAssertEqual(title, capturingHomepageFeedDelegate.capturedResults?.first?.title)
+    }
+
+    func testSuccessfullyLoadingHomepageAdaptsSubmissionIdentifierInFirstItem() {
+        let submissionID = "Some identifier"
+        let stubInkbunnySubmission = InkbunnySubmission(submissionID: submissionID, title: "")
+        let successfulInkbunnyAPI = SuccessfulInkbunnyAPI(items: [stubInkbunnySubmission])
+        let adapter = InkbunnyAPIAdapter(api: successfulInkbunnyAPI)
+        let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
+        adapter.loadFeed(delegate: capturingHomepageFeedDelegate)
+
+        XCTAssertEqual(submissionID, capturingHomepageFeedDelegate.capturedResults?.first?.contentIdentifier)
     }
 
 }
