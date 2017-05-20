@@ -9,22 +9,6 @@
 @testable import Peekazoo
 import XCTest
 
-class CapturingHomepageLoadingDelegate: HomepageLoadingDelegate {
-
-    private(set) var didFinishLoadingInvoked = false
-    private(set) var capturedHomepageItems: [HomepageItem]?
-    func finishedLoadingHomepage(items: [HomepageItem]) {
-        didFinishLoadingInvoked = true
-        capturedHomepageItems = items
-    }
-
-    private(set) var didFailToLoadInvoked = false
-    func failedToLoadHomepage() {
-        didFailToLoadInvoked = true
-    }
-
-}
-
 class PeekazooClientTests: XCTestCase {
 
     func testWhenLoadingAllFeedsAreToldToLoad() {
