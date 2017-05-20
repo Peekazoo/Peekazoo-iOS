@@ -10,6 +10,7 @@
 import XCTest
 
 enum InkbunnyHomepageLoadResult {
+    case success
     case failure
 }
 
@@ -22,6 +23,7 @@ struct InkbunnyAPI {
     }
 
     func loadHomepage(completionHandler: @escaping (InkbunnyHomepageLoadResult) -> Void) {
+        completionHandler(.success)
         let loginURL = URL(string: "https://inkbunny.net/api_login.php")!
         networkAdapter.get(loginURL) { data, _ in
             guard let data = data,
@@ -43,8 +45,12 @@ struct InkbunnyAPI {
 class CapturingInkbunnyHomepageHandler {
 
     private(set) var wasNotifiedFeedDidFailToLoad = false
+    private(set) var wasNotifiedFeedLoaded = false
     func verify(_ result: InkbunnyHomepageLoadResult) {
         switch result {
+        case .success:
+            wasNotifiedFeedLoaded = true
+
         case .failure:
             wasNotifiedFeedDidFailToLoad = true
         }
@@ -165,6 +171,18 @@ class InkbunnyAPITests: XCTestCase {
         inkbunnyAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
 
         XCTAssertTrue(capturingHomepageHandler.wasNotifiedFeedDidFailToLoad)
+    }
+
+    func testSearchSucceedsWithValidJSONNotifiesHandlerOfSuccess() {
+        var controllableNetworkAdapter = ControllableNetworkAdapter()
+        controllableNetworkAdapter.stub(url: URL(string: "https://inkbunny.net/api_login.php")!, withContentsOfJSONFile: "ValidInkbunnyGuestLoginResponse")
+        controllableNetworkAdapter.stub(url: URL(string: "https://inkbunny.net/api_search.php?sid=This_Is_A_Test_Token")!, withContentsOfJSONFile: "ValidInkbunnyGuestLoginResponse")
+
+        let inkbunnyAPI = InkbunnyAPI(networkAdapter: controllableNetworkAdapter)
+        let capturingHomepageHandler = CapturingInkbunnyHomepageHandler()
+        inkbunnyAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
+
+        XCTAssertTrue(capturingHomepageHandler.wasNotifiedFeedLoaded)
     }
 
 }
