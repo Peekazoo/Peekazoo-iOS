@@ -13,7 +13,7 @@ enum InkbunnyHomepageLoadResult {
     case failure
 }
 
-struct InkbunnyAPI {
+struct InkbunnyAPI: InkbunnyAPIProtocol {
 
     var networkAdapter: NetworkAdapter
 
