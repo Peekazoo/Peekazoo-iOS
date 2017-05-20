@@ -237,4 +237,15 @@ class InkbunnyAPITests: XCTestCase {
         XCTAssertEqual(secondSubmissionIDInSearchJSON, capturingHomepageHandler.result(at: 1)?.submissionID)
     }
 
+    func testSearchRequestProvidesUnexpectedSubmissionsRootJSONTypeNotifiesHandlerOfFailure() {
+        var unexpectedRootAdapter = makeValidLoginNetworkAdapter()
+        let unexpectedRoot = "{\"submissions\": \"this should be an array\"}".data(using: .utf8)!
+        unexpectedRootAdapter.stub(url: URL(string: "https://inkbunny.net/api_search.php?sid=This_Is_A_Test_Token")!, with: unexpectedRoot)
+        let inkbunnyAPI = InkbunnyAPI(networkAdapter: unexpectedRootAdapter)
+        let capturingHomepageHandler = CapturingInkbunnyHomepageHandler()
+        inkbunnyAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
+
+        XCTAssertTrue(capturingHomepageHandler.wasNotifiedFeedDidFailToLoad)
+    }
+
 }

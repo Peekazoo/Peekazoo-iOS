@@ -34,24 +34,19 @@ struct InkbunnyAPI {
             let searchURL = URL(string: "https://inkbunny.net/api_search.php?sid=\(sid)")!
             self.networkAdapter.get(searchURL, completionHandler: { data, _ in
                 guard let data = data,
-                      let json = self.jsonObject(from: data) as? [String : Any] else {
+                      let json = self.jsonObject(from: data) as? [String : Any],
+                      let submissions = json["submissions"] as? [[String : Any]] else {
                     completionHandler(.failure)
                     return
                 }
 
-                completionHandler(.success(self.parse(json)))
+                completionHandler(.success(submissions.flatMap(InkbunnySubmission.init)))
             })
         }
     }
 
     private func jsonObject(from data: Data) -> Any? {
         return try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
-    }
-
-    private func parse(_ json: [String : Any]) -> [InkbunnySubmission] {
-        guard let submissions = json["submissions"] as? [[String : Any]] else { return [] }
-
-        return submissions.flatMap(InkbunnySubmission.init)
     }
 
 }
