@@ -51,14 +51,12 @@ struct InkbunnyAPIAdapter: HomepageFeed {
     func loadFeed(delegate: HomepageFeedDelegate) {
         api.loadHomepage { result in
             switch result {
+            case .success(_):
+                delegate.feedDidFinishLoading(items: [])
+
             case .failure:
                 delegate.feedDidFailToLoad()
-
-            default:
-                break
             }
-
-            delegate.feedDidFinishLoading(items: [])
         }
     }
 
@@ -99,6 +97,15 @@ class InkbunnyAPIAdapterTests: XCTestCase {
         adapter.loadFeed(delegate: capturingHomepageFeedDelegate)
 
         XCTAssertFalse(capturingHomepageFeedDelegate.wasNotifiedFeedDidFailToLoad)
+    }
+
+    func testFailingToLoadHomepageDoesNotTellDelegateFeedFinishedLoading() {
+        let failingInkbunnyAPI = FailingInkbunnyAPI()
+        let adapter = InkbunnyAPIAdapter(api: failingInkbunnyAPI)
+        let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
+        adapter.loadFeed(delegate: capturingHomepageFeedDelegate)
+
+        XCTAssertFalse(capturingHomepageFeedDelegate.wasNotifiedDidFinishLoading)
     }
 
 }
