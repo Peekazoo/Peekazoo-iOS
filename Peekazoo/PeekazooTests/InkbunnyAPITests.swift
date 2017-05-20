@@ -60,9 +60,10 @@ struct InkbunnyAPI {
 
         var items = [InkbunnyHomepageItem]()
         for submission in submissions {
-            guard let title = submission["title"] as? String else { continue }
+            guard let title = submission["title"] as? String,
+                  let submissionID = submission["submission_id"] as? String else { continue }
 
-            let item = InkbunnyHomepageItem(submissionID: "1359474", title: title)
+            let item = InkbunnyHomepageItem(submissionID: submissionID, title: title)
             items.append(item)
         }
 
@@ -290,6 +291,19 @@ class InkbunnyAPITests: XCTestCase {
         inkbunnyAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
 
         XCTAssertEqual(firstSubmissionIDInSearchJSON, capturingHomepageHandler.results?.first?.submissionID)
+    }
+
+    func testSearchSucceedsProvidesHandlerWithSecondItemConfiguredWithSubmissionID() {
+        let secondSubmissionIDInSearchJSON = "1359473"
+        var controllableNetworkAdapter = ControllableNetworkAdapter()
+        controllableNetworkAdapter.stub(url: URL(string: "https://inkbunny.net/api_login.php")!, withContentsOfJSONFile: "ValidInkbunnyGuestLoginResponse")
+        controllableNetworkAdapter.stub(url: URL(string: "https://inkbunny.net/api_search.php?sid=This_Is_A_Test_Token")!, withContentsOfJSONFile: "ValidInkbunnySearchResponse")
+
+        let inkbunnyAPI = InkbunnyAPI(networkAdapter: controllableNetworkAdapter)
+        let capturingHomepageHandler = CapturingInkbunnyHomepageHandler()
+        inkbunnyAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
+
+        XCTAssertEqual(secondSubmissionIDInSearchJSON, capturingHomepageHandler.result(at: 1)?.submissionID)
     }
 
 }
