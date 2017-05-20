@@ -97,6 +97,22 @@ class CapturingInkbunnyHomepageHandler {
 
 class InkbunnyAPITests: XCTestCase {
 
+    private func makeSuccessfulSearchNetworkAdapter() -> NetworkAdapter {
+        var controllableNetworkAdapter = ControllableNetworkAdapter()
+        controllableNetworkAdapter.stub(url: URL(string: "https://inkbunny.net/api_login.php")!, withContentsOfJSONFile: "ValidInkbunnyGuestLoginResponse")
+        controllableNetworkAdapter.stub(url: URL(string: "https://inkbunny.net/api_search.php?sid=This_Is_A_Test_Token")!, withContentsOfJSONFile: "ValidInkbunnySearchResponse")
+
+        return controllableNetworkAdapter
+    }
+
+    private func makeFailingSearchNetworkAdapter() -> NetworkAdapter {
+        var controllableNetworkAdapter = ControllableNetworkAdapter()
+        controllableNetworkAdapter.stub(url: URL(string: "https://inkbunny.net/api_login.php")!, withContentsOfJSONFile: "ValidInkbunnyGuestLoginResponse")
+        controllableNetworkAdapter.stubFailure(url: URL(string: "https://inkbunny.net/api_search.php?sid=This_Is_A_Test_Token")!)
+
+        return controllableNetworkAdapter
+    }
+
     func testAttemptingToFetchHomepageWhenNotLoggedInGetsLoginEndpoint() {
         let expectedLoginURL = URL(string: "https://inkbunny.net/api_login.php")!
         let capturingNetworkAdapter = CapturingNetworkAdapter()
@@ -187,10 +203,7 @@ class InkbunnyAPITests: XCTestCase {
     }
 
     func testSearchFailsAfterLoginSucceedsNotifiesHandlerOfFailure() {
-        var controllableNetworkAdapter = ControllableNetworkAdapter()
-        controllableNetworkAdapter.stub(url: URL(string: "https://inkbunny.net/api_login.php")!, withContentsOfJSONFile: "ValidInkbunnyGuestLoginResponse")
-        controllableNetworkAdapter.stubFailure(url: URL(string: "https://inkbunny.net/api_search.php?sid=This_Is_A_Test_Token")!)
-
+        let controllableNetworkAdapter = makeFailingSearchNetworkAdapter()
         let inkbunnyAPI = InkbunnyAPI(networkAdapter: controllableNetworkAdapter)
         let capturingHomepageHandler = CapturingInkbunnyHomepageHandler()
         inkbunnyAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
@@ -199,11 +212,8 @@ class InkbunnyAPITests: XCTestCase {
     }
 
     func testSearchSucceedsWithInvalidJSONAfterGuestLoginSucceedsNotifiesHandlerOfFailure() {
-        var controllableNetworkAdapter = ControllableNetworkAdapter()
-        controllableNetworkAdapter.stub(url: URL(string: "https://inkbunny.net/api_login.php")!, withContentsOfJSONFile: "ValidInkbunnyGuestLoginResponse")
-        let invalidJSON = "{what!".data(using: .utf8)!
-        controllableNetworkAdapter.stub(url: URL(string: "https://inkbunny.net/api_search.php?sid=This_Is_A_Test_Token")!, with: invalidJSON)
-        let inkbunnyAPI = InkbunnyAPI(networkAdapter: controllableNetworkAdapter)
+        let failingSearchNetworkAdapter = makeFailingSearchNetworkAdapter()
+        let inkbunnyAPI = InkbunnyAPI(networkAdapter: failingSearchNetworkAdapter)
         let capturingHomepageHandler = CapturingInkbunnyHomepageHandler()
         inkbunnyAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
 
@@ -211,11 +221,8 @@ class InkbunnyAPITests: XCTestCase {
     }
 
     func testSearchSucceedsWithValidJSONNotifiesHandlerOfSuccess() {
-        var controllableNetworkAdapter = ControllableNetworkAdapter()
-        controllableNetworkAdapter.stub(url: URL(string: "https://inkbunny.net/api_login.php")!, withContentsOfJSONFile: "ValidInkbunnyGuestLoginResponse")
-        controllableNetworkAdapter.stub(url: URL(string: "https://inkbunny.net/api_search.php?sid=This_Is_A_Test_Token")!, withContentsOfJSONFile: "ValidInkbunnySearchResponse")
-
-        let inkbunnyAPI = InkbunnyAPI(networkAdapter: controllableNetworkAdapter)
+        let happyPathNetworkAdapter = makeSuccessfulSearchNetworkAdapter()
+        let inkbunnyAPI = InkbunnyAPI(networkAdapter: happyPathNetworkAdapter)
         let capturingHomepageHandler = CapturingInkbunnyHomepageHandler()
         inkbunnyAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
 
@@ -232,9 +239,7 @@ class InkbunnyAPITests: XCTestCase {
     }
 
     func testLoginSucceedsThenSearchFailsDoesNotNotifyHandlerOfSuccess() {
-        var controllableNetworkAdapter = ControllableNetworkAdapter()
-        controllableNetworkAdapter.stub(url: URL(string: "https://inkbunny.net/api_login.php")!, withContentsOfJSONFile: "ValidInkbunnyGuestLoginResponse")
-        controllableNetworkAdapter.stubFailure(url: URL(string: "https://inkbunny.net/api_search.php?sid=This_Is_A_Test_Token")!)
+        let controllableNetworkAdapter = makeFailingSearchNetworkAdapter()
         let inkbunnyAPI = InkbunnyAPI(networkAdapter: controllableNetworkAdapter)
         let capturingHomepageHandler = CapturingInkbunnyHomepageHandler()
         inkbunnyAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
@@ -243,11 +248,8 @@ class InkbunnyAPITests: XCTestCase {
     }
 
     func testSearchSucceedsWithValidJSONDoesNotNotifyHandlerOfFailure() {
-        var controllableNetworkAdapter = ControllableNetworkAdapter()
-        controllableNetworkAdapter.stub(url: URL(string: "https://inkbunny.net/api_login.php")!, withContentsOfJSONFile: "ValidInkbunnyGuestLoginResponse")
-        controllableNetworkAdapter.stub(url: URL(string: "https://inkbunny.net/api_search.php?sid=This_Is_A_Test_Token")!, withContentsOfJSONFile: "ValidInkbunnySearchResponse")
-
-        let inkbunnyAPI = InkbunnyAPI(networkAdapter: controllableNetworkAdapter)
+        let happyPathNetworkAdapter = makeSuccessfulSearchNetworkAdapter()
+        let inkbunnyAPI = InkbunnyAPI(networkAdapter: happyPathNetworkAdapter)
         let capturingHomepageHandler = CapturingInkbunnyHomepageHandler()
         inkbunnyAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
 
@@ -256,11 +258,8 @@ class InkbunnyAPITests: XCTestCase {
 
     func testSearchSucceedsProvidesHandlerWithItemConfiguredWithTitle() {
         let firstTitleInSearchJSON = "Green Batsu OTA (OPEN"
-        var controllableNetworkAdapter = ControllableNetworkAdapter()
-        controllableNetworkAdapter.stub(url: URL(string: "https://inkbunny.net/api_login.php")!, withContentsOfJSONFile: "ValidInkbunnyGuestLoginResponse")
-        controllableNetworkAdapter.stub(url: URL(string: "https://inkbunny.net/api_search.php?sid=This_Is_A_Test_Token")!, withContentsOfJSONFile: "ValidInkbunnySearchResponse")
-
-        let inkbunnyAPI = InkbunnyAPI(networkAdapter: controllableNetworkAdapter)
+        let happyPathNetworkAdapter = makeSuccessfulSearchNetworkAdapter()
+        let inkbunnyAPI = InkbunnyAPI(networkAdapter: happyPathNetworkAdapter)
         let capturingHomepageHandler = CapturingInkbunnyHomepageHandler()
         inkbunnyAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
 
@@ -269,11 +268,8 @@ class InkbunnyAPITests: XCTestCase {
 
     func testSearchSucceedsProvidesHandlerWithSecondItemConfiguredWithTitle() {
         let secondTitleInSearchJSON = "Groot's Undies"
-        var controllableNetworkAdapter = ControllableNetworkAdapter()
-        controllableNetworkAdapter.stub(url: URL(string: "https://inkbunny.net/api_login.php")!, withContentsOfJSONFile: "ValidInkbunnyGuestLoginResponse")
-        controllableNetworkAdapter.stub(url: URL(string: "https://inkbunny.net/api_search.php?sid=This_Is_A_Test_Token")!, withContentsOfJSONFile: "ValidInkbunnySearchResponse")
-
-        let inkbunnyAPI = InkbunnyAPI(networkAdapter: controllableNetworkAdapter)
+        let happyPathNetworkAdapter = makeSuccessfulSearchNetworkAdapter()
+        let inkbunnyAPI = InkbunnyAPI(networkAdapter: happyPathNetworkAdapter)
         let capturingHomepageHandler = CapturingInkbunnyHomepageHandler()
         inkbunnyAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
 
@@ -282,11 +278,8 @@ class InkbunnyAPITests: XCTestCase {
 
     func testSearchSucceedsProvidesHandlerWithItemConfiguredWithSubmissionID() {
         let firstSubmissionIDInSearchJSON = "1359474"
-        var controllableNetworkAdapter = ControllableNetworkAdapter()
-        controllableNetworkAdapter.stub(url: URL(string: "https://inkbunny.net/api_login.php")!, withContentsOfJSONFile: "ValidInkbunnyGuestLoginResponse")
-        controllableNetworkAdapter.stub(url: URL(string: "https://inkbunny.net/api_search.php?sid=This_Is_A_Test_Token")!, withContentsOfJSONFile: "ValidInkbunnySearchResponse")
-
-        let inkbunnyAPI = InkbunnyAPI(networkAdapter: controllableNetworkAdapter)
+        let happyPathNetworkAdapter = makeSuccessfulSearchNetworkAdapter()
+        let inkbunnyAPI = InkbunnyAPI(networkAdapter: happyPathNetworkAdapter)
         let capturingHomepageHandler = CapturingInkbunnyHomepageHandler()
         inkbunnyAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
 
@@ -295,11 +288,8 @@ class InkbunnyAPITests: XCTestCase {
 
     func testSearchSucceedsProvidesHandlerWithSecondItemConfiguredWithSubmissionID() {
         let secondSubmissionIDInSearchJSON = "1359473"
-        var controllableNetworkAdapter = ControllableNetworkAdapter()
-        controllableNetworkAdapter.stub(url: URL(string: "https://inkbunny.net/api_login.php")!, withContentsOfJSONFile: "ValidInkbunnyGuestLoginResponse")
-        controllableNetworkAdapter.stub(url: URL(string: "https://inkbunny.net/api_search.php?sid=This_Is_A_Test_Token")!, withContentsOfJSONFile: "ValidInkbunnySearchResponse")
-
-        let inkbunnyAPI = InkbunnyAPI(networkAdapter: controllableNetworkAdapter)
+        let happyPathNetworkAdapter = makeSuccessfulSearchNetworkAdapter()
+        let inkbunnyAPI = InkbunnyAPI(networkAdapter: happyPathNetworkAdapter)
         let capturingHomepageHandler = CapturingInkbunnyHomepageHandler()
         inkbunnyAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
 
