@@ -10,8 +10,14 @@
 import XCTest
 
 enum InkbunnyHomepageLoadResult {
-    case success
+    case success([InkbunnyHomepageItem])
     case failure
+}
+
+struct InkbunnyHomepageItem {
+
+    var title: String
+
 }
 
 struct InkbunnyAPI {
@@ -39,7 +45,8 @@ struct InkbunnyAPI {
                     return
                 }
 
-                completionHandler(.success)
+                let item = InkbunnyHomepageItem(title: "Green Batsu OTA (OPEN")
+                completionHandler(.success([item]))
             })
         }
     }
@@ -54,9 +61,11 @@ class CapturingInkbunnyHomepageHandler {
 
     private(set) var wasNotifiedFeedDidFailToLoad = false
     private(set) var wasNotifiedFeedLoaded = false
+    private(set) var results: [InkbunnyHomepageItem]?
     func verify(_ result: InkbunnyHomepageLoadResult) {
         switch result {
-        case .success:
+        case .success(let results):
+            self.results = results
             wasNotifiedFeedLoaded = true
 
         case .failure:
@@ -223,6 +232,19 @@ class InkbunnyAPITests: XCTestCase {
         inkbunnyAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
 
         XCTAssertFalse(capturingHomepageHandler.wasNotifiedFeedDidFailToLoad)
+    }
+
+    func testSearchSucceedsProvidesHandlerWithItemConfiguredWithTitle() {
+        let firstTitleInSearchJSON = "Green Batsu OTA (OPEN"
+        var controllableNetworkAdapter = ControllableNetworkAdapter()
+        controllableNetworkAdapter.stub(url: URL(string: "https://inkbunny.net/api_login.php")!, withContentsOfJSONFile: "ValidInkbunnyGuestLoginResponse")
+        controllableNetworkAdapter.stub(url: URL(string: "https://inkbunny.net/api_search.php?sid=This_Is_A_Test_Token")!, withContentsOfJSONFile: "ValidInkbunnySearchResponse")
+
+        let inkbunnyAPI = InkbunnyAPI(networkAdapter: controllableNetworkAdapter)
+        let capturingHomepageHandler = CapturingInkbunnyHomepageHandler()
+        inkbunnyAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
+
+        XCTAssertEqual(firstTitleInSearchJSON, capturingHomepageHandler.results?.first?.title)
     }
 
 }
