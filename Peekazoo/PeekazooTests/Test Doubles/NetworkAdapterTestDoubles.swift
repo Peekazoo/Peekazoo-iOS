@@ -37,6 +37,10 @@ class SuccessfulNetworkAdapter: NetworkAdapter {
 
     var data: Data?
 
+    convenience init(string: String) {
+        self.init(data: string.data(using: .utf8))
+    }
+
     init(data: Data?) {
         self.data = data
     }
