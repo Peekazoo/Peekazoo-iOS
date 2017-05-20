@@ -95,8 +95,9 @@ class InkbunnyAPITests: XCTestCase {
     }
 
     func testLoginRequestReturnsValidResponseDoesNotNotifyHandlerAboutFailure() {
-        let successfulNetworkAdapter = SuccessfulNetworkAdapter(contentsOfJSONFile: "ValidInkbunnyGuestLoginResponse")
-        let inkbunnyAPI = InkbunnyAPI(networkAdapter: successfulNetworkAdapter)
+        var controllableNetworkAdapter = ControllableNetworkAdapter()
+        controllableNetworkAdapter.stub(url: URL(string: "https://inkbunny.net/api_login.php")!, withContentsOfJSONFile: "ValidInkbunnyGuestLoginResponse")
+        let inkbunnyAPI = InkbunnyAPI(networkAdapter: controllableNetworkAdapter)
         let capturingHomepageHandler = CapturingInkbunnyHomepageHandler()
         inkbunnyAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
 
