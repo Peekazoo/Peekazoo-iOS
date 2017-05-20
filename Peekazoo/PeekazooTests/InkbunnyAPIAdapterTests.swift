@@ -26,8 +26,14 @@ class CapturingInkbunnyAPI: InkbunnyAPIProtocol {
 
 struct SuccessfulInkbunnyAPI: InkbunnyAPIProtocol {
 
+    var items: [InkbunnySubmission]
+
+    init(items: [InkbunnySubmission] = []) {
+        self.items = items
+    }
+
     func loadHomepage(completionHandler: @escaping (InkbunnyHomepageLoadResult) -> Void) {
-        completionHandler(.success([]))
+        completionHandler(.success(items))
     }
 
 }
@@ -51,13 +57,30 @@ struct InkbunnyAPIAdapter: HomepageFeed {
     func loadFeed(delegate: HomepageFeedDelegate) {
         api.loadHomepage { result in
             switch result {
-            case .success(_):
-                delegate.feedDidFinishLoading(items: [])
+            case .success(let items):
+                delegate.feedDidFinishLoading(items: self.adapt(items: items))
 
             case .failure:
                 delegate.feedDidFailToLoad()
             }
         }
+    }
+
+    private func adapt(items: [InkbunnySubmission]) -> [AdaptedItem] {
+        guard let item = items.first else { return [] }
+        return [AdaptedItem(submission: item)]
+    }
+
+    private struct AdaptedItem: HomepageItem {
+
+        private var submission: InkbunnySubmission
+        var title: String { return submission.title }
+        var contentIdentifier: String = ""
+
+        init(submission: InkbunnySubmission) {
+            self.submission = submission
+        }
+
     }
 
 }
@@ -106,6 +129,17 @@ class InkbunnyAPIAdapterTests: XCTestCase {
         adapter.loadFeed(delegate: capturingHomepageFeedDelegate)
 
         XCTAssertFalse(capturingHomepageFeedDelegate.wasNotifiedDidFinishLoading)
+    }
+
+    func testSuccessfullyLoadingHomepageAdaptsTitleInFirstItem() {
+        let title = "Some content"
+        let stubInkbunnySubmission = InkbunnySubmission(submissionID: "", title: title)
+        let successfulInkbunnyAPI = SuccessfulInkbunnyAPI(items: [stubInkbunnySubmission])
+        let adapter = InkbunnyAPIAdapter(api: successfulInkbunnyAPI)
+        let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
+        adapter.loadFeed(delegate: capturingHomepageFeedDelegate)
+
+        XCTAssertEqual(title, capturingHomepageFeedDelegate.capturedResults?.first?.title)
     }
 
 }

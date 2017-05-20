@@ -13,6 +13,11 @@ struct InkbunnySubmission {
     var submissionID: String
     var title: String
 
+    init(submissionID: String, title: String) {
+        self.submissionID = submissionID
+        self.title = title
+    }
+
     init?(jsonObject: [String : Any]) {
         guard let title = jsonObject["title"] as? String,
               let submissionID = jsonObject["submission_id"] as? String else { return nil }
