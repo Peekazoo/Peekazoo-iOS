@@ -32,10 +32,13 @@ struct InkbunnyAPI {
                 return
             }
 
-            completionHandler(.success)
             let searchURL = URL(string: "https://inkbunny.net/api_search.php?sid=\(sid)")!
-            self.networkAdapter.get(searchURL, completionHandler: { _, _ in
+            self.networkAdapter.get(searchURL, completionHandler: { _, error in
                 completionHandler(.failure)
+
+                if error == nil {
+                    completionHandler(.success)
+                }
             })
         }
     }
@@ -188,6 +191,17 @@ class InkbunnyAPITests: XCTestCase {
     func testLoginFailsDoesNotNotifyHandlerOfSuccess() {
         let capturingNetworkAdapter = FailingNetworkAdapter()
         let inkbunnyAPI = InkbunnyAPI(networkAdapter: capturingNetworkAdapter)
+        let capturingHomepageHandler = CapturingInkbunnyHomepageHandler()
+        inkbunnyAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
+
+        XCTAssertFalse(capturingHomepageHandler.wasNotifiedFeedLoaded)
+    }
+
+    func testLoginSucceedsThenSearchFailsDoesNotNotifyHandlerOfSuccess() {
+        var controllableNetworkAdapter = ControllableNetworkAdapter()
+        controllableNetworkAdapter.stub(url: URL(string: "https://inkbunny.net/api_login.php")!, withContentsOfJSONFile: "ValidInkbunnyGuestLoginResponse")
+        controllableNetworkAdapter.stubFailure(url: URL(string: "https://inkbunny.net/api_search.php?sid=This_Is_A_Test_Token")!)
+        let inkbunnyAPI = InkbunnyAPI(networkAdapter: controllableNetworkAdapter)
         let capturingHomepageHandler = CapturingInkbunnyHomepageHandler()
         inkbunnyAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
 
