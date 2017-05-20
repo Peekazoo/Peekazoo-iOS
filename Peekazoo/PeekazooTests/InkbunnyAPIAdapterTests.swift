@@ -24,6 +24,14 @@ class CapturingInkbunnyAPI: InkbunnyAPIProtocol {
 
 }
 
+struct SuccessfulInkbunnyAPI: InkbunnyAPIProtocol {
+
+    func loadHomepage(completionHandler: @escaping (InkbunnyHomepageLoadResult) -> Void) {
+        completionHandler(.success([]))
+    }
+
+}
+
 struct InkbunnyAPIAdapter: HomepageFeed {
 
     var api: InkbunnyAPIProtocol
@@ -34,7 +42,7 @@ struct InkbunnyAPIAdapter: HomepageFeed {
 
     func loadFeed(delegate: HomepageFeedDelegate) {
         api.loadHomepage { _ in
-
+            delegate.feedDidFinishLoading(items: [])
         }
     }
 
@@ -48,6 +56,15 @@ class InkbunnyAPIAdapterTests: XCTestCase {
         adapter.loadFeed(delegate: DummyHomepageFeedDelegate())
 
         XCTAssertTrue(capturingInkbunnyAPI.didLoadHomepage)
+    }
+
+    func testSuccessfullyLoadingHomepageTellsDelegateFeedFinishedLoading() {
+        let successfulInkbunnyAPI = SuccessfulInkbunnyAPI()
+        let adapter = InkbunnyAPIAdapter(api: successfulInkbunnyAPI)
+        let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
+        adapter.loadFeed(delegate: capturingHomepageFeedDelegate)
+
+        XCTAssertTrue(capturingHomepageFeedDelegate.wasNotifiedDidFinishLoading)
     }
 
 }
