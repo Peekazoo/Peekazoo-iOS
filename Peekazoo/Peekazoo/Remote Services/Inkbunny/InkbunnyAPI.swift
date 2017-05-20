@@ -33,7 +33,8 @@ struct InkbunnyAPI {
 
             let searchURL = URL(string: "https://inkbunny.net/api_search.php?sid=\(sid)")!
             self.networkAdapter.get(searchURL, completionHandler: { data, _ in
-                guard let data = data, let json = self.jsonObject(from: data) as? [String : Any] else {
+                guard let data = data,
+                      let json = self.jsonObject(from: data) as? [String : Any] else {
                     completionHandler(.failure)
                     return
                 }
@@ -50,16 +51,7 @@ struct InkbunnyAPI {
     private func parse(_ json: [String : Any]) -> [InkbunnySubmission] {
         guard let submissions = json["submissions"] as? [[String : Any]] else { return [] }
 
-        var items = [InkbunnySubmission]()
-        for submission in submissions {
-            guard let title = submission["title"] as? String,
-                let submissionID = submission["submission_id"] as? String else { continue }
-
-            let item = InkbunnySubmission(submissionID: submissionID, title: title)
-            items.append(item)
-        }
-
-        return items
+        return submissions.flatMap(InkbunnySubmission.init)
     }
 
 }
