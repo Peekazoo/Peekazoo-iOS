@@ -26,21 +26,26 @@ struct InkbunnyAPI {
         let loginURL = URL(string: "https://inkbunny.net/api_login.php")!
         networkAdapter.get(loginURL) { data, _ in
             guard let data = data,
-                  let json = (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)) as? [String : Any],
+                let json = self.jsonObject(from: data) as? [String : Any],
                   let sid = json["sid"] as? String else {
                 completionHandler(.failure)
                 return
             }
 
             let searchURL = URL(string: "https://inkbunny.net/api_search.php?sid=\(sid)")!
-            self.networkAdapter.get(searchURL, completionHandler: { _, error in
-                completionHandler(.failure)
-
-                if error == nil {
-                    completionHandler(.success)
+            self.networkAdapter.get(searchURL, completionHandler: { data, _ in
+                guard let data = data, let _ = self.jsonObject(from: data) else {
+                    completionHandler(.failure)
+                    return
                 }
+
+                completionHandler(.success)
             })
         }
+    }
+
+    private func jsonObject(from data: Data) -> Any? {
+        return try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
     }
 
 }
@@ -206,6 +211,18 @@ class InkbunnyAPITests: XCTestCase {
         inkbunnyAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
 
         XCTAssertFalse(capturingHomepageHandler.wasNotifiedFeedLoaded)
+    }
+
+    func testSearchSucceedsWithValidJSONDoesNotNotifyHandlerOfFailure() {
+        var controllableNetworkAdapter = ControllableNetworkAdapter()
+        controllableNetworkAdapter.stub(url: URL(string: "https://inkbunny.net/api_login.php")!, withContentsOfJSONFile: "ValidInkbunnyGuestLoginResponse")
+        controllableNetworkAdapter.stub(url: URL(string: "https://inkbunny.net/api_search.php?sid=This_Is_A_Test_Token")!, withContentsOfJSONFile: "ValidInkbunnyGuestLoginResponse")
+
+        let inkbunnyAPI = InkbunnyAPI(networkAdapter: controllableNetworkAdapter)
+        let capturingHomepageHandler = CapturingInkbunnyHomepageHandler()
+        inkbunnyAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
+
+        XCTAssertFalse(capturingHomepageHandler.wasNotifiedFeedDidFailToLoad)
     }
 
 }
