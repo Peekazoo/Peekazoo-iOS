@@ -40,19 +40,32 @@ struct InkbunnyAPI {
 
             let searchURL = URL(string: "https://inkbunny.net/api_search.php?sid=\(sid)")!
             self.networkAdapter.get(searchURL, completionHandler: { data, _ in
-                guard let data = data, let _ = self.jsonObject(from: data) else {
+                guard let data = data, let json = self.jsonObject(from: data) as? [String : Any] else {
                     completionHandler(.failure)
                     return
                 }
 
-                let item = InkbunnyHomepageItem(title: "Green Batsu OTA (OPEN")
-                completionHandler(.success([item]))
+                completionHandler(.success(self.parse(json)))
             })
         }
     }
 
     private func jsonObject(from data: Data) -> Any? {
         return try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
+    }
+
+    private func parse(_ json: [String : Any]) -> [InkbunnyHomepageItem] {
+        guard let submissions = json["submissions"] as? [[String : Any]] else { return [] }
+
+        var items = [InkbunnyHomepageItem]()
+        for submission in submissions {
+            guard let title = submission["title"] as? String else { continue }
+
+            let item = InkbunnyHomepageItem(title: title)
+            items.append(item)
+        }
+
+        return items
     }
 
 }
@@ -71,6 +84,11 @@ class CapturingInkbunnyHomepageHandler {
         case .failure:
             wasNotifiedFeedDidFailToLoad = true
         }
+    }
+
+    func result(at index: Int) -> InkbunnyHomepageItem? {
+        guard let results = results, index < results.count else { return nil }
+        return results[index]
     }
 
 }
@@ -245,6 +263,19 @@ class InkbunnyAPITests: XCTestCase {
         inkbunnyAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
 
         XCTAssertEqual(firstTitleInSearchJSON, capturingHomepageHandler.results?.first?.title)
+    }
+
+    func testSearchSucceedsProvidesHandlerWithSecondItemConfiguredWithTitle() {
+        let secondTitleInSearchJSON = "Groot's Undies"
+        var controllableNetworkAdapter = ControllableNetworkAdapter()
+        controllableNetworkAdapter.stub(url: URL(string: "https://inkbunny.net/api_login.php")!, withContentsOfJSONFile: "ValidInkbunnyGuestLoginResponse")
+        controllableNetworkAdapter.stub(url: URL(string: "https://inkbunny.net/api_search.php?sid=This_Is_A_Test_Token")!, withContentsOfJSONFile: "ValidInkbunnySearchResponse")
+
+        let inkbunnyAPI = InkbunnyAPI(networkAdapter: controllableNetworkAdapter)
+        let capturingHomepageHandler = CapturingInkbunnyHomepageHandler()
+        inkbunnyAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
+
+        XCTAssertEqual(secondTitleInSearchJSON, capturingHomepageHandler.result(at: 1)?.title)
     }
 
 }
