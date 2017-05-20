@@ -25,9 +25,8 @@ class WeasylAPIAdapterTests: XCTestCase {
         let adapter = WeasylAPIAdapter(api: successfulWeasylAPI)
         let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
         adapter.loadFeed(delegate: capturingHomepageFeedDelegate)
-        let fetchedItem = capturingHomepageFeedDelegate.capturedResults?.first
 
-        XCTAssertEqual(item.submitID, fetchedItem?.contentIdentifier)
+        XCTAssertEqual(item.submitID, capturingHomepageFeedDelegate.result(at: 0)?.contentIdentifier)
     }
 
     func testSuccessfullyFetchingWeasylItemAdaptsItemIntoPeekazooDomainObjectWithTitle() {
@@ -36,9 +35,8 @@ class WeasylAPIAdapterTests: XCTestCase {
         let adapter = WeasylAPIAdapter(api: successfulWeasylAPI)
         let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
         adapter.loadFeed(delegate: capturingHomepageFeedDelegate)
-        let fetchedItem = capturingHomepageFeedDelegate.capturedResults?.first
 
-        XCTAssertEqual(item.title, fetchedItem?.title)
+        XCTAssertEqual(item.title, capturingHomepageFeedDelegate.result(at: 0)?.title)
     }
 
     func testFailingToFetchWeasylItemTellsDelegateLoadFailed() {
@@ -68,14 +66,7 @@ class WeasylAPIAdapterTests: XCTestCase {
         let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
         adapter.loadFeed(delegate: capturingHomepageFeedDelegate)
 
-        guard let results = capturingHomepageFeedDelegate.capturedResults, results.count > 1 else {
-            XCTFail()
-            return
-        }
-
-        let fetchedItem = results[1]
-
-        XCTAssertEqual(secondItem.title, fetchedItem.title)
+        XCTAssertEqual(secondItem.title, capturingHomepageFeedDelegate.result(at: 1)?.title)
     }
 
 }

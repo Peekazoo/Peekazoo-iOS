@@ -36,6 +36,14 @@ class CapturingWeasylHomepageHandler {
 
 class WeasylAPITests: XCTestCase {
 
+    private func makeValidHomepageNetworkAdapter() -> NetworkAdapter {
+        return SuccessfulNetworkAdapter(contentsOfJSONFile: "ValidWeasylHomepageResponse")
+    }
+
+    private func makeMalformedHomepageNetworkAdapter() -> NetworkAdapter {
+        return SuccessfulNetworkAdapter(contentsOfJSONFile: "MalformedWeasylHomepageResponse")
+    }
+
     func testWhenToldToLoadTheHomepageURLIsRequested() {
         let expectedURL = URL(string: "https://www.weasyl.com/api/submissions/frontpage")!
         let capturingNetworkAdapter = CapturingNetworkAdapter()
@@ -64,7 +72,7 @@ class WeasylAPITests: XCTestCase {
     }
 
     func testWhenLoadingValidFeedDataTheDelegateIsToldTheFeedLoaded() {
-        let successfulNetworkAdapter = SuccessfulNetworkAdapter(contentsOfJSONFile: "ValidWeasylHomepageResponse")
+        let successfulNetworkAdapter = makeValidHomepageNetworkAdapter()
         let capturingHomepageHandler = CapturingWeasylHomepageHandler()
         let weasylAPI = WeasylAPI(networkAdapter: successfulNetworkAdapter)
         weasylAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
@@ -73,7 +81,7 @@ class WeasylAPITests: XCTestCase {
     }
 
     func testTheDelegateIsNotToldAboutFeedLoadsUntilNetworkHandlerIsInvokedWithData() {
-        let blockedNetworkAdapter = BlockingNetworkAdapter(adapter: SuccessfulNetworkAdapter(contentsOfJSONFile: "ValidWeasylHomepageResponse"))
+        let blockedNetworkAdapter = BlockingNetworkAdapter(adapter: makeValidHomepageNetworkAdapter())
         let capturingHomepageHandler = CapturingWeasylHomepageHandler()
         let weasylAPI = WeasylAPI(networkAdapter: blockedNetworkAdapter)
         weasylAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
@@ -91,7 +99,7 @@ class WeasylAPITests: XCTestCase {
     }
 
     func testTheDelegateIsNotToldAboutFeedErrorsWhenNetworkSucceeds() {
-        let blockedNetworkAdapter = SuccessfulNetworkAdapter(contentsOfJSONFile: "ValidWeasylHomepageResponse")
+        let blockedNetworkAdapter = makeValidHomepageNetworkAdapter()
         let capturingHomepageHandler = CapturingWeasylHomepageHandler()
         let weasylAPI = WeasylAPI(networkAdapter: blockedNetworkAdapter)
         weasylAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
@@ -100,7 +108,7 @@ class WeasylAPITests: XCTestCase {
     }
 
     func testNetworkRespondsWithInvalidJSONNotifiesDelegateAboutError() {
-        let invalidJSONAdapter = SuccessfulNetworkAdapter(contentsOfJSONFile: "MalformedWeasylHomepageResponse")
+        let invalidJSONAdapter = makeMalformedHomepageNetworkAdapter()
         let capturingHomepageHandler = CapturingWeasylHomepageHandler()
         let weasylAPI = WeasylAPI(networkAdapter: invalidJSONAdapter)
         weasylAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
@@ -109,7 +117,7 @@ class WeasylAPITests: XCTestCase {
     }
 
     func testNetworkRespondsWithInvalidJSONDoesNotNotifyDelegateLoadWasSuccessful() {
-        let invalidJSONAdapter = SuccessfulNetworkAdapter(contentsOfJSONFile: "MalformedWeasylHomepageResponse")
+        let invalidJSONAdapter = makeMalformedHomepageNetworkAdapter()
         let capturingHomepageHandler = CapturingWeasylHomepageHandler()
         let weasylAPI = WeasylAPI(networkAdapter: invalidJSONAdapter)
         weasylAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
@@ -130,17 +138,17 @@ class WeasylAPITests: XCTestCase {
 
     func testParsingValidJSONProvidesFirstItemWithExpectedTitle() {
         let titleForFirstItemInJSON = ":CO: ChaiFennec"
-        let validHomepageAdapter = SuccessfulNetworkAdapter(contentsOfJSONFile: "ValidWeasylHomepageResponse")
+        let validHomepageAdapter = makeValidHomepageNetworkAdapter()
         let capturingHomepageHandler = CapturingWeasylHomepageHandler()
         let weasylAPI = WeasylAPI(networkAdapter: validHomepageAdapter)
         weasylAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
 
-        XCTAssertEqual(titleForFirstItemInJSON, capturingHomepageHandler.capturedResults?.first?.title)
+        XCTAssertEqual(titleForFirstItemInJSON, capturingHomepageHandler.result(at: 0)?.title)
     }
 
     func testParsingValidJSONProvidesSecondItemWithExpectedTitle() {
         let titleForSecondItemInJSON = "[C] Azri Simple Icon"
-        let validHomepageAdapter = SuccessfulNetworkAdapter(contentsOfJSONFile: "ValidWeasylHomepageResponse")
+        let validHomepageAdapter = makeValidHomepageNetworkAdapter()
         let capturingHomepageHandler = CapturingWeasylHomepageHandler()
         let weasylAPI = WeasylAPI(networkAdapter: validHomepageAdapter)
         weasylAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
@@ -150,17 +158,17 @@ class WeasylAPITests: XCTestCase {
 
     func testParsingValidJSONProvidesFirstItemWithExpectedContentIdentifier() {
         let submitIDForFirstItem = "1489775"
-        let validHomepageAdapter = SuccessfulNetworkAdapter(contentsOfJSONFile: "ValidWeasylHomepageResponse")
+        let validHomepageAdapter = makeValidHomepageNetworkAdapter()
         let capturingHomepageHandler = CapturingWeasylHomepageHandler()
         let weasylAPI = WeasylAPI(networkAdapter: validHomepageAdapter)
         weasylAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
 
-        XCTAssertEqual(submitIDForFirstItem, capturingHomepageHandler.capturedResults?.first?.submitID)
+        XCTAssertEqual(submitIDForFirstItem, capturingHomepageHandler.result(at: 0)?.submitID)
     }
 
     func testParsingValidJSONProvidesSecondItemWithExpectedContentIdentifier() {
         let submitIDForSecondItem = "1489774"
-        let validHomepageAdapter = SuccessfulNetworkAdapter(contentsOfJSONFile: "ValidWeasylHomepageResponse")
+        let validHomepageAdapter = makeValidHomepageNetworkAdapter()
         let capturingHomepageHandler = CapturingWeasylHomepageHandler()
         let weasylAPI = WeasylAPI(networkAdapter: validHomepageAdapter)
         weasylAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)

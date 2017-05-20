@@ -24,7 +24,7 @@ class CapturingHomepageService: HomepageService {
         capturedDelegate = delegate
     }
 
-    func simulateSuccessfulLoad(content: [StubHomepageItem]) {
+    func simulateSuccessfulLoad(content: [StubHomepageItem] = []) {
         capturedDelegate?.homepageServiceDidLoadSuccessfully(content: content)
     }
 

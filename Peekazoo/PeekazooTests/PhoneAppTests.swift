@@ -140,7 +140,7 @@ class PhoneAppTests: XCTestCase {
     func testLoadingSuccessfullyWithoutContentThenFailingToLoadOnRefreshShowsTheErrorPlaceholder() {
         let capturingHomepageService = CapturingHomepageService()
         let context = PhoneAppTestBuilder.buildWithHomepageService(capturingHomepageService).thenLaunch()
-        capturingHomepageService.simulateSuccessfulLoad(content: [])
+        capturingHomepageService.simulateSuccessfulLoad()
         context.interface.invokePullToRefresh()
         capturingHomepageService.simulateFailedLoad()
 

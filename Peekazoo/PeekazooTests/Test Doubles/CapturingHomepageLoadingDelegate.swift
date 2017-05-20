@@ -22,4 +22,9 @@ class CapturingHomepageLoadingDelegate: HomepageLoadingDelegate {
         didFailToLoadInvoked = true
     }
 
+    func capturedItemsEqual<T>(to items: [T]) -> Bool where T: HomepageItem, T: Equatable {
+        guard let castedItems = capturedHomepageItems as? [T] else { return false }
+        return items.elementsEqual(castedItems)
+    }
+
 }

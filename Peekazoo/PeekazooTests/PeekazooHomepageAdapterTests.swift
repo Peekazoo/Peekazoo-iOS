@@ -44,7 +44,7 @@ class PeekazooHomepageAdapterTests: XCTestCase {
         let delegate = CapturingHomepageServiceLoadingDelegate()
         adapter.loadHomepage(delegate: delegate)
 
-        XCTAssertEqual(true, (delegate.capturedHomepageItems as? [StubHomepageItem])?.elementsEqual(items))
+        XCTAssertTrue(delegate.capturedItemsEqual(to: items))
     }
 
     func testFailingToLoadHomepageShouldNotTellDelegateAboutSuccess() {
