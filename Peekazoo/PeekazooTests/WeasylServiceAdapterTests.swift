@@ -20,7 +20,7 @@ class WeasylAPIAdapterTests: XCTestCase {
     }
 
     func testSuccessfullyFetchingWeasylItemAdaptsItemIntoPeekazooDomainObjectWithContentIdentifier() {
-        let item = WeasylHomepageItem(submitID: "ID", title: "Title")
+        let item = WeasylSubmission(submitID: "ID", title: "Title")
         let successfulWeasylAPI = SuccessfulWeasylAPI(items: [item])
         let adapter = WeasylAPIAdapter(api: successfulWeasylAPI)
         let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
@@ -31,7 +31,7 @@ class WeasylAPIAdapterTests: XCTestCase {
     }
 
     func testSuccessfullyFetchingWeasylItemAdaptsItemIntoPeekazooDomainObjectWithTitle() {
-        let item = WeasylHomepageItem(submitID: "ID", title: "Title")
+        let item = WeasylSubmission(submitID: "ID", title: "Title")
         let successfulWeasylAPI = SuccessfulWeasylAPI(items: [item])
         let adapter = WeasylAPIAdapter(api: successfulWeasylAPI)
         let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
@@ -51,7 +51,7 @@ class WeasylAPIAdapterTests: XCTestCase {
     }
 
     func testSuccessfullyFetchingWeasylItemDoesNotNotifyDelegateOfLoadFailure() {
-        let item = WeasylHomepageItem(submitID: "ID", title: "Title")
+        let item = WeasylSubmission(submitID: "ID", title: "Title")
         let successfulWeasylAPI = SuccessfulWeasylAPI(items: [item])
         let adapter = WeasylAPIAdapter(api: successfulWeasylAPI)
         let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
@@ -61,8 +61,8 @@ class WeasylAPIAdapterTests: XCTestCase {
     }
 
     func testSuccessfullyFetchingMultipleWeasylItemsAdaptsSecondItemTitle() {
-        let firstItem = WeasylHomepageItem(submitID: "ID", title: "Title")
-        let secondItem = WeasylHomepageItem(submitID: "ID 2", title: "Another Title")
+        let firstItem = WeasylSubmission(submitID: "ID", title: "Title")
+        let secondItem = WeasylSubmission(submitID: "ID 2", title: "Another Title")
         let successfulWeasylAPI = SuccessfulWeasylAPI(items: [firstItem, secondItem])
         let adapter = WeasylAPIAdapter(api: successfulWeasylAPI)
         let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()

@@ -1,5 +1,5 @@
 //
-//  InkbunnyHomepageItem.swift
+//  InkbunnySubmission.swift
 //  Peekazoo
 //
 //  Created by Thomas Sherwood on 20/05/2017.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct InkbunnyHomepageItem {
+struct InkbunnySubmission {
 
     var submissionID: String
     var title: String

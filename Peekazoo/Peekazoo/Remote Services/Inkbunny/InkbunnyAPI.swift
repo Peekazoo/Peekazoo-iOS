@@ -9,7 +9,7 @@
 import Foundation
 
 enum InkbunnyHomepageLoadResult {
-    case success([InkbunnyHomepageItem])
+    case success([InkbunnySubmission])
     case failure
 }
 
@@ -47,15 +47,15 @@ struct InkbunnyAPI {
         return try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
     }
 
-    private func parse(_ json: [String : Any]) -> [InkbunnyHomepageItem] {
+    private func parse(_ json: [String : Any]) -> [InkbunnySubmission] {
         guard let submissions = json["submissions"] as? [[String : Any]] else { return [] }
 
-        var items = [InkbunnyHomepageItem]()
+        var items = [InkbunnySubmission]()
         for submission in submissions {
             guard let title = submission["title"] as? String,
                 let submissionID = submission["submission_id"] as? String else { continue }
 
-            let item = InkbunnyHomepageItem(submissionID: submissionID, title: title)
+            let item = InkbunnySubmission(submissionID: submissionID, title: title)
             items.append(item)
         }
 

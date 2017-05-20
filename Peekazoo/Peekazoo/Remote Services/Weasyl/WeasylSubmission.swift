@@ -1,5 +1,5 @@
 //
-//  WeasylHomepageItem.swift
+//  WeasylSubmission.swift
 //  Peekazoo
 //
 //  Created by Thomas Sherwood on 18/05/2017.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct WeasylHomepageItem {
+struct WeasylSubmission {
 
     var title: String
     var submitID: String

@@ -12,7 +12,7 @@ import XCTest
 class CapturingWeasylHomepageHandler {
 
     private(set) var wasNotifiedDidFinishLoading = false
-    private(set) var capturedResults: [WeasylHomepageItem]?
+    private(set) var capturedResults: [WeasylSubmission]?
     private(set) var wasNotifiedFeedDidFailToLoad = false
     func verify(_ result: WeasylHomepageLoadResult) {
         switch result {
@@ -24,7 +24,7 @@ class CapturingWeasylHomepageHandler {
         }
     }
 
-    func result(at index: Int) -> WeasylHomepageItem? {
+    func result(at index: Int) -> WeasylSubmission? {
         guard let results = capturedResults, index < results.count else {
             return nil
         }

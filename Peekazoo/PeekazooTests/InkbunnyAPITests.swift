@@ -13,7 +13,7 @@ class CapturingInkbunnyHomepageHandler {
 
     private(set) var wasNotifiedFeedDidFailToLoad = false
     private(set) var wasNotifiedFeedLoaded = false
-    private(set) var results: [InkbunnyHomepageItem]?
+    private(set) var results: [InkbunnySubmission]?
     func verify(_ result: InkbunnyHomepageLoadResult) {
         switch result {
         case .success(let results):
@@ -25,7 +25,7 @@ class CapturingInkbunnyHomepageHandler {
         }
     }
 
-    func result(at index: Int) -> InkbunnyHomepageItem? {
+    func result(at index: Int) -> InkbunnySubmission? {
         guard let results = results, index < results.count else { return nil }
         return results[index]
     }

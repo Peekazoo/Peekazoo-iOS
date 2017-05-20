@@ -7,7 +7,7 @@
 //
 
 enum WeasylHomepageLoadResult {
-    case success([WeasylHomepageItem])
+    case success([WeasylSubmission])
     case failure
 }
 

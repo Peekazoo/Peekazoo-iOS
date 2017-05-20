@@ -29,7 +29,7 @@ struct WeasylAPIAdapter: HomepageFeed {
 
     private struct AdaptedItem: HomepageItem {
 
-        var weasylItem: WeasylHomepageItem
+        var weasylItem: WeasylSubmission
 
         var contentIdentifier: String { return weasylItem.submitID }
         var title: String { return weasylItem.title }

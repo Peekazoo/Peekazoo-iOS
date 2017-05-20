@@ -35,8 +35,8 @@ struct WeasylHomepageAPI {
         return (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)) as? [[String : Any]]
     }
 
-    private func parse(_ jsonObject: [[String : Any]]) -> [WeasylHomepageItem] {
-        return jsonObject.flatMap(WeasylHomepageItem.init)
+    private func parse(_ jsonObject: [[String : Any]]) -> [WeasylSubmission] {
+        return jsonObject.flatMap(WeasylSubmission.init)
     }
 
 }
