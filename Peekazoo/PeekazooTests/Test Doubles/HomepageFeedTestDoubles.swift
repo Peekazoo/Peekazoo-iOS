@@ -11,8 +11,18 @@
 class CapturingHomepageFeed: HomepageFeed {
 
     private(set) var didLoad = false
+    private(set) var capturedDelegate: HomepageFeedDelegate?
     func loadFeed(delegate: HomepageFeedDelegate) {
         didLoad = true
+        capturedDelegate = delegate
+    }
+
+    func performSuccessfulLoad(items: [HomepageItem] = []) {
+        capturedDelegate?.feedDidFinishLoading(items: items)
+    }
+
+    func performUnsuccessfulLoad() {
+        capturedDelegate?.feedDidFailToLoad()
     }
 
 }

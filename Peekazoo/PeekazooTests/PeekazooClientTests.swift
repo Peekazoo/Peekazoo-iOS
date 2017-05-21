@@ -119,4 +119,17 @@ class PeekazooClientTests: XCTestCase {
         XCTAssertFalse(capturingLoadingDelegate.didFailToLoadInvoked)
     }
 
+    func testFullySuccessfulLoadThenFailingLoadsAreNotRegardedAsSuccess() {
+        let capturingHomepageFeed = CapturingHomepageFeed()
+        var capturingLoadingDelegate = CapturingHomepageLoadingDelegate()
+        let service = PeekazooClient(feeds: [capturingHomepageFeed])
+        service.loadHomepage(delegate: capturingLoadingDelegate)
+        capturingHomepageFeed.performSuccessfulLoad()
+        capturingLoadingDelegate = CapturingHomepageLoadingDelegate()
+        service.loadHomepage(delegate: capturingLoadingDelegate)
+        capturingHomepageFeed.performUnsuccessfulLoad()
+
+        XCTAssertFalse(capturingLoadingDelegate.didFinishLoadingInvoked)
+    }
+
 }

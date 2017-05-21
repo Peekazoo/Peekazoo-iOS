@@ -36,6 +36,7 @@ class PeekazooClient: PeekazooServiceProtocol, HomepageFeedDelegate {
     func loadHomepage(delegate: HomepageLoadingDelegate) {
         self.delegate = delegate
         numberOfLoadingFeeds = feeds.count
+        numberOfSuccessfulFeeds = 0
         feeds.forEach(beginLoad)
     }
 
