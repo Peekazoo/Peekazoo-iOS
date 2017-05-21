@@ -26,6 +26,7 @@ class PeekazooClient: PeekazooServiceProtocol, HomepageFeedDelegate {
     var feeds: [HomepageFeed]
     var delegate: HomepageLoadingDelegate?
     private var numberOfLoadingFeeds = 0
+    private var numberOfSuccessfulFeeds = 0
     private var loadedItems = [HomepageItem]()
 
     init(feeds: [HomepageFeed]) {
@@ -41,6 +42,7 @@ class PeekazooClient: PeekazooServiceProtocol, HomepageFeedDelegate {
     func feedDidFinishLoading(items: [HomepageItem]) {
         loadedItems.append(contentsOf: items)
         numberOfLoadingFeeds -= 1
+        numberOfSuccessfulFeeds += 1
 
         if numberOfLoadingFeeds == 0 {
             delegate?.finishedLoadingHomepage(items: loadedItems)
@@ -49,6 +51,11 @@ class PeekazooClient: PeekazooServiceProtocol, HomepageFeedDelegate {
 
     func feedDidFailToLoad() {
         delegate?.failedToLoadHomepage()
+
+        numberOfLoadingFeeds -= 1
+        if numberOfLoadingFeeds == 0 && numberOfSuccessfulFeeds > 0 {
+            delegate?.finishedLoadingHomepage(items: loadedItems)
+        }
     }
 
     private func beginLoad(for feed: HomepageFeed) {
