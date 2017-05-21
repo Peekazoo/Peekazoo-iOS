@@ -46,33 +46,39 @@ class PeekazooClient: PeekazooServiceProtocol {
 
         func feedDidFinishLoading(items: [HomepageItem]) {
             loadedItems.append(contentsOf: items)
-            numberOfLoadingFeeds -= 1
             numberOfSuccessfulFeeds += 1
-
-            if numberOfLoadingFeeds == 0 {
-                delegateWorker.execute {
-                    self.delegate.finishedLoadingHomepage(items: self.loadedItems)
-                }
-            }
+            handleFeedFinished()
         }
 
         func feedDidFailToLoad() {
-            numberOfLoadingFeeds -= 1
-            guard numberOfLoadingFeeds == 0 else { return }
-
-            if numberOfSuccessfulFeeds > 0 {
-                delegateWorker.execute {
-                    self.delegate.finishedLoadingHomepage(items: self.loadedItems)
-                }
-            } else {
-                delegateWorker.execute {
-                    self.delegate.failedToLoadHomepage()
-                }
-            }
+            handleFeedFinished()
         }
 
         private func beginLoad(for feed: HomepageFeed) {
             feed.loadFeed(delegate: self)
+        }
+
+        private func handleFeedFinished() {
+            numberOfLoadingFeeds -= 1
+            guard isFinishedLoading() else { return }
+
+            delegateWorker.execute(notifyDelegate)
+        }
+
+        private func isFinishedLoading() -> Bool {
+            return numberOfLoadingFeeds == 0
+        }
+
+        private func isLoadSuccessful() -> Bool {
+            return numberOfSuccessfulFeeds > 0
+        }
+
+        private func notifyDelegate() {
+            if isLoadSuccessful() {
+                delegate.finishedLoadingHomepage(items: loadedItems)
+            } else {
+                delegate.failedToLoadHomepage()
+            }
         }
 
     }
