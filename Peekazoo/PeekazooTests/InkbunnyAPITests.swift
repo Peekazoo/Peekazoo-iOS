@@ -34,9 +34,11 @@ class CapturingInkbunnyHomepageHandler {
 
 class InkbunnyAPITests: XCTestCase {
 
+    let expectedLoginURL = URL(string: "https://inkbunny.net/api_login.php?username=guest&password=")!
+
     private func makeValidLoginNetworkAdapter() -> ControllableNetworkAdapter {
         var loginNetworkAdapter = ControllableNetworkAdapter()
-        loginNetworkAdapter.stub(url: URL(string: "https://inkbunny.net/api_login.php")!,
+        loginNetworkAdapter.stub(url: expectedLoginURL,
                                  withContentsOfJSONFile: "ValidInkbunnyGuestLoginResponse")
 
         return loginNetworkAdapter
@@ -58,7 +60,6 @@ class InkbunnyAPITests: XCTestCase {
     }
 
     func testAttemptingToFetchHomepageWhenNotLoggedInGetsLoginEndpoint() {
-        let expectedLoginURL = URL(string: "https://inkbunny.net/api_login.php")!
         let capturingNetworkAdapter = CapturingNetworkAdapter()
         let inkbunnyAPI = InkbunnyAPI(networkAdapter: capturingNetworkAdapter)
         inkbunnyAPI.loadHomepage(completionHandler: { _ in })

@@ -22,7 +22,7 @@ struct InkbunnyAPI: InkbunnyAPIProtocol {
     }
 
     func loadHomepage(completionHandler: @escaping (InkbunnyHomepageLoadResult) -> Void) {
-        let loginURL = URL(string: "https://inkbunny.net/api_login.php")!
+        let loginURL = URL(string: "https://inkbunny.net/api_login.php?username=guest&password=")!
         networkAdapter.get(loginURL) { data, _ in
             guard let data = data,
                 let json = self.jsonObject(from: data) as? [String : Any],
