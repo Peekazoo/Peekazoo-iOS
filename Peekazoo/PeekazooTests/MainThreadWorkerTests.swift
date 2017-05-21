@@ -9,18 +9,6 @@
 @testable import Peekazoo
 import XCTest
 
-struct MainThreadWorker: Worker {
-
-    func execute(_ work: @escaping () -> Void) {
-        if Thread.current.isMainThread {
-            work()
-        } else {
-            DispatchQueue.main.async(execute: work)
-        }
-    }
-
-}
-
 class MainThreadWorkerTests: XCTestCase {
 
     func testShouldInvokeTheWorkOnTheMainThreadWhenInvokingFromSecondaryThread() {
