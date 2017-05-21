@@ -23,7 +23,7 @@ protocol HomepageFeedDelegate {
 
 class PeekazooClient: PeekazooServiceProtocol {
 
-    private class LoadTask: HomepageFeedDelegate {
+    private class HomepageLoadTask: HomepageFeedDelegate {
 
         private let feeds: [HomepageFeed]
         private let delegate: HomepageLoadingDelegate
@@ -70,15 +70,15 @@ class PeekazooClient: PeekazooServiceProtocol {
     }
 
     var feeds: [HomepageFeed]
-    private var tasks = [LoadTask]()
+    private var homepageLoadTasks = [HomepageLoadTask]()
 
     init(feeds: [HomepageFeed]) {
         self.feeds = feeds
     }
 
     func loadHomepage(delegate: HomepageLoadingDelegate) {
-        let task = LoadTask(feeds: feeds, delegate: delegate)
-        tasks.append(task)
+        let task = HomepageLoadTask(feeds: feeds, delegate: delegate)
+        homepageLoadTasks.append(task)
         task.loadHomepage()
     }
 
