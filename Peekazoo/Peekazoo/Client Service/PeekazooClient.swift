@@ -50,11 +50,11 @@ class PeekazooClient: PeekazooServiceProtocol, HomepageFeedDelegate {
     }
 
     func feedDidFailToLoad() {
-        delegate?.failedToLoadHomepage()
-
         numberOfLoadingFeeds -= 1
         if numberOfLoadingFeeds == 0 && numberOfSuccessfulFeeds > 0 {
             delegate?.finishedLoadingHomepage(items: loadedItems)
+        } else {
+            delegate?.failedToLoadHomepage()
         }
     }
 

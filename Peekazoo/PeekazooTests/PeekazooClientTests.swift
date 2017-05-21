@@ -99,4 +99,14 @@ class PeekazooClientTests: XCTestCase {
         XCTAssertTrue(capturingLoadingDelegate.didFinishLoadingInvoked)
     }
 
+    func testWhenTheFirstFeedLoadsItemsThenTheSecondFeedFailsTheDelegateIsNotToldAboutFailure() {
+        let successfulFeed = SuccessfulHomepageFeed()
+        let failingFeed = FailingHomepageFeed()
+        let capturingLoadingDelegate = CapturingHomepageLoadingDelegate()
+        let service = PeekazooClient(feeds: [successfulFeed, failingFeed])
+        service.loadHomepage(delegate: capturingLoadingDelegate)
+
+        XCTAssertFalse(capturingLoadingDelegate.didFailToLoadInvoked)
+    }
+
 }
