@@ -132,4 +132,16 @@ class PeekazooClientTests: XCTestCase {
         XCTAssertFalse(capturingLoadingDelegate.didFinishLoadingInvoked)
     }
 
+    func testMultipleCallsToLoadHomepageDuringLoadNotifiesTheOriginalDelegate() {
+        let capturingFeed = RepeatableyCallableHomepageFeed()
+        let firstLoadingDelegate = CapturingHomepageLoadingDelegate()
+        let secondLoadingDelegate = CapturingHomepageLoadingDelegate()
+        let service = PeekazooClient(feeds: [capturingFeed])
+        service.loadHomepage(delegate: firstLoadingDelegate)
+        service.loadHomepage(delegate: secondLoadingDelegate)
+        capturingFeed.performSuccessfulLoad()
+
+        XCTAssertTrue(firstLoadingDelegate.didFinishLoadingInvoked)
+    }
+
 }

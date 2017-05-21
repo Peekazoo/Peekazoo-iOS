@@ -24,7 +24,7 @@ protocol HomepageFeedDelegate {
 class PeekazooClient: PeekazooServiceProtocol, HomepageFeedDelegate {
 
     var feeds: [HomepageFeed]
-    var delegate: HomepageLoadingDelegate?
+    private var delegates = [HomepageLoadingDelegate]()
     private var numberOfLoadingFeeds = 0
     private var numberOfSuccessfulFeeds = 0
     private var loadedItems = [HomepageItem]()
@@ -34,7 +34,7 @@ class PeekazooClient: PeekazooServiceProtocol, HomepageFeedDelegate {
     }
 
     func loadHomepage(delegate: HomepageLoadingDelegate) {
-        self.delegate = delegate
+        delegates.append(delegate)
         numberOfLoadingFeeds = feeds.count
         numberOfSuccessfulFeeds = 0
         feeds.forEach(beginLoad)
@@ -46,7 +46,7 @@ class PeekazooClient: PeekazooServiceProtocol, HomepageFeedDelegate {
         numberOfSuccessfulFeeds += 1
 
         if numberOfLoadingFeeds == 0 {
-            delegate?.finishedLoadingHomepage(items: loadedItems)
+            delegates.forEach({ $0.finishedLoadingHomepage(items: loadedItems) })
         }
     }
 
@@ -55,9 +55,9 @@ class PeekazooClient: PeekazooServiceProtocol, HomepageFeedDelegate {
         guard numberOfLoadingFeeds == 0 else { return }
 
         if numberOfSuccessfulFeeds > 0 {
-            delegate?.finishedLoadingHomepage(items: loadedItems)
+            delegates.forEach({ $0.finishedLoadingHomepage(items: loadedItems) })
         } else {
-            delegate?.failedToLoadHomepage()
+            delegates.forEach({ $0.failedToLoadHomepage() })
         }
     }
 

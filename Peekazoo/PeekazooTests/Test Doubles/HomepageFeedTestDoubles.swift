@@ -27,6 +27,23 @@ class CapturingHomepageFeed: HomepageFeed {
 
 }
 
+class RepeatableyCallableHomepageFeed: HomepageFeed {
+
+    private(set) var capturedDelegates = [HomepageFeedDelegate]()
+    func loadFeed(delegate: HomepageFeedDelegate) {
+        capturedDelegates.append(delegate)
+    }
+
+    func performSuccessfulLoad(items: [HomepageItem] = []) {
+        capturedDelegates.forEach({ $0.feedDidFinishLoading(items: items) })
+    }
+
+    func performUnsuccessfulLoad() {
+        capturedDelegates.forEach({ $0.feedDidFailToLoad() })
+    }
+
+}
+
 struct FailingHomepageFeed: HomepageFeed {
 
     func loadFeed(delegate: HomepageFeedDelegate) {
