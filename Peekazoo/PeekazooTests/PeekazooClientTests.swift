@@ -144,4 +144,17 @@ class PeekazooClientTests: XCTestCase {
         XCTAssertTrue(firstLoadingDelegate.didFinishLoadingInvoked)
     }
 
+    func testFirstRequestSucceedsThenSecondRequestFailsDoesNotNotifyFirstDelegateAboutFailure() {
+        let capturingFeed = RepeatableyCallableHomepageFeed()
+        let firstLoadingDelegate = CapturingHomepageLoadingDelegate()
+        let secondLoadingDelegate = CapturingHomepageLoadingDelegate()
+        let service = PeekazooClient(feeds: [capturingFeed])
+        service.loadHomepage(delegate: firstLoadingDelegate)
+        capturingFeed.performSuccessfulLoad()
+        service.loadHomepage(delegate: secondLoadingDelegate)
+        capturingFeed.performUnsuccessfulLoad()
+
+        XCTAssertFalse(firstLoadingDelegate.didFailToLoadInvoked)
+    }
+
 }
