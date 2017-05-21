@@ -70,7 +70,7 @@
 		7885CAF51ECE4120005F426B /* WeasylAPIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7885CAF41ECE4120005F426B /* WeasylAPIProtocol.swift */; };
 		7885CAF71ECE4140005F426B /* WeasylAPITestDoubles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7885CAF61ECE4140005F426B /* WeasylAPITestDoubles.swift */; };
 		7885CAFA1ECF1085005F426B /* PeekazooHomepageAdapterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7885CAF91ECF1085005F426B /* PeekazooHomepageAdapterTests.swift */; };
-		788B0D0A1ECB17E30035C26A /* PeekazooClientTests.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788B0D091ECB17E30035C26A /* PeekazooClientTests.swift.swift */; };
+		788B0D0A1ECB17E30035C26A /* PeekazooClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788B0D091ECB17E30035C26A /* PeekazooClientTests.swift */; };
 		789F10071EC481B100FAF5F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789F10061EC481B100FAF5F1 /* AppDelegate.swift */; };
 		789F100E1EC481B100FAF5F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 789F100D1EC481B100FAF5F1 /* Assets.xcassets */; };
 		789F10111EC481B100FAF5F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 789F100F1EC481B100FAF5F1 /* LaunchScreen.storyboard */; };
@@ -152,7 +152,7 @@
 		7885CAF41ECE4120005F426B /* WeasylAPIProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeasylAPIProtocol.swift; path = "Remote Services/Weasyl/WeasylAPIProtocol.swift"; sourceTree = "<group>"; };
 		7885CAF61ECE4140005F426B /* WeasylAPITestDoubles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeasylAPITestDoubles.swift; path = "Test Doubles/WeasylAPITestDoubles.swift"; sourceTree = "<group>"; };
 		7885CAF91ECF1085005F426B /* PeekazooHomepageAdapterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeekazooHomepageAdapterTests.swift; sourceTree = "<group>"; };
-		788B0D091ECB17E30035C26A /* PeekazooClientTests.swift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeekazooClientTests.swift.swift; sourceTree = "<group>"; };
+		788B0D091ECB17E30035C26A /* PeekazooClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeekazooClientTests.swift; sourceTree = "<group>"; };
 		789F10031EC481B100FAF5F1 /* Peekazoo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Peekazoo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		789F10061EC481B100FAF5F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		789F100D1EC481B100FAF5F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -367,7 +367,7 @@
 				6E0D85821EC6E84D000E7283 /* AppDelegateTests.swift */,
 				6E0D85861EC6EF83000E7283 /* WindowRootRouterTests.swift */,
 				6E0D85AD1EC8FD66000E7283 /* HomepageViewControllerTests.swift */,
-				788B0D091ECB17E30035C26A /* PeekazooClientTests.swift.swift */,
+				788B0D091ECB17E30035C26A /* PeekazooClientTests.swift */,
 				7840DF8A1ECB949900A623A7 /* WeasylAPITests.swift */,
 				6E02FB1C1ECCE4EB001C2D66 /* URLSessionNetworkAdapterTests.swift */,
 				786725A71ECDC4CD00D78A72 /* WeasylServiceAdapterTests.swift */,
@@ -593,7 +593,7 @@
 				7821A16B1ED0765A009CA08A /* CapturingHomepageLoadingDelegate.swift in Sources */,
 				7885CAF71ECE4140005F426B /* WeasylAPITestDoubles.swift in Sources */,
 				6E0D85A01EC83C02000E7283 /* AppTestDoubles.swift in Sources */,
-				788B0D0A1ECB17E30035C26A /* PeekazooClientTests.swift.swift in Sources */,
+				788B0D0A1ECB17E30035C26A /* PeekazooClientTests.swift in Sources */,
 				7840DF851ECB1BB400A623A7 /* Array.swift in Sources */,
 				7840DF871ECB1F7F00A623A7 /* NetworkAdapterTestDoubles.swift in Sources */,
 				786725A81ECDC4CD00D78A72 /* WeasylServiceAdapterTests.swift in Sources */,
