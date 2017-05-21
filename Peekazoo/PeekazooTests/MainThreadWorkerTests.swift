@@ -12,10 +12,10 @@ import XCTest
 struct MainThreadWorker: Worker {
 
     func execute(_ work: @escaping () -> Void) {
-        DispatchQueue.main.async(execute: work)
-
         if Thread.current.isMainThread {
             work()
+        } else {
+            DispatchQueue.main.async(execute: work)
         }
     }
 
@@ -54,6 +54,22 @@ class MainThreadWorkerTests: XCTestCase {
 
             if ran == false {
                 notRanUsingSecondaryThreadExpectation.fulfill()
+            }
+        }
+
+        waitForExpectations(timeout: 0.1)
+    }
+
+    func testShouldNotInvokeTheWorkTwiceWhenInvokedFromTheMainThread() {
+        let worker = MainThreadWorker()
+        let notInvokedTwiceExpectation = expectation(description: "Should not run work multiple times on main thread")
+        notInvokedTwiceExpectation.isInverted = true
+        var runCount = 0
+        worker.execute {
+            runCount += 1
+
+            if runCount == 2 {
+                notInvokedTwiceExpectation.fulfill()
             }
         }
 
