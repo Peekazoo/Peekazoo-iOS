@@ -27,13 +27,15 @@ class PeekazooClient: PeekazooServiceProtocol {
 
         private let feeds: [HomepageFeed]
         private let delegate: HomepageLoadingDelegate
+        private let delegateWorker: Worker
         private var numberOfLoadingFeeds = 0
         private var numberOfSuccessfulFeeds = 0
         private var loadedItems = [HomepageItem]()
 
-        init(feeds: [HomepageFeed], delegate: HomepageLoadingDelegate) {
+        init(feeds: [HomepageFeed], delegate: HomepageLoadingDelegate, delegateWorker: Worker) {
             self.feeds = feeds
             self.delegate = delegate
+            self.delegateWorker = delegateWorker
         }
 
         func loadHomepage() {
@@ -48,7 +50,9 @@ class PeekazooClient: PeekazooServiceProtocol {
             numberOfSuccessfulFeeds += 1
 
             if numberOfLoadingFeeds == 0 {
-                delegate.finishedLoadingHomepage(items: loadedItems)
+                delegateWorker.execute {
+                    self.delegate.finishedLoadingHomepage(items: self.loadedItems)
+                }
             }
         }
 
@@ -70,14 +74,27 @@ class PeekazooClient: PeekazooServiceProtocol {
     }
 
     var feeds: [HomepageFeed]
+    private let delegateWorker: Worker
     private var homepageLoadTasks = [HomepageLoadTask]()
+
+    private struct AutoRunningWorker: Worker {
+        func execute(_ work: () -> Void) {
+            work()
+        }
+    }
 
     init(feeds: [HomepageFeed]) {
         self.feeds = feeds
+        self.delegateWorker = AutoRunningWorker()
+    }
+
+    init(feeds: [HomepageFeed], delegateWorker: Worker) {
+        self.feeds = feeds
+        self.delegateWorker = delegateWorker
     }
 
     func loadHomepage(delegate: HomepageLoadingDelegate) {
-        let task = HomepageLoadTask(feeds: feeds, delegate: delegate)
+        let task = HomepageLoadTask(feeds: feeds, delegate: delegate, delegateWorker: delegateWorker)
         homepageLoadTasks.append(task)
         task.loadHomepage()
     }
