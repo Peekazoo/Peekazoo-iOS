@@ -8,6 +8,6 @@
 
 protocol Worker {
 
-    func execute(_ work: () -> Void)
+    func execute(_ work: @escaping () -> Void)
 
 }

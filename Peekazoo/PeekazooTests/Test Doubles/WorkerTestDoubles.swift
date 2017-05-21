@@ -10,7 +10,7 @@
 
 class AutoRunningWorker: Worker {
 
-    func execute(_ work: () -> Void) {
+    func execute(_ work: @escaping () -> Void) {
         work()
     }
 
@@ -18,6 +18,6 @@ class AutoRunningWorker: Worker {
 
 class BlockingWorker: Worker {
 
-    func execute(_ work: () -> Void) {}
+    func execute(_ work: @escaping () -> Void) {}
 
 }

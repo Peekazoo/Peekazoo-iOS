@@ -88,7 +88,7 @@ class PeekazooClient: PeekazooServiceProtocol {
     private var homepageLoadTasks = [HomepageLoadTask]()
 
     private struct AutoRunningWorker: Worker {
-        func execute(_ work: () -> Void) {
+        func execute(_ work: @escaping () -> Void) {
             work()
         }
     }
