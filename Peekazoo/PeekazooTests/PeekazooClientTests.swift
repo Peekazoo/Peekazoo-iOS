@@ -177,4 +177,15 @@ class PeekazooClientTests: XCTestCase {
         XCTAssertFalse(capturingLoadingDelegate.didFailToLoadInvoked)
     }
 
+    func testWhenLoadingHomepagePartiallySucceedsBlockingTheCallbackWorkerShouldNotNotifyTheDelegate() {
+        let capturingWorker = BlockingWorker()
+        let successfulFeed = SuccessfulHomepageFeed()
+        let failingFeed = FailingHomepageFeed()
+        let capturingLoadingDelegate = CapturingHomepageLoadingDelegate()
+        let service = PeekazooClient(feeds: [successfulFeed, failingFeed], delegateWorker: capturingWorker)
+        service.loadHomepage(delegate: capturingLoadingDelegate)
+
+        XCTAssertFalse(capturingLoadingDelegate.didFinishLoadingInvoked)
+    }
+
 }

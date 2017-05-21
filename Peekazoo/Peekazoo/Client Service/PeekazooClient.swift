@@ -61,7 +61,9 @@ class PeekazooClient: PeekazooServiceProtocol {
             guard numberOfLoadingFeeds == 0 else { return }
 
             if numberOfSuccessfulFeeds > 0 {
-                delegate.finishedLoadingHomepage(items: loadedItems)
+                delegateWorker.execute {
+                    self.delegate.finishedLoadingHomepage(items: self.loadedItems)
+                }
             } else {
                 delegateWorker.execute {
                     self.delegate.failedToLoadHomepage()
