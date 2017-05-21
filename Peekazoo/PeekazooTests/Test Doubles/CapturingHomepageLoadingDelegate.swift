@@ -27,4 +27,16 @@ class CapturingHomepageLoadingDelegate: HomepageLoadingDelegate {
         return items.elementsEqual(castedItems)
     }
 
+    func capturedItemsContains<T>(_ subsequence: [T]) -> Bool where T: HomepageItem, T: Equatable {
+        guard let castedItems = capturedHomepageItems as? [T] else { return false }
+
+        for item in subsequence {
+            if castedItems.contains(item) == false {
+                return false
+            }
+        }
+
+        return true
+    }
+
 }
