@@ -87,17 +87,6 @@ class PeekazooClient: PeekazooServiceProtocol {
     private let delegateWorker: Worker
     private var homepageLoadTasks = [HomepageLoadTask]()
 
-    private struct AutoRunningWorker: Worker {
-        func execute(_ work: @escaping () -> Void) {
-            work()
-        }
-    }
-
-    init(feeds: [HomepageFeed]) {
-        self.feeds = feeds
-        self.delegateWorker = AutoRunningWorker()
-    }
-
     init(feeds: [HomepageFeed], delegateWorker: Worker) {
         self.feeds = feeds
         self.delegateWorker = delegateWorker
