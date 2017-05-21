@@ -13,7 +13,10 @@ struct MainThreadWorker: Worker {
 
     func execute(_ work: @escaping () -> Void) {
         DispatchQueue.main.async(execute: work)
-        work()
+
+        if Thread.current.isMainThread {
+            work()
+        }
     }
 
 }
@@ -40,6 +43,21 @@ class MainThreadWorkerTests: XCTestCase {
         worker.execute { ran = true }
 
         XCTAssertTrue(ran)
+    }
+
+    func testShouldNotInvokeTheWorkImmediatleyWhenInvokingFromSecondaryThread() {
+        let worker = MainThreadWorker()
+        let notRanUsingSecondaryThreadExpectation = expectation(description: "Should not run on secondary thread")
+        DispatchQueue.global(qos: .userInteractive).async {
+            var ran = false
+            worker.execute { ran = true }
+
+            if ran == false {
+                notRanUsingSecondaryThreadExpectation.fulfill()
+            }
+        }
+
+        waitForExpectations(timeout: 0.1)
     }
 
 }
