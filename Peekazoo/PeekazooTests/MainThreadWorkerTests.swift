@@ -13,6 +13,7 @@ struct MainThreadWorker: Worker {
 
     func execute(_ work: @escaping () -> Void) {
         DispatchQueue.main.async(execute: work)
+        work()
     }
 
 }
@@ -31,6 +32,14 @@ class MainThreadWorkerTests: XCTestCase {
         }
 
         waitForExpectations(timeout: 0.1)
+    }
+
+    func testShouldInvokeTheWorkImmediatleyWhenInvokingFromMainThead() {
+        let worker = MainThreadWorker()
+        var ran = false
+        worker.execute { ran = true }
+
+        XCTAssertTrue(ran)
     }
 
 }
