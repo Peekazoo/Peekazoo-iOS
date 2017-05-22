@@ -22,8 +22,7 @@ public struct InkbunnyAPI: InkbunnyAPIProtocol {
     }
 
     public func loadHomepage(completionHandler: @escaping (InkbunnyHomepageLoadResult) -> Void) {
-        let loginURL = URL(string: "https://inkbunny.net/api_login.php?username=guest&password=")!
-        networkAdapter.get(loginURL) { data, _ in
+        networkAdapter.get(makeGuestLoginURL()) { data, _ in
             guard let data = data,
                 let json = self.jsonObject(from: data) as? [String : Any],
                 let sid = json["sid"] as? String else {
@@ -31,8 +30,7 @@ public struct InkbunnyAPI: InkbunnyAPIProtocol {
                     return
             }
 
-            let searchURL = URL(string: "https://inkbunny.net/api_search.php?sid=\(sid)")!
-            self.networkAdapter.get(searchURL, completionHandler: { data, _ in
+            self.networkAdapter.get(self.makeSearchURL(sid: sid)) { data, _ in
                 guard let data = data,
                       let json = self.jsonObject(from: data) as? [String : Any],
                       let submissions = json["submissions"] as? [[String : Any]] else {
@@ -41,8 +39,16 @@ public struct InkbunnyAPI: InkbunnyAPIProtocol {
                 }
 
                 completionHandler(.success(submissions.flatMap(InkbunnySubmission.init)))
-            })
+            }
         }
+    }
+
+    private func makeGuestLoginURL() -> URL {
+        return URL(string: "https://inkbunny.net/api_login.php?username=guest&password=")!
+    }
+
+    private func makeSearchURL(sid: String) -> URL {
+        return URL(string: "https://inkbunny.net/api_search.php?sid=\(sid)")!
     }
 
     private func jsonObject(from data: Data) -> Any? {
