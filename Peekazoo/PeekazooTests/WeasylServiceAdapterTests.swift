@@ -69,4 +69,15 @@ class WeasylAPIAdapterTests: XCTestCase {
         XCTAssertEqual(secondItem.title, capturingHomepageFeedDelegate.result(at: 1)?.title)
     }
 
+    func testSuccessfullyFetchingItemAdaptsPostedAtDate() {
+        let postedAt = Date(timeIntervalSinceNow: -7200)
+        let item = WeasylSubmission(submitID: "", title: "", postedAt: postedAt)
+        let successfulWeasylAPI = SuccessfulWeasylAPI(items: [item])
+        let adapter = WeasylAPIAdapter(api: successfulWeasylAPI)
+        let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
+        adapter.loadFeed(delegate: capturingHomepageFeedDelegate)
+
+        XCTAssertEqual(postedAt, capturingHomepageFeedDelegate.capturedResults?.first?.creationDate)
+    }
+
 }
