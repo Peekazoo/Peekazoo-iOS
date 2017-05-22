@@ -11,10 +11,14 @@ import Foundation
 public struct WeasylHomepageAPI {
 
     private var networkAdapter: NetworkAdapter
+    private var dateFormatter: DateFormatter
     private let homepageURL = URL(string: "https://www.weasyl.com/api/submissions/frontpage")!
 
     public init(networkAdapter: NetworkAdapter) {
         self.networkAdapter = networkAdapter
+
+        dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
     }
 
     public func loadFeed(completionHandler: @escaping (WeasylHomepageLoadResult) -> Void) {
@@ -40,7 +44,16 @@ public struct WeasylHomepageAPI {
     }
 
     private func parse(_ jsonObject: [[String : Any]]) -> [WeasylSubmission] {
-        return jsonObject.flatMap(WeasylSubmission.init)
+        return jsonObject.flatMap(parseSubmission)
+    }
+
+    private func parseSubmission(_ jsonObject: [String : Any]) -> WeasylSubmission? {
+        guard let submitID = jsonObject["submitid"] as? Int,
+              let title = jsonObject["title"] as? String,
+              let postedAtString = jsonObject["posted_at"] as? String,
+              let postedAt = dateFormatter.date(from: postedAtString) else { return nil }
+
+        return WeasylSubmission(submitID: String(submitID), title: title, postedAt: postedAt)
     }
 
 }
