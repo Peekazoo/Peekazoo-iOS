@@ -250,4 +250,14 @@ class InkbunnyAPITests: XCTestCase {
         XCTAssertTrue(capturingHomepageHandler.wasNotifiedFeedDidFailToLoad)
     }
 
+    func testParsingPostedDateFromResponse() {
+        let firstDateFromJSON = DateComponents(calendar: Calendar.current, timeZone: TimeZone(secondsFromGMT: 7200), year: 2017, month: 5, day: 19, hour: 21, minute: 46, second: 03, nanosecond: 561000110).date!
+        let happyPathNetworkAdapter = makeSuccessfulSearchNetworkAdapter()
+        let inkbunnyAPI = InkbunnyAPI(networkAdapter: happyPathNetworkAdapter)
+        let capturingHomepageHandler = CapturingInkbunnyHomepageHandler()
+        inkbunnyAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
+
+        XCTAssertEqual(firstDateFromJSON, capturingHomepageHandler.result(at: 0)?.postedDate)
+    }
+
 }
