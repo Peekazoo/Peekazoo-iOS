@@ -8,6 +8,6 @@
 
 import Foundation
 
-struct HomepageRouter {
+public struct HomepageRouter {
 
 }

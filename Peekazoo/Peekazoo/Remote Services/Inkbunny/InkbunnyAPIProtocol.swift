@@ -6,7 +6,7 @@
 //  Copyright © 2017 Peekazoo. All rights reserved.
 //
 
-protocol InkbunnyAPIProtocol {
+public protocol InkbunnyAPIProtocol {
 
     func loadHomepage(completionHandler: @escaping (InkbunnyHomepageLoadResult) -> Void)
 

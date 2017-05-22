@@ -6,11 +6,11 @@
 //  Copyright © 2017 Peekazoo. All rights reserved.
 //
 
-enum Difference {
+public enum Difference {
 
     case insertion(index: Int)
 
-    var insertedIndex: Int? {
+    public var insertedIndex: Int? {
         if case .insertion(let idx) = self {
             return idx
         } else {

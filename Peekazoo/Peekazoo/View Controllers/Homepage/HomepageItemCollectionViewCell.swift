@@ -8,8 +8,8 @@
 
 import UIKit
 
-class HomepageItemCollectionViewCell: UICollectionViewCell {
+public class HomepageItemCollectionViewCell: UICollectionViewCell {
 
-    @IBOutlet weak var itemTitleLabel: UILabel!
+    @IBOutlet public weak var itemTitleLabel: UILabel!
 
 }

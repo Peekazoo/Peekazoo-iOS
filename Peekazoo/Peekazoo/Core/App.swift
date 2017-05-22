@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol App {
+public protocol App {
 
     func launch()
 

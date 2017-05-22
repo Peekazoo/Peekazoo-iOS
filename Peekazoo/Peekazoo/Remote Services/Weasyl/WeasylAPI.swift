@@ -6,15 +6,15 @@
 //  Copyright © 2017 Peekazoo. All rights reserved.
 //
 
-struct WeasylAPI: WeasylAPIProtocol {
+public struct WeasylAPI: WeasylAPIProtocol {
 
     private var homepageFeed: WeasylHomepageAPI
 
-    init(networkAdapter: NetworkAdapter) {
+    public init(networkAdapter: NetworkAdapter) {
         homepageFeed = WeasylHomepageAPI(networkAdapter: networkAdapter)
     }
 
-    func loadHomepage(completionHandler: @escaping (WeasylHomepageLoadResult) -> Void) {
+    public func loadHomepage(completionHandler: @escaping (WeasylHomepageLoadResult) -> Void) {
         homepageFeed.loadFeed(completionHandler: completionHandler)
     }
 

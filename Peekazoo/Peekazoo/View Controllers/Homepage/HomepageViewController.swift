@@ -10,12 +10,12 @@ import UIKit
 
 private let homepageItemCellReuseIdentifier = "HomepageItemCell"
 
-class HomepageViewController: UIViewController, HomepageInterface {
+public class HomepageViewController: UIViewController, HomepageInterface {
 
     @IBOutlet weak var collectionView: UICollectionView!
     private let dataSource = HomepageCollectionViewDataSource(cellReuseIdentifier: homepageItemCellReuseIdentifier)
 
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
 
         let cellNib = UINib(nibName: "HomepageItemCollectionViewCell", bundle: Bundle.main)
@@ -24,26 +24,26 @@ class HomepageViewController: UIViewController, HomepageInterface {
         title = "Home"
     }
 
-    var delegate: HomepageInterfaceDelegate?
+    public var delegate: HomepageInterfaceDelegate?
 
-    func updateInterface(viewModel: HomepageInterfaceViewModel, applyingDifferences diffs: [Difference]) {
+    public func updateInterface(viewModel: HomepageInterfaceViewModel, applyingDifferences diffs: [Difference]) {
         dataSource.viewModel = viewModel
         collectionView.reloadData()
     }
 
-    func showLoadingErrorPlaceholder() {
+    public func showLoadingErrorPlaceholder() {
 
     }
 
-    func hideLoadingErrorPlaceholder() {
+    public func hideLoadingErrorPlaceholder() {
 
     }
 
-    func showNoContentPlaceholder() {
+    public func showNoContentPlaceholder() {
 
     }
 
-    func hideNoContentPlaceholder() {
+    public func hideNoContentPlaceholder() {
 
     }
 

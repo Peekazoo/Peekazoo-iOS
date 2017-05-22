@@ -8,15 +8,15 @@
 
 import Foundation
 
-struct WeasylAPIAdapter: HomepageFeed {
+public struct WeasylAPIAdapter: HomepageFeed {
 
-    var api: WeasylAPIProtocol
+    private var api: WeasylAPIProtocol
 
-    init(api: WeasylAPIProtocol) {
+    public init(api: WeasylAPIProtocol) {
         self.api = api
     }
 
-    func loadFeed(delegate: HomepageFeedDelegate) {
+    public func loadFeed(delegate: HomepageFeedDelegate) {
         api.loadHomepage { result in
             guard case .success(let items) = result else {
                 delegate.feedDidFailToLoad()

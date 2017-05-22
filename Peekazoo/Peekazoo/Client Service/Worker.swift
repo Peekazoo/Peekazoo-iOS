@@ -6,7 +6,7 @@
 //  Copyright © 2017 Peekazoo. All rights reserved.
 //
 
-protocol Worker {
+public protocol Worker {
 
     func execute(_ work: @escaping () -> Void)
 

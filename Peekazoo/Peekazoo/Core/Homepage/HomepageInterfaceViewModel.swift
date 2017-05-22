@@ -6,7 +6,7 @@
 //  Copyright © 2017 Peekazoo. All rights reserved.
 //
 
-protocol HomepageInterfaceViewModel {
+public protocol HomepageInterfaceViewModel {
 
     var numberOfItems: Int { get }
 
@@ -14,7 +14,7 @@ protocol HomepageInterfaceViewModel {
 
 }
 
-protocol HomepageInterfaceItemViewModel {
+public protocol HomepageInterfaceItemViewModel {
 
     var title: String { get }
 

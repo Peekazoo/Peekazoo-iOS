@@ -8,12 +8,12 @@
 
 import Foundation
 
-struct WeasylSubmission {
+public struct WeasylSubmission {
 
-    var title: String
-    var submitID: String
+    public var title: String
+    public var submitID: String
 
-    init(submitID: String, title: String) {
+    public  init(submitID: String, title: String) {
         self.submitID = submitID
         self.title = title
     }

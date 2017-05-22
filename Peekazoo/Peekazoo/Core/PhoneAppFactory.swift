@@ -8,9 +8,9 @@
 
 import UIKit
 
-struct PhoneAppFactory: AppFactory {
+public struct PhoneAppFactory: AppFactory {
 
-    func makeApplication(window: UIWindow) -> App {
+    public func makeApplication(window: UIWindow) -> App {
         let networkAdapter = URLSessionNetworkAdapter()
         let weasylAPI = WeasylAPI(networkAdapter: networkAdapter)
         let weasylAdapter = WeasylAPIAdapter(api: weasylAPI)

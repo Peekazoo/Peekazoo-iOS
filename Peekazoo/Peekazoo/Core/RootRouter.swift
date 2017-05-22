@@ -6,7 +6,7 @@
 //  Copyright © 2017 Peekazoo. All rights reserved.
 //
 
-protocol RootRouter {
+public protocol RootRouter {
 
     func navigateToHomepage() -> (interface: HomepageInterface, router: Any)
 

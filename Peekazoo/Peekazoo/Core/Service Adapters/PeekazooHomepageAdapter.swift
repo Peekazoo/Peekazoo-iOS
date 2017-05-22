@@ -6,15 +6,15 @@
 //  Copyright © 2017 Peekazoo. All rights reserved.
 //
 
-struct PeekazooHomepageAdapter: HomepageService {
+public struct PeekazooHomepageAdapter: HomepageService {
 
-    var service: PeekazooServiceProtocol
+    private var service: PeekazooServiceProtocol
 
-    init(service: PeekazooServiceProtocol) {
+    public init(service: PeekazooServiceProtocol) {
         self.service = service
     }
 
-    func loadHomepage(delegate: HomepageServiceLoadingDelegate) {
+    public func loadHomepage(delegate: HomepageServiceLoadingDelegate) {
         service.loadHomepage(delegate: HomepageLoadingDelegateAdapter(delegate: delegate))
     }
 

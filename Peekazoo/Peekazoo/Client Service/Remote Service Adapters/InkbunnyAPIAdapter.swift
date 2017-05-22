@@ -6,15 +6,15 @@
 //  Copyright © 2017 Peekazoo. All rights reserved.
 //
 
-struct InkbunnyAPIAdapter: HomepageFeed {
+public struct InkbunnyAPIAdapter: HomepageFeed {
 
-    var api: InkbunnyAPIProtocol
+    private var api: InkbunnyAPIProtocol
 
-    init(api: InkbunnyAPIProtocol) {
+    public init(api: InkbunnyAPIProtocol) {
         self.api = api
     }
 
-    func loadFeed(delegate: HomepageFeedDelegate) {
+    public func loadFeed(delegate: HomepageFeedDelegate) {
         api.loadHomepage { result in
             switch result {
             case .success(let items):

@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol NetworkAdapter {
+public protocol NetworkAdapter {
 
     func get(_ url: URL, completionHandler: @escaping (Data?, Error?) -> Void)
 

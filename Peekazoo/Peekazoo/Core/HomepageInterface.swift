@@ -6,13 +6,13 @@
 //  Copyright © 2017 Peekazoo. All rights reserved.
 //
 
-protocol HomepageInterfaceDelegate {
+public protocol HomepageInterfaceDelegate {
 
     func homepageInterfaceDidInvokePullToRefresh()
 
 }
 
-protocol HomepageInterface {
+public protocol HomepageInterface {
 
     var delegate: HomepageInterfaceDelegate? { get set }
 

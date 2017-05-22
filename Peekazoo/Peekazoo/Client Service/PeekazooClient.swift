@@ -8,20 +8,20 @@
 
 import Foundation
 
-protocol HomepageFeed {
+public protocol HomepageFeed {
 
     func loadFeed(delegate: HomepageFeedDelegate)
 
 }
 
-protocol HomepageFeedDelegate {
+public protocol HomepageFeedDelegate {
 
     func feedDidFinishLoading(items: [HomepageItem])
     func feedDidFailToLoad()
 
 }
 
-class PeekazooClient: PeekazooServiceProtocol {
+public class PeekazooClient: PeekazooServiceProtocol {
 
     private class HomepageLoadTask: HomepageFeedDelegate {
 
@@ -32,25 +32,25 @@ class PeekazooClient: PeekazooServiceProtocol {
         private var numberOfSuccessfulFeeds = 0
         private var loadedItems = [HomepageItem]()
 
-        init(feeds: [HomepageFeed], delegate: HomepageLoadingDelegate, delegateWorker: Worker) {
+        public init(feeds: [HomepageFeed], delegate: HomepageLoadingDelegate, delegateWorker: Worker) {
             self.feeds = feeds
             self.delegate = delegate
             self.delegateWorker = delegateWorker
         }
 
-        func loadHomepage() {
+        public func loadHomepage() {
             numberOfLoadingFeeds = feeds.count
             numberOfSuccessfulFeeds = 0
             feeds.forEach(beginLoad)
         }
 
-        func feedDidFinishLoading(items: [HomepageItem]) {
+        public func feedDidFinishLoading(items: [HomepageItem]) {
             loadedItems.append(contentsOf: items)
             numberOfSuccessfulFeeds += 1
             handleFeedFinished()
         }
 
-        func feedDidFailToLoad() {
+        public func feedDidFailToLoad() {
             handleFeedFinished()
         }
 
@@ -83,16 +83,16 @@ class PeekazooClient: PeekazooServiceProtocol {
 
     }
 
-    var feeds: [HomepageFeed]
+    private var feeds: [HomepageFeed]
     private let delegateWorker: Worker
     private var homepageLoadTasks = [HomepageLoadTask]()
 
-    init(feeds: [HomepageFeed], delegateWorker: Worker) {
+    public init(feeds: [HomepageFeed], delegateWorker: Worker) {
         self.feeds = feeds
         self.delegateWorker = delegateWorker
     }
 
-    func loadHomepage(delegate: HomepageLoadingDelegate) {
+    public func loadHomepage(delegate: HomepageLoadingDelegate) {
         let task = HomepageLoadTask(feeds: feeds, delegate: delegate, delegateWorker: delegateWorker)
         homepageLoadTasks.append(task)
         task.loadHomepage()

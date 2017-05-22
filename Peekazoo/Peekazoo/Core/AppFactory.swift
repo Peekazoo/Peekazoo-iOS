@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol AppFactory {
+public protocol AppFactory {
 
     func makeApplication(window: UIWindow) -> App
 

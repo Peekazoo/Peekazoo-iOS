@@ -8,15 +8,15 @@
 
 import UIKit
 
-struct WindowRootRouter: RootRouter {
+public struct WindowRootRouter: RootRouter {
 
-    var window: UIWindow
+    private var window: UIWindow
 
-    init(window: UIWindow) {
+    public init(window: UIWindow) {
         self.window = window
     }
 
-    func navigateToHomepage() -> (interface: HomepageInterface, router: Any) {
+    public func navigateToHomepage() -> (interface: HomepageInterface, router: Any) {
         let homepage = HomepageViewController()
         window.rootViewController = UINavigationController(rootViewController: homepage)
         window.makeKeyAndVisible()

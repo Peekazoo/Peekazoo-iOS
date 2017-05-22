@@ -6,21 +6,21 @@
 //  Copyright © 2017 Peekazoo. All rights reserved.
 //
 
-protocol HomepageServiceLoadingDelegate {
+public protocol HomepageServiceLoadingDelegate {
 
     func homepageServiceDidLoadSuccessfully(content: [HomepageItem])
     func homepageServiceDidFailToLoad()
 
 }
 
-protocol HomepageItem {
+public protocol HomepageItem {
 
     var contentIdentifier: String { get }
     var title: String { get }
 
 }
 
-protocol HomepageService {
+public protocol HomepageService {
 
     func loadHomepage(delegate: HomepageServiceLoadingDelegate)
 

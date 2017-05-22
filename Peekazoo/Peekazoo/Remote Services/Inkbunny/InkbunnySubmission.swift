@@ -8,12 +8,12 @@
 
 import Foundation
 
-struct InkbunnySubmission {
+public struct InkbunnySubmission {
 
-    var submissionID: String
-    var title: String
+    public var submissionID: String
+    public var title: String
 
-    init(submissionID: String, title: String) {
+    public init(submissionID: String, title: String) {
         self.submissionID = submissionID
         self.title = title
     }

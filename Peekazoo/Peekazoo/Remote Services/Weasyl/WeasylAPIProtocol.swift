@@ -6,12 +6,12 @@
 //  Copyright © 2017 Peekazoo. All rights reserved.
 //
 
-enum WeasylHomepageLoadResult {
+public enum WeasylHomepageLoadResult {
     case success([WeasylSubmission])
     case failure
 }
 
-protocol WeasylAPIProtocol {
+public protocol WeasylAPIProtocol {
 
     func loadHomepage(completionHandler: @escaping (WeasylHomepageLoadResult) -> Void)
 

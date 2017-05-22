@@ -6,13 +6,13 @@
 //  Copyright © 2017 Peekazoo. All rights reserved.
 //
 
-protocol PeekazooServiceProtocol {
+public protocol PeekazooServiceProtocol {
 
     func loadHomepage(delegate: HomepageLoadingDelegate)
 
 }
 
-protocol HomepageLoadingDelegate {
+public protocol HomepageLoadingDelegate {
 
     func finishedLoadingHomepage(items: [HomepageItem])
     func failedToLoadHomepage()

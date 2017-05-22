@@ -8,9 +8,9 @@
 
 import Foundation
 
-struct MainThreadWorker: Worker {
+public struct MainThreadWorker: Worker {
 
-    func execute(_ work: @escaping () -> Void) {
+    public func execute(_ work: @escaping () -> Void) {
         if Thread.current.isMainThread {
             work()
         } else {

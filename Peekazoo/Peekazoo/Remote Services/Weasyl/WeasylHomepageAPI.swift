@@ -8,12 +8,16 @@
 
 import Foundation
 
-struct WeasylHomepageAPI {
+public struct WeasylHomepageAPI {
 
-    var networkAdapter: NetworkAdapter
+    private var networkAdapter: NetworkAdapter
     private let homepageURL = URL(string: "https://www.weasyl.com/api/submissions/frontpage")!
 
-    func loadFeed(completionHandler: @escaping (WeasylHomepageLoadResult) -> Void) {
+    public init(networkAdapter: NetworkAdapter) {
+        self.networkAdapter = networkAdapter
+    }
+
+    public func loadFeed(completionHandler: @escaping (WeasylHomepageLoadResult) -> Void) {
         networkAdapter.get(homepageURL) { data, _ in
             if let data = data {
                 self.parseHomepageItems(from: data, completionHandler: completionHandler)

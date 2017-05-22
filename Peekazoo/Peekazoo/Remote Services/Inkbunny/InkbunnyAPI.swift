@@ -8,20 +8,20 @@
 
 import Foundation
 
-enum InkbunnyHomepageLoadResult {
+public enum InkbunnyHomepageLoadResult {
     case success([InkbunnySubmission])
     case failure
 }
 
-struct InkbunnyAPI: InkbunnyAPIProtocol {
+public struct InkbunnyAPI: InkbunnyAPIProtocol {
 
-    var networkAdapter: NetworkAdapter
+    private var networkAdapter: NetworkAdapter
 
-    init(networkAdapter: NetworkAdapter) {
+    public init(networkAdapter: NetworkAdapter) {
         self.networkAdapter = networkAdapter
     }
 
-    func loadHomepage(completionHandler: @escaping (InkbunnyHomepageLoadResult) -> Void) {
+    public func loadHomepage(completionHandler: @escaping (InkbunnyHomepageLoadResult) -> Void) {
         let loginURL = URL(string: "https://inkbunny.net/api_login.php?username=guest&password=")!
         networkAdapter.get(loginURL) { data, _ in
             guard let data = data,
