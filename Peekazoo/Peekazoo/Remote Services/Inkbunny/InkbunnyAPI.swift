@@ -16,9 +16,12 @@ public enum InkbunnyHomepageLoadResult {
 public struct InkbunnyAPI: InkbunnyAPIProtocol {
 
     private var networkAdapter: NetworkAdapter
+    private var submissionDateTimeFormatter: DateFormatter
 
     public init(networkAdapter: NetworkAdapter) {
         self.networkAdapter = networkAdapter
+        submissionDateTimeFormatter = DateFormatter()
+        submissionDateTimeFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSSZZZZ"
     }
 
     public func loadHomepage(completionHandler: @escaping (InkbunnyHomepageLoadResult) -> Void) {
@@ -38,7 +41,7 @@ public struct InkbunnyAPI: InkbunnyAPIProtocol {
                     return
                 }
 
-                completionHandler(.success(submissions.flatMap(InkbunnySubmission.init)))
+                completionHandler(.success(submissions.flatMap(self.parseSubmission)))
             }
         }
     }
@@ -53,6 +56,17 @@ public struct InkbunnyAPI: InkbunnyAPIProtocol {
 
     private func jsonObject(from data: Data) -> Any? {
         return try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
+    }
+
+    private func parseSubmission(_ json: [String : Any]) -> InkbunnySubmission? {
+        guard let submissionID = json["submission_id"] as? String,
+              let title = json["title"] as? String,
+              let dateString = json["create_datetime"] as? String,
+              let postedDate = submissionDateTimeFormatter.date(from: dateString) else { return nil }
+
+        return InkbunnySubmission(submissionID: submissionID,
+                                  title: title,
+                                  postedDate: postedDate)
     }
 
 }
