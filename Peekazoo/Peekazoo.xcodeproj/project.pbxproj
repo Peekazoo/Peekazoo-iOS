@@ -14,6 +14,8 @@
 		6E02FB251ED23D3A001C2D66 /* WorkerTestDoubles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E02FB241ED23D3A001C2D66 /* WorkerTestDoubles.swift */; };
 		6E02FB271ED23FCB001C2D66 /* MainThreadWorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E02FB261ED23FCB001C2D66 /* MainThreadWorkerTests.swift */; };
 		6E02FB291ED2424B001C2D66 /* MainThreadWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E02FB281ED2424B001C2D66 /* MainThreadWorker.swift */; };
+		6E02FB2B1ED2AED0001C2D66 /* HomepageLoadTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E02FB2A1ED2AED0001C2D66 /* HomepageLoadTask.swift */; };
+		6E02FB2D1ED2AF15001C2D66 /* HomepageFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E02FB2C1ED2AF15001C2D66 /* HomepageFeed.swift */; };
 		6E0D85831EC6E84D000E7283 /* AppDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D85821EC6E84D000E7283 /* AppDelegateTests.swift */; };
 		6E0D85871EC6EF83000E7283 /* WindowRootRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D85861EC6EF83000E7283 /* WindowRootRouterTests.swift */; };
 		6E0D858A1EC6F022000E7283 /* WindowRootRouter.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D85891EC6F022000E7283 /* WindowRootRouter.swift.swift */; };
@@ -100,6 +102,8 @@
 		6E02FB241ED23D3A001C2D66 /* WorkerTestDoubles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WorkerTestDoubles.swift; path = "Test Doubles/WorkerTestDoubles.swift"; sourceTree = "<group>"; };
 		6E02FB261ED23FCB001C2D66 /* MainThreadWorkerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainThreadWorkerTests.swift; sourceTree = "<group>"; };
 		6E02FB281ED2424B001C2D66 /* MainThreadWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainThreadWorker.swift; path = "Client Service/MainThreadWorker.swift"; sourceTree = "<group>"; };
+		6E02FB2A1ED2AED0001C2D66 /* HomepageLoadTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomepageLoadTask.swift; path = "Client Service/HomepageLoadTask.swift"; sourceTree = "<group>"; };
+		6E02FB2C1ED2AF15001C2D66 /* HomepageFeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomepageFeed.swift; path = "Client Service/HomepageFeed.swift"; sourceTree = "<group>"; };
 		6E0D85821EC6E84D000E7283 /* AppDelegateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegateTests.swift; sourceTree = "<group>"; };
 		6E0D85861EC6EF83000E7283 /* WindowRootRouterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowRootRouterTests.swift; sourceTree = "<group>"; };
 		6E0D85891EC6F022000E7283 /* WindowRootRouter.swift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowRootRouter.swift.swift; sourceTree = "<group>"; };
@@ -420,6 +424,8 @@
 				7821A14D1ECF178B009CA08A /* PeekazooServiceProtocol.swift */,
 				6E02FB221ED23D27001C2D66 /* Worker.swift */,
 				6E02FB281ED2424B001C2D66 /* MainThreadWorker.swift */,
+				6E02FB2A1ED2AED0001C2D66 /* HomepageLoadTask.swift */,
+				6E02FB2C1ED2AF15001C2D66 /* HomepageFeed.swift */,
 			);
 			name = "Client Service";
 			sourceTree = "<group>";
@@ -574,7 +580,9 @@
 				786725A61ECDC4C000D78A72 /* WeasylAPIAdapter.swift in Sources */,
 				6E0D85921EC6F2CA000E7283 /* HomepageRouter.swift in Sources */,
 				7840DF8D1ECB974000A623A7 /* WeasylHomepageAPI.swift in Sources */,
+				6E02FB2D1ED2AF15001C2D66 /* HomepageFeed.swift in Sources */,
 				6E0D85A21EC83C2F000E7283 /* App.swift in Sources */,
+				6E02FB2B1ED2AED0001C2D66 /* HomepageLoadTask.swift in Sources */,
 				6E0D85B81EC9738B000E7283 /* HomepageInterface.swift in Sources */,
 				7821A1541ECF7878009CA08A /* HomepageInterfaceViewModel.swift in Sources */,
 				6E0D858F1EC6F159000E7283 /* HomepageViewController.swift in Sources */,
