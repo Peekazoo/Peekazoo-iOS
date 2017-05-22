@@ -43,21 +43,21 @@ class HomepageLoadTask: HomepageFeedDelegate {
 
     private func handleFeedFinished() {
         numberOfLoadingFeeds -= 1
-        guard isFinishedLoading() else { return }
+        guard isFinishedLoading else { return }
 
         delegateWorker.execute(notifyDelegate)
     }
 
-    private func isFinishedLoading() -> Bool {
+    private var isFinishedLoading: Bool {
         return numberOfLoadingFeeds == 0
     }
 
-    private func isLoadSuccessful() -> Bool {
+    private var isLoadSuccessful: Bool {
         return numberOfSuccessfulFeeds > 0
     }
 
     private func notifyDelegate() {
-        if isLoadSuccessful() {
+        if isLoadSuccessful {
             delegate.finishedLoadingHomepage(items: loadedItems)
         } else {
             delegate.failedToLoadHomepage()
