@@ -176,4 +176,17 @@ class WeasylAPITests: XCTestCase {
         XCTAssertEqual(submitIDForSecondItem, capturingHomepageHandler.result(at: 1)?.submitID)
     }
 
+    func testParsingValidJSONProvidesFirstItemWithExpectedPostedDate() {
+        var firstDateFromJSON = DateComponents(year: 2017, month: 5, day: 8, hour: 19, minute: 12, second: 45)
+        firstDateFromJSON.calendar = .current
+        firstDateFromJSON.timeZone = TimeZone(secondsFromGMT: 0)
+
+        let validHomepageAdapter = makeValidHomepageNetworkAdapter()
+        let capturingHomepageHandler = CapturingWeasylHomepageHandler()
+        let weasylAPI = WeasylAPI(networkAdapter: validHomepageAdapter)
+        weasylAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
+
+        XCTAssertEqual(firstDateFromJSON.date, capturingHomepageHandler.result(at: 0)?.postedAt)
+    }
+
 }
