@@ -6,7 +6,7 @@
 //  Copyright © 2017 Peekazoo. All rights reserved.
 //
 
-@testable import Peekazoo
+import Peekazoo
 
 struct DummyHomepageFeedDelegate: HomepageFeedDelegate {
 

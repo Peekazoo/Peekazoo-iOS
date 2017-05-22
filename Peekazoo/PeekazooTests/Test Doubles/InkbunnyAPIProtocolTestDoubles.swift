@@ -7,7 +7,7 @@
 //
 
 import Foundation
-@testable import Peekazoo
+import Peekazoo
 
 class CapturingInkbunnyAPI: InkbunnyAPIProtocol {
 

@@ -10,6 +10,8 @@ import Foundation
 
 public struct MainThreadWorker: Worker {
 
+    public init() {}
+
     public func execute(_ work: @escaping () -> Void) {
         if Thread.current.isMainThread {
             work()

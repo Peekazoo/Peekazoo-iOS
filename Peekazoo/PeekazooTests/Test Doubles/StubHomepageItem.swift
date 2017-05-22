@@ -6,7 +6,7 @@
 //  Copyright © 2017 Peekazoo. All rights reserved.
 //
 
-@testable import Peekazoo
+import Peekazoo
 import Foundation
 
 struct StubHomepageItem: HomepageItem, Equatable {

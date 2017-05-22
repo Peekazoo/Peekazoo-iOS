@@ -12,7 +12,7 @@ private let homepageItemCellReuseIdentifier = "HomepageItemCell"
 
 public class HomepageViewController: UIViewController, HomepageInterface {
 
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet public weak var collectionView: UICollectionView!
     private let dataSource = HomepageCollectionViewDataSource(cellReuseIdentifier: homepageItemCellReuseIdentifier)
 
     public override func viewDidLoad() {

@@ -10,6 +10,8 @@ import Foundation
 
 public struct URLSessionNetworkAdapter: NetworkAdapter {
 
+    public init() {}
+
     public func get(_ url: URL, completionHandler: @escaping (Data?, Error?) -> Void) {
         URLSession.shared.dataTask(with: url, completionHandler: { data, _, error in
             completionHandler(data, error)
