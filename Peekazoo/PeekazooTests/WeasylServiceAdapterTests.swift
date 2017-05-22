@@ -11,6 +11,12 @@ import XCTest
 
 class WeasylAPIAdapterTests: XCTestCase {
 
+    private func makeWeasylSubmission(submitID: String = "",
+                                      title: String = "",
+                                      postedAt: Date = Date()) -> WeasylSubmission {
+        return WeasylSubmission(submitID: submitID, title: title, postedAt: postedAt)
+    }
+
     func testFetchingHomepageShouldTellTheServiceToPerformFetch() {
         let capturingWeasylAPI = CapturingWeasylAPI()
         let adapter = WeasylAPIAdapter(api: capturingWeasylAPI)
@@ -20,7 +26,7 @@ class WeasylAPIAdapterTests: XCTestCase {
     }
 
     func testSuccessfullyFetchingWeasylItemAdaptsItemIntoPeekazooDomainObjectWithContentIdentifier() {
-        let item = WeasylSubmission(submitID: "ID", title: "Title")
+        let item = makeWeasylSubmission(submitID: "ID")
         let successfulWeasylAPI = SuccessfulWeasylAPI(items: [item])
         let adapter = WeasylAPIAdapter(api: successfulWeasylAPI)
         let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
@@ -30,7 +36,7 @@ class WeasylAPIAdapterTests: XCTestCase {
     }
 
     func testSuccessfullyFetchingWeasylItemAdaptsItemIntoPeekazooDomainObjectWithTitle() {
-        let item = WeasylSubmission(submitID: "ID", title: "Title")
+        let item = makeWeasylSubmission(title: "Title")
         let successfulWeasylAPI = SuccessfulWeasylAPI(items: [item])
         let adapter = WeasylAPIAdapter(api: successfulWeasylAPI)
         let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
@@ -49,7 +55,7 @@ class WeasylAPIAdapterTests: XCTestCase {
     }
 
     func testSuccessfullyFetchingWeasylItemDoesNotNotifyDelegateOfLoadFailure() {
-        let item = WeasylSubmission(submitID: "ID", title: "Title")
+        let item = makeWeasylSubmission()
         let successfulWeasylAPI = SuccessfulWeasylAPI(items: [item])
         let adapter = WeasylAPIAdapter(api: successfulWeasylAPI)
         let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
@@ -59,8 +65,8 @@ class WeasylAPIAdapterTests: XCTestCase {
     }
 
     func testSuccessfullyFetchingMultipleWeasylItemsAdaptsSecondItemTitle() {
-        let firstItem = WeasylSubmission(submitID: "ID", title: "Title")
-        let secondItem = WeasylSubmission(submitID: "ID 2", title: "Another Title")
+        let firstItem = makeWeasylSubmission(title: "Title")
+        let secondItem = makeWeasylSubmission(title: "Another Title")
         let successfulWeasylAPI = SuccessfulWeasylAPI(items: [firstItem, secondItem])
         let adapter = WeasylAPIAdapter(api: successfulWeasylAPI)
         let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
@@ -71,7 +77,7 @@ class WeasylAPIAdapterTests: XCTestCase {
 
     func testSuccessfullyFetchingItemAdaptsPostedAtDate() {
         let postedAt = Date(timeIntervalSinceNow: -7200)
-        let item = WeasylSubmission(submitID: "", title: "", postedAt: postedAt)
+        let item = makeWeasylSubmission(postedAt: postedAt)
         let successfulWeasylAPI = SuccessfulWeasylAPI(items: [item])
         let adapter = WeasylAPIAdapter(api: successfulWeasylAPI)
         let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()

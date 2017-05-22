@@ -14,7 +14,7 @@ public struct WeasylSubmission {
     public var submitID: String
     public var postedAt: Date
 
-    public init(submitID: String, title: String, postedAt: Date = Date()) {
+    public init(submitID: String, title: String, postedAt: Date) {
         self.submitID = submitID
         self.title = title
         self.postedAt = postedAt
