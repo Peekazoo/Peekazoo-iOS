@@ -13,15 +13,18 @@ struct StubHomepageItem: HomepageItem, Equatable {
 
     var title: String
     var contentIdentifier: String
+    var creationDate: Date
 
-    init(title: String = "", contentIdentifier: String = UUID().uuidString) {
+    init(title: String = "", contentIdentifier: String = UUID().uuidString, creationDate: Date = Date()) {
         self.title = title
         self.contentIdentifier = contentIdentifier
+        self.creationDate = creationDate
     }
 
     static func ==(lhs: StubHomepageItem, rhs: StubHomepageItem) -> Bool {
         return lhs.title == rhs.title &&
-               lhs.contentIdentifier == rhs.contentIdentifier
+               lhs.contentIdentifier == rhs.contentIdentifier &&
+               lhs.creationDate == rhs.creationDate
     }
 
 }

@@ -33,6 +33,7 @@ public struct WeasylAPIAdapter: HomepageFeed {
 
         var contentIdentifier: String { return weasylItem.submitID }
         var title: String { return weasylItem.title }
+        var creationDate: Date { return Date() }
 
     }
 

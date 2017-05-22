@@ -6,6 +6,8 @@
 //  Copyright © 2017 Peekazoo. All rights reserved.
 //
 
+import Foundation
+
 public struct InkbunnyAPIAdapter: HomepageFeed {
 
     private var api: InkbunnyAPIProtocol
@@ -33,6 +35,7 @@ public struct InkbunnyAPIAdapter: HomepageFeed {
 
         var title: String { return submission.title }
         var contentIdentifier: String { return submission.submissionID }
+        var creationDate: Date { return submission.postedDate }
 
         init(submission: InkbunnySubmission) {
             self.submission = submission

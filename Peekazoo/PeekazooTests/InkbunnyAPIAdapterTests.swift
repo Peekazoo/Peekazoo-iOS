@@ -88,4 +88,15 @@ class InkbunnyAPIAdapterTests: XCTestCase {
         XCTAssertEqual(secondInkbunnySubmission.submissionID, capturingHomepageFeedDelegate.result(at: 1)?.contentIdentifier)
     }
 
+    func testSuccessfullyLoadingItemShouldAdaptPostedDate() {
+        let postedDate = Date(timeIntervalSinceNow: -7200)
+        let stubInkbunnySubmission = InkbunnySubmission(submissionID: "", title: "", postedDate: postedDate)
+        let successfulInkbunnyAPI = SuccessfulInkbunnyAPI(items: [stubInkbunnySubmission])
+        let adapter = InkbunnyAPIAdapter(api: successfulInkbunnyAPI)
+        let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
+        adapter.loadFeed(delegate: capturingHomepageFeedDelegate)
+
+        XCTAssertEqual(postedDate, capturingHomepageFeedDelegate.capturedResults?.first?.creationDate)
+    }
+
 }
