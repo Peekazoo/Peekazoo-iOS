@@ -11,6 +11,12 @@ import XCTest
 
 class InkbunnyAPIAdapterTests: XCTestCase {
 
+    private func makeInkbunnySubmission(submissionID: String = "",
+                                        title: String = "",
+                                        postedDate: Date = Date()) -> InkbunnySubmission {
+        return InkbunnySubmission(submissionID: submissionID, title: title, postedDate: postedDate)
+    }
+
     func testFetchingHomepageShouldTellAPIToFetchHomepage() {
         let capturingInkbunnyAPI = CapturingInkbunnyAPI()
         let adapter = InkbunnyAPIAdapter(api: capturingInkbunnyAPI)
@@ -57,7 +63,7 @@ class InkbunnyAPIAdapterTests: XCTestCase {
 
     func testSuccessfullyLoadingHomepageAdaptsTitleInFirstItem() {
         let title = "Some content"
-        let stubInkbunnySubmission = InkbunnySubmission(submissionID: "", title: title)
+        let stubInkbunnySubmission = makeInkbunnySubmission(title: title)
         let successfulInkbunnyAPI = SuccessfulInkbunnyAPI(items: [stubInkbunnySubmission])
         let adapter = InkbunnyAPIAdapter(api: successfulInkbunnyAPI)
         let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
@@ -68,7 +74,7 @@ class InkbunnyAPIAdapterTests: XCTestCase {
 
     func testSuccessfullyLoadingHomepageAdaptsSubmissionIdentifierInFirstItem() {
         let submissionID = "Some identifier"
-        let stubInkbunnySubmission = InkbunnySubmission(submissionID: submissionID, title: "")
+        let stubInkbunnySubmission = makeInkbunnySubmission(submissionID: submissionID)
         let successfulInkbunnyAPI = SuccessfulInkbunnyAPI(items: [stubInkbunnySubmission])
         let adapter = InkbunnyAPIAdapter(api: successfulInkbunnyAPI)
         let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
@@ -78,8 +84,8 @@ class InkbunnyAPIAdapterTests: XCTestCase {
     }
 
     func testSuccessfullyLoadingMultipleItemsShouldTheSecondIdentifier() {
-        let firstInkbunnySubmission = InkbunnySubmission(submissionID: "ID 1", title: "")
-        let secondInkbunnySubmission = InkbunnySubmission(submissionID: "ID 2", title: "")
+        let firstInkbunnySubmission = makeInkbunnySubmission(submissionID: "ID 1")
+        let secondInkbunnySubmission = makeInkbunnySubmission(submissionID: "ID 2")
         let successfulInkbunnyAPI = SuccessfulInkbunnyAPI(items: [firstInkbunnySubmission, secondInkbunnySubmission])
         let adapter = InkbunnyAPIAdapter(api: successfulInkbunnyAPI)
         let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
@@ -90,7 +96,7 @@ class InkbunnyAPIAdapterTests: XCTestCase {
 
     func testSuccessfullyLoadingItemShouldAdaptPostedDate() {
         let postedDate = Date(timeIntervalSinceNow: -7200)
-        let stubInkbunnySubmission = InkbunnySubmission(submissionID: "", title: "", postedDate: postedDate)
+        let stubInkbunnySubmission = makeInkbunnySubmission(postedDate: postedDate)
         let successfulInkbunnyAPI = SuccessfulInkbunnyAPI(items: [stubInkbunnySubmission])
         let adapter = InkbunnyAPIAdapter(api: successfulInkbunnyAPI)
         let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()

@@ -14,7 +14,7 @@ public struct InkbunnySubmission {
     public var title: String
     public var postedDate: Date
 
-    public init(submissionID: String, title: String, postedDate: Date = Date()) {
+    public init(submissionID: String, title: String, postedDate: Date) {
         self.submissionID = submissionID
         self.title = title
         self.postedDate = postedDate
