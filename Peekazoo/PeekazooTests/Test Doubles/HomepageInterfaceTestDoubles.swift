@@ -66,6 +66,11 @@ class CapturingHomepageInterface: HomepageInterface {
         }
     }
 
+    var committedItems: [HomepageInterfaceItemViewModel] {
+        guard let viewModel = committedViewModel, viewModel.numberOfItems > 0 else { return [] }
+        return (0..<viewModel.numberOfItems).map(viewModel.item(at:))
+    }
+
 }
 
 class JournallingIndexHomepageInterface: CapturingHomepageInterface {

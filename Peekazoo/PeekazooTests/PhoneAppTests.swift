@@ -211,4 +211,14 @@ class PhoneAppTests: XCTestCase {
         XCTAssertEqual(timeString, formattedTimeString)
     }
 
+    func testLoadingMultipleItemsShouldSortTheirViewModelsByDate() {
+        let secondEarliestItem = StubHomepageItem(title: "B", creationDate: Date(timeIntervalSinceNow: -50))
+        let earliestItem = StubHomepageItem(title: "C", creationDate: Date(timeIntervalSinceNow: -100))
+        let mostRecentItem = StubHomepageItem(title: "A", creationDate: Date(timeIntervalSinceNow: 0))
+        let context = PhoneAppTestBuilder.buildForSuccessfulHomepageService(content: [earliestItem, secondEarliestItem, mostRecentItem]).thenLaunch()
+        let expectedTitleOrder = ["A", "B", "C"]
+
+        XCTAssertEqual(expectedTitleOrder, context.interface.committedItems.map({ $0.title }))
+    }
+
 }

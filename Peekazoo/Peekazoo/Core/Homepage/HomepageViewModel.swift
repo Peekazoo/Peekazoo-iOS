@@ -24,6 +24,7 @@ struct HomepageViewModel: HomepageInterfaceViewModel {
         let existingIdentifiers = content.map({ $0.item.contentIdentifier })
         let newItems = items.filter(isNotRepresentedByExistingIdentifiers(existingIdentifiers))
         content = newItems.map(makeItemViewModel) + content
+        sortByCreationDate()
     }
 
     private func isNotRepresentedByExistingIdentifiers(_ identifiers: [String]) -> (HomepageItem) -> Bool {
@@ -32,6 +33,12 @@ struct HomepageViewModel: HomepageInterfaceViewModel {
 
     private func makeItemViewModel(_ item: HomepageItem) -> HomepageItemViewModel {
         return HomepageItemViewModel(item: item, timeFormatter: timeFormatter)
+    }
+
+    private mutating func sortByCreationDate() {
+        content.sort { (first, second) -> Bool in
+            return first.item.creationDate.compare(second.item.creationDate) == .orderedDescending
+        }
     }
 
     func item(at index: Int) -> HomepageInterfaceItemViewModel {
