@@ -9,21 +9,6 @@
 import Peekazoo
 import XCTest
 
-struct DummyTimeFormatter: TimeFormatter {
-
-    func string(from date: Date) { }
-
-}
-
-class CapturingTimeFormatter: TimeFormatter {
-
-    private(set) var capturedDateToFormat: Date?
-    func string(from date: Date) {
-        capturedDateToFormat = date
-    }
-
-}
-
 class PhoneAppTests: XCTestCase {
 
     struct PhoneAppTestBuilder {
