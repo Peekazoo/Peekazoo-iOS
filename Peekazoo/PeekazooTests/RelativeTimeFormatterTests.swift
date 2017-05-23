@@ -9,13 +9,56 @@
 import Peekazoo
 import XCTest
 
+protocol TemporalDistanceMeasurer {
+
+    func measureDistance(from date: Date) -> TimeInterval
+
+}
+
+struct DateTemporalDistanceMeasurer: TemporalDistanceMeasurer {
+
+    func measureDistance(from date: Date) -> TimeInterval {
+        return Date().timeIntervalSince(date)
+    }
+
+}
+
+class StubTemporalDistanceMeasurer: TemporalDistanceMeasurer {
+
+    private var temporalDistance: TimeInterval
+
+    init(temporalDistance: TimeInterval = 0) {
+        self.temporalDistance = temporalDistance
+    }
+
+    func measureDistance(from date: Date) -> TimeInterval {
+        return temporalDistance
+    }
+
+}
+
+class CapturingTemporalDistanceMeasurer: StubTemporalDistanceMeasurer {
+
+    private(set) var capturedDate: Date?
+    override func measureDistance(from date: Date) -> TimeInterval {
+        capturedDate = date
+        return super.measureDistance(from: date)
+    }
+
+}
+
 struct RelativeTimeFormatter: TimeFormatter {
 
+    var temporalDistanceMeasurer: TemporalDistanceMeasurer
+
+    init(temporalDistanceMeasurer: TemporalDistanceMeasurer = DateTemporalDistanceMeasurer()) {
+        self.temporalDistanceMeasurer = temporalDistanceMeasurer
+    }
+
     func string(from date: Date) -> String {
-        let now = Date()
-        let distance = now.timeIntervalSince(date)
+        let distance = temporalDistanceMeasurer.measureDistance(from: date)
         if distance > 60 {
-            if distance > 120 {
+            if distance >= 120 {
                 return "2 minutes ago"
             } else {
                 return "1 minute ago"
@@ -29,26 +72,35 @@ struct RelativeTimeFormatter: TimeFormatter {
 
 class RelativeTimeFormatterTests: XCTestCase {
 
+    func testRequestingTimeMeasuresDistanceFromProvidedDate() {
+        let temporalMeasurer = CapturingTemporalDistanceMeasurer()
+        let formatter = RelativeTimeFormatter(temporalDistanceMeasurer: temporalMeasurer)
+        let date = Date(timeIntervalSinceNow: 42)
+        _ = formatter.string(from: date)
+
+        XCTAssertEqual(date, temporalMeasurer.capturedDate)
+    }
+
     func testRequestingTimeWithinOneMinuteReturnsJustNow() {
-        let formatter = RelativeTimeFormatter()
-        let withinOneMinute = Date(timeIntervalSinceNow: -59)
-        let formattedString = formatter.string(from: withinOneMinute)
+        let temporalMeasurer = StubTemporalDistanceMeasurer(temporalDistance: 59)
+        let formatter = RelativeTimeFormatter(temporalDistanceMeasurer: temporalMeasurer)
+        let formattedString = formatter.string(from: Date())
 
         XCTAssertEqual("Just now", formattedString)
     }
 
     func testRequestingTimeWithinTwoMinutesReturnOneMinuteAgo() {
-        let formatter = RelativeTimeFormatter()
-        let withinTwoMinutes = Date(timeIntervalSinceNow: -119)
-        let formattedString = formatter.string(from: withinTwoMinutes)
+        let temporalMeasurer = StubTemporalDistanceMeasurer(temporalDistance: 119)
+        let formatter = RelativeTimeFormatter(temporalDistanceMeasurer: temporalMeasurer)
+        let formattedString = formatter.string(from: Date())
 
         XCTAssertEqual("1 minute ago", formattedString)
     }
 
     func testRequestingTimeTwoMinutesAgoReturnsTwoMinutes() {
-        let formatter = RelativeTimeFormatter()
-        let twoMinutesAgo = Date(timeIntervalSinceNow: -120)
-        let formattedString = formatter.string(from: twoMinutesAgo)
+        let temporalMeasurer = StubTemporalDistanceMeasurer(temporalDistance: 120)
+        let formatter = RelativeTimeFormatter(temporalDistanceMeasurer: temporalMeasurer)
+        let formattedString = formatter.string(from: Date())
 
         XCTAssertEqual("2 minutes ago", formattedString)
     }
