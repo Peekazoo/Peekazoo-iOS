@@ -11,6 +11,10 @@ import UIKit
 public struct PhoneAppFactory: AppFactory {
 
     public func makeApplication(window: UIWindow) -> App {
+        struct DummyTimeFormatter: TimeFormatter {
+            func string(from date: Date) { }
+        }
+
         let networkAdapter = URLSessionNetworkAdapter()
         let weasylAPI = WeasylAPI(networkAdapter: networkAdapter)
         let weasylAdapter = WeasylAPIAdapter(api: weasylAPI)
@@ -20,7 +24,8 @@ public struct PhoneAppFactory: AppFactory {
         let serviceAdapter = PeekazooHomepageAdapter(service: service)
 
         return PhoneApp(rootRouter: WindowRootRouter(window: window),
-                        homepageService: serviceAdapter)
+                        homepageService: serviceAdapter,
+                        timeFormatter: DummyTimeFormatter())
     }
 
 }

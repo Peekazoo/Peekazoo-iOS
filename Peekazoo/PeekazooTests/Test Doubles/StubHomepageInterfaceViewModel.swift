@@ -26,5 +26,11 @@ struct StubHomepageInterfaceViewModel: HomepageInterfaceViewModel {
 struct StubHomepageInterfaceItemViewModel: HomepageInterfaceItemViewModel {
 
     var title: String = ""
+    var creationDate: String = ""
+
+    init(title: String = "", creationDate: String = "") {
+        self.title = title
+        self.creationDate = creationDate
+    }
 
 }

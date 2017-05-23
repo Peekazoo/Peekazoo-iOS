@@ -12,10 +12,12 @@ class HomepagePresenter: HomepageInterfaceDelegate, HomepageServiceLoadingDelega
     var interface: HomepageInterface
     var viewModel: HomepageViewModel
 
-    init(interface: HomepageInterface, service: HomepageService) {
+    init(interface: HomepageInterface,
+         service: HomepageService,
+         timeFormatter: TimeFormatter) {
         self.interface = interface
         self.service = service
-        self.viewModel = HomepageViewModel()
+        self.viewModel = HomepageViewModel(timeFormatter: timeFormatter)
         self.interface.delegate = self
         reloadHomepage()
     }

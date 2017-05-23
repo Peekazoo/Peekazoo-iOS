@@ -10,14 +10,20 @@ public struct PhoneApp: App {
 
     private var rootRouter: RootRouter
     private var homepageService: HomepageService
+    private var timeFormatter: TimeFormatter
 
-    public init(rootRouter: RootRouter, homepageService: HomepageService) {
+    public init(rootRouter: RootRouter,
+                homepageService: HomepageService,
+                timeFormatter: TimeFormatter) {
         self.rootRouter = rootRouter
         self.homepageService = homepageService
+        self.timeFormatter = timeFormatter
     }
 
     public func launch() {
-        HomepageModule.initialize(router: rootRouter, service: homepageService)
+        HomepageModule.initialize(router: rootRouter,
+                                  service: homepageService,
+                                  timeFormatter: timeFormatter)
     }
 
 }

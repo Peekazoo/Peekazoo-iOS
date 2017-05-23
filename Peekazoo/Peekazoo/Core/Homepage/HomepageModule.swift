@@ -10,9 +10,13 @@ import Foundation
 
 struct HomepageModule {
 
-    static func initialize(router: RootRouter, service: HomepageService) {
+    static func initialize(router: RootRouter,
+                           service: HomepageService,
+                           timeFormatter: TimeFormatter) {
         let homepageInterface = router.navigateToHomepage().interface
-        _ = HomepagePresenter(interface: homepageInterface, service: service)
+        _ = HomepagePresenter(interface: homepageInterface,
+                              service: service,
+                              timeFormatter: timeFormatter)
     }
 
 }

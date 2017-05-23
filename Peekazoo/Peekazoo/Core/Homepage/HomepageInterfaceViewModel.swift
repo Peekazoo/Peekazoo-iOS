@@ -17,5 +17,6 @@ public protocol HomepageInterfaceViewModel {
 public protocol HomepageInterfaceItemViewModel {
 
     var title: String { get }
+    var creationDate: String { get }
 
 }

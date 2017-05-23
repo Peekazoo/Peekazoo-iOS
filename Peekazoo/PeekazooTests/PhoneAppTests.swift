@@ -9,6 +9,21 @@
 import Peekazoo
 import XCTest
 
+struct DummyTimeFormatter: TimeFormatter {
+
+    func string(from date: Date) { }
+
+}
+
+class CapturingTimeFormatter: TimeFormatter {
+
+    private(set) var capturedDateToFormat: Date?
+    func string(from date: Date) {
+        capturedDateToFormat = date
+    }
+
+}
+
 class PhoneAppTests: XCTestCase {
 
     struct PhoneAppTestBuilder {
@@ -16,6 +31,7 @@ class PhoneAppTests: XCTestCase {
         struct Product<Interface> where Interface: HomepageInterface {
             var app: PhoneApp
             var interface: Interface
+            var timeFormatter: CapturingTimeFormatter
 
             @discardableResult func thenLaunch() -> Product {
                 app.launch()
@@ -25,9 +41,12 @@ class PhoneAppTests: XCTestCase {
 
         static func buildWithHomepageService<T: HomepageInterface>(_ service: HomepageService, interface: T) -> Product<T> {
             let stubbedRootRouter = StubRootRouter(homepageInterface: interface)
-            let app = PhoneApp(rootRouter: stubbedRootRouter, homepageService: service)
+            let timeFormatter = CapturingTimeFormatter()
+            let app = PhoneApp(rootRouter: stubbedRootRouter,
+                               homepageService: service,
+                               timeFormatter: timeFormatter)
 
-            return Product(app: app, interface: interface)
+            return Product(app: app, interface: interface, timeFormatter: timeFormatter)
         }
 
         static func buildWithHomepageService(_ service: HomepageService) -> Product<CapturingHomepageInterface> {
@@ -50,7 +69,9 @@ class PhoneAppTests: XCTestCase {
 
     func testWhenLaunchedTheRootInterfaceIsNavigatedTo() {
         let capturingRootRouter = CapturingRootRouter()
-        let app = PhoneApp(rootRouter: capturingRootRouter, homepageService: DummyHomepageService())
+        let app = PhoneApp(rootRouter: capturingRootRouter,
+                           homepageService: DummyHomepageService(),
+                           timeFormatter: DummyTimeFormatter())
         app.launch()
 
         XCTAssertTrue(capturingRootRouter.didNavigateToHomepage)
@@ -183,6 +204,15 @@ class PhoneAppTests: XCTestCase {
         capturingHomepageService.simulateSuccessfulLoad(content: [item])
 
         XCTAssertEqual(1, context.interface.committedViewModel?.numberOfItems)
+    }
+
+    func testLoadingItemShouldProvideViewModelWithFormattedTimeStringFromFormatter() {
+        let date = Date(timeIntervalSinceNow: -7200)
+        let item = StubHomepageItem(creationDate: date)
+        let context = PhoneAppTestBuilder.buildForSuccessfulHomepageService(content: [item]).thenLaunch()
+        _ = context.interface.committedViewModel?.item(at: 0).creationDate
+
+        XCTAssertEqual(date, context.timeFormatter.capturedDateToFormat)
     }
 
 }
