@@ -11,5 +11,6 @@ import UIKit
 public class HomepageItemCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet public weak var itemTitleLabel: UILabel!
+    @IBOutlet public weak var itemCreationDateLabel: UILabel!
 
 }

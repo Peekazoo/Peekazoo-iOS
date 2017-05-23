@@ -86,4 +86,12 @@ class HomepageViewControllerTests: XCTestCase {
         XCTAssertEqual(secondItem.title, cellForItem(at: 1)?.itemTitleLabel.text)
     }
 
+    func testDequeuedHomepageItemCellsShouldHaveCreationTimeLabel() {
+        let item = StubHomepageInterfaceItemViewModel()
+        let viewModel = StubHomepageInterfaceViewModel(items: [item])
+        updateInterface(viewModel: viewModel, applyingDifferences: [])
+
+        XCTAssertNotNil(cellForItem(at: 0)?.itemCreationDateLabel)
+    }
+
 }
