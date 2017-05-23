@@ -50,14 +50,25 @@ class CapturingTemporalDistanceMeasurer: StubTemporalDistanceMeasurer {
 struct RelativeTimeFormatter: TimeFormatter {
 
     var temporalDistanceMeasurer: TemporalDistanceMeasurer
+    let dateFormatter: DateFormatter
 
     init(temporalDistanceMeasurer: TemporalDistanceMeasurer = DateTemporalDistanceMeasurer()) {
         self.temporalDistanceMeasurer = temporalDistanceMeasurer
+
+        dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .short
     }
 
     func string(from date: Date) -> String {
         let distance = temporalDistanceMeasurer.measureDistance(from: date)
         switch distance {
+        case _ where distance >= 172800:
+            return dateFormatter.string(from: date)
+
+        case _ where distance >= 86400:
+            return "Yesterday"
+
         case _ where distance > 7199:
             return "\(Int(distance) / 3600) hours ago"
 
@@ -142,6 +153,36 @@ class RelativeTimeFormatterTests: XCTestCase {
         let formattedString = formatter.string(from: Date())
 
         XCTAssertEqual("23 hours ago", formattedString)
+    }
+
+    func testRequestingTimeOneDayAgoReturnsYesterday() {
+        let temporalMeasurer = StubTemporalDistanceMeasurer(temporalDistance: 86400)
+        let formatter = RelativeTimeFormatter(temporalDistanceMeasurer: temporalMeasurer)
+        let formattedString = formatter.string(from: Date())
+
+        XCTAssertEqual("Yesterday", formattedString)
+    }
+
+    func testRequestingTimeGreaterThanTwoDaysAgoReturnsAbsoluteDate() {
+        let temporalMeasurer = StubTemporalDistanceMeasurer(temporalDistance: 172800)
+        let formatter = RelativeTimeFormatter(temporalDistanceMeasurer: temporalMeasurer)
+        let specificDate = DateComponents(calendar: Calendar.current,
+                                          year: 2017,
+                                          month: 5,
+                                          day: 23,
+                                          hour: 21,
+                                          minute: 42,
+                                          second: 24).date!
+
+        // Using the real formatter gets around locale issues in tests
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .short
+        let expectedFormatString = dateFormatter.string(from: specificDate)
+
+        let formattedString = formatter.string(from: specificDate)
+
+        XCTAssertEqual(expectedFormatString, formattedString)
     }
 
 }
