@@ -59,7 +59,7 @@ struct RelativeTimeFormatter: TimeFormatter {
         let distance = temporalDistanceMeasurer.measureDistance(from: date)
         switch distance {
         case _ where distance > 7199:
-            return "2 hours ago"
+            return "\(Int(distance) / 3600) hours ago"
 
         case _ where distance > 3599:
             return "1 hour ago"
@@ -134,6 +134,14 @@ class RelativeTimeFormatterTests: XCTestCase {
         let formattedString = formatter.string(from: Date())
 
         XCTAssertEqual("2 hours ago", formattedString)
+    }
+
+    func testRequestingTimeForWithinOneDayReturnsNumberOfHours() {
+        let temporalMeasurer = StubTemporalDistanceMeasurer(temporalDistance: 86340)
+        let formatter = RelativeTimeFormatter(temporalDistanceMeasurer: temporalMeasurer)
+        let formattedString = formatter.string(from: Date())
+
+        XCTAssertEqual("23 hours ago", formattedString)
     }
 
 }
