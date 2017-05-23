@@ -12,7 +12,12 @@ import XCTest
 struct RelativeTimeFormatter: TimeFormatter {
 
     func string(from date: Date) -> String {
-        return "Just now"
+        let now = Date()
+        if now.timeIntervalSince(date) > 60 {
+            return "1 minute ago"
+        } else {
+            return "Just now"
+        }
     }
 
 }
@@ -25,6 +30,14 @@ class RelativeTimeFormatterTests: XCTestCase {
         let formattedString = formatter.string(from: withinOneMinute)
 
         XCTAssertEqual("Just now", formattedString)
+    }
+
+    func testRequestingTimeWithinTwoMinutesReturnOneMinuteAgo() {
+        let formatter = RelativeTimeFormatter()
+        let withinTwoMinutes = Date(timeIntervalSinceNow: -119)
+        let formattedString = formatter.string(from: withinTwoMinutes)
+
+        XCTAssertEqual("1 minute ago", formattedString)
     }
 
 }
