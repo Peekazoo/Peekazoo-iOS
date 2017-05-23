@@ -94,4 +94,13 @@ class HomepageViewControllerTests: XCTestCase {
         XCTAssertNotNil(cellForItem(at: 0)?.itemCreationDateLabel)
     }
 
+    func testDequeuedHomepageItemCellShouldUseCreationDateFromViewModel() {
+        let creationDate = "Some date"
+        let item = StubHomepageInterfaceItemViewModel(creationDate: creationDate)
+        let viewModel = StubHomepageInterfaceViewModel(items: [item])
+        updateInterface(viewModel: viewModel, applyingDifferences: [])
+
+        XCTAssertEqual(creationDate, cellForItem(at: 0)?.itemCreationDateLabel?.text)
+    }
+
 }

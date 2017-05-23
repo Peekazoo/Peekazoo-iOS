@@ -34,6 +34,8 @@ class HomepageCollectionViewDataSource: NSObject, UICollectionViewDataSource {
 
         let itemViewModel = viewModel?.item(at: indexPath.item)
         cell.itemTitleLabel.text = itemViewModel?.title
+        cell.itemCreationDateLabel.text = itemViewModel?.creationDate
+
         return cell
     }
 
