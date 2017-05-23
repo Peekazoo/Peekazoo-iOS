@@ -191,13 +191,24 @@ class PhoneAppTests: XCTestCase {
         XCTAssertEqual(1, context.interface.committedViewModel?.numberOfItems)
     }
 
-    func testLoadingItemShouldProvideViewModelWithFormattedTimeStringFromFormatter() {
+    func testLoadingItemUseDateForItemWhenPreparingCreationDateString() {
         let date = Date(timeIntervalSinceNow: -7200)
         let item = StubHomepageItem(creationDate: date)
         let context = PhoneAppTestBuilder.buildForSuccessfulHomepageService(content: [item]).thenLaunch()
         _ = context.interface.committedViewModel?.item(at: 0).creationDate
 
         XCTAssertEqual(date, context.timeFormatter.capturedDateToFormat)
+    }
+
+    func testLoadingItemShouldReturnTimeFormattedStringWhenRequestingFromViewModel() {
+        let capturingService = CapturingHomepageService()
+        let context = PhoneAppTestBuilder.buildWithHomepageService(capturingService).thenLaunch()
+        let timeString = "Some time"
+        context.timeFormatter.stubbedTimeString = timeString
+        capturingService.simulateSuccessfulLoad(content: [StubHomepageItem()])
+        let formattedTimeString = context.interface.committedViewModel?.item(at: 0).creationDate
+
+        XCTAssertEqual(timeString, formattedTimeString)
     }
 
 }

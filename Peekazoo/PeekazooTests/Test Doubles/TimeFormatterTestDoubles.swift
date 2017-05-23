@@ -11,15 +11,17 @@ import Peekazoo
 
 struct DummyTimeFormatter: TimeFormatter {
 
-    func string(from date: Date) { }
+    func string(from date: Date) -> String { return "" }
 
 }
 
 class CapturingTimeFormatter: TimeFormatter {
 
     private(set) var capturedDateToFormat: Date?
-    func string(from date: Date) {
+    var stubbedTimeString: String = ""
+    func string(from date: Date) -> String {
         capturedDateToFormat = date
+        return stubbedTimeString
     }
 
 }

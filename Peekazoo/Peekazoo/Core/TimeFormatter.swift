@@ -10,6 +10,6 @@ import Foundation
 
 public protocol TimeFormatter {
 
-    func string(from date: Date)
+    func string(from date: Date) -> String
 
 }

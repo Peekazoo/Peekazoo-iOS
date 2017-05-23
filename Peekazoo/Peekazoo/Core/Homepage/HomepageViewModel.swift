@@ -58,8 +58,7 @@ struct HomepageItemViewModel: HomepageInterfaceItemViewModel {
     }
 
     var creationDate: String {
-        timeFormatter.string(from: item.creationDate)
-        return ""
+        return timeFormatter.string(from: item.creationDate)
     }
 
 }

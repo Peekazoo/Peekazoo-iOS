@@ -12,7 +12,7 @@ public struct PhoneAppFactory: AppFactory {
 
     public func makeApplication(window: UIWindow) -> App {
         struct DummyTimeFormatter: TimeFormatter {
-            func string(from date: Date) { }
+            func string(from date: Date) -> String { return "" }
         }
 
         let networkAdapter = URLSessionNetworkAdapter()
