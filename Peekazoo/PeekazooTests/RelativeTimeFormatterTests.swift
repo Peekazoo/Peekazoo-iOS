@@ -57,21 +57,20 @@ struct RelativeTimeFormatter: TimeFormatter {
 
     func string(from date: Date) -> String {
         let distance = temporalDistanceMeasurer.measureDistance(from: date)
-        if distance > 60 {
-            if distance >= 120 {
-                if distance > 3599 {
-                    if distance > 7199 {
-                        return "2 hours ago"
-                    } else {
-                        return "1 hour ago"
-                    }
-                }
+        switch distance {
+        case _ where distance > 7199:
+            return "2 hours ago"
 
-                return "\(Int(distance) / 60) minutes ago"
-            } else {
-                return "1 minute ago"
-            }
-        } else {
+        case _ where distance > 3599:
+            return "1 hour ago"
+
+        case _ where distance >= 120:
+            return "\(Int(distance) / 60) minutes ago"
+
+        case _ where distance > 60:
+            return "1 minute ago"
+
+        default:
             return "Just now"
         }
     }
