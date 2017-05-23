@@ -60,9 +60,13 @@ struct RelativeTimeFormatter: TimeFormatter {
         if distance > 60 {
             if distance >= 120 {
                 if distance > 3599 {
-                    return "1 hour ago"
+                    if distance > 7199 {
+                        return "2 hours ago"
+                    } else {
+                        return "1 hour ago"
+                    }
                 }
-                
+
                 return "\(Int(distance) / 60) minutes ago"
             } else {
                 return "1 minute ago"
@@ -123,6 +127,14 @@ class RelativeTimeFormatterTests: XCTestCase {
         let formattedString = formatter.string(from: Date())
 
         XCTAssertEqual("1 hour ago", formattedString)
+    }
+
+    func testRequestingTimeForTwoHoursReturnsTwoHoursAgo() {
+        let temporalMeasurer = StubTemporalDistanceMeasurer(temporalDistance: 7200)
+        let formatter = RelativeTimeFormatter(temporalDistanceMeasurer: temporalMeasurer)
+        let formattedString = formatter.string(from: Date())
+
+        XCTAssertEqual("2 hours ago", formattedString)
     }
 
 }
