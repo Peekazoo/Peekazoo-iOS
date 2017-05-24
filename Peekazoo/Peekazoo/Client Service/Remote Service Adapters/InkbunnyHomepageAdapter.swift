@@ -1,5 +1,5 @@
 //
-//  InkbunnyAPIAdapter.swift
+//  InkbunnyHomepageAdapter.swift
 //  Peekazoo
 //
 //  Created by Thomas Sherwood on 20/05/2017.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct InkbunnyAPIAdapter: HomepageFeed {
+public struct InkbunnyHomepageAdapter: HomepageFeed {
 
     private var api: InkbunnyAPIProtocol
 

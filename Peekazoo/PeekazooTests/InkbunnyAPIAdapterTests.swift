@@ -1,5 +1,5 @@
 //
-//  InkbunnyAPIAdapterTests.swift
+//  InkbunnyHomepageAdapterTests.swift
 //  Peekazoo
 //
 //  Created by Thomas Sherwood on 20/05/2017.
@@ -9,7 +9,7 @@
 import Peekazoo
 import XCTest
 
-class InkbunnyAPIAdapterTests: XCTestCase {
+class InkbunnyHomepageAdapterTests: XCTestCase {
 
     private func makeInkbunnySubmission(submissionID: String = "",
                                         title: String = "",
@@ -19,7 +19,7 @@ class InkbunnyAPIAdapterTests: XCTestCase {
 
     func testFetchingHomepageShouldTellAPIToFetchHomepage() {
         let capturingInkbunnyAPI = CapturingInkbunnyAPI()
-        let adapter = InkbunnyAPIAdapter(api: capturingInkbunnyAPI)
+        let adapter = InkbunnyHomepageAdapter(api: capturingInkbunnyAPI)
         adapter.loadFeed(delegate: DummyHomepageFeedDelegate())
 
         XCTAssertTrue(capturingInkbunnyAPI.didLoadHomepage)
@@ -27,7 +27,7 @@ class InkbunnyAPIAdapterTests: XCTestCase {
 
     func testSuccessfullyLoadingHomepageTellsDelegateFeedFinishedLoading() {
         let successfulInkbunnyAPI = SuccessfulInkbunnyAPI()
-        let adapter = InkbunnyAPIAdapter(api: successfulInkbunnyAPI)
+        let adapter = InkbunnyHomepageAdapter(api: successfulInkbunnyAPI)
         let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
         adapter.loadFeed(delegate: capturingHomepageFeedDelegate)
 
@@ -36,7 +36,7 @@ class InkbunnyAPIAdapterTests: XCTestCase {
 
     func testFailingToLoadHomepageTellDelegateFeedFailedToLoad() {
         let failingInkbunnyAPI = FailingInkbunnyAPI()
-        let adapter = InkbunnyAPIAdapter(api: failingInkbunnyAPI)
+        let adapter = InkbunnyHomepageAdapter(api: failingInkbunnyAPI)
         let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
         adapter.loadFeed(delegate: capturingHomepageFeedDelegate)
 
@@ -45,7 +45,7 @@ class InkbunnyAPIAdapterTests: XCTestCase {
 
     func testSuccessfullyLoadingHomepageDoesNotTellDelegateFeedFailedToLoad() {
         let successfulInkbunnyAPI = SuccessfulInkbunnyAPI()
-        let adapter = InkbunnyAPIAdapter(api: successfulInkbunnyAPI)
+        let adapter = InkbunnyHomepageAdapter(api: successfulInkbunnyAPI)
         let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
         adapter.loadFeed(delegate: capturingHomepageFeedDelegate)
 
@@ -54,7 +54,7 @@ class InkbunnyAPIAdapterTests: XCTestCase {
 
     func testFailingToLoadHomepageDoesNotTellDelegateFeedFinishedLoading() {
         let failingInkbunnyAPI = FailingInkbunnyAPI()
-        let adapter = InkbunnyAPIAdapter(api: failingInkbunnyAPI)
+        let adapter = InkbunnyHomepageAdapter(api: failingInkbunnyAPI)
         let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
         adapter.loadFeed(delegate: capturingHomepageFeedDelegate)
 
@@ -65,7 +65,7 @@ class InkbunnyAPIAdapterTests: XCTestCase {
         let title = "Some content"
         let stubInkbunnySubmission = makeInkbunnySubmission(title: title)
         let successfulInkbunnyAPI = SuccessfulInkbunnyAPI(items: [stubInkbunnySubmission])
-        let adapter = InkbunnyAPIAdapter(api: successfulInkbunnyAPI)
+        let adapter = InkbunnyHomepageAdapter(api: successfulInkbunnyAPI)
         let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
         adapter.loadFeed(delegate: capturingHomepageFeedDelegate)
 
@@ -76,7 +76,7 @@ class InkbunnyAPIAdapterTests: XCTestCase {
         let submissionID = "Some identifier"
         let stubInkbunnySubmission = makeInkbunnySubmission(submissionID: submissionID)
         let successfulInkbunnyAPI = SuccessfulInkbunnyAPI(items: [stubInkbunnySubmission])
-        let adapter = InkbunnyAPIAdapter(api: successfulInkbunnyAPI)
+        let adapter = InkbunnyHomepageAdapter(api: successfulInkbunnyAPI)
         let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
         adapter.loadFeed(delegate: capturingHomepageFeedDelegate)
 
@@ -87,7 +87,7 @@ class InkbunnyAPIAdapterTests: XCTestCase {
         let firstInkbunnySubmission = makeInkbunnySubmission(submissionID: "ID 1")
         let secondInkbunnySubmission = makeInkbunnySubmission(submissionID: "ID 2")
         let successfulInkbunnyAPI = SuccessfulInkbunnyAPI(items: [firstInkbunnySubmission, secondInkbunnySubmission])
-        let adapter = InkbunnyAPIAdapter(api: successfulInkbunnyAPI)
+        let adapter = InkbunnyHomepageAdapter(api: successfulInkbunnyAPI)
         let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
         adapter.loadFeed(delegate: capturingHomepageFeedDelegate)
 
@@ -98,7 +98,7 @@ class InkbunnyAPIAdapterTests: XCTestCase {
         let postedDate = Date(timeIntervalSinceNow: -7200)
         let stubInkbunnySubmission = makeInkbunnySubmission(postedDate: postedDate)
         let successfulInkbunnyAPI = SuccessfulInkbunnyAPI(items: [stubInkbunnySubmission])
-        let adapter = InkbunnyAPIAdapter(api: successfulInkbunnyAPI)
+        let adapter = InkbunnyHomepageAdapter(api: successfulInkbunnyAPI)
         let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
         adapter.loadFeed(delegate: capturingHomepageFeedDelegate)
 

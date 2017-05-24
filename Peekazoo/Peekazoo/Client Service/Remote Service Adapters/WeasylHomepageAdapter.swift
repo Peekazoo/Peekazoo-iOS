@@ -1,5 +1,5 @@
 //
-//  WeasylAPIAdapter.swift
+//  WeasylHomepageAdapter.swift
 //  Peekazoo
 //
 //  Created by Thomas Sherwood on 18/05/2017.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct WeasylAPIAdapter: HomepageFeed {
+public struct WeasylHomepageAdapter: HomepageFeed {
 
     private var api: WeasylAPIProtocol
 
