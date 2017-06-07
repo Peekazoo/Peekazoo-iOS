@@ -13,7 +13,11 @@ public struct RelativeTimeFormatter: TimeFormatter {
     var temporalDistanceMeasurer: TemporalDistanceMeasurer
     let dateFormatter: DateFormatter
 
-    public init(temporalDistanceMeasurer: TemporalDistanceMeasurer = DateTemporalDistanceMeasurer()) {
+    public init() {
+        self.init(temporalDistanceMeasurer: DateTemporalDistanceMeasurer())
+    }
+
+    public init(temporalDistanceMeasurer: TemporalDistanceMeasurer) {
         self.temporalDistanceMeasurer = temporalDistanceMeasurer
 
         dateFormatter = DateFormatter()

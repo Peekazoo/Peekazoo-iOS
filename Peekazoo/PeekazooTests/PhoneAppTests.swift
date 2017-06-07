@@ -24,7 +24,7 @@ class PhoneAppTests: XCTestCase {
             }
         }
 
-        static func buildWithHomepageService<T: HomepageInterface>(_ service: HomepageService, interface: T) -> Product<T> {
+        static func buildWithHomepageService<T>(_ service: HomepageService, interface: T) -> Product<T> {
             let stubbedRootRouter = StubRootRouter(homepageInterface: interface)
             let timeFormatter = CapturingTimeFormatter()
             let app = PhoneApp(rootRouter: stubbedRootRouter,
@@ -38,7 +38,7 @@ class PhoneAppTests: XCTestCase {
             return buildWithHomepageService(service, interface: CapturingHomepageInterface())
         }
 
-        static func buildForSuccessfulHomepageService<T: HomepageInterface>(content: [StubHomepageItem] = [], interface: T) -> Product<T> {
+        static func buildForSuccessfulHomepageService<T>(content: [StubHomepageItem] = [], interface: T) -> Product<T> {
             return buildWithHomepageService(SuccessfulHomepageService(content: content), interface: interface)
         }
 
