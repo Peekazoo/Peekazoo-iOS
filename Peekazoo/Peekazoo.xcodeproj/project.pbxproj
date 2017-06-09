@@ -51,6 +51,7 @@
 		7810B6381ED4D87000366B8C /* TemporalDistanceMeasurer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7810B6371ED4D87000366B8C /* TemporalDistanceMeasurer.swift */; };
 		7810B63A1ED4D88200366B8C /* RelativeTimeFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7810B6391ED4D88200366B8C /* RelativeTimeFormatter.swift */; };
 		7810B63C1ED4D8B600366B8C /* TemporalDistanceMeasurerTestDoubles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7810B63B1ED4D8B600366B8C /* TemporalDistanceMeasurerTestDoubles.swift */; };
+		781F6D291EEB32E2001FE36E /* JSONInkbunnySearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781F6D281EEB32E2001FE36E /* JSONInkbunnySearchResponse.swift */; };
 		7821A14E1ECF178B009CA08A /* PeekazooServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7821A14D1ECF178B009CA08A /* PeekazooServiceProtocol.swift */; };
 		7821A1501ECF17AA009CA08A /* PeekazooServiceProtocolTestDoubles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7821A14F1ECF17AA009CA08A /* PeekazooServiceProtocolTestDoubles.swift */; };
 		7821A1521ECF17CB009CA08A /* PeekazooHomepageAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7821A1511ECF17CB009CA08A /* PeekazooHomepageAdapter.swift */; };
@@ -60,7 +61,7 @@
 		7821A15A1ECF8DB9009CA08A /* ValidInkbunnyGuestLoginResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 7821A1591ECF8DB8009CA08A /* ValidInkbunnyGuestLoginResponse.json */; };
 		7821A15C1ED029C0009CA08A /* ValidInkbunnySearchResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 7821A15B1ED029C0009CA08A /* ValidInkbunnySearchResponse.json */; };
 		7821A15F1ED039BB009CA08A /* InkbunnyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7821A15E1ED039BB009CA08A /* InkbunnyAPI.swift */; };
-		7821A1611ED039D3009CA08A /* InkbunnySubmissionImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7821A1601ED039D3009CA08A /* InkbunnySubmissionImpl.swift */; };
+		7821A1611ED039D3009CA08A /* JSONInkbunnySubmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7821A1601ED039D3009CA08A /* JSONInkbunnySubmission.swift */; };
 		7821A1631ED03D36009CA08A /* InkbunnyAPIAdapterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7821A1621ED03D36009CA08A /* InkbunnyAPIAdapterTests.swift */; };
 		7821A1651ED04428009CA08A /* InkbunnyAPIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7821A1641ED04428009CA08A /* InkbunnyAPIProtocol.swift */; };
 		7821A1671ED0444A009CA08A /* InkbunnyHomepageAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7821A1661ED0444A009CA08A /* InkbunnyHomepageAdapter.swift */; };
@@ -92,6 +93,7 @@
 		789F10111EC481B100FAF5F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 789F100F1EC481B100FAF5F1 /* LaunchScreen.storyboard */; };
 		78F27FA31ECDC0CC00C38738 /* WeasylAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F27FA21ECDC0CC00C38738 /* WeasylAPI.swift */; };
 		78F27FA81ECDC2BD00C38738 /* NetworkAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F27FA71ECDC2BD00C38738 /* NetworkAdapter.swift */; };
+		78FA6FBA1EEB3133009806B6 /* JSONInkbunnyLoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FA6FB91EEB3133009806B6 /* JSONInkbunnyLoginResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -149,6 +151,7 @@
 		7810B6371ED4D87000366B8C /* TemporalDistanceMeasurer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TemporalDistanceMeasurer.swift; path = Core/TemporalDistanceMeasurer.swift; sourceTree = "<group>"; };
 		7810B6391ED4D88200366B8C /* RelativeTimeFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RelativeTimeFormatter.swift; path = Core/RelativeTimeFormatter.swift; sourceTree = "<group>"; };
 		7810B63B1ED4D8B600366B8C /* TemporalDistanceMeasurerTestDoubles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TemporalDistanceMeasurerTestDoubles.swift; path = "Test Doubles/TemporalDistanceMeasurerTestDoubles.swift"; sourceTree = "<group>"; };
+		781F6D281EEB32E2001FE36E /* JSONInkbunnySearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = JSONInkbunnySearchResponse.swift; path = "Remote Services/Inkbunny/JSON Parsing/JSONInkbunnySearchResponse.swift"; sourceTree = "<group>"; };
 		7821A14D1ECF178B009CA08A /* PeekazooServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PeekazooServiceProtocol.swift; path = "Client Service/PeekazooServiceProtocol.swift"; sourceTree = "<group>"; };
 		7821A14F1ECF17AA009CA08A /* PeekazooServiceProtocolTestDoubles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PeekazooServiceProtocolTestDoubles.swift; path = "Test Doubles/PeekazooServiceProtocolTestDoubles.swift"; sourceTree = "<group>"; };
 		7821A1511ECF17CB009CA08A /* PeekazooHomepageAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PeekazooHomepageAdapter.swift; path = "Core/Service Adapters/PeekazooHomepageAdapter.swift"; sourceTree = "<group>"; };
@@ -158,7 +161,7 @@
 		7821A1591ECF8DB8009CA08A /* ValidInkbunnyGuestLoginResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = ValidInkbunnyGuestLoginResponse.json; path = "Test Data/ValidInkbunnyGuestLoginResponse.json"; sourceTree = "<group>"; };
 		7821A15B1ED029C0009CA08A /* ValidInkbunnySearchResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = ValidInkbunnySearchResponse.json; path = "Test Data/ValidInkbunnySearchResponse.json"; sourceTree = "<group>"; };
 		7821A15E1ED039BB009CA08A /* InkbunnyAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InkbunnyAPI.swift; path = "Remote Services/Inkbunny/InkbunnyAPI.swift"; sourceTree = "<group>"; };
-		7821A1601ED039D3009CA08A /* InkbunnySubmissionImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InkbunnySubmissionImpl.swift; path = "Remote Services/Inkbunny/InkbunnySubmissionImpl.swift"; sourceTree = "<group>"; };
+		7821A1601ED039D3009CA08A /* JSONInkbunnySubmission.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSONInkbunnySubmission.swift; path = "Remote Services/Inkbunny/JSONInkbunnySubmission.swift"; sourceTree = "<group>"; };
 		7821A1621ED03D36009CA08A /* InkbunnyAPIAdapterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InkbunnyAPIAdapterTests.swift; sourceTree = "<group>"; };
 		7821A1641ED04428009CA08A /* InkbunnyAPIProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InkbunnyAPIProtocol.swift; path = "Remote Services/Inkbunny/InkbunnyAPIProtocol.swift"; sourceTree = "<group>"; };
 		7821A1661ED0444A009CA08A /* InkbunnyHomepageAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InkbunnyHomepageAdapter.swift; path = "Client Service/Remote Service Adapters/InkbunnyHomepageAdapter.swift"; sourceTree = "<group>"; };
@@ -194,6 +197,7 @@
 		789F101D1EC481B100FAF5F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		78F27FA21ECDC0CC00C38738 /* WeasylAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeasylAPI.swift; path = "Remote Services/Weasyl/WeasylAPI.swift"; sourceTree = "<group>"; };
 		78F27FA71ECDC2BD00C38738 /* NetworkAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkAdapter.swift; path = Networking/NetworkAdapter.swift; sourceTree = "<group>"; };
+		78FA6FB91EEB3133009806B6 /* JSONInkbunnyLoginResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSONInkbunnyLoginResponse.swift; path = "Remote Services/Inkbunny/JSON Parsing/JSONInkbunnyLoginResponse.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -330,10 +334,10 @@
 		7821A15D1ED039A2009CA08A /* Inkbunny */ = {
 			isa = PBXGroup;
 			children = (
+				78FA6FB81EEB3114009806B6 /* API Responses */,
 				7821A1641ED04428009CA08A /* InkbunnyAPIProtocol.swift */,
 				7842E2481EED106800D86261 /* InkbunnySubmission.swift */,
 				7821A15E1ED039BB009CA08A /* InkbunnyAPI.swift */,
-				7821A1601ED039D3009CA08A /* InkbunnySubmissionImpl.swift */,
 			);
 			name = Inkbunny;
 			sourceTree = "<group>";
@@ -469,6 +473,16 @@
 			name = Networking;
 			sourceTree = "<group>";
 		};
+		78FA6FB81EEB3114009806B6 /* API Responses */ = {
+			isa = PBXGroup;
+			children = (
+				78FA6FB91EEB3133009806B6 /* JSONInkbunnyLoginResponse.swift */,
+				781F6D281EEB32E2001FE36E /* JSONInkbunnySearchResponse.swift */,
+				7821A1601ED039D3009CA08A /* JSONInkbunnySubmission.swift */,
+			);
+			name = "API Responses";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -597,6 +611,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78FA6FBA1EEB3133009806B6 /* JSONInkbunnyLoginResponse.swift in Sources */,
 				78F27FA31ECDC0CC00C38738 /* WeasylAPI.swift in Sources */,
 				786725AA1ECE1DB500D78A72 /* WeasylSubmissionImpl.swift in Sources */,
 				7810B6381ED4D87000366B8C /* TemporalDistanceMeasurer.swift in Sources */,
@@ -607,7 +622,7 @@
 				7821A1521ECF17CB009CA08A /* PeekazooHomepageAdapter.swift in Sources */,
 				7821A1561ECF7935009CA08A /* Difference.swift in Sources */,
 				789F10071EC481B100FAF5F1 /* AppDelegate.swift in Sources */,
-				7821A1611ED039D3009CA08A /* InkbunnySubmissionImpl.swift in Sources */,
+				7821A1611ED039D3009CA08A /* JSONInkbunnySubmission.swift in Sources */,
 				7821A14E1ECF178B009CA08A /* PeekazooServiceProtocol.swift in Sources */,
 				787B50951EED12E1007C040E /* WeasylSubmission.swift in Sources */,
 				6E0D85C31EC9A4DF000E7283 /* HomepagePresenter.swift in Sources */,
@@ -626,6 +641,7 @@
 				7840DF831ECB19D800A623A7 /* PeekazooClient.swift in Sources */,
 				7821A1651ED04428009CA08A /* InkbunnyAPIProtocol.swift in Sources */,
 				6E6E617F1ECA43FF00964076 /* HomepageItemCollectionViewCell.swift in Sources */,
+				781F6D291EEB32E2001FE36E /* JSONInkbunnySearchResponse.swift in Sources */,
 				78F27FA81ECDC2BD00C38738 /* NetworkAdapter.swift in Sources */,
 				6E0D85C51EC9AC88000E7283 /* HomepageModule.swift in Sources */,
 				6E6E61751EC9FC4C00964076 /* HomepageCollectionViewDataSource.swift in Sources */,
