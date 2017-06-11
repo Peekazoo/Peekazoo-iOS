@@ -43,17 +43,17 @@ public struct WeasylHomepageAPI {
         return (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)) as? [[String : Any]]
     }
 
-    private func parse(_ jsonObject: [[String : Any]]) -> [WeasylSubmission] {
+    private func parse(_ jsonObject: [[String : Any]]) -> [WeasylSubmissionImpl] {
         return jsonObject.flatMap(parseSubmission)
     }
 
-    private func parseSubmission(_ jsonObject: [String : Any]) -> WeasylSubmission? {
+    private func parseSubmission(_ jsonObject: [String : Any]) -> WeasylSubmissionImpl? {
         guard let submitID = jsonObject["submitid"] as? Int,
               let title = jsonObject["title"] as? String,
               let postedAtString = jsonObject["posted_at"] as? String,
               let postedAt = dateFormatter.date(from: postedAtString) else { return nil }
 
-        return WeasylSubmission(submitID: String(submitID), title: title, postedAt: postedAt)
+        return WeasylSubmissionImpl(submitID: String(submitID), title: title, postedAt: postedAt)
     }
 
 }

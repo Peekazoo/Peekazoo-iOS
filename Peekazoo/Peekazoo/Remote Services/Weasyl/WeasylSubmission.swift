@@ -2,22 +2,16 @@
 //  WeasylSubmission.swift
 //  Peekazoo
 //
-//  Created by Thomas Sherwood on 18/05/2017.
+//  Created by Thomas Sherwood on 10/06/2017.
 //  Copyright © 2017 Peekazoo. All rights reserved.
 //
 
 import Foundation
 
-public struct WeasylSubmission {
+public protocol WeasylSubmission {
 
-    public var title: String
-    public var submitID: String
-    public var postedAt: Date
-
-    public init(submitID: String, title: String, postedAt: Date) {
-        self.submitID = submitID
-        self.title = title
-        self.postedAt = postedAt
-    }
+    var title: String { get }
+    var submitID: String { get }
+    var postedAt: Date { get }
 
 }
