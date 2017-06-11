@@ -63,7 +63,7 @@
 		7821A15F1ED039BB009CA08A /* JSONInkbunnyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7821A15E1ED039BB009CA08A /* JSONInkbunnyAPI.swift */; };
 		7821A1611ED039D3009CA08A /* JSONInkbunnySubmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7821A1601ED039D3009CA08A /* JSONInkbunnySubmission.swift */; };
 		7821A1631ED03D36009CA08A /* InkbunnyAPIAdapterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7821A1621ED03D36009CA08A /* InkbunnyAPIAdapterTests.swift */; };
-		7821A1651ED04428009CA08A /* InkbunnyAPIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7821A1641ED04428009CA08A /* InkbunnyAPIProtocol.swift */; };
+		7821A1651ED04428009CA08A /* InkbunnyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7821A1641ED04428009CA08A /* InkbunnyAPI.swift */; };
 		7821A1671ED0444A009CA08A /* InkbunnyHomepageAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7821A1661ED0444A009CA08A /* InkbunnyHomepageAdapter.swift */; };
 		7821A1691ED04461009CA08A /* InkbunnyAPIProtocolTestDoubles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7821A1681ED04461009CA08A /* InkbunnyAPIProtocolTestDoubles.swift */; };
 		7821A16B1ED0765A009CA08A /* CapturingHomepageLoadingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7821A16A1ED0765A009CA08A /* CapturingHomepageLoadingDelegate.swift */; };
@@ -164,7 +164,7 @@
 		7821A15E1ED039BB009CA08A /* JSONInkbunnyAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSONInkbunnyAPI.swift; path = "Remote Services/Inkbunny/JSONInkbunnyAPI.swift"; sourceTree = "<group>"; };
 		7821A1601ED039D3009CA08A /* JSONInkbunnySubmission.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSONInkbunnySubmission.swift; path = "Remote Services/Inkbunny/JSONInkbunnySubmission.swift"; sourceTree = "<group>"; };
 		7821A1621ED03D36009CA08A /* InkbunnyAPIAdapterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InkbunnyAPIAdapterTests.swift; sourceTree = "<group>"; };
-		7821A1641ED04428009CA08A /* InkbunnyAPIProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InkbunnyAPIProtocol.swift; path = "Remote Services/Inkbunny/InkbunnyAPIProtocol.swift"; sourceTree = "<group>"; };
+		7821A1641ED04428009CA08A /* InkbunnyAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InkbunnyAPI.swift; path = "Remote Services/Inkbunny/InkbunnyAPI.swift"; sourceTree = "<group>"; };
 		7821A1661ED0444A009CA08A /* InkbunnyHomepageAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InkbunnyHomepageAdapter.swift; path = "Client Service/Remote Service Adapters/InkbunnyHomepageAdapter.swift"; sourceTree = "<group>"; };
 		7821A1681ED04461009CA08A /* InkbunnyAPIProtocolTestDoubles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InkbunnyAPIProtocolTestDoubles.swift; path = "Test Doubles/InkbunnyAPIProtocolTestDoubles.swift"; sourceTree = "<group>"; };
 		7821A16A1ED0765A009CA08A /* CapturingHomepageLoadingDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CapturingHomepageLoadingDelegate.swift; path = "Test Doubles/CapturingHomepageLoadingDelegate.swift"; sourceTree = "<group>"; };
@@ -337,7 +337,7 @@
 			isa = PBXGroup;
 			children = (
 				78FA6FB81EEB3114009806B6 /* API Responses */,
-				7821A1641ED04428009CA08A /* InkbunnyAPIProtocol.swift */,
+				7821A1641ED04428009CA08A /* InkbunnyAPI.swift */,
 				7842E2481EED106800D86261 /* InkbunnySubmission.swift */,
 				7821A15E1ED039BB009CA08A /* JSONInkbunnyAPI.swift */,
 			);
@@ -643,7 +643,7 @@
 				6E6E61731EC9ED8400964076 /* HomepageViewModel.swift in Sources */,
 				7821A15F1ED039BB009CA08A /* JSONInkbunnyAPI.swift in Sources */,
 				7840DF831ECB19D800A623A7 /* PeekazooClient.swift in Sources */,
-				7821A1651ED04428009CA08A /* InkbunnyAPIProtocol.swift in Sources */,
+				7821A1651ED04428009CA08A /* InkbunnyAPI.swift in Sources */,
 				6E6E617F1ECA43FF00964076 /* HomepageItemCollectionViewCell.swift in Sources */,
 				781F6D291EEB32E2001FE36E /* JSONInkbunnySearchResponse.swift in Sources */,
 				78F27FA81ECDC2BD00C38738 /* NetworkAdapter.swift in Sources */,

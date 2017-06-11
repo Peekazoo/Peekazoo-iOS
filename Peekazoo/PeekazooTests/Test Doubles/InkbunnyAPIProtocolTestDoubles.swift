@@ -9,7 +9,7 @@
 import Foundation
 import Peekazoo
 
-class CapturingInkbunnyAPI: InkbunnyAPIProtocol {
+class CapturingInkbunnyAPI: InkbunnyAPI {
 
     private(set) var didLoadHomepage = false
     func loadHomepage(completionHandler: @escaping (InkbunnyHomepageLoadResult) -> Void) {
@@ -18,7 +18,7 @@ class CapturingInkbunnyAPI: InkbunnyAPIProtocol {
 
 }
 
-struct SuccessfulInkbunnyAPI: InkbunnyAPIProtocol {
+struct SuccessfulInkbunnyAPI: InkbunnyAPI {
 
     var items: [InkbunnySubmission]
 
@@ -32,7 +32,7 @@ struct SuccessfulInkbunnyAPI: InkbunnyAPIProtocol {
 
 }
 
-struct FailingInkbunnyAPI: InkbunnyAPIProtocol {
+struct FailingInkbunnyAPI: InkbunnyAPI {
 
     func loadHomepage(completionHandler: @escaping (InkbunnyHomepageLoadResult) -> Void) {
         completionHandler(.failure)

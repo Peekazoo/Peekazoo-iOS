@@ -10,9 +10,9 @@ import Foundation
 
 public struct InkbunnyHomepageAdapter: HomepageFeed {
 
-    private var api: InkbunnyAPIProtocol
+    private var api: InkbunnyAPI
 
-    public init(api: InkbunnyAPIProtocol) {
+    public init(api: InkbunnyAPI) {
         self.api = api
     }
 
