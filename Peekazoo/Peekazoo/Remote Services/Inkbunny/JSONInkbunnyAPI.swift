@@ -17,13 +17,13 @@ public struct JSONInkbunnyAPI: InkbunnyAPI {
     }
 
     public func loadHomepage(completionHandler: @escaping (InkbunnyHomepageLoadResult) -> Void) {
-        jsonFetcher.fetchJSON(from: makeGuestLoginURL(), representing: JSONInkbunnyLoginResponse.self) { (result) in
+        performGuestLogin { (result) in
             switch result {
             case .failure:
                 completionHandler(.failure)
 
             case .success(let response):
-                self.jsonFetcher.fetchJSON(from: self.makeSearchURL(sid: response.sessionIdentifier), representing: JSONInkbunnySearchResponse.self, completionHandler: { (searchResult) in
+                self.performSearch(sid: response.sessionIdentifier) { (searchResult) in
                     switch searchResult {
                     case .failure:
                         completionHandler(.failure)
@@ -31,9 +31,21 @@ public struct JSONInkbunnyAPI: InkbunnyAPI {
                     case .success(let searchResponse):
                         completionHandler(.success(searchResponse.submissions))
                     }
-                })
+                }
             }
         }
+    }
+
+    private func performGuestLogin(completionHandler: @escaping (JSONFetcher.Result<JSONInkbunnyLoginResponse>) -> Void) {
+        jsonFetcher.fetchJSON(from: makeGuestLoginURL(),
+                              representing: JSONInkbunnyLoginResponse.self,
+                              completionHandler: completionHandler)
+    }
+
+    private func performSearch(sid: String, completionHandler: @escaping (JSONFetcher.Result<JSONInkbunnySearchResponse>) -> Void) {
+        jsonFetcher.fetchJSON(from: makeSearchURL(sid: sid),
+                              representing: JSONInkbunnySearchResponse.self,
+                              completionHandler: completionHandler)
     }
 
     private func makeGuestLoginURL() -> URL {
