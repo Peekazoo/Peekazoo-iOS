@@ -20,7 +20,7 @@ class CapturingWeasylAPI: WeasylAPIProtocol {
 
 struct SuccessfulWeasylAPI: WeasylAPIProtocol {
 
-    var items: [WeasylSubmissionImpl]
+    var items: [WeasylSubmission]
 
     func loadHomepage(completionHandler: @escaping (WeasylHomepageLoadResult) -> Void) {
         completionHandler(.success(items))
