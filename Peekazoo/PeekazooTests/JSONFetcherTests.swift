@@ -22,14 +22,16 @@ struct JSONFetcher {
         self.networkAdapter = networkAdapter
     }
 
-    func fetchJSON(from url: URL, representing: Any.Type, completionHandler: @escaping (Result) -> Void) {
+    func fetchJSON<T: Decodable>(from url: URL, representing type: T.Type, completionHandler: @escaping (Result) -> Void) {
         networkAdapter.get(url) { (data, _) in
-            guard data != nil else {
+            guard let data = data else {
                 completionHandler(.failure)
                 return
             }
 
-            completionHandler(.success(EmptyJSONObject()))
+            if let object = try? JSONDecoder().decode(type, from: data) {
+                completionHandler(.success(object))
+            }
         }
     }
 
@@ -54,6 +56,10 @@ class CapturingJSONHandler {
 }
 
 struct EmptyJSONObject: Decodable {
+
+}
+
+struct AnotherEmptyJSONObject: Decodable {
 
 }
 
@@ -105,6 +111,16 @@ class JSONFetcherTests: XCTestCase {
         jsonFetcher.fetchJSON(from: URL(string: "https://someplace.com")!, representing: EmptyJSONObject.self, completionHandler: capturingJSONHandler.verify)
 
         XCTAssertTrue(capturingJSONHandler.capturedJSONObject is EmptyJSONObject)
+    }
+
+    func testFetchingDifferentJSONTypeProvidesThatTypeToHandler() {
+        let capturingJSONHandler = CapturingJSONHandler()
+        let emptyJSONObjectData = "{}".data(using: .utf8)
+        let successfulNetworkAdapter = SuccessfulNetworkAdapter(data: emptyJSONObjectData)
+        let jsonFetcher = JSONFetcher(networkAdapter: successfulNetworkAdapter)
+        jsonFetcher.fetchJSON(from: URL(string: "https://someplace.com")!, representing: AnotherEmptyJSONObject.self, completionHandler: capturingJSONHandler.verify)
+
+        XCTAssertTrue(capturingJSONHandler.capturedJSONObject is AnotherEmptyJSONObject)
     }
 
 }
