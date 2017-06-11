@@ -11,8 +11,8 @@ import Peekazoo
 
 struct JSONFetcher {
 
-    enum Result {
-        case success(Decodable)
+    enum Result<T> where T: Decodable {
+        case success(T)
         case failure
     }
 
@@ -22,7 +22,7 @@ struct JSONFetcher {
         self.networkAdapter = networkAdapter
     }
 
-    func fetchJSON<T: Decodable>(from url: URL, representing type: T.Type, completionHandler: @escaping (Result) -> Void) {
+    func fetchJSON<T>(from url: URL, representing type: T.Type, completionHandler: @escaping (Result<T>) -> Void) {
         networkAdapter.get(url) { (data, _) in
             guard let data = data else {
                 completionHandler(.failure)
@@ -45,7 +45,7 @@ class CapturingJSONHandler {
     private(set) var wasToldLoadFailed = false
     private(set) var wasToldLoadSucceeded = false
     private(set) var capturedJSONObject: Decodable?
-    func verify(_ result: JSONFetcher.Result) {
+    func verify<T>(_ result: JSONFetcher.Result<T>) {
         switch result {
         case .success(let JSONObject):
             wasToldLoadSucceeded = true
