@@ -11,3 +11,8 @@ public protocol InkbunnyAPI {
     func loadHomepage(completionHandler: @escaping (InkbunnyHomepageLoadResult) -> Void)
 
 }
+
+public enum InkbunnyHomepageLoadResult {
+    case success([InkbunnySubmission])
+    case failure
+}

@@ -8,11 +8,6 @@
 
 import Foundation
 
-public enum InkbunnyHomepageLoadResult {
-    case success([InkbunnySubmission])
-    case failure
-}
-
 public struct JSONInkbunnyAPI: InkbunnyAPI {
 
     private var networkAdapter: NetworkAdapter

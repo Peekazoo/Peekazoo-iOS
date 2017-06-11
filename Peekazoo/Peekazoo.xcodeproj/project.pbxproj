@@ -336,10 +336,9 @@
 		7821A15D1ED039A2009CA08A /* Inkbunny */ = {
 			isa = PBXGroup;
 			children = (
-				78FA6FB81EEB3114009806B6 /* API Responses */,
+				7889DFFF1EED1B8800AF2C1F /* JSON API */,
 				7821A1641ED04428009CA08A /* InkbunnyAPI.swift */,
 				7842E2481EED106800D86261 /* InkbunnySubmission.swift */,
-				7821A15E1ED039BB009CA08A /* JSONInkbunnyAPI.swift */,
 			);
 			name = Inkbunny;
 			sourceTree = "<group>";
@@ -371,6 +370,15 @@
 				7821A1511ECF17CB009CA08A /* PeekazooHomepageAdapter.swift */,
 			);
 			name = "Service Adapters";
+			sourceTree = "<group>";
+		};
+		7889DFFF1EED1B8800AF2C1F /* JSON API */ = {
+			isa = PBXGroup;
+			children = (
+				78FA6FB81EEB3114009806B6 /* API Responses */,
+				7821A15E1ED039BB009CA08A /* JSONInkbunnyAPI.swift */,
+			);
+			name = "JSON API";
 			sourceTree = "<group>";
 		};
 		789F0FFA1EC481B100FAF5F1 = {
