@@ -10,28 +10,28 @@ import Foundation
 
 public struct JSONInkbunnyAPI: InkbunnyAPI {
 
-    private var networkAdapter: NetworkAdapter
+    private let jsonFetcher: JSONFetcher
 
     public init(networkAdapter: NetworkAdapter) {
-        self.networkAdapter = networkAdapter
+        jsonFetcher = JSONFetcher(networkAdapter: networkAdapter)
     }
 
     public func loadHomepage(completionHandler: @escaping (InkbunnyHomepageLoadResult) -> Void) {
-        networkAdapter.get(makeGuestLoginURL()) { data, _ in
-            guard let data = data,
-                  let response = try? JSONDecoder().decode(JSONInkbunnyLoginResponse.self, from: data) else {
-                    completionHandler(.failure)
-                    return
-            }
+        jsonFetcher.fetchJSON(from: makeGuestLoginURL(), representing: JSONInkbunnyLoginResponse.self) { (result) in
+            switch result {
+            case .failure:
+                completionHandler(.failure)
 
-            self.networkAdapter.get(self.makeSearchURL(sid: response.sessionIdentifier)) { data, _ in
-                guard let data = data,
-                    let response = try? JSONDecoder().decode(JSONInkbunnySearchResponse.self, from: data) else {
-                    completionHandler(.failure)
-                    return
-                }
+            case .success(let response):
+                self.jsonFetcher.fetchJSON(from: self.makeSearchURL(sid: response.sessionIdentifier), representing: JSONInkbunnySearchResponse.self, completionHandler: { (searchResult) in
+                    switch searchResult {
+                    case .failure:
+                        completionHandler(.failure)
 
-                completionHandler(.success(response.submissions))
+                    case .success(let searchResponse):
+                        completionHandler(.success(searchResponse.submissions))
+                    }
+                })
             }
         }
     }
