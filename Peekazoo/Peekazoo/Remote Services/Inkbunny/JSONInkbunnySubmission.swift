@@ -16,10 +16,6 @@ struct JSONInkbunnySubmission: InkbunnySubmission, Decodable {
         case createdDateTime = "create_datetime"
     }
 
-    enum DecodingError: Error {
-        case untestedErrorJustToGetTheBallRolling
-    }
-
     static var dateFormatter: DateFormatter = {
         let submissionDateTimeFormatter = DateFormatter()
         submissionDateTimeFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSSZZZZ"
@@ -37,7 +33,7 @@ struct JSONInkbunnySubmission: InkbunnySubmission, Decodable {
 
         let stringFormedCreatedDate = try container.decode(String.self, forKey: CodingKeys.createdDateTime)
         guard let date = JSONInkbunnySubmission.dateFormatter.date(from: stringFormedCreatedDate) else {
-            throw DecodingError.untestedErrorJustToGetTheBallRolling
+            throw NSError(domain: "", code: 0, userInfo: nil)
         }
 
         postedDate = date

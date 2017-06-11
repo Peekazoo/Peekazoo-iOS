@@ -87,6 +87,7 @@
 		7885CAF51ECE4120005F426B /* WeasylAPIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7885CAF41ECE4120005F426B /* WeasylAPIProtocol.swift */; };
 		7885CAF71ECE4140005F426B /* WeasylAPITestDoubles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7885CAF61ECE4140005F426B /* WeasylAPITestDoubles.swift */; };
 		7885CAFA1ECF1085005F426B /* PeekazooHomepageAdapterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7885CAF91ECF1085005F426B /* PeekazooHomepageAdapterTests.swift */; };
+		7889DFFE1EED192500AF2C1F /* InkbunnyInvalidSubmissionDateFormatSubmissionResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 7889DFFD1EED192500AF2C1F /* InkbunnyInvalidSubmissionDateFormatSubmissionResponse.json */; };
 		788B0D0A1ECB17E30035C26A /* PeekazooClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788B0D091ECB17E30035C26A /* PeekazooClientTests.swift */; };
 		789F10071EC481B100FAF5F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789F10061EC481B100FAF5F1 /* AppDelegate.swift */; };
 		789F100E1EC481B100FAF5F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 789F100D1EC481B100FAF5F1 /* Assets.xcassets */; };
@@ -187,6 +188,7 @@
 		7885CAF41ECE4120005F426B /* WeasylAPIProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeasylAPIProtocol.swift; path = "Remote Services/Weasyl/WeasylAPIProtocol.swift"; sourceTree = "<group>"; };
 		7885CAF61ECE4140005F426B /* WeasylAPITestDoubles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeasylAPITestDoubles.swift; path = "Test Doubles/WeasylAPITestDoubles.swift"; sourceTree = "<group>"; };
 		7885CAF91ECF1085005F426B /* PeekazooHomepageAdapterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeekazooHomepageAdapterTests.swift; sourceTree = "<group>"; };
+		7889DFFD1EED192500AF2C1F /* InkbunnyInvalidSubmissionDateFormatSubmissionResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = InkbunnyInvalidSubmissionDateFormatSubmissionResponse.json; path = "Test Data/InkbunnyInvalidSubmissionDateFormatSubmissionResponse.json"; sourceTree = "<group>"; };
 		788B0D091ECB17E30035C26A /* PeekazooClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeekazooClientTests.swift; sourceTree = "<group>"; };
 		789F10031EC481B100FAF5F1 /* Peekazoo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Peekazoo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		789F10061EC481B100FAF5F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -349,6 +351,7 @@
 				7840DF981ECC6B7100A623A7 /* MalformedWeasylHomepageResponse.json */,
 				7821A1591ECF8DB8009CA08A /* ValidInkbunnyGuestLoginResponse.json */,
 				7821A15B1ED029C0009CA08A /* ValidInkbunnySearchResponse.json */,
+				7889DFFD1EED192500AF2C1F /* InkbunnyInvalidSubmissionDateFormatSubmissionResponse.json */,
 			);
 			name = "Test Data";
 			sourceTree = "<group>";
@@ -582,6 +585,7 @@
 			files = (
 				7840DF951ECB9F2400A623A7 /* ValidWeasylHomepageResponse.json in Resources */,
 				7821A15A1ECF8DB9009CA08A /* ValidInkbunnyGuestLoginResponse.json in Resources */,
+				7889DFFE1EED192500AF2C1F /* InkbunnyInvalidSubmissionDateFormatSubmissionResponse.json in Resources */,
 				7821A15C1ED029C0009CA08A /* ValidInkbunnySearchResponse.json in Resources */,
 				7840DF991ECC6B7100A623A7 /* MalformedWeasylHomepageResponse.json in Resources */,
 			);

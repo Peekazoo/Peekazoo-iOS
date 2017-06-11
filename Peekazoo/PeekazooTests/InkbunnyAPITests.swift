@@ -260,4 +260,15 @@ class InkbunnyAPITests: XCTestCase {
         XCTAssertEqual(firstDateFromJSON, capturingHomepageHandler.result(at: 0)?.postedDate)
     }
 
+    func testSearchSucceedsWithValidJSONWithUnexpectedDateFormatNotifiersHandlerOfFailure() {
+        var invalidDateTypeNetworkAdapter = makeValidLoginNetworkAdapter()
+        invalidDateTypeNetworkAdapter.stub(url: URL(string: "https://inkbunny.net/api_search.php?sid=This_Is_A_Test_Token")!,
+                                      withContentsOfJSONFile: "InkbunnyInvalidSubmissionDateFormatSubmissionResponse")
+        let inkbunnyAPI = InkbunnyAPI(networkAdapter: invalidDateTypeNetworkAdapter)
+        let capturingHomepageHandler = CapturingInkbunnyHomepageHandler()
+        inkbunnyAPI.loadHomepage(completionHandler: capturingHomepageHandler.verify)
+
+        XCTAssertTrue(capturingHomepageHandler.wasNotifiedFeedDidFailToLoad)
+    }
+
 }
