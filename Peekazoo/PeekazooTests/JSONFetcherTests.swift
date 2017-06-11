@@ -22,8 +22,7 @@ struct JSONFetcher {
         self.networkAdapter = networkAdapter
     }
 
-    func fetchJSON(representing: Any.Type, completionHandler: @escaping (Result) -> Void) {
-        let url = URL(string: "https://www.bbc.co.uk")!
+    func fetchJSON(from url: URL, representing: Any.Type, completionHandler: @escaping (Result) -> Void) {
         networkAdapter.get(url) { (data, _) in
             guard data != nil else {
                 completionHandler(.failure)
@@ -62,7 +61,7 @@ class JSONFetcherTests: XCTestCase {
         let capturingJSONHandler = CapturingJSONHandler()
         let failingNetworkAdapter = FailingNetworkAdapter()
         let jsonFetcher = JSONFetcher(networkAdapter: failingNetworkAdapter)
-        jsonFetcher.fetchJSON(representing: EmptyJSONObject.self, completionHandler: capturingJSONHandler.verify)
+        jsonFetcher.fetchJSON(from: URL(string: "https://someplace.com")!, representing: EmptyJSONObject.self, completionHandler: capturingJSONHandler.verify)
 
         XCTAssertTrue(capturingJSONHandler.wasToldLoadFailed)
     }
@@ -72,7 +71,7 @@ class JSONFetcherTests: XCTestCase {
         let emptyJSONObjectData = "{}".data(using: .utf8)
         let successfulNetworkAdapter = SuccessfulNetworkAdapter(data: emptyJSONObjectData)
         let jsonFetcher = JSONFetcher(networkAdapter: successfulNetworkAdapter)
-        jsonFetcher.fetchJSON(representing: EmptyJSONObject.self, completionHandler: capturingJSONHandler.verify)
+        jsonFetcher.fetchJSON(from: URL(string: "https://someplace.com")!, representing: EmptyJSONObject.self, completionHandler: capturingJSONHandler.verify)
 
         XCTAssertTrue(capturingJSONHandler.wasToldLoadSucceeded)
     }
@@ -81,9 +80,19 @@ class JSONFetcherTests: XCTestCase {
         let capturingJSONHandler = CapturingJSONHandler()
         let failingNetworkAdapter = FailingNetworkAdapter()
         let jsonFetcher = JSONFetcher(networkAdapter: failingNetworkAdapter)
-        jsonFetcher.fetchJSON(representing: EmptyJSONObject.self, completionHandler: capturingJSONHandler.verify)
+        jsonFetcher.fetchJSON(from: URL(string: "https://someplace.com")!, representing: EmptyJSONObject.self, completionHandler: capturingJSONHandler.verify)
 
         XCTAssertFalse(capturingJSONHandler.wasToldLoadSucceeded)
+    }
+
+    func testFetchingJSONShouldProvideTheDesiredURLToTheNetworkAdapter() {
+        let expected = URL(string: "https://someplace.com")!
+        let capturingNetworkAdapter = CapturingNetworkAdapter()
+        let jsonFetcher = JSONFetcher(networkAdapter: capturingNetworkAdapter)
+        let capturingJSONHandler = CapturingJSONHandler()
+        jsonFetcher.fetchJSON(from: expected, representing: EmptyJSONObject.self, completionHandler: capturingJSONHandler.verify)
+
+        XCTAssertEqual(expected, capturingNetworkAdapter.requestedURL)
     }
 
 }
