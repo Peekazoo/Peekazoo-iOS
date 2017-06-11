@@ -89,6 +89,7 @@
 		7885CAFA1ECF1085005F426B /* PeekazooHomepageAdapterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7885CAF91ECF1085005F426B /* PeekazooHomepageAdapterTests.swift */; };
 		7889DFFE1EED192500AF2C1F /* InkbunnyInvalidSubmissionDateFormatSubmissionResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 7889DFFD1EED192500AF2C1F /* InkbunnyInvalidSubmissionDateFormatSubmissionResponse.json */; };
 		7889E0041EED2AA600AF2C1F /* JSONFetcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7889E0031EED2AA600AF2C1F /* JSONFetcherTests.swift */; };
+		7889E0061EED32BE00AF2C1F /* JSONFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7889E0051EED32BE00AF2C1F /* JSONFetcher.swift */; };
 		788B0D0A1ECB17E30035C26A /* PeekazooClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788B0D091ECB17E30035C26A /* PeekazooClientTests.swift */; };
 		789F10071EC481B100FAF5F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789F10061EC481B100FAF5F1 /* AppDelegate.swift */; };
 		789F100E1EC481B100FAF5F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 789F100D1EC481B100FAF5F1 /* Assets.xcassets */; };
@@ -191,6 +192,7 @@
 		7885CAF91ECF1085005F426B /* PeekazooHomepageAdapterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeekazooHomepageAdapterTests.swift; sourceTree = "<group>"; };
 		7889DFFD1EED192500AF2C1F /* InkbunnyInvalidSubmissionDateFormatSubmissionResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = InkbunnyInvalidSubmissionDateFormatSubmissionResponse.json; path = "Test Data/InkbunnyInvalidSubmissionDateFormatSubmissionResponse.json"; sourceTree = "<group>"; };
 		7889E0031EED2AA600AF2C1F /* JSONFetcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONFetcherTests.swift; sourceTree = "<group>"; };
+		7889E0051EED32BE00AF2C1F /* JSONFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = JSONFetcher.swift; path = Networking/JSONFetcher.swift; sourceTree = "<group>"; };
 		788B0D091ECB17E30035C26A /* PeekazooClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeekazooClientTests.swift; sourceTree = "<group>"; };
 		789F10031EC481B100FAF5F1 /* Peekazoo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Peekazoo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		789F10061EC481B100FAF5F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -483,6 +485,7 @@
 			children = (
 				78F27FA71ECDC2BD00C38738 /* NetworkAdapter.swift */,
 				6E02FB1E1ECCEA53001C2D66 /* URLSessionNetworkAdapter.swift */,
+				7889E0051EED32BE00AF2C1F /* JSONFetcher.swift */,
 			);
 			name = Networking;
 			sourceTree = "<group>";
@@ -653,6 +656,7 @@
 				6E0D85981EC839FA000E7283 /* AppFactory.swift in Sources */,
 				6E6E61731EC9ED8400964076 /* HomepageViewModel.swift in Sources */,
 				7821A15F1ED039BB009CA08A /* JSONInkbunnyAPI.swift in Sources */,
+				7889E0061EED32BE00AF2C1F /* JSONFetcher.swift in Sources */,
 				7840DF831ECB19D800A623A7 /* PeekazooClient.swift in Sources */,
 				7821A1651ED04428009CA08A /* InkbunnyAPI.swift in Sources */,
 				6E6E617F1ECA43FF00964076 /* HomepageItemCollectionViewCell.swift in Sources */,

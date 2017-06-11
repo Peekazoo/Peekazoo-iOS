@@ -9,37 +9,6 @@
 import XCTest
 import Peekazoo
 
-struct JSONFetcher {
-
-    enum Result<T> where T: Decodable {
-        case success(T)
-        case failure
-    }
-
-    private let networkAdapter: NetworkAdapter
-
-    init(networkAdapter: NetworkAdapter) {
-        self.networkAdapter = networkAdapter
-    }
-
-    func fetchJSON<T>(from url: URL, representing type: T.Type, completionHandler: @escaping (Result<T>) -> Void) {
-        networkAdapter.get(url) { (data, _) in
-            guard let data = data else {
-                completionHandler(.failure)
-                return
-            }
-
-            do {
-                let jsonObject = try JSONDecoder().decode(type, from: data)
-                completionHandler(.success(jsonObject))
-            } catch {
-                completionHandler(.failure)
-            }
-        }
-    }
-
-}
-
 class CapturingJSONHandler {
 
     private(set) var wasToldLoadFailed = false
