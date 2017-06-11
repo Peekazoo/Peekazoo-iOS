@@ -20,9 +20,9 @@ class CapturingInkbunnyAPI: InkbunnyAPIProtocol {
 
 struct SuccessfulInkbunnyAPI: InkbunnyAPIProtocol {
 
-    var items: [InkbunnySubmission]
+    var items: [InkbunnySubmissionImpl]
 
-    init(items: [InkbunnySubmission] = []) {
+    init(items: [InkbunnySubmissionImpl] = []) {
         self.items = items
     }
 

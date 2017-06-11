@@ -58,13 +58,13 @@ public struct InkbunnyAPI: InkbunnyAPIProtocol {
         return try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
     }
 
-    private func parseSubmission(_ json: [String : Any]) -> InkbunnySubmission? {
+    private func parseSubmission(_ json: [String : Any]) -> InkbunnySubmissionImpl? {
         guard let submissionID = json["submission_id"] as? String,
               let title = json["title"] as? String,
               let dateString = json["create_datetime"] as? String,
               let postedDate = submissionDateTimeFormatter.date(from: dateString) else { return nil }
 
-        return InkbunnySubmission(submissionID: submissionID,
+        return InkbunnySubmissionImpl(submissionID: submissionID,
                                   title: title,
                                   postedDate: postedDate)
     }

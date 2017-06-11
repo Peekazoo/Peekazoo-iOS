@@ -11,10 +11,10 @@ import XCTest
 
 class InkbunnyHomepageAdapterTests: XCTestCase {
 
-    private func makeInkbunnySubmission(submissionID: String = "",
+    private func makeInkbunnySubmissionImpl(submissionID: String = "",
                                         title: String = "",
-                                        postedDate: Date = Date()) -> InkbunnySubmission {
-        return InkbunnySubmission(submissionID: submissionID, title: title, postedDate: postedDate)
+                                        postedDate: Date = Date()) -> InkbunnySubmissionImpl {
+        return InkbunnySubmissionImpl(submissionID: submissionID, title: title, postedDate: postedDate)
     }
 
     func testFetchingHomepageShouldTellAPIToFetchHomepage() {
@@ -63,8 +63,8 @@ class InkbunnyHomepageAdapterTests: XCTestCase {
 
     func testSuccessfullyLoadingHomepageAdaptsTitleInFirstItem() {
         let title = "Some content"
-        let stubInkbunnySubmission = makeInkbunnySubmission(title: title)
-        let successfulInkbunnyAPI = SuccessfulInkbunnyAPI(items: [stubInkbunnySubmission])
+        let stubInkbunnySubmissionImpl = makeInkbunnySubmissionImpl(title: title)
+        let successfulInkbunnyAPI = SuccessfulInkbunnyAPI(items: [stubInkbunnySubmissionImpl])
         let adapter = InkbunnyHomepageAdapter(api: successfulInkbunnyAPI)
         let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
         adapter.loadFeed(delegate: capturingHomepageFeedDelegate)
@@ -74,8 +74,8 @@ class InkbunnyHomepageAdapterTests: XCTestCase {
 
     func testSuccessfullyLoadingHomepageAdaptsSubmissionIdentifierInFirstItem() {
         let submissionID = "Some identifier"
-        let stubInkbunnySubmission = makeInkbunnySubmission(submissionID: submissionID)
-        let successfulInkbunnyAPI = SuccessfulInkbunnyAPI(items: [stubInkbunnySubmission])
+        let stubInkbunnySubmissionImpl = makeInkbunnySubmissionImpl(submissionID: submissionID)
+        let successfulInkbunnyAPI = SuccessfulInkbunnyAPI(items: [stubInkbunnySubmissionImpl])
         let adapter = InkbunnyHomepageAdapter(api: successfulInkbunnyAPI)
         let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
         adapter.loadFeed(delegate: capturingHomepageFeedDelegate)
@@ -84,20 +84,20 @@ class InkbunnyHomepageAdapterTests: XCTestCase {
     }
 
     func testSuccessfullyLoadingMultipleItemsShouldTheSecondIdentifier() {
-        let firstInkbunnySubmission = makeInkbunnySubmission(submissionID: "ID 1")
-        let secondInkbunnySubmission = makeInkbunnySubmission(submissionID: "ID 2")
-        let successfulInkbunnyAPI = SuccessfulInkbunnyAPI(items: [firstInkbunnySubmission, secondInkbunnySubmission])
+        let firstInkbunnySubmissionImpl = makeInkbunnySubmissionImpl(submissionID: "ID 1")
+        let secondInkbunnySubmissionImpl = makeInkbunnySubmissionImpl(submissionID: "ID 2")
+        let successfulInkbunnyAPI = SuccessfulInkbunnyAPI(items: [firstInkbunnySubmissionImpl, secondInkbunnySubmissionImpl])
         let adapter = InkbunnyHomepageAdapter(api: successfulInkbunnyAPI)
         let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
         adapter.loadFeed(delegate: capturingHomepageFeedDelegate)
 
-        XCTAssertEqual(secondInkbunnySubmission.submissionID, capturingHomepageFeedDelegate.result(at: 1)?.contentIdentifier)
+        XCTAssertEqual(secondInkbunnySubmissionImpl.submissionID, capturingHomepageFeedDelegate.result(at: 1)?.contentIdentifier)
     }
 
     func testSuccessfullyLoadingItemShouldAdaptPostedDate() {
         let postedDate = Date(timeIntervalSinceNow: -7200)
-        let stubInkbunnySubmission = makeInkbunnySubmission(postedDate: postedDate)
-        let successfulInkbunnyAPI = SuccessfulInkbunnyAPI(items: [stubInkbunnySubmission])
+        let stubInkbunnySubmissionImpl = makeInkbunnySubmissionImpl(postedDate: postedDate)
+        let successfulInkbunnyAPI = SuccessfulInkbunnyAPI(items: [stubInkbunnySubmissionImpl])
         let adapter = InkbunnyHomepageAdapter(api: successfulInkbunnyAPI)
         let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
         adapter.loadFeed(delegate: capturingHomepageFeedDelegate)
