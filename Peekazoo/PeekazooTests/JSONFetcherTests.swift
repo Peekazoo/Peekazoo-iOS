@@ -12,7 +12,7 @@ import Peekazoo
 struct JSONFetcher {
 
     enum Result {
-        case success
+        case success(Decodable)
         case failure
     }
 
@@ -29,7 +29,7 @@ struct JSONFetcher {
                 return
             }
 
-            completionHandler(.success)
+            completionHandler(.success(EmptyJSONObject()))
         }
     }
 
@@ -39,10 +39,12 @@ class CapturingJSONHandler {
 
     private(set) var wasToldLoadFailed = false
     private(set) var wasToldLoadSucceeded = false
+    private(set) var capturedJSONObject: Decodable?
     func verify(_ result: JSONFetcher.Result) {
         switch result {
-        case .success:
+        case .success(let JSONObject):
             wasToldLoadSucceeded = true
+            capturedJSONObject = JSONObject
 
         case .failure:
             wasToldLoadFailed = true
@@ -93,6 +95,16 @@ class JSONFetcherTests: XCTestCase {
         jsonFetcher.fetchJSON(from: expected, representing: EmptyJSONObject.self, completionHandler: capturingJSONHandler.verify)
 
         XCTAssertEqual(expected, capturingNetworkAdapter.requestedURL)
+    }
+
+    func testFetchingDataThatDecodesIntoTypeProvidesInstanceOfTypeToHandler() {
+        let capturingJSONHandler = CapturingJSONHandler()
+        let emptyJSONObjectData = "{}".data(using: .utf8)
+        let successfulNetworkAdapter = SuccessfulNetworkAdapter(data: emptyJSONObjectData)
+        let jsonFetcher = JSONFetcher(networkAdapter: successfulNetworkAdapter)
+        jsonFetcher.fetchJSON(from: URL(string: "https://someplace.com")!, representing: EmptyJSONObject.self, completionHandler: capturingJSONHandler.verify)
+
+        XCTAssertTrue(capturingJSONHandler.capturedJSONObject is EmptyJSONObject)
     }
 
 }
