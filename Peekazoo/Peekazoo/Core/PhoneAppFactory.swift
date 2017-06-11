@@ -14,7 +14,7 @@ public struct PhoneAppFactory: AppFactory {
         let networkAdapter = URLSessionNetworkAdapter()
         let weasylAPI = WeasylAPI(networkAdapter: networkAdapter)
         let weasylAdapter = WeasylHomepageAdapter(api: weasylAPI)
-        let inkbunnyAPI = InkbunnyAPI(networkAdapter: networkAdapter)
+        let inkbunnyAPI = JSONInkbunnyAPI(networkAdapter: networkAdapter)
         let inkbunnyAdapter = InkbunnyHomepageAdapter(api: inkbunnyAPI)
         let service = PeekazooClient(feeds: [weasylAdapter, inkbunnyAdapter], delegateWorker: MainThreadWorker())
         let serviceAdapter = PeekazooHomepageAdapter(service: service)

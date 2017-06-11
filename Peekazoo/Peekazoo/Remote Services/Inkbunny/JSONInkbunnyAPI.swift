@@ -1,5 +1,5 @@
 //
-//  InkbunnyAPI.swift
+//  JSONInkbunnyAPI.swift
 //  Peekazoo
 //
 //  Created by Thomas Sherwood on 20/05/2017.
@@ -13,7 +13,7 @@ public enum InkbunnyHomepageLoadResult {
     case failure
 }
 
-public struct InkbunnyAPI: InkbunnyAPIProtocol {
+public struct JSONInkbunnyAPI: InkbunnyAPIProtocol {
 
     private var networkAdapter: NetworkAdapter
 
