@@ -31,6 +31,8 @@ struct JSONFetcher {
 
             if let object = try? JSONDecoder().decode(type, from: data) {
                 completionHandler(.success(object))
+            } else {
+                completionHandler(.failure)
             }
         }
     }
@@ -121,6 +123,16 @@ class JSONFetcherTests: XCTestCase {
         jsonFetcher.fetchJSON(from: URL(string: "https://someplace.com")!, representing: AnotherEmptyJSONObject.self, completionHandler: capturingJSONHandler.verify)
 
         XCTAssertTrue(capturingJSONHandler.capturedJSONObject is AnotherEmptyJSONObject)
+    }
+
+    func testNetworkResponseReceievedButNotJSONTellsHandlerFetchFailed() {
+        let capturingJSONHandler = CapturingJSONHandler()
+        let notJSONData = "{ oops".data(using: .utf8)
+        let successfulNetworkAdapter = SuccessfulNetworkAdapter(data: notJSONData)
+        let jsonFetcher = JSONFetcher(networkAdapter: successfulNetworkAdapter)
+        jsonFetcher.fetchJSON(from: URL(string: "https://someplace.com")!, representing: EmptyJSONObject.self, completionHandler: capturingJSONHandler.verify)
+
+        XCTAssertTrue(capturingJSONHandler.wasToldLoadFailed)
     }
 
 }
