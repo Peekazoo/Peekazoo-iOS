@@ -80,6 +80,7 @@
 		786725A61ECDC4C000D78A72 /* WeasylHomepageAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786725A51ECDC4C000D78A72 /* WeasylHomepageAdapter.swift */; };
 		786725A81ECDC4CD00D78A72 /* WeasylServiceAdapterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786725A71ECDC4CD00D78A72 /* WeasylServiceAdapterTests.swift */; };
 		786725AA1ECE1DB500D78A72 /* WeasylSubmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786725A91ECE1DB500D78A72 /* WeasylSubmission.swift */; };
+		787B50931EED127E007C040E /* StubInkbunnySubmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787B50921EED127E007C040E /* StubInkbunnySubmission.swift */; };
 		7885CAF51ECE4120005F426B /* WeasylAPIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7885CAF41ECE4120005F426B /* WeasylAPIProtocol.swift */; };
 		7885CAF71ECE4140005F426B /* WeasylAPITestDoubles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7885CAF61ECE4140005F426B /* WeasylAPITestDoubles.swift */; };
 		7885CAFA1ECF1085005F426B /* PeekazooHomepageAdapterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7885CAF91ECF1085005F426B /* PeekazooHomepageAdapterTests.swift */; };
@@ -175,6 +176,7 @@
 		786725A51ECDC4C000D78A72 /* WeasylHomepageAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeasylHomepageAdapter.swift; path = "Client Service/Remote Service Adapters/WeasylHomepageAdapter.swift"; sourceTree = "<group>"; };
 		786725A71ECDC4CD00D78A72 /* WeasylServiceAdapterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeasylServiceAdapterTests.swift; sourceTree = "<group>"; };
 		786725A91ECE1DB500D78A72 /* WeasylSubmission.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeasylSubmission.swift; path = "Remote Services/Weasyl/WeasylSubmission.swift"; sourceTree = "<group>"; };
+		787B50921EED127E007C040E /* StubInkbunnySubmission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StubInkbunnySubmission.swift; path = "Test Doubles/StubInkbunnySubmission.swift"; sourceTree = "<group>"; };
 		7885CAF41ECE4120005F426B /* WeasylAPIProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeasylAPIProtocol.swift; path = "Remote Services/Weasyl/WeasylAPIProtocol.swift"; sourceTree = "<group>"; };
 		7885CAF61ECE4140005F426B /* WeasylAPITestDoubles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeasylAPITestDoubles.swift; path = "Test Doubles/WeasylAPITestDoubles.swift"; sourceTree = "<group>"; };
 		7885CAF91ECF1085005F426B /* PeekazooHomepageAdapterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeekazooHomepageAdapterTests.swift; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 				6E02FB241ED23D3A001C2D66 /* WorkerTestDoubles.swift */,
 				7810B6331ED4BDF300366B8C /* TimeFormatterTestDoubles.swift */,
 				7810B63B1ED4D8B600366B8C /* TemporalDistanceMeasurerTestDoubles.swift */,
+				787B50921EED127E007C040E /* StubInkbunnySubmission.swift */,
 			);
 			name = "Test Doubles";
 			sourceTree = "<group>";
@@ -660,6 +663,7 @@
 				6E0D85831EC6E84D000E7283 /* AppDelegateTests.swift in Sources */,
 				6E0D85C71EC9AFBF000E7283 /* StubHomepageItem.swift in Sources */,
 				7821A1581ECF7E3D009CA08A /* InkbunnyAPITests.swift in Sources */,
+				787B50931EED127E007C040E /* StubInkbunnySubmission.swift in Sources */,
 				6E6E61771ECA420A00964076 /* StubHomepageInterfaceViewModel.swift in Sources */,
 				7885CAFA1ECF1085005F426B /* PeekazooHomepageAdapterTests.swift in Sources */,
 				7810B63C1ED4D8B600366B8C /* TemporalDistanceMeasurerTestDoubles.swift in Sources */,

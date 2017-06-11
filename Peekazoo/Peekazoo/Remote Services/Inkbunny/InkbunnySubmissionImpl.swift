@@ -8,16 +8,10 @@
 
 import Foundation
 
-public struct InkbunnySubmissionImpl: InkbunnySubmission {
+struct InkbunnySubmissionImpl: InkbunnySubmission {
 
     public var submissionID: String
     public var title: String
     public var postedDate: Date
-
-    public init(submissionID: String, title: String, postedDate: Date) {
-        self.submissionID = submissionID
-        self.title = title
-        self.postedDate = postedDate
-    }
 
 }
