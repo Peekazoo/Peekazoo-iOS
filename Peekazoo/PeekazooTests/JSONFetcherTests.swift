@@ -29,9 +29,10 @@ struct JSONFetcher {
                 return
             }
 
-            if let object = try? JSONDecoder().decode(type, from: data) {
-                completionHandler(.success(object))
-            } else {
+            do {
+                let jsonObject = try JSONDecoder().decode(type, from: data)
+                completionHandler(.success(jsonObject))
+            } catch {
                 completionHandler(.failure)
             }
         }
