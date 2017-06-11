@@ -7,15 +7,31 @@
 //
 
 import XCTest
+import Peekazoo
 
 struct JSONFetcher {
 
-    init(networkAdapter: Any) {
-
+    enum Result {
+        case success
+        case failure
     }
 
-    func fetchJSON(completionHandler: () -> Void) {
-        completionHandler()
+    private let networkAdapter: NetworkAdapter
+
+    init(networkAdapter: NetworkAdapter) {
+        self.networkAdapter = networkAdapter
+    }
+
+    func fetchJSON(representing: Any.Type, completionHandler: @escaping (Result) -> Void) {
+        let url = URL(string: "https://www.bbc.co.uk")!
+        networkAdapter.get(url) { (data, _) in
+            guard data != nil else {
+                completionHandler(.failure)
+                return
+            }
+
+            completionHandler(.success)
+        }
     }
 
 }
@@ -23,9 +39,20 @@ struct JSONFetcher {
 class CapturingJSONHandler {
 
     private(set) var wasToldLoadFailed = false
-    func verify() {
-        wasToldLoadFailed = true
+    private(set) var wasToldLoadSucceeded = false
+    func verify(_ result: JSONFetcher.Result) {
+        switch result {
+        case .success:
+            wasToldLoadSucceeded = true
+
+        case .failure:
+            wasToldLoadFailed = true
+        }
     }
+
+}
+
+struct EmptyJSONObject: Decodable {
 
 }
 
@@ -35,9 +62,28 @@ class JSONFetcherTests: XCTestCase {
         let capturingJSONHandler = CapturingJSONHandler()
         let failingNetworkAdapter = FailingNetworkAdapter()
         let jsonFetcher = JSONFetcher(networkAdapter: failingNetworkAdapter)
-        jsonFetcher.fetchJSON(completionHandler: capturingJSONHandler.verify)
+        jsonFetcher.fetchJSON(representing: EmptyJSONObject.self, completionHandler: capturingJSONHandler.verify)
 
         XCTAssertTrue(capturingJSONHandler.wasToldLoadFailed)
+    }
+
+    func testSuccessfulNetworkLoadWithHappyParsingPathTellsHandlerFetchSucceeded() {
+        let capturingJSONHandler = CapturingJSONHandler()
+        let emptyJSONObjectData = "{}".data(using: .utf8)
+        let successfulNetworkAdapter = SuccessfulNetworkAdapter(data: emptyJSONObjectData)
+        let jsonFetcher = JSONFetcher(networkAdapter: successfulNetworkAdapter)
+        jsonFetcher.fetchJSON(representing: EmptyJSONObject.self, completionHandler: capturingJSONHandler.verify)
+
+        XCTAssertTrue(capturingJSONHandler.wasToldLoadSucceeded)
+    }
+
+    func testFailingToLoadDataDoesNotTellHandlerFetchSucceeded() {
+        let capturingJSONHandler = CapturingJSONHandler()
+        let failingNetworkAdapter = FailingNetworkAdapter()
+        let jsonFetcher = JSONFetcher(networkAdapter: failingNetworkAdapter)
+        jsonFetcher.fetchJSON(representing: EmptyJSONObject.self, completionHandler: capturingJSONHandler.verify)
+
+        XCTAssertFalse(capturingJSONHandler.wasToldLoadSucceeded)
     }
 
 }
