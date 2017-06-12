@@ -157,7 +157,7 @@ class WeasylAPITests: XCTestCase {
     }
 
     func testParsingValidJSONProvidesFirstItemWithExpectedContentIdentifier() {
-        let submitIDForFirstItem = "1489775"
+        let submitIDForFirstItem = 1489775
         let validHomepageAdapter = makeValidHomepageNetworkAdapter()
         let capturingHomepageHandler = CapturingWeasylHomepageHandler()
         let weasylAPI = JSONWeasylAPI(networkAdapter: validHomepageAdapter)
@@ -167,7 +167,7 @@ class WeasylAPITests: XCTestCase {
     }
 
     func testParsingValidJSONProvidesSecondItemWithExpectedContentIdentifier() {
-        let submitIDForSecondItem = "1489774"
+        let submitIDForSecondItem = 1489774
         let validHomepageAdapter = makeValidHomepageNetworkAdapter()
         let capturingHomepageHandler = CapturingWeasylHomepageHandler()
         let weasylAPI = JSONWeasylAPI(networkAdapter: validHomepageAdapter)

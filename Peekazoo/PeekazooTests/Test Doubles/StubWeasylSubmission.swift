@@ -12,10 +12,10 @@ import Peekazoo
 struct StubWeasylSubmission: WeasylSubmission {
 
     var title: String
-    var submitID: String
+    var submitID: Int
     var postedAt: Date
 
-    init(title: String = "", submitID: String = "", postedAt: Date = Date()) {
+    init(title: String = "", submitID: Int = 0, postedAt: Date = Date()) {
         self.title = title
         self.submitID = submitID
         self.postedAt = postedAt

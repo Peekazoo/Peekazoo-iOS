@@ -11,7 +11,7 @@ import Foundation
 public protocol WeasylSubmission {
 
     var title: String { get }
-    var submitID: String { get }
+    var submitID: Int { get }
     var postedAt: Date { get }
 
 }

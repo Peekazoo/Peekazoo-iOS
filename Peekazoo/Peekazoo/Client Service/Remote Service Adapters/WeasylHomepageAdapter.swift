@@ -31,7 +31,7 @@ public struct WeasylHomepageAdapter: HomepageFeed {
 
         var weasylItem: WeasylSubmission
 
-        var contentIdentifier: String { return weasylItem.submitID }
+        var contentIdentifier: String { return String(weasylItem.submitID) }
         var title: String { return weasylItem.title }
         var creationDate: Date { return weasylItem.postedAt }
 

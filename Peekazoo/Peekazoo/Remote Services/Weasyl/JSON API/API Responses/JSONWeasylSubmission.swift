@@ -8,16 +8,16 @@
 
 import Foundation
 
-struct JSONWeasylSubmission: WeasylSubmission {
+struct JSONWeasylSubmission: WeasylSubmission, Decodable {
 
     public var title: String
-    public var submitID: String
+    public var submitID: Int
     public var postedAt: Date
 
-    init(submitID: String, title: String, postedAt: Date) {
-        self.submitID = submitID
-        self.title = title
-        self.postedAt = postedAt
+    private enum CodingKeys: String, CodingKey {
+        case title
+        case submitID = "submitid"
+        case postedAt = "posted_at"
     }
 
 }

@@ -20,13 +20,13 @@ class WeasylHomepageAdapterTests: XCTestCase {
     }
 
     func testSuccessfullyFetchingWeasylItemAdaptsItemIntoPeekazooDomainObjectWithContentIdentifier() {
-        let item = StubWeasylSubmission(submitID: "ID")
+        let item = StubWeasylSubmission(submitID: 42)
         let successfulWeasylAPI = SuccessfulWeasylAPI(items: [item])
         let adapter = WeasylHomepageAdapter(api: successfulWeasylAPI)
         let capturingHomepageFeedDelegate = CapturingHomepageFeedDelegate()
         adapter.loadFeed(delegate: capturingHomepageFeedDelegate)
 
-        XCTAssertEqual(item.submitID, capturingHomepageFeedDelegate.result(at: 0)?.contentIdentifier)
+        XCTAssertEqual(String(item.submitID), capturingHomepageFeedDelegate.result(at: 0)?.contentIdentifier)
     }
 
     func testSuccessfullyFetchingWeasylItemAdaptsItemIntoPeekazooDomainObjectWithTitle() {
