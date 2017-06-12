@@ -12,7 +12,7 @@ struct JSONInkbunnyLoginResponse: Decodable {
 
     var sessionIdentifier: String
 
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case sessionIdentifier = "sid"
     }
 

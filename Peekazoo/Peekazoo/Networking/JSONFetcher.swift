@@ -16,12 +16,19 @@ public struct JSONFetcher {
     }
 
     private let networkAdapter: NetworkAdapter
+    private let decoder: JSONDecoder
 
     public init(networkAdapter: NetworkAdapter) {
+        self.init(decoder: JSONDecoder(), networkAdapter: networkAdapter)
+    }
+
+    public init(decoder: JSONDecoder, networkAdapter: NetworkAdapter) {
+        self.decoder = decoder
         self.networkAdapter = networkAdapter
     }
 
     public func fetchJSON<T>(from url: URL, representing type: T.Type, completionHandler: @escaping (Result<T>) -> Void) {
+        let jsonDecoder = decoder
         networkAdapter.get(url) { (data, _) in
             guard let data = data else {
                 completionHandler(.failure)
@@ -29,7 +36,7 @@ public struct JSONFetcher {
             }
 
             do {
-                let jsonObject = try JSONDecoder().decode(type, from: data)
+                let jsonObject = try jsonDecoder.decode(type, from: data)
                 completionHandler(.success(jsonObject))
             } catch {
                 completionHandler(.failure)

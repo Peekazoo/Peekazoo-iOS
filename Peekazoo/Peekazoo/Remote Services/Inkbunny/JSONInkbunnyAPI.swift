@@ -13,7 +13,12 @@ public struct JSONInkbunnyAPI: InkbunnyAPI {
     private let jsonFetcher: JSONFetcher
 
     public init(networkAdapter: NetworkAdapter) {
-        jsonFetcher = JSONFetcher(networkAdapter: networkAdapter)
+        let decoder = JSONDecoder()
+        let inkbunnyDateFormatter = DateFormatter()
+        inkbunnyDateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSSZZZZ"
+        decoder.dateDecodingStrategy = .formatted(inkbunnyDateFormatter)
+
+        jsonFetcher = JSONFetcher(decoder: decoder, networkAdapter: networkAdapter)
     }
 
     public func loadHomepage(completionHandler: @escaping (InkbunnyHomepageLoadResult) -> Void) {
@@ -23,37 +28,29 @@ public struct JSONInkbunnyAPI: InkbunnyAPI {
                 completionHandler(.failure)
 
             case .success(let response):
-                self.performSearch(sid: response.sessionIdentifier) { (searchResult) in
-                    switch searchResult {
-                    case .failure:
-                        completionHandler(.failure)
-
-                    case .success(let searchResponse):
-                        completionHandler(.success(searchResponse.submissions))
-                    }
-                }
+                self.performSearch(sid: response.sessionIdentifier, completionHandler: completionHandler)
             }
         }
     }
 
     private func performGuestLogin(completionHandler: @escaping (JSONFetcher.Result<JSONInkbunnyLoginResponse>) -> Void) {
-        jsonFetcher.fetchJSON(from: makeGuestLoginURL(),
+        let guestLoginURL = URL(string: "https://inkbunny.net/api_login.php?username=guest&password=")!
+        jsonFetcher.fetchJSON(from: guestLoginURL,
                               representing: JSONInkbunnyLoginResponse.self,
                               completionHandler: completionHandler)
     }
 
-    private func performSearch(sid: String, completionHandler: @escaping (JSONFetcher.Result<JSONInkbunnySearchResponse>) -> Void) {
-        jsonFetcher.fetchJSON(from: makeSearchURL(sid: sid),
-                              representing: JSONInkbunnySearchResponse.self,
-                              completionHandler: completionHandler)
-    }
+    private func performSearch(sid: String, completionHandler: @escaping (InkbunnyHomepageLoadResult) -> Void) {
+        let searchURL = URL(string: "https://inkbunny.net/api_search.php?sid=\(sid)")!
+        jsonFetcher.fetchJSON(from: searchURL, representing: JSONInkbunnySearchResponse.self) { (response) in
+            switch response {
+            case .success(let searchResponse):
+                completionHandler(.success(searchResponse.submissions))
 
-    private func makeGuestLoginURL() -> URL {
-        return URL(string: "https://inkbunny.net/api_login.php?username=guest&password=")!
-    }
-
-    private func makeSearchURL(sid: String) -> URL {
-        return URL(string: "https://inkbunny.net/api_search.php?sid=\(sid)")!
+            case .failure:
+                completionHandler(.failure)
+            }
+        }
     }
 
 }
