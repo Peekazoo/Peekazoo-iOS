@@ -9,7 +9,7 @@
 import Foundation
 import Peekazoo
 
-class CapturingWeasylAPI: WeasylAPIProtocol {
+class CapturingWeasylAPI: WeasylAPI {
 
     private(set) var didLoadHomepage = false
     func loadHomepage(completionHandler: @escaping (WeasylHomepageLoadResult) -> Void) {
@@ -18,7 +18,7 @@ class CapturingWeasylAPI: WeasylAPIProtocol {
 
 }
 
-struct SuccessfulWeasylAPI: WeasylAPIProtocol {
+struct SuccessfulWeasylAPI: WeasylAPI {
 
     var items: [WeasylSubmission]
 
@@ -28,7 +28,7 @@ struct SuccessfulWeasylAPI: WeasylAPIProtocol {
 
 }
 
-struct FailingWeasylAPI: WeasylAPIProtocol {
+struct FailingWeasylAPI: WeasylAPI {
 
     func loadHomepage(completionHandler: @escaping (WeasylHomepageLoadResult) -> Void) {
         completionHandler(.failure)

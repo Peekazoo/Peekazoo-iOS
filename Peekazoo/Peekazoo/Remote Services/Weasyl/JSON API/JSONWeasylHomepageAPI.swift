@@ -1,5 +1,5 @@
 //
-//  WeasylHomepageAPI.swift
+//  JSONWeasylHomepageAPI.swift
 //  Peekazoo
 //
 //  Created by Thomas Sherwood on 18/05/2017.
@@ -8,20 +8,20 @@
 
 import Foundation
 
-public struct WeasylHomepageAPI {
+struct JSONWeasylHomepageAPI {
 
     private var networkAdapter: NetworkAdapter
     private var dateFormatter: DateFormatter
     private let homepageURL = URL(string: "https://www.weasyl.com/api/submissions/frontpage")!
 
-    public init(networkAdapter: NetworkAdapter) {
+    init(networkAdapter: NetworkAdapter) {
         self.networkAdapter = networkAdapter
 
         dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
     }
 
-    public func loadFeed(completionHandler: @escaping (WeasylHomepageLoadResult) -> Void) {
+    func loadFeed(completionHandler: @escaping (WeasylHomepageLoadResult) -> Void) {
         networkAdapter.get(homepageURL) { data, _ in
             if let data = data {
                 self.parseHomepageItems(from: data, completionHandler: completionHandler)
@@ -43,17 +43,17 @@ public struct WeasylHomepageAPI {
         return (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)) as? [[String : Any]]
     }
 
-    private func parse(_ jsonObject: [[String : Any]]) -> [WeasylSubmissionImpl] {
+    private func parse(_ jsonObject: [[String : Any]]) -> [JSONWeasylSubmission] {
         return jsonObject.flatMap(parseSubmission)
     }
 
-    private func parseSubmission(_ jsonObject: [String : Any]) -> WeasylSubmissionImpl? {
+    private func parseSubmission(_ jsonObject: [String : Any]) -> JSONWeasylSubmission? {
         guard let submitID = jsonObject["submitid"] as? Int,
               let title = jsonObject["title"] as? String,
               let postedAtString = jsonObject["posted_at"] as? String,
               let postedAt = dateFormatter.date(from: postedAtString) else { return nil }
 
-        return WeasylSubmissionImpl(submitID: String(submitID), title: title, postedAt: postedAt)
+        return JSONWeasylSubmission(submitID: String(submitID), title: title, postedAt: postedAt)
     }
 
 }

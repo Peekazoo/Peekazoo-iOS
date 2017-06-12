@@ -12,7 +12,7 @@ public struct PhoneAppFactory: AppFactory {
 
     public func makeApplication(window: UIWindow) -> App {
         let networkAdapter = URLSessionNetworkAdapter()
-        let weasylAPI = WeasylAPI(networkAdapter: networkAdapter)
+        let weasylAPI = JSONWeasylAPI(networkAdapter: networkAdapter)
         let weasylAdapter = WeasylHomepageAdapter(api: weasylAPI)
         let inkbunnyAPI = JSONInkbunnyAPI(networkAdapter: networkAdapter)
         let inkbunnyAdapter = InkbunnyHomepageAdapter(api: inkbunnyAPI)

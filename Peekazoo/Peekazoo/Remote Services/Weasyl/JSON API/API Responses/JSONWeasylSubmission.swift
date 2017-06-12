@@ -1,5 +1,5 @@
 //
-//  WeasylSubmissionImpl.swift
+//  JSONWeasylSubmission.swift
 //  Peekazoo
 //
 //  Created by Thomas Sherwood on 18/05/2017.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct WeasylSubmissionImpl: WeasylSubmission {
+struct JSONWeasylSubmission: WeasylSubmission {
 
     public var title: String
     public var submitID: String

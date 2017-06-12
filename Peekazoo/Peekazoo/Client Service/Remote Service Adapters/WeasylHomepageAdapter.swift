@@ -10,9 +10,9 @@ import Foundation
 
 public struct WeasylHomepageAdapter: HomepageFeed {
 
-    private var api: WeasylAPIProtocol
+    private var api: WeasylAPI
 
-    public init(api: WeasylAPIProtocol) {
+    public init(api: WeasylAPI) {
         self.api = api
     }
 

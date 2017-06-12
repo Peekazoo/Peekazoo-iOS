@@ -6,16 +6,13 @@
 //  Copyright © 2017 Peekazoo. All rights reserved.
 //
 
-public struct WeasylAPI: WeasylAPIProtocol {
+public enum WeasylHomepageLoadResult {
+    case success([WeasylSubmission])
+    case failure
+}
 
-    private var homepageFeed: WeasylHomepageAPI
+public protocol WeasylAPI {
 
-    public init(networkAdapter: NetworkAdapter) {
-        homepageFeed = WeasylHomepageAPI(networkAdapter: networkAdapter)
-    }
-
-    public func loadHomepage(completionHandler: @escaping (WeasylHomepageLoadResult) -> Void) {
-        homepageFeed.loadFeed(completionHandler: completionHandler)
-    }
+    func loadHomepage(completionHandler: @escaping (WeasylHomepageLoadResult) -> Void)
 
 }
